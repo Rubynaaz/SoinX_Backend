@@ -1,138 +1,134 @@
-import clientPromise from "@/lib/mongodb";
+import { PrismaClient } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
+import allowCors from "@/lib/allowCors";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    if (req.method !== "GET") {
-        return res.status(405).json({ message: "Method not allowed" });
+const prisma = new PrismaClient();
+
+async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== "GET") {
+    return res.status(405).json({ message: "Method not allowed" });
+  }
+
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 12;
+  const sortBy = (req.query.sort_by as string) || "avg_change";
+  const order = req.query.order === "asc" ? 1 : -1;
+
+  try {
+    // 1️⃣ Fetch all messages
+    const messages = await prisma.groupUserCountsWebhookTest.findMany({
+      where: { ContractAddress: { not: null } },
+      include: { DexscreenerData: true },
+    });
+
+    // 2️⃣ Get all unique contract addresses
+    const contractAddresses = messages
+      .map(m => m.ContractAddress)
+      .filter((addr): addr is string => addr != null);
+
+    // 3️⃣ Fetch all cached Dex data at once
+    const cachedDexList = await prisma.dexscreenerCacheNew.findMany({
+      where: { contractAddress: { in: contractAddresses } },
+    });
+
+    const cachedDexMap = new Map<string, typeof cachedDexList[0]>();
+    cachedDexList.forEach(d => cachedDexMap.set(d.contractAddress, d));
+
+    // 4️⃣ Group messages by username + group
+    const groupMap = new Map<string, any>();
+
+    for (const msg of messages) {
+      if (!msg.ContractAddress) continue;
+      const key = `${msg.Username}-${msg.GroupName}`;
+      const cachedDex = cachedDexMap.get(msg.ContractAddress);
+      const firstDex = msg.DexscreenerData?.[0];
+      if (!firstDex || !cachedDex) continue;
+
+      if (!groupMap.has(key)) {
+        groupMap.set(key, {
+          username: msg.Username,
+          group_name: msg.GroupName,
+          group_user_count: msg.GroupUserCount || 0,
+          total_calls: 0,
+          unique_contracts: new Set<string>(),
+          latest_message: msg.MessageDateTime,
+          contracts: [] as any[],
+        });
+      }
+
+      const group = groupMap.get(key);
+      group.total_calls += 1;
+      group.unique_contracts.add(msg.ContractAddress);
+      if (msg.MessageDateTime > group.latest_message) {
+        group.latest_message = msg.MessageDateTime;
+      }
+
+      const historical_marketCap = firstDex.marketCap || 0;
+      const cached_marketCap = cachedDex.marketCap || 0;
+      const historical_price = parseFloat(firstDex.priceUsd || "0");
+      const cached_price = cachedDex.priceUsd || 0;
+
+      let change_percent = 0;
+      if (historical_marketCap > 0 && cached_marketCap > 0) {
+        change_percent = ((historical_marketCap - cached_marketCap) / cached_marketCap) * 100;
+      } else if (historical_price > 0 && cached_price > 0) {
+        change_percent = ((historical_price - cached_price) / cached_price) * 100;
+      }
+
+      group.contracts.push({
+        contract: msg.ContractAddress,
+        change_percent,
+      });
     }
 
-    const page = parseInt(req.query.page as string) || 1;
-    const limit = parseInt(req.query.limit as string) || 12;
-    const sortBy = (req.query.sort_by as string) || "avg_change";
-    const order = req.query.order === "asc" ? 1 : -1;
+    // 5️⃣ Convert groups to array and calculate metrics
+    const allGroups = Array.from(groupMap.values()).map(g => {
+      const avg_change =
+        g.contracts.length > 0
+          ? g.contracts.reduce((sum: number, c: any) => sum + c.change_percent, 0) / g.contracts.length
+          : 0;
 
-    try {
-        const client = await clientPromise;
-        const db = client.db("telegram_tokens");
+      const max_change = g.contracts.length > 0
+        ? Math.max(...g.contracts.map((c: any) => c.change_percent))
+        : 0;
 
-        const pipeline = [
-            {
-                $match: {
-                    "Group Name": { $exists: true, $nin: [null, ""] },
-                    "Contract Address": { $exists: true, $nin: [null, ""] }
-                }
-            },
-            {
-                $group: {
-                    _id: { username: "$Username", group_name: "$Group Name" },
-                    group_user_count: { $first: "$Group User Count" },
-                    total_calls: { $sum: 1 },
-                    unique_contracts: { $addToSet: "$Contract Address" },
-                    latest_message: { $max: "$Message DateTime" },
-                    contracts: { $push: { contract: "$Contract Address", dex_data: "$Dexscreener Data" } }
-                }
-            },
-            { $unwind: { path: "$contracts", preserveNullAndEmptyArrays: true } },
-            {
-                $lookup: {
-                    from: "dexscreener_cache_new",
-                    localField: "contracts.contract",
-                    foreignField: "contract_address",
-                    as: "cache_doc"
-                }
-            },
-            { $unwind: { path: "$cache_doc", preserveNullAndEmptyArrays: true } },
-            {
-                $addFields: {
-                    historical_price: { $toDouble: { $arrayElemAt: ["$contracts.dex_data.priceUsd", 0] } },
-                    historical_marketCap: { $toDouble: { $arrayElemAt: ["$contracts.dex_data.marketCap", 0] } },
-                    cached_price: { $toDouble: "$cache_doc.priceUsd" },
-                    cached_marketCap: { $toDouble: "$cache_doc.marketCap" }
-                }
-            },
-            {
-                $addFields: {
-                    change_percent: {
-                        $cond: [
-                            { $gt: ["$historical_marketCap", 0] },
-                            { $multiply: [{ $divide: [{ $subtract: ["$historical_marketCap", "$cached_marketCap"] }, "$cached_marketCap"] }, 100] },
-                            {
-                                $cond: [
-                                    { $gt: ["$historical_price", 0] },
-                                    { $multiply: [{ $divide: [{ $subtract: ["$historical_price", "$cached_price"] }, "$cached_price"] }, 100] },
-                                    0
-                                ]
-                            }
-                        ]
-                    }
-                }
-            },
-            {
-                $group: {
-                    _id: "$_id",
-                    username: { $first: "$_id.username" },
-                    group_name: { $first: "$_id.group_name" },
-                    group_user_count: { $first: "$group_user_count" },
-                    total_calls: { $first: "$total_calls" },
-                    unique_contracts: { $first: { $size: "$unique_contracts" } },
-                    latest_message: { $first: "$latest_message" },
-                    avg_change: { $avg: "$change_percent" },
-                    contracts: {
-                        $push: {
-                            contract: "$contracts.contract",
-                            change_percent: "$change_percent",
-                            cache_doc: "$cache_doc"
-                        }
-                    },
-                    max_change: { $max: "$change_percent" }
-                }
-            },
-            {
-                $addFields: {
-                    top_performer: {
-                        $arrayElemAt: [
-                            {
-                                $filter: {
-                                    input: "$contracts",
-                                    as: "c",
-                                    cond: { $eq: ["$$c.change_percent", "$max_change"] }
-                                }
-                            },
-                            0
-                        ]
-                    }
-                }
-            },
-            { $project: { contracts: 0, max_change: 0 } }
-        ];
+      const top_performer = g.contracts.find((c: any) => c.change_percent === max_change) || null;
 
-        const allGroups = await db.collection("group_user_counts_webhook_test").aggregate(pipeline).toArray();
+      return {
+        ...g,
+        unique_contracts: g.unique_contracts.size,
+        avg_change,
+        top_performer,
+      };
+    });
 
-        // Sort in JS (small dataset after aggregation, fast)
-        allGroups.sort((a, b) => {
-            let cmp = 0;
-            switch (sortBy) {
-                case "group_user_count": cmp = a.group_user_count - b.group_user_count; break;
-                case "total_calls": cmp = a.total_calls - b.total_calls; break;
-                case "unique_contracts": cmp = a.unique_contracts - b.unique_contracts; break;
-                case "avg_change": cmp = a.avg_change - b.avg_change; break;
-                case "latest_message": cmp = new Date(a.latest_message).getTime() - new Date(b.latest_message).getTime(); break;
-            }
-            return order === 1 ? cmp : -cmp;
-        });
+    // 6️⃣ Sort
+    allGroups.sort((a, b) => {
+      let cmp = 0;
+      switch (sortBy) {
+        case "group_user_count": cmp = a.group_user_count - b.group_user_count; break;
+        case "total_calls": cmp = a.total_calls - b.total_calls; break;
+        case "unique_contracts": cmp = a.unique_contracts - b.unique_contracts; break;
+        case "avg_change": cmp = a.avg_change - b.avg_change; break;
+        case "latest_message": cmp = new Date(a.latest_message).getTime() - new Date(b.latest_message).getTime(); break;
+      }
+      return order === 1 ? cmp : -cmp;
+    });
 
-        const totalGroups = allGroups.length;
-        const start = (page - 1) * limit;
-        const pagedGroups = allGroups.slice(start, start + limit);
+    // 7️⃣ Apply pagination
+    const totalGroups = allGroups.length;
+    const start = (page - 1) * limit;
+    const pagedGroups = allGroups.slice(start, start + limit);
 
-        return res.status(200).json({
-            data: pagedGroups,
-            pagination: { page, limit, total: totalGroups, total_pages: Math.ceil(totalGroups / limit) },
-            sort_options: ["group_user_count", "total_calls", "unique_contracts", "avg_change", "latest_message"]
-        });
-
-    } catch (err) {
-        console.error(err);
-        return res.status(500).json({ message: "Internal server error" });
-    }
+    return res.status(200).json({
+      data: pagedGroups,
+      pagination: { page, limit, total: totalGroups, total_pages: Math.ceil(totalGroups / limit) },
+      sort_options: ["group_user_count", "total_calls", "unique_contracts", "avg_change", "latest_message"],
+    });
+  } catch (error) {
+    console.error("Error fetching groups:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
 }
+
+export default allowCors(handler);

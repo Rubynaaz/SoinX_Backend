@@ -1,0 +1,132 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model GroupUserCountsWebhookTest {
+  id              String    @id @map("_id") @db.ObjectId
+  Chain           String?
+  GroupName       String    @map("Group Name")
+  ContractAddress String?   @map("Contract Address")
+  Username        String?
+  GroupUserCount  Int?      @map("Group User Count")
+  MessageDateTime DateTime  @map("Message DateTime")
+  FullMessage     String    @map("Full Message")
+  DexscreenerData DexData[] @map("Dexscreener Data")
+  CallCount       Int?      @map("Call Count")
+  MessageLink     String?   @map("Message Link")
+
+  @@map("group_user_counts_webhook_test")
+}
+
+type DexData {
+  chainId       String?
+  dexId         String?
+  url           String?
+  pairAddress   String?
+  labels        String[]
+  baseToken     Token?
+  quoteToken    Token?
+  priceNative   String?
+  priceUsd      String?
+  txns          TxnStats?
+  volume        VolumeStats?
+  priceChange   PriceChangeStats?
+  liquidity     Liquidity?
+  fdv           Int?
+  marketCap     Int?
+  pairCreatedAt BigInt?           @map("pairCreatedAt")
+  info          DexInfo?
+}
+
+type Token {
+  address String
+  name    String?
+  symbol  String?
+}
+
+type TxnStats {
+  m5  TxnData?
+  h1  TxnData?
+  h6  TxnData?
+  h24 TxnData?
+}
+
+type TxnData {
+  buys  Int?
+  sells Int?
+}
+
+type VolumeStats {
+  h24 Float?
+  h6  Float?
+  h1  Float?
+  m5  Float?
+}
+
+type PriceChangeStats {
+  m5  Float?
+  h1  Float?
+  h6  Float?
+  h24 Float?
+}
+
+type Liquidity {
+  usd   Float?
+  base  Float?
+  quote Float?
+}
+
+type DexInfo {
+  imageUrl  String?
+  header    String?
+  openGraph String?
+  websites  Website[]
+  socials   Social[]
+}
+
+type Website {
+  label String?
+  url   String?
+}
+
+type Social {
+  type String?
+  url  String?
+}
+
+model DexscreenerCacheNew {
+  id              String       @id @default(auto()) @map("_id") @db.ObjectId
+  contractAddress String       @unique @map("contract_address")
+  marketCap       Float?
+  priceUsd        Float?
+  updatedAt       DateTime?
+  baseToken       BaseToken
+  info            DexInfoCash?
+  dexUrl          String?      @map("dexurl")
+
+  @@map("dexscreener_cache_new")
+}
+
+type BaseToken {
+  name   String?
+  symbol String?
+}
+
+type DexInfoCash {
+  imageurl  String?
+  header    String?
+  openGraph String?
+  websites  Website[]
+  socials   Social[]
+}
