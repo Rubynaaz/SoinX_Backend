@@ -78,6 +78,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       group.contracts.push({
         contract: msg.ContractAddress,
         change_percent,
+        token_name: msg.DexscreenerData[0]?.baseToken?.name,
+        token_symbol: msg.DexscreenerData[0]?.baseToken?.symbol,
+        token_image: msg.DexscreenerData[0]?.info?.imageUrl,
       });
     }
 
