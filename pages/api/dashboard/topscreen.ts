@@ -29,10 +29,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     const totalMessages = await prisma.groupUserCountsWebhookTest.count();
 
-    console.log('totalCalls', totalCalls);
-    console.log('uniqueGroups', uniqueGroups);
-    console.log('totalMessages', totalMessages);
-    console.log('uniqueContracts', uniqueContracts);
+    // console.log('totalCalls', totalCalls);
+    // console.log('uniqueGroups', uniqueGroups);
+    // console.log('totalMessages', totalMessages);
+    // console.log('uniqueContracts', uniqueContracts);
     return res.status(200).json({
       totalCalls,
       totalUniqueContracts: uniqueContracts.length,
