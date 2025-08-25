@@ -130,3 +130,28 @@ type DexInfoCash {
   websites  Website[]
   socials   Social[]
 }
+
+model User {
+  id            String           @id @default(auto()) @map("_id") @db.ObjectId
+  walletAddress String           @unique @map("wallet_address")
+  youtube       YouTubeAccount[]
+}
+
+model YouTubeAccount {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  channelId       String   @unique @map("id")
+  userId          String   @db.ObjectId
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken     String   @map("access_token")
+  refreshToken    String   @map("refresh_token")
+  expiry          DateTime @map("expiry")
+  title           String
+  description     String?
+  thumbnailUrl    String?  @map("thumbnail_url")
+  publishedAt     DateTime
+  subscriberCount Int      @map("subscriber_count")
+  videoCount      Int      @map("video_count")
+  viewCount       Int      @map("view_count")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt
+}

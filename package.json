@@ -9,6 +9,7 @@
     "@prisma/client": "^6.14.0",
     "mongodb": "^6.5.0",
     "next": "latest",
+    "next-auth": "^4.24.11",
     "react": "^18",
     "react-dom": "^18"
   },

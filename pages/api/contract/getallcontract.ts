@@ -53,6 +53,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     // Fetch Dexscreener cache
     const dexCache = await prisma.dexscreenerCacheNew.findMany();
     const dexCacheMap = new Map(dexCache.map(dc => [dc.contractAddress, dc]));
+    const tokenImage = dexCache[0]?.info?.imageurl!;
 
     // Map and calculate marketcapChange
     contracts = contracts
@@ -62,6 +63,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
         const dbCap = Number(item.firstDex?.marketCap || 0);
         const cachedCap = Number(cachedDex.marketCap || 0);
+        
 
         if (!dbCap || !cachedCap) return null;
 
@@ -80,7 +82,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           chain: item.firstDex?.chainId,
           tokenName: item.firstDex?.baseToken?.name,
           tokenSymbol: item.firstDex?.baseToken?.symbol,
-          tokenImage: item.firstDex?.info?.imageUrl,
+          tokenImage: item.firstDex?.info?.imageUrl || tokenImage,
           dbMarketcap: dbCap,
           priceUsd: item.firstDex?.priceUsd,
           cachedMarketcap: cachedCap,
