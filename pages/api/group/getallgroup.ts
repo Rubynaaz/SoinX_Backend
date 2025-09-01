@@ -113,6 +113,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
             unique_contracts: g.unique_contracts.size,
             avg_change,
             top_performer,
+            contracts: undefined
           };
         });
 

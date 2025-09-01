@@ -39,6 +39,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
         const dbMarketcap = firstDex?.marketCap || 0;
         const cachedMarketcap = cachedDex.marketCap || 0;
+        const historicaldata = cachedDex.historicalData;
 
         if (!dbMarketcap || !cachedMarketcap) return null;
 
@@ -54,7 +55,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           username: group.Username,
           groupmember: group.GroupUserCount,
           marketcapChange: parseFloat(marketcapChange.toFixed(2)),
-          xmultiply: parseFloat(xmultiply.toFixed(2))
+          xmultiply: parseFloat(xmultiply.toFixed(2)),
         };
       })
       .filter((g): g is NonNullable<typeof g> => g != null); // Remove null entries
@@ -75,7 +76,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         cachedMarketcap: cachedDex.marketCap,
         dexUrl: groups[0].DexscreenerData[0]?.url,
         tokenImage: cachedDex.info?.imageurl,
-        tokenBackgroundImage: groups[0].DexscreenerData[0]?.info?.header
+        tokenBackgroundImage: groups[0].DexscreenerData[0]?.info?.header,
+        historicalData: cachedDex.historicalData
       },
       messages: groupsWithChange,
       averageMarketcapChange: parseFloat(avgMarketcapChange.toFixed(2))

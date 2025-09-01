@@ -106,16 +106,23 @@ type Social {
 }
 
 model DexscreenerCacheNew {
-  id              String       @id @default(auto()) @map("_id") @db.ObjectId
-  contractAddress String       @unique @map("contract_address")
+  id              String           @id @default(auto()) @map("_id") @db.ObjectId
+  contractAddress String           @unique @map("contract_address")
   marketCap       Float?
   priceUsd        Float?
   updatedAt       DateTime?
   baseToken       BaseToken
   info            DexInfoCash?
-  dexUrl          String?      @map("dexurl")
+  dexUrl          String?          @map("dexurl")
+  historicalData  historicalData[]
 
   @@map("dexscreener_cache_new")
+}
+
+type historicalData {
+  timestamp DateTime
+  marketCap Float?
+  priceUsd  Float?
 }
 
 type BaseToken {

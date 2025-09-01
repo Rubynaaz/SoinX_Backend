@@ -78,7 +78,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
       groupedByContract[msg.ContractAddress].messages.push({
         message: msg.FullMessage,
-        messageDateTime: msg.MessageDateTime
+        messageDateTime: msg.MessageDateTime,
+        messageLink: msg.MessageLink
       });
 
       callPerformances.push(multiplierX);
