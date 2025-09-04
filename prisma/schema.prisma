@@ -108,6 +108,7 @@ type Social {
 model DexscreenerCacheNew {
   id              String           @id @default(auto()) @map("_id") @db.ObjectId
   contractAddress String           @unique @map("contract_address")
+  groupUser       String?
   marketCap       Float?
   priceUsd        Float?
   updatedAt       DateTime?
@@ -116,12 +117,15 @@ model DexscreenerCacheNew {
   dexUrl          String?          @map("dexurl")
   historicalData  historicalData[]
 
+  @@unique([contractAddress, groupUser])
   @@map("dexscreener_cache_new")
 }
 
 type historicalData {
   timestamp DateTime
   marketCap Float?
+  volume_1h Float?
+  groupUser String?
   priceUsd  Float?
 }
 
@@ -161,4 +165,44 @@ model YouTubeAccount {
   viewCount       Int      @map("view_count")
   createdAt       DateTime @default(now()) @map("created_at")
   updatedAt       DateTime @updatedAt
+}
+
+model GroupAnalytics {
+  id                 String   @id @map("_id") @db.ObjectId
+  groupUser          String
+  groupUserCount     Int
+  numContracts       Int
+  avgMarketCap       Float?
+  avgPriceChange     Float?
+  avgMarketCapChange Float?
+  totalMarketCap     Float?
+  top_contract       Json?
+  updatedAt          DateTime @default(now())
+
+  @@map("group_analytics")
+}
+
+type TopContract {
+  contract_address          String
+  priceUsd                  Float?
+  marketCap                 Float?
+  priceChangeSinceFirst     Float?
+  marketCapChangeSinceFirst Float?
+  baseToken                 BaseToken
+  updatedAt                 DateTime         @default(now())
+  dexurl                    String
+  info                      ContractInfo
+  historicalData            HistoricalData[]
+}
+
+type ContractInfo {
+  websites Website[]
+  socials  Social[]
+  imageurl String
+}
+
+type HistoricalData {
+  priceUsd  Float?
+  marketCap Float?
+  timestamp DateTime
 }
