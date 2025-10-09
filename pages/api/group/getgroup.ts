@@ -26,6 +26,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       return res.status(404).json({ message: "No messages found for this user" });
     }
 
+    console.log('first message', messages[0])
+
     const groupedByContract: Record<string, any> = {};
     const callPerformances: number[] = [];
     const marketCaps: number[] = [];
@@ -34,6 +36,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     let bestCall = { tokenName: "", tokenSymbol: "", multiplier: 0 };
     let lastCall: any = null;
     const groupname = messages[0].GroupName;
+    const groupMembers = messages[0].GroupUserCount;
 
     // Fetch cached Dex data for all unique contracts in messages
     const uniqueContracts = Array.from(
@@ -62,6 +65,16 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       let multiplierX = marketcapChangePercent > -100 ? marketcapChangePercent / 100 + 1 : 1;
 
       if (!groupedByContract[msg.ContractAddress]) {
+        // Use CallCount from database for star rating system
+        const callCount = msg.CallCount || 1;
+        let starRating: number;
+        if (callCount <= 3) {
+          starRating = callCount;
+        } else {
+          // For 4+ calls, reset to 1 star
+          starRating = 1;
+        }
+        
         groupedByContract[msg.ContractAddress] = {
           contract: msg.ContractAddress,
           tokenName: firstDex.baseToken?.name,
@@ -72,6 +85,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           dbMarketcap: firstDex.marketCap,
           marketcapChangePercent,
           multiplierX,
+          callCount: callCount,
+          starRating: starRating,
           messages: []
         };
       }
@@ -84,7 +99,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
       callPerformances.push(multiplierX);
       if (cachedDex.marketCap) marketCaps.push(cachedDex.marketCap);
-      totalCallsTracked++;
+      totalCallsTracked += msg.CallCount || 1;
       contractAddresses.add(msg.ContractAddress);
 
       if (multiplierX > bestCall.multiplier) {
@@ -106,10 +121,36 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       }
     });
 
-    const alphaCalls = callPerformances.filter(x => x >= 2).length;
-    const profitableCalls = callPerformances.filter(x => x > 0.3).length;
-    const consistencyPercentage = totalCallsTracked
-      ? (profitableCalls / totalCallsTracked) * 100
+    // Calculate alpha calls and profitable calls based on unique contracts
+    const alphaContracts = new Set<string>();
+    const profitableContracts = new Set<string>();
+    
+    messages.forEach(msg => {
+      if (!msg.ContractAddress) return;
+      
+      const cachedDex = cachedDexMap.get(msg.ContractAddress);
+      if (!cachedDex) return;
+
+      const firstDex = msg.DexscreenerData
+        ?.sort((a, b) => Number(b.pairCreatedAt || 0) - Number(a.pairCreatedAt || 0))[0];
+
+      if (!firstDex || !firstDex.marketCap || !cachedDex.marketCap) return;
+
+      const marketcapChangePercent = ((firstDex.marketCap - cachedDex.marketCap) / cachedDex.marketCap) * 100;
+      let multiplierX = marketcapChangePercent > -100 ? marketcapChangePercent / 100 + 1 : 1;
+      
+      if (multiplierX >= 2) {
+        alphaContracts.add(msg.ContractAddress);
+      }
+      if (multiplierX > 0.3) {
+        profitableContracts.add(msg.ContractAddress);
+      }
+    });
+    
+    const alphaCalls = alphaContracts.size;
+    const profitableCalls = profitableContracts.size;
+    const consistencyPercentage = contractAddresses.size
+      ? (profitableCalls / contractAddresses.size) * 100
       : 0;
     const avgXPerCall = callPerformances.length
       ? callPerformances.reduce((a, b) => a + b, 0) / callPerformances.length
@@ -120,8 +161,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     return res.status(200).json({
       username,
+      groupMembers,
       groupname,
-      messages: groupedByContract,
       analytics: {
         total_calls_tracked: totalCallsTracked,
         total_unique_contracts: contractAddresses.size,
@@ -133,7 +174,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           : null,
         average_call_marketcap: Math.round(avgMarketCap * 100) / 100,
         average_x_per_call: Math.round(avgXPerCall * 10) / 10
-      }
+      },
+      messages: groupedByContract,
+      
     });
 
   } catch (error) {
