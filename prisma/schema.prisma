@@ -107,7 +107,7 @@ type Social {
 
 model DexscreenerCacheNew {
   id              String           @id @default(auto()) @map("_id") @db.ObjectId
-  contractAddress String           @unique @map("contract_address")
+  contractAddress String           @map("contract_address")
   groupUser       String?
   marketCap       Float?
   priceUsd        Float?
@@ -142,33 +142,33 @@ type DexInfoCash {
   socials   Social[]
 }
 
-model User {
-  id            String           @id @default(auto()) @map("_id") @db.ObjectId
-  walletAddress String           @unique @map("wallet_address")
-  youtube       YouTubeAccount[]
-}
+// model User {
+//   id            String           @id @default(auto()) @map("_id") @db.ObjectId
+//   walletAddress String           @unique @map("wallet_address")
+//   // youtube       YouTubeAccount[]
+// }
 
-model YouTubeAccount {
-  id              String   @id @default(auto()) @map("_id") @db.ObjectId
-  channelId       String   @unique @map("id")
-  userId          String   @db.ObjectId
-  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  accessToken     String   @map("access_token")
-  refreshToken    String   @map("refresh_token")
-  expiry          DateTime @map("expiry")
-  title           String
-  description     String?
-  thumbnailUrl    String?  @map("thumbnail_url")
-  publishedAt     DateTime
-  subscriberCount Int      @map("subscriber_count")
-  videoCount      Int      @map("video_count")
-  viewCount       Int      @map("view_count")
-  createdAt       DateTime @default(now()) @map("created_at")
-  updatedAt       DateTime @updatedAt
-}
+// model YouTubeAccount {
+//   id              String   @id @default(auto()) @map("_id") @db.ObjectId
+//   channelId       String   @unique @map("id")
+//   userId          String   @db.ObjectId
+//   user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+//   accessToken     String   @map("access_token")
+//   refreshToken    String   @map("refresh_token")
+//   expiry          DateTime @map("expiry")
+//   title           String
+//   description     String?
+//   thumbnailUrl    String?  @map("thumbnail_url")
+//   publishedAt     DateTime
+//   subscriberCount Int      @map("subscriber_count")
+//   videoCount      Int      @map("video_count")
+//   viewCount       Int      @map("view_count")
+//   createdAt       DateTime @default(now()) @map("created_at")
+//   updatedAt       DateTime @updatedAt
+// }
 
 model GroupAnalytics {
-  id                 String   @id @map("_id") @db.ObjectId
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
   groupUser          String
   groupUserCount     Int
   numContracts       Int
@@ -205,4 +205,153 @@ type HistoricalData {
   priceUsd  Float?
   marketCap Float?
   timestamp DateTime
+}
+
+model TwitterData {
+  id     String  @id @map("_id") @db.ObjectId
+  url    String
+  user   Json
+
+  @@map("user_profiles")
+}
+
+type User {
+  id                           String
+  rest_id                      String
+  affiliates_highlighted_label AffiliatesHighlightedLabel?
+  avatar                       Avatar?
+  core                         Core
+  dm_permissions               Json?
+  is_blue_verified             Boolean
+  legacy                       Legacy
+  location                     Location?
+  media_permissions            Json?
+  parody_commentary_fan_label  String?
+  profile_image_shape          String?
+  professional                 Professional?
+  privacy                      Privacy?
+  relationship_perspectives    Json?
+  tipjar_settings              TipjarSettings?
+  verification                 Verification?
+  legacy_extended_profile      Json?
+  is_profile_translatable      Boolean?
+  has_hidden_subscriptions_on_profile Boolean?
+  verification_info            VerificationInfo?
+  highlights_info              HighlightsInfo?
+  user_seed_tweet_count        Int?
+  business_account             Json?
+  creator_subscriptions_count  Int?
+}
+
+type AffiliatesHighlightedLabel {
+  label Label
+}
+
+type Label {
+  url                      Url?
+  badge                    Badge?
+  description              String?
+  userLabelType            String?
+  userLabelDisplayType     String?
+}
+
+type Url {
+  url      String?
+  urlType  String?
+}
+
+type Badge {
+  url String?
+}
+
+type Avatar {
+  image_url String?
+}
+
+type Core {
+  created_at  String
+  name        String
+  screen_name String
+}
+
+type Legacy {
+  default_profile           Boolean
+  default_profile_image      Boolean
+  description                String?
+  entities                   Entities?
+  fast_followers_count       Int?
+  favourites_count           Int?
+  followers_count            Int?
+  friends_count              Int?
+  has_custom_timelines       Boolean?
+  is_translator              Boolean?
+  listed_count               Int?
+  media_count                Int?
+  normal_followers_count     Int?
+  pinned_tweet_ids_str       String[]
+  possibly_sensitive          Boolean?
+  profile_banner_url         String?
+  profile_interstitial_type  String?
+  statuses_count             Int?
+  translator_type            String?
+  withheld_in_countries      String[]
+}
+
+type Entities {
+  description Description?
+}
+
+type Description {
+  urls String[]
+}
+
+type Location {
+  location String?
+}
+
+type Professional {
+  rest_id           String?
+  professional_type String?
+  category          String[]
+}
+
+type Privacy {
+  protected Boolean?
+}
+
+type TipjarSettings {
+  is_enabled       Boolean?
+  bandcamp_handle  String?
+  bitcoin_handle   String?
+  cash_app_handle  String?
+  ethereum_handle  String?
+  gofundme_handle  String?
+  patreon_handle   String?
+  pay_pal_handle   String?
+  venmo_handle     String?
+}
+
+type Verification {
+  verified Boolean?
+}
+
+type VerificationInfo {
+  is_identity_verified Boolean?
+  reason               VerificationReason?
+}
+
+type VerificationReason {
+  description           VerificationDescription?
+  verified_since_msec   String?
+  override_verified_year Int?
+}
+
+type VerificationDescription {
+  text      String?
+  entities  Json?
+}
+
+type HighlightsInfo {
+  can_highlight_tweets Boolean?
+  highlighted_tweets   String?
 }
