@@ -1,0 +1,198 @@
+generator client_db2 {
+    provider = "prisma-client-js"
+    output   = "./lib/generated/prisma/db2"
+}
+
+datasource db2 {
+    provider = "mongodb"
+    url      = env("DATABASE_URL_2")
+}
+
+model UserProfile {
+    id                        String           @id @default(auto()) @map("_id") @db2.ObjectId
+    default_profile           Boolean
+    default_profile_image     Boolean
+    description               String?
+    entities                  EntitiesProfile?
+    fast_followers_count      Int?
+    favourites_count          Int?
+    followers_count           Int?
+    friends_count             Int?
+    has_custom_timelines      Boolean?
+    is_translator             Boolean?
+    listed_count              Int?
+    media_count               Int?
+    normal_followers_count    Int?
+    pinned_tweet_ids_str      String[]
+    possibly_sensitive        Boolean?
+    profile_banner_url        String?
+    profile_interstitial_type String?
+    statuses_count            Int?
+    translator_type           String?
+    withheld_in_countries     String[]
+    id_str                    String
+    profile_url               String
+    updated_time              DateTime
+
+    @@map("user_profiles")
+}
+
+type EntitiesProfile {
+    description DescriptionProfile?
+}
+
+type DescriptionProfile {
+    urls UrlEntity[]
+}
+
+type UrlEntity {
+    display_url  String?
+    expanded_url String?
+    url          String?
+    indices      Int[]
+}
+
+/// Tweets data collection mapped from Twitter JSON
+model TweetsData {
+    id                   String   @id @default(auto()) @map("_id") @db2.ObjectId
+    id_str               String
+    bookmark_count       Int?
+    bookmarked           Boolean?
+    conversation_id_str  String?
+    created_at           String?
+    display_text_range   Int[]
+    entities             Json?
+    favorite_count       Int?
+    favorited            Boolean?
+    full_text            String?
+    is_quote_status      Boolean?
+    lang                 String?
+    quote_count          Int?
+    reply_count          Int?
+    retweet_count        Int?
+    retweeted            Boolean?
+    user                 TweetUser?
+    user_id_str          String?
+    updated_time         DateTime
+
+    @@map("tweets_data")
+}
+
+/// Minimal user shape embedded in a tweet
+type TweetUser {
+    default_profile            Boolean
+    default_profile_image      Boolean
+    description                String?
+    entities                   EntitiesProfile?
+    fast_followers_count       Int?
+    favourites_count           Int?
+    followers_count            Int?
+    friends_count              Int?
+    has_custom_timelines       Boolean?
+    is_translator              Boolean?
+    listed_count               Int?
+    media_count                Int?
+    normal_followers_count     Int?
+    pinned_tweet_ids_str       String[]
+    possibly_sensitive         Boolean?
+    profile_banner_url         String?
+    profile_interstitial_type  String?
+    statuses_count             Int?
+    translator_type            String?
+    withheld_in_countries      String[]
+}
+
+/// Follower/Following data collection
+model FollowerFollowingData {
+    id                              String   @id @default(auto()) @map("_id") @db2.ObjectId
+    id_str                          String
+    name                            String?
+    screen_name                     String?
+    location                        String?
+    description                     String?
+    url                             String?
+    entities                        Json?
+    protected                       Boolean?
+    followers_count                 Int?
+    fast_followers_count            Int?
+    normal_followers_count          Int?
+    friends_count                   Int?
+    listed_count                    Int?
+    created_at                      String?
+    favourites_count                Int?
+    utc_offset                      String?
+    time_zone                       String?
+    geo_enabled                     Boolean?
+    verified                        Boolean?
+    statuses_count                  Int?
+    media_count                     Int?
+    lang                            String?
+    status                          TweetStatus?
+    contributors_enabled            Boolean?
+    is_translator                   Boolean?
+    is_translation_enabled          Boolean?
+    profile_background_color        String?
+    profile_background_image_url    String?
+    profile_background_image_url_https String?
+    profile_background_tile         Boolean?
+    profile_image_url               String?
+    profile_image_url_https         String?
+    profile_banner_url              String?
+    profile_link_color              String?
+    profile_sidebar_border_color    String?
+    profile_sidebar_fill_color      String?
+    profile_text_color              String?
+    profile_use_background_image    Boolean?
+    has_extended_profile            Boolean?
+    default_profile                 Boolean?
+    default_profile_image           Boolean?
+    pinned_tweet_ids                Json?
+    pinned_tweet_ids_str            String[]
+    has_custom_timelines            Boolean?
+    can_media_tag                   Boolean?
+    followed_by                     Boolean?
+    following                       Boolean?
+    live_following                  Boolean?
+    follow_request_sent             Boolean?
+    notifications                   Boolean?
+    muting                         Boolean?
+    blocking                        Boolean?
+    blocked_by                      Boolean?
+    advertiser_account_type         String?
+    advertiser_account_service_levels String[]
+    analytics_type                  String?
+    business_profile_state          String?
+    translator_type                 String?
+    withheld_in_countries           String[]
+    require_some_consent            Boolean?
+    type                            String?
+    target_username                 String?
+    email                           String?
+
+    @@map("follower_following_data")
+}
+
+/// Tweet status embedded in follower data
+type TweetStatus {
+    created_at                      String?
+    id_str                          String?
+    text                            String?
+    truncated                       Boolean?
+    entities                        Json?
+    source                          String?
+    in_reply_to_status_id_str       String?
+    in_reply_to_user_id_str         String?
+    in_reply_to_screen_name         String?
+    geo                             Json?
+    coordinates                     Json?
+    place                           Json?
+    contributors                    Json?
+    is_quote_status                 Boolean?
+    retweet_count                   Int?
+    favorite_count                  Int?
+    favorited                       Boolean?
+    retweeted                       Boolean?
+    lang                            String?
+    supplemental_language           String?
+    self_thread                     Json?
+}
