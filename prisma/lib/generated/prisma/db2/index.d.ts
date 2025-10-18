@@ -44,15 +44,30 @@ export type TweetStatus = $Result.DefaultSelection<Prisma.$TweetStatusPayload>
  */
 export type UserProfile = $Result.DefaultSelection<Prisma.$UserProfilePayload>
 /**
+ * Model UserProfileTest
+ * Duplicate of UserProfile mapped to user_profiles_test collection
+ */
+export type UserProfileTest = $Result.DefaultSelection<Prisma.$UserProfileTestPayload>
+/**
  * Model TweetsData
  * Tweets data collection mapped from Twitter JSON
  */
 export type TweetsData = $Result.DefaultSelection<Prisma.$TweetsDataPayload>
 /**
+ * Model TweetsDataTest
+ * Duplicate of TweetsData mapped to tweets_data_test collection
+ */
+export type TweetsDataTest = $Result.DefaultSelection<Prisma.$TweetsDataTestPayload>
+/**
  * Model FollowerFollowingData
  * Follower/Following data collection
  */
 export type FollowerFollowingData = $Result.DefaultSelection<Prisma.$FollowerFollowingDataPayload>
+/**
+ * Model FollowersDataTest
+ * Duplicate of FollowerFollowingData mapped to followers_data_test collection
+ */
+export type FollowersDataTest = $Result.DefaultSelection<Prisma.$FollowersDataTestPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -150,6 +165,16 @@ export class PrismaClient<
   get userProfile(): Prisma.UserProfileDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.userProfileTest`: Exposes CRUD operations for the **UserProfileTest** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserProfileTests
+    * const userProfileTests = await prisma.userProfileTest.findMany()
+    * ```
+    */
+  get userProfileTest(): Prisma.UserProfileTestDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.tweetsData`: Exposes CRUD operations for the **TweetsData** model.
     * Example usage:
     * ```ts
@@ -160,6 +185,16 @@ export class PrismaClient<
   get tweetsData(): Prisma.TweetsDataDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.tweetsDataTest`: Exposes CRUD operations for the **TweetsDataTest** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TweetsDataTests
+    * const tweetsDataTests = await prisma.tweetsDataTest.findMany()
+    * ```
+    */
+  get tweetsDataTest(): Prisma.TweetsDataTestDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.followerFollowingData`: Exposes CRUD operations for the **FollowerFollowingData** model.
     * Example usage:
     * ```ts
@@ -168,6 +203,16 @@ export class PrismaClient<
     * ```
     */
   get followerFollowingData(): Prisma.FollowerFollowingDataDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.followersDataTest`: Exposes CRUD operations for the **FollowersDataTest** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FollowersDataTests
+    * const followersDataTests = await prisma.followersDataTest.findMany()
+    * ```
+    */
+  get followersDataTest(): Prisma.FollowersDataTestDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -609,8 +654,11 @@ export namespace Prisma {
 
   export const ModelName: {
     UserProfile: 'UserProfile',
+    UserProfileTest: 'UserProfileTest',
     TweetsData: 'TweetsData',
-    FollowerFollowingData: 'FollowerFollowingData'
+    TweetsDataTest: 'TweetsDataTest',
+    FollowerFollowingData: 'FollowerFollowingData',
+    FollowersDataTest: 'FollowersDataTest'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -629,7 +677,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "userProfile" | "tweetsData" | "followerFollowingData"
+      modelProps: "userProfile" | "userProfileTest" | "tweetsData" | "tweetsDataTest" | "followerFollowingData" | "followersDataTest"
       txIsolationLevel: never
     }
     model: {
@@ -707,6 +755,80 @@ export namespace Prisma {
           }
         }
       }
+      UserProfileTest: {
+        payload: Prisma.$UserProfileTestPayload<ExtArgs>
+        fields: Prisma.UserProfileTestFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserProfileTestFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfileTestPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserProfileTestFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfileTestPayload>
+          }
+          findFirst: {
+            args: Prisma.UserProfileTestFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfileTestPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserProfileTestFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfileTestPayload>
+          }
+          findMany: {
+            args: Prisma.UserProfileTestFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfileTestPayload>[]
+          }
+          create: {
+            args: Prisma.UserProfileTestCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfileTestPayload>
+          }
+          createMany: {
+            args: Prisma.UserProfileTestCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.UserProfileTestDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfileTestPayload>
+          }
+          update: {
+            args: Prisma.UserProfileTestUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfileTestPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserProfileTestDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserProfileTestUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.UserProfileTestUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfileTestPayload>
+          }
+          aggregate: {
+            args: Prisma.UserProfileTestAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserProfileTest>
+          }
+          groupBy: {
+            args: Prisma.UserProfileTestGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserProfileTestGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.UserProfileTestFindRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.UserProfileTestAggregateRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          count: {
+            args: Prisma.UserProfileTestCountArgs<ExtArgs>
+            result: $Utils.Optional<UserProfileTestCountAggregateOutputType> | number
+          }
+        }
+      }
       TweetsData: {
         payload: Prisma.$TweetsDataPayload<ExtArgs>
         fields: Prisma.TweetsDataFieldRefs
@@ -781,6 +903,80 @@ export namespace Prisma {
           }
         }
       }
+      TweetsDataTest: {
+        payload: Prisma.$TweetsDataTestPayload<ExtArgs>
+        fields: Prisma.TweetsDataTestFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TweetsDataTestFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TweetsDataTestPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TweetsDataTestFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TweetsDataTestPayload>
+          }
+          findFirst: {
+            args: Prisma.TweetsDataTestFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TweetsDataTestPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TweetsDataTestFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TweetsDataTestPayload>
+          }
+          findMany: {
+            args: Prisma.TweetsDataTestFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TweetsDataTestPayload>[]
+          }
+          create: {
+            args: Prisma.TweetsDataTestCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TweetsDataTestPayload>
+          }
+          createMany: {
+            args: Prisma.TweetsDataTestCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.TweetsDataTestDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TweetsDataTestPayload>
+          }
+          update: {
+            args: Prisma.TweetsDataTestUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TweetsDataTestPayload>
+          }
+          deleteMany: {
+            args: Prisma.TweetsDataTestDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TweetsDataTestUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.TweetsDataTestUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TweetsDataTestPayload>
+          }
+          aggregate: {
+            args: Prisma.TweetsDataTestAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTweetsDataTest>
+          }
+          groupBy: {
+            args: Prisma.TweetsDataTestGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TweetsDataTestGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.TweetsDataTestFindRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.TweetsDataTestAggregateRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          count: {
+            args: Prisma.TweetsDataTestCountArgs<ExtArgs>
+            result: $Utils.Optional<TweetsDataTestCountAggregateOutputType> | number
+          }
+        }
+      }
       FollowerFollowingData: {
         payload: Prisma.$FollowerFollowingDataPayload<ExtArgs>
         fields: Prisma.FollowerFollowingDataFieldRefs
@@ -852,6 +1048,80 @@ export namespace Prisma {
           count: {
             args: Prisma.FollowerFollowingDataCountArgs<ExtArgs>
             result: $Utils.Optional<FollowerFollowingDataCountAggregateOutputType> | number
+          }
+        }
+      }
+      FollowersDataTest: {
+        payload: Prisma.$FollowersDataTestPayload<ExtArgs>
+        fields: Prisma.FollowersDataTestFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FollowersDataTestFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FollowersDataTestPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FollowersDataTestFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FollowersDataTestPayload>
+          }
+          findFirst: {
+            args: Prisma.FollowersDataTestFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FollowersDataTestPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FollowersDataTestFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FollowersDataTestPayload>
+          }
+          findMany: {
+            args: Prisma.FollowersDataTestFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FollowersDataTestPayload>[]
+          }
+          create: {
+            args: Prisma.FollowersDataTestCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FollowersDataTestPayload>
+          }
+          createMany: {
+            args: Prisma.FollowersDataTestCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.FollowersDataTestDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FollowersDataTestPayload>
+          }
+          update: {
+            args: Prisma.FollowersDataTestUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FollowersDataTestPayload>
+          }
+          deleteMany: {
+            args: Prisma.FollowersDataTestDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FollowersDataTestUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.FollowersDataTestUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FollowersDataTestPayload>
+          }
+          aggregate: {
+            args: Prisma.FollowersDataTestAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFollowersDataTest>
+          }
+          groupBy: {
+            args: Prisma.FollowersDataTestGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FollowersDataTestGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.FollowersDataTestFindRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.FollowersDataTestAggregateRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          count: {
+            args: Prisma.FollowersDataTestCountArgs<ExtArgs>
+            result: $Utils.Optional<FollowersDataTestCountAggregateOutputType> | number
           }
         }
       }
@@ -935,8 +1205,11 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     userProfile?: UserProfileOmit
+    userProfileTest?: UserProfileTestOmit
     tweetsData?: TweetsDataOmit
+    tweetsDataTest?: TweetsDataTestOmit
     followerFollowingData?: FollowerFollowingDataOmit
+    followersDataTest?: FollowersDataTestOmit
   }
 
   /* Types for Logging */
@@ -2719,6 +2992,1256 @@ export namespace Prisma {
 
 
   /**
+   * Model UserProfileTest
+   */
+
+  export type AggregateUserProfileTest = {
+    _count: UserProfileTestCountAggregateOutputType | null
+    _avg: UserProfileTestAvgAggregateOutputType | null
+    _sum: UserProfileTestSumAggregateOutputType | null
+    _min: UserProfileTestMinAggregateOutputType | null
+    _max: UserProfileTestMaxAggregateOutputType | null
+  }
+
+  export type UserProfileTestAvgAggregateOutputType = {
+    fast_followers_count: number | null
+    favourites_count: number | null
+    followers_count: number | null
+    friends_count: number | null
+    listed_count: number | null
+    media_count: number | null
+    normal_followers_count: number | null
+    statuses_count: number | null
+  }
+
+  export type UserProfileTestSumAggregateOutputType = {
+    fast_followers_count: number | null
+    favourites_count: number | null
+    followers_count: number | null
+    friends_count: number | null
+    listed_count: number | null
+    media_count: number | null
+    normal_followers_count: number | null
+    statuses_count: number | null
+  }
+
+  export type UserProfileTestMinAggregateOutputType = {
+    id: string | null
+    default_profile: boolean | null
+    default_profile_image: boolean | null
+    description: string | null
+    fast_followers_count: number | null
+    favourites_count: number | null
+    followers_count: number | null
+    friends_count: number | null
+    has_custom_timelines: boolean | null
+    is_translator: boolean | null
+    listed_count: number | null
+    media_count: number | null
+    normal_followers_count: number | null
+    possibly_sensitive: boolean | null
+    profile_banner_url: string | null
+    profile_interstitial_type: string | null
+    statuses_count: number | null
+    translator_type: string | null
+    user_id_str: string | null
+    profile_url: string | null
+    profile_image_url_https: string | null
+    verified: boolean | null
+    updated_time: Date | null
+  }
+
+  export type UserProfileTestMaxAggregateOutputType = {
+    id: string | null
+    default_profile: boolean | null
+    default_profile_image: boolean | null
+    description: string | null
+    fast_followers_count: number | null
+    favourites_count: number | null
+    followers_count: number | null
+    friends_count: number | null
+    has_custom_timelines: boolean | null
+    is_translator: boolean | null
+    listed_count: number | null
+    media_count: number | null
+    normal_followers_count: number | null
+    possibly_sensitive: boolean | null
+    profile_banner_url: string | null
+    profile_interstitial_type: string | null
+    statuses_count: number | null
+    translator_type: string | null
+    user_id_str: string | null
+    profile_url: string | null
+    profile_image_url_https: string | null
+    verified: boolean | null
+    updated_time: Date | null
+  }
+
+  export type UserProfileTestCountAggregateOutputType = {
+    id: number
+    default_profile: number
+    default_profile_image: number
+    description: number
+    fast_followers_count: number
+    favourites_count: number
+    followers_count: number
+    friends_count: number
+    has_custom_timelines: number
+    is_translator: number
+    listed_count: number
+    media_count: number
+    normal_followers_count: number
+    pinned_tweet_ids_str: number
+    possibly_sensitive: number
+    profile_banner_url: number
+    profile_interstitial_type: number
+    statuses_count: number
+    translator_type: number
+    withheld_in_countries: number
+    user_id_str: number
+    profile_url: number
+    profile_image_url_https: number
+    verified: number
+    updated_time: number
+    _all: number
+  }
+
+
+  export type UserProfileTestAvgAggregateInputType = {
+    fast_followers_count?: true
+    favourites_count?: true
+    followers_count?: true
+    friends_count?: true
+    listed_count?: true
+    media_count?: true
+    normal_followers_count?: true
+    statuses_count?: true
+  }
+
+  export type UserProfileTestSumAggregateInputType = {
+    fast_followers_count?: true
+    favourites_count?: true
+    followers_count?: true
+    friends_count?: true
+    listed_count?: true
+    media_count?: true
+    normal_followers_count?: true
+    statuses_count?: true
+  }
+
+  export type UserProfileTestMinAggregateInputType = {
+    id?: true
+    default_profile?: true
+    default_profile_image?: true
+    description?: true
+    fast_followers_count?: true
+    favourites_count?: true
+    followers_count?: true
+    friends_count?: true
+    has_custom_timelines?: true
+    is_translator?: true
+    listed_count?: true
+    media_count?: true
+    normal_followers_count?: true
+    possibly_sensitive?: true
+    profile_banner_url?: true
+    profile_interstitial_type?: true
+    statuses_count?: true
+    translator_type?: true
+    user_id_str?: true
+    profile_url?: true
+    profile_image_url_https?: true
+    verified?: true
+    updated_time?: true
+  }
+
+  export type UserProfileTestMaxAggregateInputType = {
+    id?: true
+    default_profile?: true
+    default_profile_image?: true
+    description?: true
+    fast_followers_count?: true
+    favourites_count?: true
+    followers_count?: true
+    friends_count?: true
+    has_custom_timelines?: true
+    is_translator?: true
+    listed_count?: true
+    media_count?: true
+    normal_followers_count?: true
+    possibly_sensitive?: true
+    profile_banner_url?: true
+    profile_interstitial_type?: true
+    statuses_count?: true
+    translator_type?: true
+    user_id_str?: true
+    profile_url?: true
+    profile_image_url_https?: true
+    verified?: true
+    updated_time?: true
+  }
+
+  export type UserProfileTestCountAggregateInputType = {
+    id?: true
+    default_profile?: true
+    default_profile_image?: true
+    description?: true
+    fast_followers_count?: true
+    favourites_count?: true
+    followers_count?: true
+    friends_count?: true
+    has_custom_timelines?: true
+    is_translator?: true
+    listed_count?: true
+    media_count?: true
+    normal_followers_count?: true
+    pinned_tweet_ids_str?: true
+    possibly_sensitive?: true
+    profile_banner_url?: true
+    profile_interstitial_type?: true
+    statuses_count?: true
+    translator_type?: true
+    withheld_in_countries?: true
+    user_id_str?: true
+    profile_url?: true
+    profile_image_url_https?: true
+    verified?: true
+    updated_time?: true
+    _all?: true
+  }
+
+  export type UserProfileTestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserProfileTest to aggregate.
+     */
+    where?: UserProfileTestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserProfileTests to fetch.
+     */
+    orderBy?: UserProfileTestOrderByWithRelationInput | UserProfileTestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserProfileTestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserProfileTests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserProfileTests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserProfileTests
+    **/
+    _count?: true | UserProfileTestCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserProfileTestAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserProfileTestSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserProfileTestMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserProfileTestMaxAggregateInputType
+  }
+
+  export type GetUserProfileTestAggregateType<T extends UserProfileTestAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserProfileTest]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserProfileTest[P]>
+      : GetScalarType<T[P], AggregateUserProfileTest[P]>
+  }
+
+
+
+
+  export type UserProfileTestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserProfileTestWhereInput
+    orderBy?: UserProfileTestOrderByWithAggregationInput | UserProfileTestOrderByWithAggregationInput[]
+    by: UserProfileTestScalarFieldEnum[] | UserProfileTestScalarFieldEnum
+    having?: UserProfileTestScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserProfileTestCountAggregateInputType | true
+    _avg?: UserProfileTestAvgAggregateInputType
+    _sum?: UserProfileTestSumAggregateInputType
+    _min?: UserProfileTestMinAggregateInputType
+    _max?: UserProfileTestMaxAggregateInputType
+  }
+
+  export type UserProfileTestGroupByOutputType = {
+    id: string
+    default_profile: boolean
+    default_profile_image: boolean
+    description: string | null
+    fast_followers_count: number | null
+    favourites_count: number | null
+    followers_count: number | null
+    friends_count: number | null
+    has_custom_timelines: boolean | null
+    is_translator: boolean | null
+    listed_count: number | null
+    media_count: number | null
+    normal_followers_count: number | null
+    pinned_tweet_ids_str: string[]
+    possibly_sensitive: boolean | null
+    profile_banner_url: string | null
+    profile_interstitial_type: string | null
+    statuses_count: number | null
+    translator_type: string | null
+    withheld_in_countries: string[]
+    user_id_str: string
+    profile_url: string | null
+    profile_image_url_https: string | null
+    verified: boolean | null
+    updated_time: Date | null
+    _count: UserProfileTestCountAggregateOutputType | null
+    _avg: UserProfileTestAvgAggregateOutputType | null
+    _sum: UserProfileTestSumAggregateOutputType | null
+    _min: UserProfileTestMinAggregateOutputType | null
+    _max: UserProfileTestMaxAggregateOutputType | null
+  }
+
+  type GetUserProfileTestGroupByPayload<T extends UserProfileTestGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserProfileTestGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserProfileTestGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserProfileTestGroupByOutputType[P]>
+            : GetScalarType<T[P], UserProfileTestGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserProfileTestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    default_profile?: boolean
+    default_profile_image?: boolean
+    description?: boolean
+    entities?: boolean | EntitiesProfileDefaultArgs<ExtArgs>
+    fast_followers_count?: boolean
+    favourites_count?: boolean
+    followers_count?: boolean
+    friends_count?: boolean
+    has_custom_timelines?: boolean
+    is_translator?: boolean
+    listed_count?: boolean
+    media_count?: boolean
+    normal_followers_count?: boolean
+    pinned_tweet_ids_str?: boolean
+    possibly_sensitive?: boolean
+    profile_banner_url?: boolean
+    profile_interstitial_type?: boolean
+    statuses_count?: boolean
+    translator_type?: boolean
+    withheld_in_countries?: boolean
+    user_id_str?: boolean
+    profile_url?: boolean
+    profile_image_url_https?: boolean
+    verified?: boolean
+    updated_time?: boolean
+  }, ExtArgs["result"]["userProfileTest"]>
+
+
+
+  export type UserProfileTestSelectScalar = {
+    id?: boolean
+    default_profile?: boolean
+    default_profile_image?: boolean
+    description?: boolean
+    fast_followers_count?: boolean
+    favourites_count?: boolean
+    followers_count?: boolean
+    friends_count?: boolean
+    has_custom_timelines?: boolean
+    is_translator?: boolean
+    listed_count?: boolean
+    media_count?: boolean
+    normal_followers_count?: boolean
+    pinned_tweet_ids_str?: boolean
+    possibly_sensitive?: boolean
+    profile_banner_url?: boolean
+    profile_interstitial_type?: boolean
+    statuses_count?: boolean
+    translator_type?: boolean
+    withheld_in_countries?: boolean
+    user_id_str?: boolean
+    profile_url?: boolean
+    profile_image_url_https?: boolean
+    verified?: boolean
+    updated_time?: boolean
+  }
+
+  export type UserProfileTestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "default_profile" | "default_profile_image" | "description" | "entities" | "fast_followers_count" | "favourites_count" | "followers_count" | "friends_count" | "has_custom_timelines" | "is_translator" | "listed_count" | "media_count" | "normal_followers_count" | "pinned_tweet_ids_str" | "possibly_sensitive" | "profile_banner_url" | "profile_interstitial_type" | "statuses_count" | "translator_type" | "withheld_in_countries" | "user_id_str" | "profile_url" | "profile_image_url_https" | "verified" | "updated_time", ExtArgs["result"]["userProfileTest"]>
+  export type UserProfileTestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $UserProfileTestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserProfileTest"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      default_profile: boolean
+      default_profile_image: boolean
+      description: string | null
+      fast_followers_count: number | null
+      favourites_count: number | null
+      followers_count: number | null
+      friends_count: number | null
+      has_custom_timelines: boolean | null
+      is_translator: boolean | null
+      listed_count: number | null
+      media_count: number | null
+      normal_followers_count: number | null
+      pinned_tweet_ids_str: string[]
+      possibly_sensitive: boolean | null
+      profile_banner_url: string | null
+      profile_interstitial_type: string | null
+      statuses_count: number | null
+      translator_type: string | null
+      withheld_in_countries: string[]
+      user_id_str: string
+      profile_url: string | null
+      profile_image_url_https: string | null
+      verified: boolean | null
+      updated_time: Date | null
+    }, ExtArgs["result"]["userProfileTest"]>
+    composites: {
+      entities: Prisma.$EntitiesProfilePayload | null
+    }
+  }
+
+  type UserProfileTestGetPayload<S extends boolean | null | undefined | UserProfileTestDefaultArgs> = $Result.GetResult<Prisma.$UserProfileTestPayload, S>
+
+  type UserProfileTestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserProfileTestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserProfileTestCountAggregateInputType | true
+    }
+
+  export interface UserProfileTestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserProfileTest'], meta: { name: 'UserProfileTest' } }
+    /**
+     * Find zero or one UserProfileTest that matches the filter.
+     * @param {UserProfileTestFindUniqueArgs} args - Arguments to find a UserProfileTest
+     * @example
+     * // Get one UserProfileTest
+     * const userProfileTest = await prisma.userProfileTest.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserProfileTestFindUniqueArgs>(args: SelectSubset<T, UserProfileTestFindUniqueArgs<ExtArgs>>): Prisma__UserProfileTestClient<$Result.GetResult<Prisma.$UserProfileTestPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserProfileTest that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserProfileTestFindUniqueOrThrowArgs} args - Arguments to find a UserProfileTest
+     * @example
+     * // Get one UserProfileTest
+     * const userProfileTest = await prisma.userProfileTest.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserProfileTestFindUniqueOrThrowArgs>(args: SelectSubset<T, UserProfileTestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserProfileTestClient<$Result.GetResult<Prisma.$UserProfileTestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserProfileTest that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfileTestFindFirstArgs} args - Arguments to find a UserProfileTest
+     * @example
+     * // Get one UserProfileTest
+     * const userProfileTest = await prisma.userProfileTest.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserProfileTestFindFirstArgs>(args?: SelectSubset<T, UserProfileTestFindFirstArgs<ExtArgs>>): Prisma__UserProfileTestClient<$Result.GetResult<Prisma.$UserProfileTestPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserProfileTest that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfileTestFindFirstOrThrowArgs} args - Arguments to find a UserProfileTest
+     * @example
+     * // Get one UserProfileTest
+     * const userProfileTest = await prisma.userProfileTest.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserProfileTestFindFirstOrThrowArgs>(args?: SelectSubset<T, UserProfileTestFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserProfileTestClient<$Result.GetResult<Prisma.$UserProfileTestPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserProfileTests that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfileTestFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserProfileTests
+     * const userProfileTests = await prisma.userProfileTest.findMany()
+     * 
+     * // Get first 10 UserProfileTests
+     * const userProfileTests = await prisma.userProfileTest.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userProfileTestWithIdOnly = await prisma.userProfileTest.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserProfileTestFindManyArgs>(args?: SelectSubset<T, UserProfileTestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserProfileTestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserProfileTest.
+     * @param {UserProfileTestCreateArgs} args - Arguments to create a UserProfileTest.
+     * @example
+     * // Create one UserProfileTest
+     * const UserProfileTest = await prisma.userProfileTest.create({
+     *   data: {
+     *     // ... data to create a UserProfileTest
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserProfileTestCreateArgs>(args: SelectSubset<T, UserProfileTestCreateArgs<ExtArgs>>): Prisma__UserProfileTestClient<$Result.GetResult<Prisma.$UserProfileTestPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserProfileTests.
+     * @param {UserProfileTestCreateManyArgs} args - Arguments to create many UserProfileTests.
+     * @example
+     * // Create many UserProfileTests
+     * const userProfileTest = await prisma.userProfileTest.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserProfileTestCreateManyArgs>(args?: SelectSubset<T, UserProfileTestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a UserProfileTest.
+     * @param {UserProfileTestDeleteArgs} args - Arguments to delete one UserProfileTest.
+     * @example
+     * // Delete one UserProfileTest
+     * const UserProfileTest = await prisma.userProfileTest.delete({
+     *   where: {
+     *     // ... filter to delete one UserProfileTest
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserProfileTestDeleteArgs>(args: SelectSubset<T, UserProfileTestDeleteArgs<ExtArgs>>): Prisma__UserProfileTestClient<$Result.GetResult<Prisma.$UserProfileTestPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserProfileTest.
+     * @param {UserProfileTestUpdateArgs} args - Arguments to update one UserProfileTest.
+     * @example
+     * // Update one UserProfileTest
+     * const userProfileTest = await prisma.userProfileTest.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserProfileTestUpdateArgs>(args: SelectSubset<T, UserProfileTestUpdateArgs<ExtArgs>>): Prisma__UserProfileTestClient<$Result.GetResult<Prisma.$UserProfileTestPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserProfileTests.
+     * @param {UserProfileTestDeleteManyArgs} args - Arguments to filter UserProfileTests to delete.
+     * @example
+     * // Delete a few UserProfileTests
+     * const { count } = await prisma.userProfileTest.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserProfileTestDeleteManyArgs>(args?: SelectSubset<T, UserProfileTestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserProfileTests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfileTestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserProfileTests
+     * const userProfileTest = await prisma.userProfileTest.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserProfileTestUpdateManyArgs>(args: SelectSubset<T, UserProfileTestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one UserProfileTest.
+     * @param {UserProfileTestUpsertArgs} args - Arguments to update or create a UserProfileTest.
+     * @example
+     * // Update or create a UserProfileTest
+     * const userProfileTest = await prisma.userProfileTest.upsert({
+     *   create: {
+     *     // ... data to create a UserProfileTest
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserProfileTest we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserProfileTestUpsertArgs>(args: SelectSubset<T, UserProfileTestUpsertArgs<ExtArgs>>): Prisma__UserProfileTestClient<$Result.GetResult<Prisma.$UserProfileTestPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserProfileTests that matches the filter.
+     * @param {UserProfileTestFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const userProfileTest = await prisma.userProfileTest.findRaw({
+     *   filter: { age: { $gt: 25 } }
+     * })
+     */
+    findRaw(args?: UserProfileTestFindRawArgs): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a UserProfileTest.
+     * @param {UserProfileTestAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const userProfileTest = await prisma.userProfileTest.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     */
+    aggregateRaw(args?: UserProfileTestAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+
+
+    /**
+     * Count the number of UserProfileTests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfileTestCountArgs} args - Arguments to filter UserProfileTests to count.
+     * @example
+     * // Count the number of UserProfileTests
+     * const count = await prisma.userProfileTest.count({
+     *   where: {
+     *     // ... the filter for the UserProfileTests we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserProfileTestCountArgs>(
+      args?: Subset<T, UserProfileTestCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserProfileTestCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserProfileTest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfileTestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserProfileTestAggregateArgs>(args: Subset<T, UserProfileTestAggregateArgs>): Prisma.PrismaPromise<GetUserProfileTestAggregateType<T>>
+
+    /**
+     * Group by UserProfileTest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfileTestGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserProfileTestGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserProfileTestGroupByArgs['orderBy'] }
+        : { orderBy?: UserProfileTestGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserProfileTestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserProfileTestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserProfileTest model
+   */
+  readonly fields: UserProfileTestFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserProfileTest.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserProfileTestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserProfileTest model
+   */
+  interface UserProfileTestFieldRefs {
+    readonly id: FieldRef<"UserProfileTest", 'String'>
+    readonly default_profile: FieldRef<"UserProfileTest", 'Boolean'>
+    readonly default_profile_image: FieldRef<"UserProfileTest", 'Boolean'>
+    readonly description: FieldRef<"UserProfileTest", 'String'>
+    readonly fast_followers_count: FieldRef<"UserProfileTest", 'Int'>
+    readonly favourites_count: FieldRef<"UserProfileTest", 'Int'>
+    readonly followers_count: FieldRef<"UserProfileTest", 'Int'>
+    readonly friends_count: FieldRef<"UserProfileTest", 'Int'>
+    readonly has_custom_timelines: FieldRef<"UserProfileTest", 'Boolean'>
+    readonly is_translator: FieldRef<"UserProfileTest", 'Boolean'>
+    readonly listed_count: FieldRef<"UserProfileTest", 'Int'>
+    readonly media_count: FieldRef<"UserProfileTest", 'Int'>
+    readonly normal_followers_count: FieldRef<"UserProfileTest", 'Int'>
+    readonly pinned_tweet_ids_str: FieldRef<"UserProfileTest", 'String[]'>
+    readonly possibly_sensitive: FieldRef<"UserProfileTest", 'Boolean'>
+    readonly profile_banner_url: FieldRef<"UserProfileTest", 'String'>
+    readonly profile_interstitial_type: FieldRef<"UserProfileTest", 'String'>
+    readonly statuses_count: FieldRef<"UserProfileTest", 'Int'>
+    readonly translator_type: FieldRef<"UserProfileTest", 'String'>
+    readonly withheld_in_countries: FieldRef<"UserProfileTest", 'String[]'>
+    readonly user_id_str: FieldRef<"UserProfileTest", 'String'>
+    readonly profile_url: FieldRef<"UserProfileTest", 'String'>
+    readonly profile_image_url_https: FieldRef<"UserProfileTest", 'String'>
+    readonly verified: FieldRef<"UserProfileTest", 'Boolean'>
+    readonly updated_time: FieldRef<"UserProfileTest", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserProfileTest findUnique
+   */
+  export type UserProfileTestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfileTest
+     */
+    select?: UserProfileTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfileTest
+     */
+    omit?: UserProfileTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileTestInclude<ExtArgs> | null
+    /**
+     * Filter, which UserProfileTest to fetch.
+     */
+    where: UserProfileTestWhereUniqueInput
+  }
+
+  /**
+   * UserProfileTest findUniqueOrThrow
+   */
+  export type UserProfileTestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfileTest
+     */
+    select?: UserProfileTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfileTest
+     */
+    omit?: UserProfileTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileTestInclude<ExtArgs> | null
+    /**
+     * Filter, which UserProfileTest to fetch.
+     */
+    where: UserProfileTestWhereUniqueInput
+  }
+
+  /**
+   * UserProfileTest findFirst
+   */
+  export type UserProfileTestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfileTest
+     */
+    select?: UserProfileTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfileTest
+     */
+    omit?: UserProfileTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileTestInclude<ExtArgs> | null
+    /**
+     * Filter, which UserProfileTest to fetch.
+     */
+    where?: UserProfileTestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserProfileTests to fetch.
+     */
+    orderBy?: UserProfileTestOrderByWithRelationInput | UserProfileTestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserProfileTests.
+     */
+    cursor?: UserProfileTestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserProfileTests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserProfileTests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserProfileTests.
+     */
+    distinct?: UserProfileTestScalarFieldEnum | UserProfileTestScalarFieldEnum[]
+  }
+
+  /**
+   * UserProfileTest findFirstOrThrow
+   */
+  export type UserProfileTestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfileTest
+     */
+    select?: UserProfileTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfileTest
+     */
+    omit?: UserProfileTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileTestInclude<ExtArgs> | null
+    /**
+     * Filter, which UserProfileTest to fetch.
+     */
+    where?: UserProfileTestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserProfileTests to fetch.
+     */
+    orderBy?: UserProfileTestOrderByWithRelationInput | UserProfileTestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserProfileTests.
+     */
+    cursor?: UserProfileTestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserProfileTests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserProfileTests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserProfileTests.
+     */
+    distinct?: UserProfileTestScalarFieldEnum | UserProfileTestScalarFieldEnum[]
+  }
+
+  /**
+   * UserProfileTest findMany
+   */
+  export type UserProfileTestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfileTest
+     */
+    select?: UserProfileTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfileTest
+     */
+    omit?: UserProfileTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileTestInclude<ExtArgs> | null
+    /**
+     * Filter, which UserProfileTests to fetch.
+     */
+    where?: UserProfileTestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserProfileTests to fetch.
+     */
+    orderBy?: UserProfileTestOrderByWithRelationInput | UserProfileTestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserProfileTests.
+     */
+    cursor?: UserProfileTestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserProfileTests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserProfileTests.
+     */
+    skip?: number
+    distinct?: UserProfileTestScalarFieldEnum | UserProfileTestScalarFieldEnum[]
+  }
+
+  /**
+   * UserProfileTest create
+   */
+  export type UserProfileTestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfileTest
+     */
+    select?: UserProfileTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfileTest
+     */
+    omit?: UserProfileTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileTestInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserProfileTest.
+     */
+    data: XOR<UserProfileTestCreateInput, UserProfileTestUncheckedCreateInput>
+  }
+
+  /**
+   * UserProfileTest createMany
+   */
+  export type UserProfileTestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserProfileTests.
+     */
+    data: UserProfileTestCreateManyInput | UserProfileTestCreateManyInput[]
+  }
+
+  /**
+   * UserProfileTest update
+   */
+  export type UserProfileTestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfileTest
+     */
+    select?: UserProfileTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfileTest
+     */
+    omit?: UserProfileTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileTestInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserProfileTest.
+     */
+    data: XOR<UserProfileTestUpdateInput, UserProfileTestUncheckedUpdateInput>
+    /**
+     * Choose, which UserProfileTest to update.
+     */
+    where: UserProfileTestWhereUniqueInput
+  }
+
+  /**
+   * UserProfileTest updateMany
+   */
+  export type UserProfileTestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserProfileTests.
+     */
+    data: XOR<UserProfileTestUpdateManyMutationInput, UserProfileTestUncheckedUpdateManyInput>
+    /**
+     * Filter which UserProfileTests to update
+     */
+    where?: UserProfileTestWhereInput
+    /**
+     * Limit how many UserProfileTests to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserProfileTest upsert
+   */
+  export type UserProfileTestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfileTest
+     */
+    select?: UserProfileTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfileTest
+     */
+    omit?: UserProfileTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileTestInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserProfileTest to update in case it exists.
+     */
+    where: UserProfileTestWhereUniqueInput
+    /**
+     * In case the UserProfileTest found by the `where` argument doesn't exist, create a new UserProfileTest with this data.
+     */
+    create: XOR<UserProfileTestCreateInput, UserProfileTestUncheckedCreateInput>
+    /**
+     * In case the UserProfileTest was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserProfileTestUpdateInput, UserProfileTestUncheckedUpdateInput>
+  }
+
+  /**
+   * UserProfileTest delete
+   */
+  export type UserProfileTestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfileTest
+     */
+    select?: UserProfileTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfileTest
+     */
+    omit?: UserProfileTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileTestInclude<ExtArgs> | null
+    /**
+     * Filter which UserProfileTest to delete.
+     */
+    where: UserProfileTestWhereUniqueInput
+  }
+
+  /**
+   * UserProfileTest deleteMany
+   */
+  export type UserProfileTestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserProfileTests to delete
+     */
+    where?: UserProfileTestWhereInput
+    /**
+     * Limit how many UserProfileTests to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserProfileTest findRaw
+   */
+  export type UserProfileTestFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * UserProfileTest aggregateRaw
+   */
+  export type UserProfileTestAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * UserProfileTest without action
+   */
+  export type UserProfileTestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfileTest
+     */
+    select?: UserProfileTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfileTest
+     */
+    omit?: UserProfileTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfileTestInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model TweetsData
    */
 
@@ -2765,6 +4288,7 @@ export namespace Prisma {
     retweet_count: number | null
     retweeted: boolean | null
     user_id_str: string | null
+    views_count: string | null
     updated_time: Date | null
   }
 
@@ -2785,6 +4309,7 @@ export namespace Prisma {
     retweet_count: number | null
     retweeted: boolean | null
     user_id_str: string | null
+    views_count: string | null
     updated_time: Date | null
   }
 
@@ -2807,6 +4332,7 @@ export namespace Prisma {
     retweet_count: number
     retweeted: number
     user_id_str: number
+    views_count: number
     updated_time: number
     _all: number
   }
@@ -2847,6 +4373,7 @@ export namespace Prisma {
     retweet_count?: true
     retweeted?: true
     user_id_str?: true
+    views_count?: true
     updated_time?: true
   }
 
@@ -2867,6 +4394,7 @@ export namespace Prisma {
     retweet_count?: true
     retweeted?: true
     user_id_str?: true
+    views_count?: true
     updated_time?: true
   }
 
@@ -2889,6 +4417,7 @@ export namespace Prisma {
     retweet_count?: true
     retweeted?: true
     user_id_str?: true
+    views_count?: true
     updated_time?: true
     _all?: true
   }
@@ -2998,6 +4527,7 @@ export namespace Prisma {
     retweet_count: number | null
     retweeted: boolean | null
     user_id_str: string | null
+    views_count: string | null
     updated_time: Date
     _count: TweetsDataCountAggregateOutputType | null
     _avg: TweetsDataAvgAggregateOutputType | null
@@ -3040,6 +4570,7 @@ export namespace Prisma {
     retweeted?: boolean
     user?: boolean | TweetUserDefaultArgs<ExtArgs>
     user_id_str?: boolean
+    views_count?: boolean
     updated_time?: boolean
   }, ExtArgs["result"]["tweetsData"]>
 
@@ -3064,10 +4595,11 @@ export namespace Prisma {
     retweet_count?: boolean
     retweeted?: boolean
     user_id_str?: boolean
+    views_count?: boolean
     updated_time?: boolean
   }
 
-  export type TweetsDataOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "id_str" | "bookmark_count" | "bookmarked" | "conversation_id_str" | "created_at" | "display_text_range" | "entities" | "favorite_count" | "favorited" | "full_text" | "is_quote_status" | "lang" | "quote_count" | "reply_count" | "retweet_count" | "retweeted" | "user" | "user_id_str" | "updated_time", ExtArgs["result"]["tweetsData"]>
+  export type TweetsDataOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "id_str" | "bookmark_count" | "bookmarked" | "conversation_id_str" | "created_at" | "display_text_range" | "entities" | "favorite_count" | "favorited" | "full_text" | "is_quote_status" | "lang" | "quote_count" | "reply_count" | "retweet_count" | "retweeted" | "user" | "user_id_str" | "views_count" | "updated_time", ExtArgs["result"]["tweetsData"]>
   export type TweetsDataInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $TweetsDataPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3092,6 +4624,7 @@ export namespace Prisma {
       retweet_count: number | null
       retweeted: boolean | null
       user_id_str: string | null
+      views_count: string | null
       updated_time: Date
     }, ExtArgs["result"]["tweetsData"]>
     composites: {
@@ -3505,6 +5038,7 @@ export namespace Prisma {
     readonly retweet_count: FieldRef<"TweetsData", 'Int'>
     readonly retweeted: FieldRef<"TweetsData", 'Boolean'>
     readonly user_id_str: FieldRef<"TweetsData", 'String'>
+    readonly views_count: FieldRef<"TweetsData", 'String'>
     readonly updated_time: FieldRef<"TweetsData", 'DateTime'>
   }
     
@@ -3891,6 +5425,1222 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: TweetsDataInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TweetsDataTest
+   */
+
+  export type AggregateTweetsDataTest = {
+    _count: TweetsDataTestCountAggregateOutputType | null
+    _avg: TweetsDataTestAvgAggregateOutputType | null
+    _sum: TweetsDataTestSumAggregateOutputType | null
+    _min: TweetsDataTestMinAggregateOutputType | null
+    _max: TweetsDataTestMaxAggregateOutputType | null
+  }
+
+  export type TweetsDataTestAvgAggregateOutputType = {
+    bookmark_count: number | null
+    display_text_range: number | null
+    favorite_count: number | null
+    quote_count: number | null
+    reply_count: number | null
+    retweet_count: number | null
+  }
+
+  export type TweetsDataTestSumAggregateOutputType = {
+    bookmark_count: number | null
+    display_text_range: number[]
+    favorite_count: number | null
+    quote_count: number | null
+    reply_count: number | null
+    retweet_count: number | null
+  }
+
+  export type TweetsDataTestMinAggregateOutputType = {
+    id: string | null
+    id_str: string | null
+    bookmark_count: number | null
+    bookmarked: boolean | null
+    conversation_id_str: string | null
+    created_at: string | null
+    favorite_count: number | null
+    favorited: boolean | null
+    full_text: string | null
+    is_quote_status: boolean | null
+    lang: string | null
+    quote_count: number | null
+    reply_count: number | null
+    retweet_count: number | null
+    retweeted: boolean | null
+    twitterUrl: string | null
+    url: string | null
+    user_id_str: string | null
+    views_count: string | null
+    updated_time: Date | null
+  }
+
+  export type TweetsDataTestMaxAggregateOutputType = {
+    id: string | null
+    id_str: string | null
+    bookmark_count: number | null
+    bookmarked: boolean | null
+    conversation_id_str: string | null
+    created_at: string | null
+    favorite_count: number | null
+    favorited: boolean | null
+    full_text: string | null
+    is_quote_status: boolean | null
+    lang: string | null
+    quote_count: number | null
+    reply_count: number | null
+    retweet_count: number | null
+    retweeted: boolean | null
+    twitterUrl: string | null
+    url: string | null
+    user_id_str: string | null
+    views_count: string | null
+    updated_time: Date | null
+  }
+
+  export type TweetsDataTestCountAggregateOutputType = {
+    id: number
+    id_str: number
+    bookmark_count: number
+    bookmarked: number
+    conversation_id_str: number
+    created_at: number
+    display_text_range: number
+    extended_entities: number
+    entities: number
+    favorite_count: number
+    favorited: number
+    full_text: number
+    is_quote_status: number
+    lang: number
+    quote_count: number
+    reply_count: number
+    retweet_count: number
+    retweeted: number
+    twitterUrl: number
+    url: number
+    user_id_str: number
+    views_count: number
+    updated_time: number
+    _all: number
+  }
+
+
+  export type TweetsDataTestAvgAggregateInputType = {
+    bookmark_count?: true
+    display_text_range?: true
+    favorite_count?: true
+    quote_count?: true
+    reply_count?: true
+    retweet_count?: true
+  }
+
+  export type TweetsDataTestSumAggregateInputType = {
+    bookmark_count?: true
+    display_text_range?: true
+    favorite_count?: true
+    quote_count?: true
+    reply_count?: true
+    retweet_count?: true
+  }
+
+  export type TweetsDataTestMinAggregateInputType = {
+    id?: true
+    id_str?: true
+    bookmark_count?: true
+    bookmarked?: true
+    conversation_id_str?: true
+    created_at?: true
+    favorite_count?: true
+    favorited?: true
+    full_text?: true
+    is_quote_status?: true
+    lang?: true
+    quote_count?: true
+    reply_count?: true
+    retweet_count?: true
+    retweeted?: true
+    twitterUrl?: true
+    url?: true
+    user_id_str?: true
+    views_count?: true
+    updated_time?: true
+  }
+
+  export type TweetsDataTestMaxAggregateInputType = {
+    id?: true
+    id_str?: true
+    bookmark_count?: true
+    bookmarked?: true
+    conversation_id_str?: true
+    created_at?: true
+    favorite_count?: true
+    favorited?: true
+    full_text?: true
+    is_quote_status?: true
+    lang?: true
+    quote_count?: true
+    reply_count?: true
+    retweet_count?: true
+    retweeted?: true
+    twitterUrl?: true
+    url?: true
+    user_id_str?: true
+    views_count?: true
+    updated_time?: true
+  }
+
+  export type TweetsDataTestCountAggregateInputType = {
+    id?: true
+    id_str?: true
+    bookmark_count?: true
+    bookmarked?: true
+    conversation_id_str?: true
+    created_at?: true
+    display_text_range?: true
+    extended_entities?: true
+    entities?: true
+    favorite_count?: true
+    favorited?: true
+    full_text?: true
+    is_quote_status?: true
+    lang?: true
+    quote_count?: true
+    reply_count?: true
+    retweet_count?: true
+    retweeted?: true
+    twitterUrl?: true
+    url?: true
+    user_id_str?: true
+    views_count?: true
+    updated_time?: true
+    _all?: true
+  }
+
+  export type TweetsDataTestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TweetsDataTest to aggregate.
+     */
+    where?: TweetsDataTestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TweetsDataTests to fetch.
+     */
+    orderBy?: TweetsDataTestOrderByWithRelationInput | TweetsDataTestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TweetsDataTestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TweetsDataTests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TweetsDataTests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TweetsDataTests
+    **/
+    _count?: true | TweetsDataTestCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TweetsDataTestAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TweetsDataTestSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TweetsDataTestMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TweetsDataTestMaxAggregateInputType
+  }
+
+  export type GetTweetsDataTestAggregateType<T extends TweetsDataTestAggregateArgs> = {
+        [P in keyof T & keyof AggregateTweetsDataTest]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTweetsDataTest[P]>
+      : GetScalarType<T[P], AggregateTweetsDataTest[P]>
+  }
+
+
+
+
+  export type TweetsDataTestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TweetsDataTestWhereInput
+    orderBy?: TweetsDataTestOrderByWithAggregationInput | TweetsDataTestOrderByWithAggregationInput[]
+    by: TweetsDataTestScalarFieldEnum[] | TweetsDataTestScalarFieldEnum
+    having?: TweetsDataTestScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TweetsDataTestCountAggregateInputType | true
+    _avg?: TweetsDataTestAvgAggregateInputType
+    _sum?: TweetsDataTestSumAggregateInputType
+    _min?: TweetsDataTestMinAggregateInputType
+    _max?: TweetsDataTestMaxAggregateInputType
+  }
+
+  export type TweetsDataTestGroupByOutputType = {
+    id: string
+    id_str: string
+    bookmark_count: number | null
+    bookmarked: boolean | null
+    conversation_id_str: string | null
+    created_at: string | null
+    display_text_range: number[]
+    extended_entities: JsonValue | null
+    entities: JsonValue | null
+    favorite_count: number | null
+    favorited: boolean | null
+    full_text: string | null
+    is_quote_status: boolean | null
+    lang: string | null
+    quote_count: number | null
+    reply_count: number | null
+    retweet_count: number | null
+    retweeted: boolean | null
+    twitterUrl: string | null
+    url: string | null
+    user_id_str: string | null
+    views_count: string | null
+    updated_time: Date | null
+    _count: TweetsDataTestCountAggregateOutputType | null
+    _avg: TweetsDataTestAvgAggregateOutputType | null
+    _sum: TweetsDataTestSumAggregateOutputType | null
+    _min: TweetsDataTestMinAggregateOutputType | null
+    _max: TweetsDataTestMaxAggregateOutputType | null
+  }
+
+  type GetTweetsDataTestGroupByPayload<T extends TweetsDataTestGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TweetsDataTestGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TweetsDataTestGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TweetsDataTestGroupByOutputType[P]>
+            : GetScalarType<T[P], TweetsDataTestGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TweetsDataTestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    id_str?: boolean
+    bookmark_count?: boolean
+    bookmarked?: boolean
+    conversation_id_str?: boolean
+    created_at?: boolean
+    display_text_range?: boolean
+    extended_entities?: boolean
+    entities?: boolean
+    favorite_count?: boolean
+    favorited?: boolean
+    full_text?: boolean
+    is_quote_status?: boolean
+    lang?: boolean
+    quote_count?: boolean
+    reply_count?: boolean
+    retweet_count?: boolean
+    retweeted?: boolean
+    twitterUrl?: boolean
+    user?: boolean | TweetUserDefaultArgs<ExtArgs>
+    url?: boolean
+    user_id_str?: boolean
+    views_count?: boolean
+    updated_time?: boolean
+  }, ExtArgs["result"]["tweetsDataTest"]>
+
+
+
+  export type TweetsDataTestSelectScalar = {
+    id?: boolean
+    id_str?: boolean
+    bookmark_count?: boolean
+    bookmarked?: boolean
+    conversation_id_str?: boolean
+    created_at?: boolean
+    display_text_range?: boolean
+    extended_entities?: boolean
+    entities?: boolean
+    favorite_count?: boolean
+    favorited?: boolean
+    full_text?: boolean
+    is_quote_status?: boolean
+    lang?: boolean
+    quote_count?: boolean
+    reply_count?: boolean
+    retweet_count?: boolean
+    retweeted?: boolean
+    twitterUrl?: boolean
+    url?: boolean
+    user_id_str?: boolean
+    views_count?: boolean
+    updated_time?: boolean
+  }
+
+  export type TweetsDataTestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "id_str" | "bookmark_count" | "bookmarked" | "conversation_id_str" | "created_at" | "display_text_range" | "extended_entities" | "entities" | "favorite_count" | "favorited" | "full_text" | "is_quote_status" | "lang" | "quote_count" | "reply_count" | "retweet_count" | "retweeted" | "twitterUrl" | "user" | "url" | "user_id_str" | "views_count" | "updated_time", ExtArgs["result"]["tweetsDataTest"]>
+  export type TweetsDataTestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $TweetsDataTestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TweetsDataTest"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      id_str: string
+      bookmark_count: number | null
+      bookmarked: boolean | null
+      conversation_id_str: string | null
+      created_at: string | null
+      display_text_range: number[]
+      extended_entities: Prisma.JsonValue | null
+      entities: Prisma.JsonValue | null
+      favorite_count: number | null
+      favorited: boolean | null
+      full_text: string | null
+      is_quote_status: boolean | null
+      lang: string | null
+      quote_count: number | null
+      reply_count: number | null
+      retweet_count: number | null
+      retweeted: boolean | null
+      twitterUrl: string | null
+      url: string | null
+      user_id_str: string | null
+      views_count: string | null
+      updated_time: Date | null
+    }, ExtArgs["result"]["tweetsDataTest"]>
+    composites: {
+      user: Prisma.$TweetUserPayload | null
+    }
+  }
+
+  type TweetsDataTestGetPayload<S extends boolean | null | undefined | TweetsDataTestDefaultArgs> = $Result.GetResult<Prisma.$TweetsDataTestPayload, S>
+
+  type TweetsDataTestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TweetsDataTestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TweetsDataTestCountAggregateInputType | true
+    }
+
+  export interface TweetsDataTestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TweetsDataTest'], meta: { name: 'TweetsDataTest' } }
+    /**
+     * Find zero or one TweetsDataTest that matches the filter.
+     * @param {TweetsDataTestFindUniqueArgs} args - Arguments to find a TweetsDataTest
+     * @example
+     * // Get one TweetsDataTest
+     * const tweetsDataTest = await prisma.tweetsDataTest.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TweetsDataTestFindUniqueArgs>(args: SelectSubset<T, TweetsDataTestFindUniqueArgs<ExtArgs>>): Prisma__TweetsDataTestClient<$Result.GetResult<Prisma.$TweetsDataTestPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TweetsDataTest that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TweetsDataTestFindUniqueOrThrowArgs} args - Arguments to find a TweetsDataTest
+     * @example
+     * // Get one TweetsDataTest
+     * const tweetsDataTest = await prisma.tweetsDataTest.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TweetsDataTestFindUniqueOrThrowArgs>(args: SelectSubset<T, TweetsDataTestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TweetsDataTestClient<$Result.GetResult<Prisma.$TweetsDataTestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TweetsDataTest that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TweetsDataTestFindFirstArgs} args - Arguments to find a TweetsDataTest
+     * @example
+     * // Get one TweetsDataTest
+     * const tweetsDataTest = await prisma.tweetsDataTest.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TweetsDataTestFindFirstArgs>(args?: SelectSubset<T, TweetsDataTestFindFirstArgs<ExtArgs>>): Prisma__TweetsDataTestClient<$Result.GetResult<Prisma.$TweetsDataTestPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TweetsDataTest that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TweetsDataTestFindFirstOrThrowArgs} args - Arguments to find a TweetsDataTest
+     * @example
+     * // Get one TweetsDataTest
+     * const tweetsDataTest = await prisma.tweetsDataTest.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TweetsDataTestFindFirstOrThrowArgs>(args?: SelectSubset<T, TweetsDataTestFindFirstOrThrowArgs<ExtArgs>>): Prisma__TweetsDataTestClient<$Result.GetResult<Prisma.$TweetsDataTestPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TweetsDataTests that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TweetsDataTestFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TweetsDataTests
+     * const tweetsDataTests = await prisma.tweetsDataTest.findMany()
+     * 
+     * // Get first 10 TweetsDataTests
+     * const tweetsDataTests = await prisma.tweetsDataTest.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const tweetsDataTestWithIdOnly = await prisma.tweetsDataTest.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TweetsDataTestFindManyArgs>(args?: SelectSubset<T, TweetsDataTestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TweetsDataTestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TweetsDataTest.
+     * @param {TweetsDataTestCreateArgs} args - Arguments to create a TweetsDataTest.
+     * @example
+     * // Create one TweetsDataTest
+     * const TweetsDataTest = await prisma.tweetsDataTest.create({
+     *   data: {
+     *     // ... data to create a TweetsDataTest
+     *   }
+     * })
+     * 
+     */
+    create<T extends TweetsDataTestCreateArgs>(args: SelectSubset<T, TweetsDataTestCreateArgs<ExtArgs>>): Prisma__TweetsDataTestClient<$Result.GetResult<Prisma.$TweetsDataTestPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TweetsDataTests.
+     * @param {TweetsDataTestCreateManyArgs} args - Arguments to create many TweetsDataTests.
+     * @example
+     * // Create many TweetsDataTests
+     * const tweetsDataTest = await prisma.tweetsDataTest.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TweetsDataTestCreateManyArgs>(args?: SelectSubset<T, TweetsDataTestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a TweetsDataTest.
+     * @param {TweetsDataTestDeleteArgs} args - Arguments to delete one TweetsDataTest.
+     * @example
+     * // Delete one TweetsDataTest
+     * const TweetsDataTest = await prisma.tweetsDataTest.delete({
+     *   where: {
+     *     // ... filter to delete one TweetsDataTest
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TweetsDataTestDeleteArgs>(args: SelectSubset<T, TweetsDataTestDeleteArgs<ExtArgs>>): Prisma__TweetsDataTestClient<$Result.GetResult<Prisma.$TweetsDataTestPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TweetsDataTest.
+     * @param {TweetsDataTestUpdateArgs} args - Arguments to update one TweetsDataTest.
+     * @example
+     * // Update one TweetsDataTest
+     * const tweetsDataTest = await prisma.tweetsDataTest.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TweetsDataTestUpdateArgs>(args: SelectSubset<T, TweetsDataTestUpdateArgs<ExtArgs>>): Prisma__TweetsDataTestClient<$Result.GetResult<Prisma.$TweetsDataTestPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TweetsDataTests.
+     * @param {TweetsDataTestDeleteManyArgs} args - Arguments to filter TweetsDataTests to delete.
+     * @example
+     * // Delete a few TweetsDataTests
+     * const { count } = await prisma.tweetsDataTest.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TweetsDataTestDeleteManyArgs>(args?: SelectSubset<T, TweetsDataTestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TweetsDataTests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TweetsDataTestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TweetsDataTests
+     * const tweetsDataTest = await prisma.tweetsDataTest.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TweetsDataTestUpdateManyArgs>(args: SelectSubset<T, TweetsDataTestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one TweetsDataTest.
+     * @param {TweetsDataTestUpsertArgs} args - Arguments to update or create a TweetsDataTest.
+     * @example
+     * // Update or create a TweetsDataTest
+     * const tweetsDataTest = await prisma.tweetsDataTest.upsert({
+     *   create: {
+     *     // ... data to create a TweetsDataTest
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TweetsDataTest we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TweetsDataTestUpsertArgs>(args: SelectSubset<T, TweetsDataTestUpsertArgs<ExtArgs>>): Prisma__TweetsDataTestClient<$Result.GetResult<Prisma.$TweetsDataTestPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TweetsDataTests that matches the filter.
+     * @param {TweetsDataTestFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const tweetsDataTest = await prisma.tweetsDataTest.findRaw({
+     *   filter: { age: { $gt: 25 } }
+     * })
+     */
+    findRaw(args?: TweetsDataTestFindRawArgs): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a TweetsDataTest.
+     * @param {TweetsDataTestAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const tweetsDataTest = await prisma.tweetsDataTest.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     */
+    aggregateRaw(args?: TweetsDataTestAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+
+
+    /**
+     * Count the number of TweetsDataTests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TweetsDataTestCountArgs} args - Arguments to filter TweetsDataTests to count.
+     * @example
+     * // Count the number of TweetsDataTests
+     * const count = await prisma.tweetsDataTest.count({
+     *   where: {
+     *     // ... the filter for the TweetsDataTests we want to count
+     *   }
+     * })
+    **/
+    count<T extends TweetsDataTestCountArgs>(
+      args?: Subset<T, TweetsDataTestCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TweetsDataTestCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TweetsDataTest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TweetsDataTestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TweetsDataTestAggregateArgs>(args: Subset<T, TweetsDataTestAggregateArgs>): Prisma.PrismaPromise<GetTweetsDataTestAggregateType<T>>
+
+    /**
+     * Group by TweetsDataTest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TweetsDataTestGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TweetsDataTestGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TweetsDataTestGroupByArgs['orderBy'] }
+        : { orderBy?: TweetsDataTestGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TweetsDataTestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTweetsDataTestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TweetsDataTest model
+   */
+  readonly fields: TweetsDataTestFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TweetsDataTest.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TweetsDataTestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TweetsDataTest model
+   */
+  interface TweetsDataTestFieldRefs {
+    readonly id: FieldRef<"TweetsDataTest", 'String'>
+    readonly id_str: FieldRef<"TweetsDataTest", 'String'>
+    readonly bookmark_count: FieldRef<"TweetsDataTest", 'Int'>
+    readonly bookmarked: FieldRef<"TweetsDataTest", 'Boolean'>
+    readonly conversation_id_str: FieldRef<"TweetsDataTest", 'String'>
+    readonly created_at: FieldRef<"TweetsDataTest", 'String'>
+    readonly display_text_range: FieldRef<"TweetsDataTest", 'Int[]'>
+    readonly extended_entities: FieldRef<"TweetsDataTest", 'Json'>
+    readonly entities: FieldRef<"TweetsDataTest", 'Json'>
+    readonly favorite_count: FieldRef<"TweetsDataTest", 'Int'>
+    readonly favorited: FieldRef<"TweetsDataTest", 'Boolean'>
+    readonly full_text: FieldRef<"TweetsDataTest", 'String'>
+    readonly is_quote_status: FieldRef<"TweetsDataTest", 'Boolean'>
+    readonly lang: FieldRef<"TweetsDataTest", 'String'>
+    readonly quote_count: FieldRef<"TweetsDataTest", 'Int'>
+    readonly reply_count: FieldRef<"TweetsDataTest", 'Int'>
+    readonly retweet_count: FieldRef<"TweetsDataTest", 'Int'>
+    readonly retweeted: FieldRef<"TweetsDataTest", 'Boolean'>
+    readonly twitterUrl: FieldRef<"TweetsDataTest", 'String'>
+    readonly url: FieldRef<"TweetsDataTest", 'String'>
+    readonly user_id_str: FieldRef<"TweetsDataTest", 'String'>
+    readonly views_count: FieldRef<"TweetsDataTest", 'String'>
+    readonly updated_time: FieldRef<"TweetsDataTest", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TweetsDataTest findUnique
+   */
+  export type TweetsDataTestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TweetsDataTest
+     */
+    select?: TweetsDataTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TweetsDataTest
+     */
+    omit?: TweetsDataTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TweetsDataTestInclude<ExtArgs> | null
+    /**
+     * Filter, which TweetsDataTest to fetch.
+     */
+    where: TweetsDataTestWhereUniqueInput
+  }
+
+  /**
+   * TweetsDataTest findUniqueOrThrow
+   */
+  export type TweetsDataTestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TweetsDataTest
+     */
+    select?: TweetsDataTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TweetsDataTest
+     */
+    omit?: TweetsDataTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TweetsDataTestInclude<ExtArgs> | null
+    /**
+     * Filter, which TweetsDataTest to fetch.
+     */
+    where: TweetsDataTestWhereUniqueInput
+  }
+
+  /**
+   * TweetsDataTest findFirst
+   */
+  export type TweetsDataTestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TweetsDataTest
+     */
+    select?: TweetsDataTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TweetsDataTest
+     */
+    omit?: TweetsDataTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TweetsDataTestInclude<ExtArgs> | null
+    /**
+     * Filter, which TweetsDataTest to fetch.
+     */
+    where?: TweetsDataTestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TweetsDataTests to fetch.
+     */
+    orderBy?: TweetsDataTestOrderByWithRelationInput | TweetsDataTestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TweetsDataTests.
+     */
+    cursor?: TweetsDataTestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TweetsDataTests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TweetsDataTests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TweetsDataTests.
+     */
+    distinct?: TweetsDataTestScalarFieldEnum | TweetsDataTestScalarFieldEnum[]
+  }
+
+  /**
+   * TweetsDataTest findFirstOrThrow
+   */
+  export type TweetsDataTestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TweetsDataTest
+     */
+    select?: TweetsDataTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TweetsDataTest
+     */
+    omit?: TweetsDataTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TweetsDataTestInclude<ExtArgs> | null
+    /**
+     * Filter, which TweetsDataTest to fetch.
+     */
+    where?: TweetsDataTestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TweetsDataTests to fetch.
+     */
+    orderBy?: TweetsDataTestOrderByWithRelationInput | TweetsDataTestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TweetsDataTests.
+     */
+    cursor?: TweetsDataTestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TweetsDataTests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TweetsDataTests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TweetsDataTests.
+     */
+    distinct?: TweetsDataTestScalarFieldEnum | TweetsDataTestScalarFieldEnum[]
+  }
+
+  /**
+   * TweetsDataTest findMany
+   */
+  export type TweetsDataTestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TweetsDataTest
+     */
+    select?: TweetsDataTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TweetsDataTest
+     */
+    omit?: TweetsDataTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TweetsDataTestInclude<ExtArgs> | null
+    /**
+     * Filter, which TweetsDataTests to fetch.
+     */
+    where?: TweetsDataTestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TweetsDataTests to fetch.
+     */
+    orderBy?: TweetsDataTestOrderByWithRelationInput | TweetsDataTestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TweetsDataTests.
+     */
+    cursor?: TweetsDataTestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TweetsDataTests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TweetsDataTests.
+     */
+    skip?: number
+    distinct?: TweetsDataTestScalarFieldEnum | TweetsDataTestScalarFieldEnum[]
+  }
+
+  /**
+   * TweetsDataTest create
+   */
+  export type TweetsDataTestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TweetsDataTest
+     */
+    select?: TweetsDataTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TweetsDataTest
+     */
+    omit?: TweetsDataTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TweetsDataTestInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TweetsDataTest.
+     */
+    data: XOR<TweetsDataTestCreateInput, TweetsDataTestUncheckedCreateInput>
+  }
+
+  /**
+   * TweetsDataTest createMany
+   */
+  export type TweetsDataTestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TweetsDataTests.
+     */
+    data: TweetsDataTestCreateManyInput | TweetsDataTestCreateManyInput[]
+  }
+
+  /**
+   * TweetsDataTest update
+   */
+  export type TweetsDataTestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TweetsDataTest
+     */
+    select?: TweetsDataTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TweetsDataTest
+     */
+    omit?: TweetsDataTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TweetsDataTestInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TweetsDataTest.
+     */
+    data: XOR<TweetsDataTestUpdateInput, TweetsDataTestUncheckedUpdateInput>
+    /**
+     * Choose, which TweetsDataTest to update.
+     */
+    where: TweetsDataTestWhereUniqueInput
+  }
+
+  /**
+   * TweetsDataTest updateMany
+   */
+  export type TweetsDataTestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TweetsDataTests.
+     */
+    data: XOR<TweetsDataTestUpdateManyMutationInput, TweetsDataTestUncheckedUpdateManyInput>
+    /**
+     * Filter which TweetsDataTests to update
+     */
+    where?: TweetsDataTestWhereInput
+    /**
+     * Limit how many TweetsDataTests to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TweetsDataTest upsert
+   */
+  export type TweetsDataTestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TweetsDataTest
+     */
+    select?: TweetsDataTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TweetsDataTest
+     */
+    omit?: TweetsDataTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TweetsDataTestInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TweetsDataTest to update in case it exists.
+     */
+    where: TweetsDataTestWhereUniqueInput
+    /**
+     * In case the TweetsDataTest found by the `where` argument doesn't exist, create a new TweetsDataTest with this data.
+     */
+    create: XOR<TweetsDataTestCreateInput, TweetsDataTestUncheckedCreateInput>
+    /**
+     * In case the TweetsDataTest was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TweetsDataTestUpdateInput, TweetsDataTestUncheckedUpdateInput>
+  }
+
+  /**
+   * TweetsDataTest delete
+   */
+  export type TweetsDataTestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TweetsDataTest
+     */
+    select?: TweetsDataTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TweetsDataTest
+     */
+    omit?: TweetsDataTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TweetsDataTestInclude<ExtArgs> | null
+    /**
+     * Filter which TweetsDataTest to delete.
+     */
+    where: TweetsDataTestWhereUniqueInput
+  }
+
+  /**
+   * TweetsDataTest deleteMany
+   */
+  export type TweetsDataTestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TweetsDataTests to delete
+     */
+    where?: TweetsDataTestWhereInput
+    /**
+     * Limit how many TweetsDataTests to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TweetsDataTest findRaw
+   */
+  export type TweetsDataTestFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * TweetsDataTest aggregateRaw
+   */
+  export type TweetsDataTestAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * TweetsDataTest without action
+   */
+  export type TweetsDataTestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TweetsDataTest
+     */
+    select?: TweetsDataTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TweetsDataTest
+     */
+    omit?: TweetsDataTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TweetsDataTestInclude<ExtArgs> | null
   }
 
 
@@ -5551,6 +8301,1662 @@ export namespace Prisma {
 
 
   /**
+   * Model FollowersDataTest
+   */
+
+  export type AggregateFollowersDataTest = {
+    _count: FollowersDataTestCountAggregateOutputType | null
+    _avg: FollowersDataTestAvgAggregateOutputType | null
+    _sum: FollowersDataTestSumAggregateOutputType | null
+    _min: FollowersDataTestMinAggregateOutputType | null
+    _max: FollowersDataTestMaxAggregateOutputType | null
+  }
+
+  export type FollowersDataTestAvgAggregateOutputType = {
+    followers_count: number | null
+    fast_followers_count: number | null
+    normal_followers_count: number | null
+    friends_count: number | null
+    listed_count: number | null
+    favourites_count: number | null
+    statuses_count: number | null
+    media_count: number | null
+  }
+
+  export type FollowersDataTestSumAggregateOutputType = {
+    followers_count: number | null
+    fast_followers_count: number | null
+    normal_followers_count: number | null
+    friends_count: number | null
+    listed_count: number | null
+    favourites_count: number | null
+    statuses_count: number | null
+    media_count: number | null
+  }
+
+  export type FollowersDataTestMinAggregateOutputType = {
+    id: string | null
+    id_str: string | null
+    name: string | null
+    screen_name: string | null
+    location: string | null
+    description: string | null
+    url: string | null
+    protected: boolean | null
+    followers_count: number | null
+    fast_followers_count: number | null
+    normal_followers_count: number | null
+    friends_count: number | null
+    listed_count: number | null
+    created_at: string | null
+    favourites_count: number | null
+    utc_offset: string | null
+    time_zone: string | null
+    geo_enabled: boolean | null
+    verified: boolean | null
+    statuses_count: number | null
+    media_count: number | null
+    lang: string | null
+    contributors_enabled: boolean | null
+    is_translator: boolean | null
+    is_translation_enabled: boolean | null
+    profile_background_color: string | null
+    profile_background_image_url: string | null
+    profile_background_image_url_https: string | null
+    profile_background_tile: boolean | null
+    profile_image_url: string | null
+    profile_image_url_https: string | null
+    profile_banner_url: string | null
+    profile_link_color: string | null
+    profile_sidebar_border_color: string | null
+    profile_sidebar_fill_color: string | null
+    profile_text_color: string | null
+    profile_use_background_image: boolean | null
+    has_extended_profile: boolean | null
+    default_profile: boolean | null
+    default_profile_image: boolean | null
+    has_custom_timelines: boolean | null
+    can_media_tag: boolean | null
+    followed_by: boolean | null
+    following: boolean | null
+    live_following: boolean | null
+    follow_request_sent: boolean | null
+    notifications: boolean | null
+    muting: boolean | null
+    blocking: boolean | null
+    blocked_by: boolean | null
+    advertiser_account_type: string | null
+    analytics_type: string | null
+    business_profile_state: string | null
+    translator_type: string | null
+    require_some_consent: boolean | null
+    type: string | null
+    target_username: string | null
+    email: string | null
+  }
+
+  export type FollowersDataTestMaxAggregateOutputType = {
+    id: string | null
+    id_str: string | null
+    name: string | null
+    screen_name: string | null
+    location: string | null
+    description: string | null
+    url: string | null
+    protected: boolean | null
+    followers_count: number | null
+    fast_followers_count: number | null
+    normal_followers_count: number | null
+    friends_count: number | null
+    listed_count: number | null
+    created_at: string | null
+    favourites_count: number | null
+    utc_offset: string | null
+    time_zone: string | null
+    geo_enabled: boolean | null
+    verified: boolean | null
+    statuses_count: number | null
+    media_count: number | null
+    lang: string | null
+    contributors_enabled: boolean | null
+    is_translator: boolean | null
+    is_translation_enabled: boolean | null
+    profile_background_color: string | null
+    profile_background_image_url: string | null
+    profile_background_image_url_https: string | null
+    profile_background_tile: boolean | null
+    profile_image_url: string | null
+    profile_image_url_https: string | null
+    profile_banner_url: string | null
+    profile_link_color: string | null
+    profile_sidebar_border_color: string | null
+    profile_sidebar_fill_color: string | null
+    profile_text_color: string | null
+    profile_use_background_image: boolean | null
+    has_extended_profile: boolean | null
+    default_profile: boolean | null
+    default_profile_image: boolean | null
+    has_custom_timelines: boolean | null
+    can_media_tag: boolean | null
+    followed_by: boolean | null
+    following: boolean | null
+    live_following: boolean | null
+    follow_request_sent: boolean | null
+    notifications: boolean | null
+    muting: boolean | null
+    blocking: boolean | null
+    blocked_by: boolean | null
+    advertiser_account_type: string | null
+    analytics_type: string | null
+    business_profile_state: string | null
+    translator_type: string | null
+    require_some_consent: boolean | null
+    type: string | null
+    target_username: string | null
+    email: string | null
+  }
+
+  export type FollowersDataTestCountAggregateOutputType = {
+    id: number
+    id_str: number
+    name: number
+    screen_name: number
+    location: number
+    description: number
+    url: number
+    entities: number
+    protected: number
+    followers_count: number
+    fast_followers_count: number
+    normal_followers_count: number
+    friends_count: number
+    listed_count: number
+    created_at: number
+    favourites_count: number
+    utc_offset: number
+    time_zone: number
+    geo_enabled: number
+    verified: number
+    statuses_count: number
+    media_count: number
+    lang: number
+    contributors_enabled: number
+    is_translator: number
+    is_translation_enabled: number
+    profile_background_color: number
+    profile_background_image_url: number
+    profile_background_image_url_https: number
+    profile_background_tile: number
+    profile_image_url: number
+    profile_image_url_https: number
+    profile_banner_url: number
+    profile_link_color: number
+    profile_sidebar_border_color: number
+    profile_sidebar_fill_color: number
+    profile_text_color: number
+    profile_use_background_image: number
+    has_extended_profile: number
+    default_profile: number
+    default_profile_image: number
+    pinned_tweet_ids: number
+    pinned_tweet_ids_str: number
+    has_custom_timelines: number
+    can_media_tag: number
+    followed_by: number
+    following: number
+    live_following: number
+    follow_request_sent: number
+    notifications: number
+    muting: number
+    blocking: number
+    blocked_by: number
+    advertiser_account_type: number
+    advertiser_account_service_levels: number
+    analytics_type: number
+    business_profile_state: number
+    translator_type: number
+    withheld_in_countries: number
+    require_some_consent: number
+    type: number
+    target_username: number
+    email: number
+    _all: number
+  }
+
+
+  export type FollowersDataTestAvgAggregateInputType = {
+    followers_count?: true
+    fast_followers_count?: true
+    normal_followers_count?: true
+    friends_count?: true
+    listed_count?: true
+    favourites_count?: true
+    statuses_count?: true
+    media_count?: true
+  }
+
+  export type FollowersDataTestSumAggregateInputType = {
+    followers_count?: true
+    fast_followers_count?: true
+    normal_followers_count?: true
+    friends_count?: true
+    listed_count?: true
+    favourites_count?: true
+    statuses_count?: true
+    media_count?: true
+  }
+
+  export type FollowersDataTestMinAggregateInputType = {
+    id?: true
+    id_str?: true
+    name?: true
+    screen_name?: true
+    location?: true
+    description?: true
+    url?: true
+    protected?: true
+    followers_count?: true
+    fast_followers_count?: true
+    normal_followers_count?: true
+    friends_count?: true
+    listed_count?: true
+    created_at?: true
+    favourites_count?: true
+    utc_offset?: true
+    time_zone?: true
+    geo_enabled?: true
+    verified?: true
+    statuses_count?: true
+    media_count?: true
+    lang?: true
+    contributors_enabled?: true
+    is_translator?: true
+    is_translation_enabled?: true
+    profile_background_color?: true
+    profile_background_image_url?: true
+    profile_background_image_url_https?: true
+    profile_background_tile?: true
+    profile_image_url?: true
+    profile_image_url_https?: true
+    profile_banner_url?: true
+    profile_link_color?: true
+    profile_sidebar_border_color?: true
+    profile_sidebar_fill_color?: true
+    profile_text_color?: true
+    profile_use_background_image?: true
+    has_extended_profile?: true
+    default_profile?: true
+    default_profile_image?: true
+    has_custom_timelines?: true
+    can_media_tag?: true
+    followed_by?: true
+    following?: true
+    live_following?: true
+    follow_request_sent?: true
+    notifications?: true
+    muting?: true
+    blocking?: true
+    blocked_by?: true
+    advertiser_account_type?: true
+    analytics_type?: true
+    business_profile_state?: true
+    translator_type?: true
+    require_some_consent?: true
+    type?: true
+    target_username?: true
+    email?: true
+  }
+
+  export type FollowersDataTestMaxAggregateInputType = {
+    id?: true
+    id_str?: true
+    name?: true
+    screen_name?: true
+    location?: true
+    description?: true
+    url?: true
+    protected?: true
+    followers_count?: true
+    fast_followers_count?: true
+    normal_followers_count?: true
+    friends_count?: true
+    listed_count?: true
+    created_at?: true
+    favourites_count?: true
+    utc_offset?: true
+    time_zone?: true
+    geo_enabled?: true
+    verified?: true
+    statuses_count?: true
+    media_count?: true
+    lang?: true
+    contributors_enabled?: true
+    is_translator?: true
+    is_translation_enabled?: true
+    profile_background_color?: true
+    profile_background_image_url?: true
+    profile_background_image_url_https?: true
+    profile_background_tile?: true
+    profile_image_url?: true
+    profile_image_url_https?: true
+    profile_banner_url?: true
+    profile_link_color?: true
+    profile_sidebar_border_color?: true
+    profile_sidebar_fill_color?: true
+    profile_text_color?: true
+    profile_use_background_image?: true
+    has_extended_profile?: true
+    default_profile?: true
+    default_profile_image?: true
+    has_custom_timelines?: true
+    can_media_tag?: true
+    followed_by?: true
+    following?: true
+    live_following?: true
+    follow_request_sent?: true
+    notifications?: true
+    muting?: true
+    blocking?: true
+    blocked_by?: true
+    advertiser_account_type?: true
+    analytics_type?: true
+    business_profile_state?: true
+    translator_type?: true
+    require_some_consent?: true
+    type?: true
+    target_username?: true
+    email?: true
+  }
+
+  export type FollowersDataTestCountAggregateInputType = {
+    id?: true
+    id_str?: true
+    name?: true
+    screen_name?: true
+    location?: true
+    description?: true
+    url?: true
+    entities?: true
+    protected?: true
+    followers_count?: true
+    fast_followers_count?: true
+    normal_followers_count?: true
+    friends_count?: true
+    listed_count?: true
+    created_at?: true
+    favourites_count?: true
+    utc_offset?: true
+    time_zone?: true
+    geo_enabled?: true
+    verified?: true
+    statuses_count?: true
+    media_count?: true
+    lang?: true
+    contributors_enabled?: true
+    is_translator?: true
+    is_translation_enabled?: true
+    profile_background_color?: true
+    profile_background_image_url?: true
+    profile_background_image_url_https?: true
+    profile_background_tile?: true
+    profile_image_url?: true
+    profile_image_url_https?: true
+    profile_banner_url?: true
+    profile_link_color?: true
+    profile_sidebar_border_color?: true
+    profile_sidebar_fill_color?: true
+    profile_text_color?: true
+    profile_use_background_image?: true
+    has_extended_profile?: true
+    default_profile?: true
+    default_profile_image?: true
+    pinned_tweet_ids?: true
+    pinned_tweet_ids_str?: true
+    has_custom_timelines?: true
+    can_media_tag?: true
+    followed_by?: true
+    following?: true
+    live_following?: true
+    follow_request_sent?: true
+    notifications?: true
+    muting?: true
+    blocking?: true
+    blocked_by?: true
+    advertiser_account_type?: true
+    advertiser_account_service_levels?: true
+    analytics_type?: true
+    business_profile_state?: true
+    translator_type?: true
+    withheld_in_countries?: true
+    require_some_consent?: true
+    type?: true
+    target_username?: true
+    email?: true
+    _all?: true
+  }
+
+  export type FollowersDataTestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FollowersDataTest to aggregate.
+     */
+    where?: FollowersDataTestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FollowersDataTests to fetch.
+     */
+    orderBy?: FollowersDataTestOrderByWithRelationInput | FollowersDataTestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FollowersDataTestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FollowersDataTests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FollowersDataTests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FollowersDataTests
+    **/
+    _count?: true | FollowersDataTestCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FollowersDataTestAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FollowersDataTestSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FollowersDataTestMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FollowersDataTestMaxAggregateInputType
+  }
+
+  export type GetFollowersDataTestAggregateType<T extends FollowersDataTestAggregateArgs> = {
+        [P in keyof T & keyof AggregateFollowersDataTest]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFollowersDataTest[P]>
+      : GetScalarType<T[P], AggregateFollowersDataTest[P]>
+  }
+
+
+
+
+  export type FollowersDataTestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FollowersDataTestWhereInput
+    orderBy?: FollowersDataTestOrderByWithAggregationInput | FollowersDataTestOrderByWithAggregationInput[]
+    by: FollowersDataTestScalarFieldEnum[] | FollowersDataTestScalarFieldEnum
+    having?: FollowersDataTestScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FollowersDataTestCountAggregateInputType | true
+    _avg?: FollowersDataTestAvgAggregateInputType
+    _sum?: FollowersDataTestSumAggregateInputType
+    _min?: FollowersDataTestMinAggregateInputType
+    _max?: FollowersDataTestMaxAggregateInputType
+  }
+
+  export type FollowersDataTestGroupByOutputType = {
+    id: string
+    id_str: string
+    name: string | null
+    screen_name: string | null
+    location: string | null
+    description: string | null
+    url: string | null
+    entities: JsonValue | null
+    protected: boolean | null
+    followers_count: number | null
+    fast_followers_count: number | null
+    normal_followers_count: number | null
+    friends_count: number | null
+    listed_count: number | null
+    created_at: string | null
+    favourites_count: number | null
+    utc_offset: string | null
+    time_zone: string | null
+    geo_enabled: boolean | null
+    verified: boolean | null
+    statuses_count: number | null
+    media_count: number | null
+    lang: string | null
+    contributors_enabled: boolean | null
+    is_translator: boolean | null
+    is_translation_enabled: boolean | null
+    profile_background_color: string | null
+    profile_background_image_url: string | null
+    profile_background_image_url_https: string | null
+    profile_background_tile: boolean | null
+    profile_image_url: string | null
+    profile_image_url_https: string | null
+    profile_banner_url: string | null
+    profile_link_color: string | null
+    profile_sidebar_border_color: string | null
+    profile_sidebar_fill_color: string | null
+    profile_text_color: string | null
+    profile_use_background_image: boolean | null
+    has_extended_profile: boolean | null
+    default_profile: boolean | null
+    default_profile_image: boolean | null
+    pinned_tweet_ids: JsonValue | null
+    pinned_tweet_ids_str: string[]
+    has_custom_timelines: boolean | null
+    can_media_tag: boolean | null
+    followed_by: boolean | null
+    following: boolean | null
+    live_following: boolean | null
+    follow_request_sent: boolean | null
+    notifications: boolean | null
+    muting: boolean | null
+    blocking: boolean | null
+    blocked_by: boolean | null
+    advertiser_account_type: string | null
+    advertiser_account_service_levels: string[]
+    analytics_type: string | null
+    business_profile_state: string | null
+    translator_type: string | null
+    withheld_in_countries: string[]
+    require_some_consent: boolean | null
+    type: string | null
+    target_username: string | null
+    email: string | null
+    _count: FollowersDataTestCountAggregateOutputType | null
+    _avg: FollowersDataTestAvgAggregateOutputType | null
+    _sum: FollowersDataTestSumAggregateOutputType | null
+    _min: FollowersDataTestMinAggregateOutputType | null
+    _max: FollowersDataTestMaxAggregateOutputType | null
+  }
+
+  type GetFollowersDataTestGroupByPayload<T extends FollowersDataTestGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FollowersDataTestGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FollowersDataTestGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FollowersDataTestGroupByOutputType[P]>
+            : GetScalarType<T[P], FollowersDataTestGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FollowersDataTestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    id_str?: boolean
+    name?: boolean
+    screen_name?: boolean
+    location?: boolean
+    description?: boolean
+    url?: boolean
+    entities?: boolean
+    protected?: boolean
+    followers_count?: boolean
+    fast_followers_count?: boolean
+    normal_followers_count?: boolean
+    friends_count?: boolean
+    listed_count?: boolean
+    created_at?: boolean
+    favourites_count?: boolean
+    utc_offset?: boolean
+    time_zone?: boolean
+    geo_enabled?: boolean
+    verified?: boolean
+    statuses_count?: boolean
+    media_count?: boolean
+    lang?: boolean
+    status?: boolean | TweetStatusDefaultArgs<ExtArgs>
+    contributors_enabled?: boolean
+    is_translator?: boolean
+    is_translation_enabled?: boolean
+    profile_background_color?: boolean
+    profile_background_image_url?: boolean
+    profile_background_image_url_https?: boolean
+    profile_background_tile?: boolean
+    profile_image_url?: boolean
+    profile_image_url_https?: boolean
+    profile_banner_url?: boolean
+    profile_link_color?: boolean
+    profile_sidebar_border_color?: boolean
+    profile_sidebar_fill_color?: boolean
+    profile_text_color?: boolean
+    profile_use_background_image?: boolean
+    has_extended_profile?: boolean
+    default_profile?: boolean
+    default_profile_image?: boolean
+    pinned_tweet_ids?: boolean
+    pinned_tweet_ids_str?: boolean
+    has_custom_timelines?: boolean
+    can_media_tag?: boolean
+    followed_by?: boolean
+    following?: boolean
+    live_following?: boolean
+    follow_request_sent?: boolean
+    notifications?: boolean
+    muting?: boolean
+    blocking?: boolean
+    blocked_by?: boolean
+    advertiser_account_type?: boolean
+    advertiser_account_service_levels?: boolean
+    analytics_type?: boolean
+    business_profile_state?: boolean
+    translator_type?: boolean
+    withheld_in_countries?: boolean
+    require_some_consent?: boolean
+    type?: boolean
+    target_username?: boolean
+    email?: boolean
+  }, ExtArgs["result"]["followersDataTest"]>
+
+
+
+  export type FollowersDataTestSelectScalar = {
+    id?: boolean
+    id_str?: boolean
+    name?: boolean
+    screen_name?: boolean
+    location?: boolean
+    description?: boolean
+    url?: boolean
+    entities?: boolean
+    protected?: boolean
+    followers_count?: boolean
+    fast_followers_count?: boolean
+    normal_followers_count?: boolean
+    friends_count?: boolean
+    listed_count?: boolean
+    created_at?: boolean
+    favourites_count?: boolean
+    utc_offset?: boolean
+    time_zone?: boolean
+    geo_enabled?: boolean
+    verified?: boolean
+    statuses_count?: boolean
+    media_count?: boolean
+    lang?: boolean
+    contributors_enabled?: boolean
+    is_translator?: boolean
+    is_translation_enabled?: boolean
+    profile_background_color?: boolean
+    profile_background_image_url?: boolean
+    profile_background_image_url_https?: boolean
+    profile_background_tile?: boolean
+    profile_image_url?: boolean
+    profile_image_url_https?: boolean
+    profile_banner_url?: boolean
+    profile_link_color?: boolean
+    profile_sidebar_border_color?: boolean
+    profile_sidebar_fill_color?: boolean
+    profile_text_color?: boolean
+    profile_use_background_image?: boolean
+    has_extended_profile?: boolean
+    default_profile?: boolean
+    default_profile_image?: boolean
+    pinned_tweet_ids?: boolean
+    pinned_tweet_ids_str?: boolean
+    has_custom_timelines?: boolean
+    can_media_tag?: boolean
+    followed_by?: boolean
+    following?: boolean
+    live_following?: boolean
+    follow_request_sent?: boolean
+    notifications?: boolean
+    muting?: boolean
+    blocking?: boolean
+    blocked_by?: boolean
+    advertiser_account_type?: boolean
+    advertiser_account_service_levels?: boolean
+    analytics_type?: boolean
+    business_profile_state?: boolean
+    translator_type?: boolean
+    withheld_in_countries?: boolean
+    require_some_consent?: boolean
+    type?: boolean
+    target_username?: boolean
+    email?: boolean
+  }
+
+  export type FollowersDataTestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "id_str" | "name" | "screen_name" | "location" | "description" | "url" | "entities" | "protected" | "followers_count" | "fast_followers_count" | "normal_followers_count" | "friends_count" | "listed_count" | "created_at" | "favourites_count" | "utc_offset" | "time_zone" | "geo_enabled" | "verified" | "statuses_count" | "media_count" | "lang" | "status" | "contributors_enabled" | "is_translator" | "is_translation_enabled" | "profile_background_color" | "profile_background_image_url" | "profile_background_image_url_https" | "profile_background_tile" | "profile_image_url" | "profile_image_url_https" | "profile_banner_url" | "profile_link_color" | "profile_sidebar_border_color" | "profile_sidebar_fill_color" | "profile_text_color" | "profile_use_background_image" | "has_extended_profile" | "default_profile" | "default_profile_image" | "pinned_tweet_ids" | "pinned_tweet_ids_str" | "has_custom_timelines" | "can_media_tag" | "followed_by" | "following" | "live_following" | "follow_request_sent" | "notifications" | "muting" | "blocking" | "blocked_by" | "advertiser_account_type" | "advertiser_account_service_levels" | "analytics_type" | "business_profile_state" | "translator_type" | "withheld_in_countries" | "require_some_consent" | "type" | "target_username" | "email", ExtArgs["result"]["followersDataTest"]>
+  export type FollowersDataTestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $FollowersDataTestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FollowersDataTest"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      id_str: string
+      name: string | null
+      screen_name: string | null
+      location: string | null
+      description: string | null
+      url: string | null
+      entities: Prisma.JsonValue | null
+      protected: boolean | null
+      followers_count: number | null
+      fast_followers_count: number | null
+      normal_followers_count: number | null
+      friends_count: number | null
+      listed_count: number | null
+      created_at: string | null
+      favourites_count: number | null
+      utc_offset: string | null
+      time_zone: string | null
+      geo_enabled: boolean | null
+      verified: boolean | null
+      statuses_count: number | null
+      media_count: number | null
+      lang: string | null
+      contributors_enabled: boolean | null
+      is_translator: boolean | null
+      is_translation_enabled: boolean | null
+      profile_background_color: string | null
+      profile_background_image_url: string | null
+      profile_background_image_url_https: string | null
+      profile_background_tile: boolean | null
+      profile_image_url: string | null
+      profile_image_url_https: string | null
+      profile_banner_url: string | null
+      profile_link_color: string | null
+      profile_sidebar_border_color: string | null
+      profile_sidebar_fill_color: string | null
+      profile_text_color: string | null
+      profile_use_background_image: boolean | null
+      has_extended_profile: boolean | null
+      default_profile: boolean | null
+      default_profile_image: boolean | null
+      pinned_tweet_ids: Prisma.JsonValue | null
+      pinned_tweet_ids_str: string[]
+      has_custom_timelines: boolean | null
+      can_media_tag: boolean | null
+      followed_by: boolean | null
+      following: boolean | null
+      live_following: boolean | null
+      follow_request_sent: boolean | null
+      notifications: boolean | null
+      muting: boolean | null
+      blocking: boolean | null
+      blocked_by: boolean | null
+      advertiser_account_type: string | null
+      advertiser_account_service_levels: string[]
+      analytics_type: string | null
+      business_profile_state: string | null
+      translator_type: string | null
+      withheld_in_countries: string[]
+      require_some_consent: boolean | null
+      type: string | null
+      target_username: string | null
+      email: string | null
+    }, ExtArgs["result"]["followersDataTest"]>
+    composites: {
+      status: Prisma.$TweetStatusPayload | null
+    }
+  }
+
+  type FollowersDataTestGetPayload<S extends boolean | null | undefined | FollowersDataTestDefaultArgs> = $Result.GetResult<Prisma.$FollowersDataTestPayload, S>
+
+  type FollowersDataTestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FollowersDataTestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FollowersDataTestCountAggregateInputType | true
+    }
+
+  export interface FollowersDataTestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FollowersDataTest'], meta: { name: 'FollowersDataTest' } }
+    /**
+     * Find zero or one FollowersDataTest that matches the filter.
+     * @param {FollowersDataTestFindUniqueArgs} args - Arguments to find a FollowersDataTest
+     * @example
+     * // Get one FollowersDataTest
+     * const followersDataTest = await prisma.followersDataTest.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FollowersDataTestFindUniqueArgs>(args: SelectSubset<T, FollowersDataTestFindUniqueArgs<ExtArgs>>): Prisma__FollowersDataTestClient<$Result.GetResult<Prisma.$FollowersDataTestPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FollowersDataTest that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FollowersDataTestFindUniqueOrThrowArgs} args - Arguments to find a FollowersDataTest
+     * @example
+     * // Get one FollowersDataTest
+     * const followersDataTest = await prisma.followersDataTest.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FollowersDataTestFindUniqueOrThrowArgs>(args: SelectSubset<T, FollowersDataTestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FollowersDataTestClient<$Result.GetResult<Prisma.$FollowersDataTestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FollowersDataTest that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FollowersDataTestFindFirstArgs} args - Arguments to find a FollowersDataTest
+     * @example
+     * // Get one FollowersDataTest
+     * const followersDataTest = await prisma.followersDataTest.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FollowersDataTestFindFirstArgs>(args?: SelectSubset<T, FollowersDataTestFindFirstArgs<ExtArgs>>): Prisma__FollowersDataTestClient<$Result.GetResult<Prisma.$FollowersDataTestPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FollowersDataTest that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FollowersDataTestFindFirstOrThrowArgs} args - Arguments to find a FollowersDataTest
+     * @example
+     * // Get one FollowersDataTest
+     * const followersDataTest = await prisma.followersDataTest.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FollowersDataTestFindFirstOrThrowArgs>(args?: SelectSubset<T, FollowersDataTestFindFirstOrThrowArgs<ExtArgs>>): Prisma__FollowersDataTestClient<$Result.GetResult<Prisma.$FollowersDataTestPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FollowersDataTests that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FollowersDataTestFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FollowersDataTests
+     * const followersDataTests = await prisma.followersDataTest.findMany()
+     * 
+     * // Get first 10 FollowersDataTests
+     * const followersDataTests = await prisma.followersDataTest.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const followersDataTestWithIdOnly = await prisma.followersDataTest.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FollowersDataTestFindManyArgs>(args?: SelectSubset<T, FollowersDataTestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FollowersDataTestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FollowersDataTest.
+     * @param {FollowersDataTestCreateArgs} args - Arguments to create a FollowersDataTest.
+     * @example
+     * // Create one FollowersDataTest
+     * const FollowersDataTest = await prisma.followersDataTest.create({
+     *   data: {
+     *     // ... data to create a FollowersDataTest
+     *   }
+     * })
+     * 
+     */
+    create<T extends FollowersDataTestCreateArgs>(args: SelectSubset<T, FollowersDataTestCreateArgs<ExtArgs>>): Prisma__FollowersDataTestClient<$Result.GetResult<Prisma.$FollowersDataTestPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FollowersDataTests.
+     * @param {FollowersDataTestCreateManyArgs} args - Arguments to create many FollowersDataTests.
+     * @example
+     * // Create many FollowersDataTests
+     * const followersDataTest = await prisma.followersDataTest.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FollowersDataTestCreateManyArgs>(args?: SelectSubset<T, FollowersDataTestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a FollowersDataTest.
+     * @param {FollowersDataTestDeleteArgs} args - Arguments to delete one FollowersDataTest.
+     * @example
+     * // Delete one FollowersDataTest
+     * const FollowersDataTest = await prisma.followersDataTest.delete({
+     *   where: {
+     *     // ... filter to delete one FollowersDataTest
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FollowersDataTestDeleteArgs>(args: SelectSubset<T, FollowersDataTestDeleteArgs<ExtArgs>>): Prisma__FollowersDataTestClient<$Result.GetResult<Prisma.$FollowersDataTestPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FollowersDataTest.
+     * @param {FollowersDataTestUpdateArgs} args - Arguments to update one FollowersDataTest.
+     * @example
+     * // Update one FollowersDataTest
+     * const followersDataTest = await prisma.followersDataTest.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FollowersDataTestUpdateArgs>(args: SelectSubset<T, FollowersDataTestUpdateArgs<ExtArgs>>): Prisma__FollowersDataTestClient<$Result.GetResult<Prisma.$FollowersDataTestPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FollowersDataTests.
+     * @param {FollowersDataTestDeleteManyArgs} args - Arguments to filter FollowersDataTests to delete.
+     * @example
+     * // Delete a few FollowersDataTests
+     * const { count } = await prisma.followersDataTest.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FollowersDataTestDeleteManyArgs>(args?: SelectSubset<T, FollowersDataTestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FollowersDataTests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FollowersDataTestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FollowersDataTests
+     * const followersDataTest = await prisma.followersDataTest.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FollowersDataTestUpdateManyArgs>(args: SelectSubset<T, FollowersDataTestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one FollowersDataTest.
+     * @param {FollowersDataTestUpsertArgs} args - Arguments to update or create a FollowersDataTest.
+     * @example
+     * // Update or create a FollowersDataTest
+     * const followersDataTest = await prisma.followersDataTest.upsert({
+     *   create: {
+     *     // ... data to create a FollowersDataTest
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FollowersDataTest we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FollowersDataTestUpsertArgs>(args: SelectSubset<T, FollowersDataTestUpsertArgs<ExtArgs>>): Prisma__FollowersDataTestClient<$Result.GetResult<Prisma.$FollowersDataTestPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FollowersDataTests that matches the filter.
+     * @param {FollowersDataTestFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const followersDataTest = await prisma.followersDataTest.findRaw({
+     *   filter: { age: { $gt: 25 } }
+     * })
+     */
+    findRaw(args?: FollowersDataTestFindRawArgs): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a FollowersDataTest.
+     * @param {FollowersDataTestAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const followersDataTest = await prisma.followersDataTest.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     */
+    aggregateRaw(args?: FollowersDataTestAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+
+
+    /**
+     * Count the number of FollowersDataTests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FollowersDataTestCountArgs} args - Arguments to filter FollowersDataTests to count.
+     * @example
+     * // Count the number of FollowersDataTests
+     * const count = await prisma.followersDataTest.count({
+     *   where: {
+     *     // ... the filter for the FollowersDataTests we want to count
+     *   }
+     * })
+    **/
+    count<T extends FollowersDataTestCountArgs>(
+      args?: Subset<T, FollowersDataTestCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FollowersDataTestCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FollowersDataTest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FollowersDataTestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FollowersDataTestAggregateArgs>(args: Subset<T, FollowersDataTestAggregateArgs>): Prisma.PrismaPromise<GetFollowersDataTestAggregateType<T>>
+
+    /**
+     * Group by FollowersDataTest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FollowersDataTestGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FollowersDataTestGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FollowersDataTestGroupByArgs['orderBy'] }
+        : { orderBy?: FollowersDataTestGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FollowersDataTestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFollowersDataTestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FollowersDataTest model
+   */
+  readonly fields: FollowersDataTestFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FollowersDataTest.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FollowersDataTestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FollowersDataTest model
+   */
+  interface FollowersDataTestFieldRefs {
+    readonly id: FieldRef<"FollowersDataTest", 'String'>
+    readonly id_str: FieldRef<"FollowersDataTest", 'String'>
+    readonly name: FieldRef<"FollowersDataTest", 'String'>
+    readonly screen_name: FieldRef<"FollowersDataTest", 'String'>
+    readonly location: FieldRef<"FollowersDataTest", 'String'>
+    readonly description: FieldRef<"FollowersDataTest", 'String'>
+    readonly url: FieldRef<"FollowersDataTest", 'String'>
+    readonly entities: FieldRef<"FollowersDataTest", 'Json'>
+    readonly protected: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly followers_count: FieldRef<"FollowersDataTest", 'Int'>
+    readonly fast_followers_count: FieldRef<"FollowersDataTest", 'Int'>
+    readonly normal_followers_count: FieldRef<"FollowersDataTest", 'Int'>
+    readonly friends_count: FieldRef<"FollowersDataTest", 'Int'>
+    readonly listed_count: FieldRef<"FollowersDataTest", 'Int'>
+    readonly created_at: FieldRef<"FollowersDataTest", 'String'>
+    readonly favourites_count: FieldRef<"FollowersDataTest", 'Int'>
+    readonly utc_offset: FieldRef<"FollowersDataTest", 'String'>
+    readonly time_zone: FieldRef<"FollowersDataTest", 'String'>
+    readonly geo_enabled: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly verified: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly statuses_count: FieldRef<"FollowersDataTest", 'Int'>
+    readonly media_count: FieldRef<"FollowersDataTest", 'Int'>
+    readonly lang: FieldRef<"FollowersDataTest", 'String'>
+    readonly contributors_enabled: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly is_translator: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly is_translation_enabled: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly profile_background_color: FieldRef<"FollowersDataTest", 'String'>
+    readonly profile_background_image_url: FieldRef<"FollowersDataTest", 'String'>
+    readonly profile_background_image_url_https: FieldRef<"FollowersDataTest", 'String'>
+    readonly profile_background_tile: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly profile_image_url: FieldRef<"FollowersDataTest", 'String'>
+    readonly profile_image_url_https: FieldRef<"FollowersDataTest", 'String'>
+    readonly profile_banner_url: FieldRef<"FollowersDataTest", 'String'>
+    readonly profile_link_color: FieldRef<"FollowersDataTest", 'String'>
+    readonly profile_sidebar_border_color: FieldRef<"FollowersDataTest", 'String'>
+    readonly profile_sidebar_fill_color: FieldRef<"FollowersDataTest", 'String'>
+    readonly profile_text_color: FieldRef<"FollowersDataTest", 'String'>
+    readonly profile_use_background_image: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly has_extended_profile: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly default_profile: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly default_profile_image: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly pinned_tweet_ids: FieldRef<"FollowersDataTest", 'Json'>
+    readonly pinned_tweet_ids_str: FieldRef<"FollowersDataTest", 'String[]'>
+    readonly has_custom_timelines: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly can_media_tag: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly followed_by: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly following: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly live_following: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly follow_request_sent: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly notifications: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly muting: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly blocking: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly blocked_by: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly advertiser_account_type: FieldRef<"FollowersDataTest", 'String'>
+    readonly advertiser_account_service_levels: FieldRef<"FollowersDataTest", 'String[]'>
+    readonly analytics_type: FieldRef<"FollowersDataTest", 'String'>
+    readonly business_profile_state: FieldRef<"FollowersDataTest", 'String'>
+    readonly translator_type: FieldRef<"FollowersDataTest", 'String'>
+    readonly withheld_in_countries: FieldRef<"FollowersDataTest", 'String[]'>
+    readonly require_some_consent: FieldRef<"FollowersDataTest", 'Boolean'>
+    readonly type: FieldRef<"FollowersDataTest", 'String'>
+    readonly target_username: FieldRef<"FollowersDataTest", 'String'>
+    readonly email: FieldRef<"FollowersDataTest", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FollowersDataTest findUnique
+   */
+  export type FollowersDataTestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowersDataTest
+     */
+    select?: FollowersDataTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowersDataTest
+     */
+    omit?: FollowersDataTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowersDataTestInclude<ExtArgs> | null
+    /**
+     * Filter, which FollowersDataTest to fetch.
+     */
+    where: FollowersDataTestWhereUniqueInput
+  }
+
+  /**
+   * FollowersDataTest findUniqueOrThrow
+   */
+  export type FollowersDataTestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowersDataTest
+     */
+    select?: FollowersDataTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowersDataTest
+     */
+    omit?: FollowersDataTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowersDataTestInclude<ExtArgs> | null
+    /**
+     * Filter, which FollowersDataTest to fetch.
+     */
+    where: FollowersDataTestWhereUniqueInput
+  }
+
+  /**
+   * FollowersDataTest findFirst
+   */
+  export type FollowersDataTestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowersDataTest
+     */
+    select?: FollowersDataTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowersDataTest
+     */
+    omit?: FollowersDataTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowersDataTestInclude<ExtArgs> | null
+    /**
+     * Filter, which FollowersDataTest to fetch.
+     */
+    where?: FollowersDataTestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FollowersDataTests to fetch.
+     */
+    orderBy?: FollowersDataTestOrderByWithRelationInput | FollowersDataTestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FollowersDataTests.
+     */
+    cursor?: FollowersDataTestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FollowersDataTests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FollowersDataTests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FollowersDataTests.
+     */
+    distinct?: FollowersDataTestScalarFieldEnum | FollowersDataTestScalarFieldEnum[]
+  }
+
+  /**
+   * FollowersDataTest findFirstOrThrow
+   */
+  export type FollowersDataTestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowersDataTest
+     */
+    select?: FollowersDataTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowersDataTest
+     */
+    omit?: FollowersDataTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowersDataTestInclude<ExtArgs> | null
+    /**
+     * Filter, which FollowersDataTest to fetch.
+     */
+    where?: FollowersDataTestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FollowersDataTests to fetch.
+     */
+    orderBy?: FollowersDataTestOrderByWithRelationInput | FollowersDataTestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FollowersDataTests.
+     */
+    cursor?: FollowersDataTestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FollowersDataTests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FollowersDataTests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FollowersDataTests.
+     */
+    distinct?: FollowersDataTestScalarFieldEnum | FollowersDataTestScalarFieldEnum[]
+  }
+
+  /**
+   * FollowersDataTest findMany
+   */
+  export type FollowersDataTestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowersDataTest
+     */
+    select?: FollowersDataTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowersDataTest
+     */
+    omit?: FollowersDataTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowersDataTestInclude<ExtArgs> | null
+    /**
+     * Filter, which FollowersDataTests to fetch.
+     */
+    where?: FollowersDataTestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FollowersDataTests to fetch.
+     */
+    orderBy?: FollowersDataTestOrderByWithRelationInput | FollowersDataTestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FollowersDataTests.
+     */
+    cursor?: FollowersDataTestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FollowersDataTests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FollowersDataTests.
+     */
+    skip?: number
+    distinct?: FollowersDataTestScalarFieldEnum | FollowersDataTestScalarFieldEnum[]
+  }
+
+  /**
+   * FollowersDataTest create
+   */
+  export type FollowersDataTestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowersDataTest
+     */
+    select?: FollowersDataTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowersDataTest
+     */
+    omit?: FollowersDataTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowersDataTestInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FollowersDataTest.
+     */
+    data: XOR<FollowersDataTestCreateInput, FollowersDataTestUncheckedCreateInput>
+  }
+
+  /**
+   * FollowersDataTest createMany
+   */
+  export type FollowersDataTestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FollowersDataTests.
+     */
+    data: FollowersDataTestCreateManyInput | FollowersDataTestCreateManyInput[]
+  }
+
+  /**
+   * FollowersDataTest update
+   */
+  export type FollowersDataTestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowersDataTest
+     */
+    select?: FollowersDataTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowersDataTest
+     */
+    omit?: FollowersDataTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowersDataTestInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FollowersDataTest.
+     */
+    data: XOR<FollowersDataTestUpdateInput, FollowersDataTestUncheckedUpdateInput>
+    /**
+     * Choose, which FollowersDataTest to update.
+     */
+    where: FollowersDataTestWhereUniqueInput
+  }
+
+  /**
+   * FollowersDataTest updateMany
+   */
+  export type FollowersDataTestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FollowersDataTests.
+     */
+    data: XOR<FollowersDataTestUpdateManyMutationInput, FollowersDataTestUncheckedUpdateManyInput>
+    /**
+     * Filter which FollowersDataTests to update
+     */
+    where?: FollowersDataTestWhereInput
+    /**
+     * Limit how many FollowersDataTests to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FollowersDataTest upsert
+   */
+  export type FollowersDataTestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowersDataTest
+     */
+    select?: FollowersDataTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowersDataTest
+     */
+    omit?: FollowersDataTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowersDataTestInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FollowersDataTest to update in case it exists.
+     */
+    where: FollowersDataTestWhereUniqueInput
+    /**
+     * In case the FollowersDataTest found by the `where` argument doesn't exist, create a new FollowersDataTest with this data.
+     */
+    create: XOR<FollowersDataTestCreateInput, FollowersDataTestUncheckedCreateInput>
+    /**
+     * In case the FollowersDataTest was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FollowersDataTestUpdateInput, FollowersDataTestUncheckedUpdateInput>
+  }
+
+  /**
+   * FollowersDataTest delete
+   */
+  export type FollowersDataTestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowersDataTest
+     */
+    select?: FollowersDataTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowersDataTest
+     */
+    omit?: FollowersDataTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowersDataTestInclude<ExtArgs> | null
+    /**
+     * Filter which FollowersDataTest to delete.
+     */
+    where: FollowersDataTestWhereUniqueInput
+  }
+
+  /**
+   * FollowersDataTest deleteMany
+   */
+  export type FollowersDataTestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FollowersDataTests to delete
+     */
+    where?: FollowersDataTestWhereInput
+    /**
+     * Limit how many FollowersDataTests to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FollowersDataTest findRaw
+   */
+  export type FollowersDataTestFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * FollowersDataTest aggregateRaw
+   */
+  export type FollowersDataTestAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * FollowersDataTest without action
+   */
+  export type FollowersDataTestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowersDataTest
+     */
+    select?: FollowersDataTestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowersDataTest
+     */
+    omit?: FollowersDataTestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowersDataTestInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5583,6 +9989,37 @@ export namespace Prisma {
   export type UserProfileScalarFieldEnum = (typeof UserProfileScalarFieldEnum)[keyof typeof UserProfileScalarFieldEnum]
 
 
+  export const UserProfileTestScalarFieldEnum: {
+    id: 'id',
+    default_profile: 'default_profile',
+    default_profile_image: 'default_profile_image',
+    description: 'description',
+    fast_followers_count: 'fast_followers_count',
+    favourites_count: 'favourites_count',
+    followers_count: 'followers_count',
+    friends_count: 'friends_count',
+    has_custom_timelines: 'has_custom_timelines',
+    is_translator: 'is_translator',
+    listed_count: 'listed_count',
+    media_count: 'media_count',
+    normal_followers_count: 'normal_followers_count',
+    pinned_tweet_ids_str: 'pinned_tweet_ids_str',
+    possibly_sensitive: 'possibly_sensitive',
+    profile_banner_url: 'profile_banner_url',
+    profile_interstitial_type: 'profile_interstitial_type',
+    statuses_count: 'statuses_count',
+    translator_type: 'translator_type',
+    withheld_in_countries: 'withheld_in_countries',
+    user_id_str: 'user_id_str',
+    profile_url: 'profile_url',
+    profile_image_url_https: 'profile_image_url_https',
+    verified: 'verified',
+    updated_time: 'updated_time'
+  };
+
+  export type UserProfileTestScalarFieldEnum = (typeof UserProfileTestScalarFieldEnum)[keyof typeof UserProfileTestScalarFieldEnum]
+
+
   export const TweetsDataScalarFieldEnum: {
     id: 'id',
     id_str: 'id_str',
@@ -5602,10 +10039,40 @@ export namespace Prisma {
     retweet_count: 'retweet_count',
     retweeted: 'retweeted',
     user_id_str: 'user_id_str',
+    views_count: 'views_count',
     updated_time: 'updated_time'
   };
 
   export type TweetsDataScalarFieldEnum = (typeof TweetsDataScalarFieldEnum)[keyof typeof TweetsDataScalarFieldEnum]
+
+
+  export const TweetsDataTestScalarFieldEnum: {
+    id: 'id',
+    id_str: 'id_str',
+    bookmark_count: 'bookmark_count',
+    bookmarked: 'bookmarked',
+    conversation_id_str: 'conversation_id_str',
+    created_at: 'created_at',
+    display_text_range: 'display_text_range',
+    extended_entities: 'extended_entities',
+    entities: 'entities',
+    favorite_count: 'favorite_count',
+    favorited: 'favorited',
+    full_text: 'full_text',
+    is_quote_status: 'is_quote_status',
+    lang: 'lang',
+    quote_count: 'quote_count',
+    reply_count: 'reply_count',
+    retweet_count: 'retweet_count',
+    retweeted: 'retweeted',
+    twitterUrl: 'twitterUrl',
+    url: 'url',
+    user_id_str: 'user_id_str',
+    views_count: 'views_count',
+    updated_time: 'updated_time'
+  };
+
+  export type TweetsDataTestScalarFieldEnum = (typeof TweetsDataTestScalarFieldEnum)[keyof typeof TweetsDataTestScalarFieldEnum]
 
 
   export const FollowerFollowingDataScalarFieldEnum: {
@@ -5675,6 +10142,75 @@ export namespace Prisma {
   };
 
   export type FollowerFollowingDataScalarFieldEnum = (typeof FollowerFollowingDataScalarFieldEnum)[keyof typeof FollowerFollowingDataScalarFieldEnum]
+
+
+  export const FollowersDataTestScalarFieldEnum: {
+    id: 'id',
+    id_str: 'id_str',
+    name: 'name',
+    screen_name: 'screen_name',
+    location: 'location',
+    description: 'description',
+    url: 'url',
+    entities: 'entities',
+    protected: 'protected',
+    followers_count: 'followers_count',
+    fast_followers_count: 'fast_followers_count',
+    normal_followers_count: 'normal_followers_count',
+    friends_count: 'friends_count',
+    listed_count: 'listed_count',
+    created_at: 'created_at',
+    favourites_count: 'favourites_count',
+    utc_offset: 'utc_offset',
+    time_zone: 'time_zone',
+    geo_enabled: 'geo_enabled',
+    verified: 'verified',
+    statuses_count: 'statuses_count',
+    media_count: 'media_count',
+    lang: 'lang',
+    contributors_enabled: 'contributors_enabled',
+    is_translator: 'is_translator',
+    is_translation_enabled: 'is_translation_enabled',
+    profile_background_color: 'profile_background_color',
+    profile_background_image_url: 'profile_background_image_url',
+    profile_background_image_url_https: 'profile_background_image_url_https',
+    profile_background_tile: 'profile_background_tile',
+    profile_image_url: 'profile_image_url',
+    profile_image_url_https: 'profile_image_url_https',
+    profile_banner_url: 'profile_banner_url',
+    profile_link_color: 'profile_link_color',
+    profile_sidebar_border_color: 'profile_sidebar_border_color',
+    profile_sidebar_fill_color: 'profile_sidebar_fill_color',
+    profile_text_color: 'profile_text_color',
+    profile_use_background_image: 'profile_use_background_image',
+    has_extended_profile: 'has_extended_profile',
+    default_profile: 'default_profile',
+    default_profile_image: 'default_profile_image',
+    pinned_tweet_ids: 'pinned_tweet_ids',
+    pinned_tweet_ids_str: 'pinned_tweet_ids_str',
+    has_custom_timelines: 'has_custom_timelines',
+    can_media_tag: 'can_media_tag',
+    followed_by: 'followed_by',
+    following: 'following',
+    live_following: 'live_following',
+    follow_request_sent: 'follow_request_sent',
+    notifications: 'notifications',
+    muting: 'muting',
+    blocking: 'blocking',
+    blocked_by: 'blocked_by',
+    advertiser_account_type: 'advertiser_account_type',
+    advertiser_account_service_levels: 'advertiser_account_service_levels',
+    analytics_type: 'analytics_type',
+    business_profile_state: 'business_profile_state',
+    translator_type: 'translator_type',
+    withheld_in_countries: 'withheld_in_countries',
+    require_some_consent: 'require_some_consent',
+    type: 'type',
+    target_username: 'target_username',
+    email: 'email'
+  };
+
+  export type FollowersDataTestScalarFieldEnum = (typeof FollowersDataTestScalarFieldEnum)[keyof typeof FollowersDataTestScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5918,6 +10454,163 @@ export namespace Prisma {
     updated_time?: DateTimeWithAggregatesFilter<"UserProfile"> | Date | string
   }
 
+  export type UserProfileTestWhereInput = {
+    AND?: UserProfileTestWhereInput | UserProfileTestWhereInput[]
+    OR?: UserProfileTestWhereInput[]
+    NOT?: UserProfileTestWhereInput | UserProfileTestWhereInput[]
+    id?: StringFilter<"UserProfileTest"> | string
+    default_profile?: BoolFilter<"UserProfileTest"> | boolean
+    default_profile_image?: BoolFilter<"UserProfileTest"> | boolean
+    description?: StringNullableFilter<"UserProfileTest"> | string | null
+    entities?: XOR<EntitiesProfileNullableCompositeFilter, EntitiesProfileObjectEqualityInput> | null
+    fast_followers_count?: IntNullableFilter<"UserProfileTest"> | number | null
+    favourites_count?: IntNullableFilter<"UserProfileTest"> | number | null
+    followers_count?: IntNullableFilter<"UserProfileTest"> | number | null
+    friends_count?: IntNullableFilter<"UserProfileTest"> | number | null
+    has_custom_timelines?: BoolNullableFilter<"UserProfileTest"> | boolean | null
+    is_translator?: BoolNullableFilter<"UserProfileTest"> | boolean | null
+    listed_count?: IntNullableFilter<"UserProfileTest"> | number | null
+    media_count?: IntNullableFilter<"UserProfileTest"> | number | null
+    normal_followers_count?: IntNullableFilter<"UserProfileTest"> | number | null
+    pinned_tweet_ids_str?: StringNullableListFilter<"UserProfileTest">
+    possibly_sensitive?: BoolNullableFilter<"UserProfileTest"> | boolean | null
+    profile_banner_url?: StringNullableFilter<"UserProfileTest"> | string | null
+    profile_interstitial_type?: StringNullableFilter<"UserProfileTest"> | string | null
+    statuses_count?: IntNullableFilter<"UserProfileTest"> | number | null
+    translator_type?: StringNullableFilter<"UserProfileTest"> | string | null
+    withheld_in_countries?: StringNullableListFilter<"UserProfileTest">
+    user_id_str?: StringFilter<"UserProfileTest"> | string
+    profile_url?: StringNullableFilter<"UserProfileTest"> | string | null
+    profile_image_url_https?: StringNullableFilter<"UserProfileTest"> | string | null
+    verified?: BoolNullableFilter<"UserProfileTest"> | boolean | null
+    updated_time?: DateTimeNullableFilter<"UserProfileTest"> | Date | string | null
+  }
+
+  export type UserProfileTestOrderByWithRelationInput = {
+    id?: SortOrder
+    default_profile?: SortOrder
+    default_profile_image?: SortOrder
+    description?: SortOrder
+    entities?: EntitiesProfileOrderByInput
+    fast_followers_count?: SortOrder
+    favourites_count?: SortOrder
+    followers_count?: SortOrder
+    friends_count?: SortOrder
+    has_custom_timelines?: SortOrder
+    is_translator?: SortOrder
+    listed_count?: SortOrder
+    media_count?: SortOrder
+    normal_followers_count?: SortOrder
+    pinned_tweet_ids_str?: SortOrder
+    possibly_sensitive?: SortOrder
+    profile_banner_url?: SortOrder
+    profile_interstitial_type?: SortOrder
+    statuses_count?: SortOrder
+    translator_type?: SortOrder
+    withheld_in_countries?: SortOrder
+    user_id_str?: SortOrder
+    profile_url?: SortOrder
+    profile_image_url_https?: SortOrder
+    verified?: SortOrder
+    updated_time?: SortOrder
+  }
+
+  export type UserProfileTestWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: UserProfileTestWhereInput | UserProfileTestWhereInput[]
+    OR?: UserProfileTestWhereInput[]
+    NOT?: UserProfileTestWhereInput | UserProfileTestWhereInput[]
+    default_profile?: BoolFilter<"UserProfileTest"> | boolean
+    default_profile_image?: BoolFilter<"UserProfileTest"> | boolean
+    description?: StringNullableFilter<"UserProfileTest"> | string | null
+    entities?: XOR<EntitiesProfileNullableCompositeFilter, EntitiesProfileObjectEqualityInput> | null
+    fast_followers_count?: IntNullableFilter<"UserProfileTest"> | number | null
+    favourites_count?: IntNullableFilter<"UserProfileTest"> | number | null
+    followers_count?: IntNullableFilter<"UserProfileTest"> | number | null
+    friends_count?: IntNullableFilter<"UserProfileTest"> | number | null
+    has_custom_timelines?: BoolNullableFilter<"UserProfileTest"> | boolean | null
+    is_translator?: BoolNullableFilter<"UserProfileTest"> | boolean | null
+    listed_count?: IntNullableFilter<"UserProfileTest"> | number | null
+    media_count?: IntNullableFilter<"UserProfileTest"> | number | null
+    normal_followers_count?: IntNullableFilter<"UserProfileTest"> | number | null
+    pinned_tweet_ids_str?: StringNullableListFilter<"UserProfileTest">
+    possibly_sensitive?: BoolNullableFilter<"UserProfileTest"> | boolean | null
+    profile_banner_url?: StringNullableFilter<"UserProfileTest"> | string | null
+    profile_interstitial_type?: StringNullableFilter<"UserProfileTest"> | string | null
+    statuses_count?: IntNullableFilter<"UserProfileTest"> | number | null
+    translator_type?: StringNullableFilter<"UserProfileTest"> | string | null
+    withheld_in_countries?: StringNullableListFilter<"UserProfileTest">
+    user_id_str?: StringFilter<"UserProfileTest"> | string
+    profile_url?: StringNullableFilter<"UserProfileTest"> | string | null
+    profile_image_url_https?: StringNullableFilter<"UserProfileTest"> | string | null
+    verified?: BoolNullableFilter<"UserProfileTest"> | boolean | null
+    updated_time?: DateTimeNullableFilter<"UserProfileTest"> | Date | string | null
+  }, "id">
+
+  export type UserProfileTestOrderByWithAggregationInput = {
+    id?: SortOrder
+    default_profile?: SortOrder
+    default_profile_image?: SortOrder
+    description?: SortOrder
+    fast_followers_count?: SortOrder
+    favourites_count?: SortOrder
+    followers_count?: SortOrder
+    friends_count?: SortOrder
+    has_custom_timelines?: SortOrder
+    is_translator?: SortOrder
+    listed_count?: SortOrder
+    media_count?: SortOrder
+    normal_followers_count?: SortOrder
+    pinned_tweet_ids_str?: SortOrder
+    possibly_sensitive?: SortOrder
+    profile_banner_url?: SortOrder
+    profile_interstitial_type?: SortOrder
+    statuses_count?: SortOrder
+    translator_type?: SortOrder
+    withheld_in_countries?: SortOrder
+    user_id_str?: SortOrder
+    profile_url?: SortOrder
+    profile_image_url_https?: SortOrder
+    verified?: SortOrder
+    updated_time?: SortOrder
+    _count?: UserProfileTestCountOrderByAggregateInput
+    _avg?: UserProfileTestAvgOrderByAggregateInput
+    _max?: UserProfileTestMaxOrderByAggregateInput
+    _min?: UserProfileTestMinOrderByAggregateInput
+    _sum?: UserProfileTestSumOrderByAggregateInput
+  }
+
+  export type UserProfileTestScalarWhereWithAggregatesInput = {
+    AND?: UserProfileTestScalarWhereWithAggregatesInput | UserProfileTestScalarWhereWithAggregatesInput[]
+    OR?: UserProfileTestScalarWhereWithAggregatesInput[]
+    NOT?: UserProfileTestScalarWhereWithAggregatesInput | UserProfileTestScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserProfileTest"> | string
+    default_profile?: BoolWithAggregatesFilter<"UserProfileTest"> | boolean
+    default_profile_image?: BoolWithAggregatesFilter<"UserProfileTest"> | boolean
+    description?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
+    fast_followers_count?: IntNullableWithAggregatesFilter<"UserProfileTest"> | number | null
+    favourites_count?: IntNullableWithAggregatesFilter<"UserProfileTest"> | number | null
+    followers_count?: IntNullableWithAggregatesFilter<"UserProfileTest"> | number | null
+    friends_count?: IntNullableWithAggregatesFilter<"UserProfileTest"> | number | null
+    has_custom_timelines?: BoolNullableWithAggregatesFilter<"UserProfileTest"> | boolean | null
+    is_translator?: BoolNullableWithAggregatesFilter<"UserProfileTest"> | boolean | null
+    listed_count?: IntNullableWithAggregatesFilter<"UserProfileTest"> | number | null
+    media_count?: IntNullableWithAggregatesFilter<"UserProfileTest"> | number | null
+    normal_followers_count?: IntNullableWithAggregatesFilter<"UserProfileTest"> | number | null
+    pinned_tweet_ids_str?: StringNullableListFilter<"UserProfileTest">
+    possibly_sensitive?: BoolNullableWithAggregatesFilter<"UserProfileTest"> | boolean | null
+    profile_banner_url?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
+    profile_interstitial_type?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
+    statuses_count?: IntNullableWithAggregatesFilter<"UserProfileTest"> | number | null
+    translator_type?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
+    withheld_in_countries?: StringNullableListFilter<"UserProfileTest">
+    user_id_str?: StringWithAggregatesFilter<"UserProfileTest"> | string
+    profile_url?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
+    profile_image_url_https?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
+    verified?: BoolNullableWithAggregatesFilter<"UserProfileTest"> | boolean | null
+    updated_time?: DateTimeNullableWithAggregatesFilter<"UserProfileTest"> | Date | string | null
+  }
+
   export type TweetsDataWhereInput = {
     AND?: TweetsDataWhereInput | TweetsDataWhereInput[]
     OR?: TweetsDataWhereInput[]
@@ -5941,6 +10634,7 @@ export namespace Prisma {
     retweeted?: BoolNullableFilter<"TweetsData"> | boolean | null
     user?: XOR<TweetUserNullableCompositeFilter, TweetUserObjectEqualityInput> | null
     user_id_str?: StringNullableFilter<"TweetsData"> | string | null
+    views_count?: StringNullableFilter<"TweetsData"> | string | null
     updated_time?: DateTimeFilter<"TweetsData"> | Date | string
   }
 
@@ -5964,6 +10658,7 @@ export namespace Prisma {
     retweeted?: SortOrder
     user?: TweetUserOrderByInput
     user_id_str?: SortOrder
+    views_count?: SortOrder
     updated_time?: SortOrder
   }
 
@@ -5990,6 +10685,7 @@ export namespace Prisma {
     retweeted?: BoolNullableFilter<"TweetsData"> | boolean | null
     user?: XOR<TweetUserNullableCompositeFilter, TweetUserObjectEqualityInput> | null
     user_id_str?: StringNullableFilter<"TweetsData"> | string | null
+    views_count?: StringNullableFilter<"TweetsData"> | string | null
     updated_time?: DateTimeFilter<"TweetsData"> | Date | string
   }, "id">
 
@@ -6012,6 +10708,7 @@ export namespace Prisma {
     retweet_count?: SortOrder
     retweeted?: SortOrder
     user_id_str?: SortOrder
+    views_count?: SortOrder
     updated_time?: SortOrder
     _count?: TweetsDataCountOrderByAggregateInput
     _avg?: TweetsDataAvgOrderByAggregateInput
@@ -6042,7 +10739,155 @@ export namespace Prisma {
     retweet_count?: IntNullableWithAggregatesFilter<"TweetsData"> | number | null
     retweeted?: BoolNullableWithAggregatesFilter<"TweetsData"> | boolean | null
     user_id_str?: StringNullableWithAggregatesFilter<"TweetsData"> | string | null
+    views_count?: StringNullableWithAggregatesFilter<"TweetsData"> | string | null
     updated_time?: DateTimeWithAggregatesFilter<"TweetsData"> | Date | string
+  }
+
+  export type TweetsDataTestWhereInput = {
+    AND?: TweetsDataTestWhereInput | TweetsDataTestWhereInput[]
+    OR?: TweetsDataTestWhereInput[]
+    NOT?: TweetsDataTestWhereInput | TweetsDataTestWhereInput[]
+    id?: StringFilter<"TweetsDataTest"> | string
+    id_str?: StringFilter<"TweetsDataTest"> | string
+    bookmark_count?: IntNullableFilter<"TweetsDataTest"> | number | null
+    bookmarked?: BoolNullableFilter<"TweetsDataTest"> | boolean | null
+    conversation_id_str?: StringNullableFilter<"TweetsDataTest"> | string | null
+    created_at?: StringNullableFilter<"TweetsDataTest"> | string | null
+    display_text_range?: IntNullableListFilter<"TweetsDataTest">
+    extended_entities?: JsonNullableFilter<"TweetsDataTest">
+    entities?: JsonNullableFilter<"TweetsDataTest">
+    favorite_count?: IntNullableFilter<"TweetsDataTest"> | number | null
+    favorited?: BoolNullableFilter<"TweetsDataTest"> | boolean | null
+    full_text?: StringNullableFilter<"TweetsDataTest"> | string | null
+    is_quote_status?: BoolNullableFilter<"TweetsDataTest"> | boolean | null
+    lang?: StringNullableFilter<"TweetsDataTest"> | string | null
+    quote_count?: IntNullableFilter<"TweetsDataTest"> | number | null
+    reply_count?: IntNullableFilter<"TweetsDataTest"> | number | null
+    retweet_count?: IntNullableFilter<"TweetsDataTest"> | number | null
+    retweeted?: BoolNullableFilter<"TweetsDataTest"> | boolean | null
+    twitterUrl?: StringNullableFilter<"TweetsDataTest"> | string | null
+    user?: XOR<TweetUserNullableCompositeFilter, TweetUserObjectEqualityInput> | null
+    url?: StringNullableFilter<"TweetsDataTest"> | string | null
+    user_id_str?: StringNullableFilter<"TweetsDataTest"> | string | null
+    views_count?: StringNullableFilter<"TweetsDataTest"> | string | null
+    updated_time?: DateTimeNullableFilter<"TweetsDataTest"> | Date | string | null
+  }
+
+  export type TweetsDataTestOrderByWithRelationInput = {
+    id?: SortOrder
+    id_str?: SortOrder
+    bookmark_count?: SortOrder
+    bookmarked?: SortOrder
+    conversation_id_str?: SortOrder
+    created_at?: SortOrder
+    display_text_range?: SortOrder
+    extended_entities?: SortOrder
+    entities?: SortOrder
+    favorite_count?: SortOrder
+    favorited?: SortOrder
+    full_text?: SortOrder
+    is_quote_status?: SortOrder
+    lang?: SortOrder
+    quote_count?: SortOrder
+    reply_count?: SortOrder
+    retweet_count?: SortOrder
+    retweeted?: SortOrder
+    twitterUrl?: SortOrder
+    user?: TweetUserOrderByInput
+    url?: SortOrder
+    user_id_str?: SortOrder
+    views_count?: SortOrder
+    updated_time?: SortOrder
+  }
+
+  export type TweetsDataTestWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: TweetsDataTestWhereInput | TweetsDataTestWhereInput[]
+    OR?: TweetsDataTestWhereInput[]
+    NOT?: TweetsDataTestWhereInput | TweetsDataTestWhereInput[]
+    id_str?: StringFilter<"TweetsDataTest"> | string
+    bookmark_count?: IntNullableFilter<"TweetsDataTest"> | number | null
+    bookmarked?: BoolNullableFilter<"TweetsDataTest"> | boolean | null
+    conversation_id_str?: StringNullableFilter<"TweetsDataTest"> | string | null
+    created_at?: StringNullableFilter<"TweetsDataTest"> | string | null
+    display_text_range?: IntNullableListFilter<"TweetsDataTest">
+    extended_entities?: JsonNullableFilter<"TweetsDataTest">
+    entities?: JsonNullableFilter<"TweetsDataTest">
+    favorite_count?: IntNullableFilter<"TweetsDataTest"> | number | null
+    favorited?: BoolNullableFilter<"TweetsDataTest"> | boolean | null
+    full_text?: StringNullableFilter<"TweetsDataTest"> | string | null
+    is_quote_status?: BoolNullableFilter<"TweetsDataTest"> | boolean | null
+    lang?: StringNullableFilter<"TweetsDataTest"> | string | null
+    quote_count?: IntNullableFilter<"TweetsDataTest"> | number | null
+    reply_count?: IntNullableFilter<"TweetsDataTest"> | number | null
+    retweet_count?: IntNullableFilter<"TweetsDataTest"> | number | null
+    retweeted?: BoolNullableFilter<"TweetsDataTest"> | boolean | null
+    twitterUrl?: StringNullableFilter<"TweetsDataTest"> | string | null
+    user?: XOR<TweetUserNullableCompositeFilter, TweetUserObjectEqualityInput> | null
+    url?: StringNullableFilter<"TweetsDataTest"> | string | null
+    user_id_str?: StringNullableFilter<"TweetsDataTest"> | string | null
+    views_count?: StringNullableFilter<"TweetsDataTest"> | string | null
+    updated_time?: DateTimeNullableFilter<"TweetsDataTest"> | Date | string | null
+  }, "id">
+
+  export type TweetsDataTestOrderByWithAggregationInput = {
+    id?: SortOrder
+    id_str?: SortOrder
+    bookmark_count?: SortOrder
+    bookmarked?: SortOrder
+    conversation_id_str?: SortOrder
+    created_at?: SortOrder
+    display_text_range?: SortOrder
+    extended_entities?: SortOrder
+    entities?: SortOrder
+    favorite_count?: SortOrder
+    favorited?: SortOrder
+    full_text?: SortOrder
+    is_quote_status?: SortOrder
+    lang?: SortOrder
+    quote_count?: SortOrder
+    reply_count?: SortOrder
+    retweet_count?: SortOrder
+    retweeted?: SortOrder
+    twitterUrl?: SortOrder
+    url?: SortOrder
+    user_id_str?: SortOrder
+    views_count?: SortOrder
+    updated_time?: SortOrder
+    _count?: TweetsDataTestCountOrderByAggregateInput
+    _avg?: TweetsDataTestAvgOrderByAggregateInput
+    _max?: TweetsDataTestMaxOrderByAggregateInput
+    _min?: TweetsDataTestMinOrderByAggregateInput
+    _sum?: TweetsDataTestSumOrderByAggregateInput
+  }
+
+  export type TweetsDataTestScalarWhereWithAggregatesInput = {
+    AND?: TweetsDataTestScalarWhereWithAggregatesInput | TweetsDataTestScalarWhereWithAggregatesInput[]
+    OR?: TweetsDataTestScalarWhereWithAggregatesInput[]
+    NOT?: TweetsDataTestScalarWhereWithAggregatesInput | TweetsDataTestScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TweetsDataTest"> | string
+    id_str?: StringWithAggregatesFilter<"TweetsDataTest"> | string
+    bookmark_count?: IntNullableWithAggregatesFilter<"TweetsDataTest"> | number | null
+    bookmarked?: BoolNullableWithAggregatesFilter<"TweetsDataTest"> | boolean | null
+    conversation_id_str?: StringNullableWithAggregatesFilter<"TweetsDataTest"> | string | null
+    created_at?: StringNullableWithAggregatesFilter<"TweetsDataTest"> | string | null
+    display_text_range?: IntNullableListFilter<"TweetsDataTest">
+    extended_entities?: JsonNullableWithAggregatesFilter<"TweetsDataTest">
+    entities?: JsonNullableWithAggregatesFilter<"TweetsDataTest">
+    favorite_count?: IntNullableWithAggregatesFilter<"TweetsDataTest"> | number | null
+    favorited?: BoolNullableWithAggregatesFilter<"TweetsDataTest"> | boolean | null
+    full_text?: StringNullableWithAggregatesFilter<"TweetsDataTest"> | string | null
+    is_quote_status?: BoolNullableWithAggregatesFilter<"TweetsDataTest"> | boolean | null
+    lang?: StringNullableWithAggregatesFilter<"TweetsDataTest"> | string | null
+    quote_count?: IntNullableWithAggregatesFilter<"TweetsDataTest"> | number | null
+    reply_count?: IntNullableWithAggregatesFilter<"TweetsDataTest"> | number | null
+    retweet_count?: IntNullableWithAggregatesFilter<"TweetsDataTest"> | number | null
+    retweeted?: BoolNullableWithAggregatesFilter<"TweetsDataTest"> | boolean | null
+    twitterUrl?: StringNullableWithAggregatesFilter<"TweetsDataTest"> | string | null
+    url?: StringNullableWithAggregatesFilter<"TweetsDataTest"> | string | null
+    user_id_str?: StringNullableWithAggregatesFilter<"TweetsDataTest"> | string | null
+    views_count?: StringNullableWithAggregatesFilter<"TweetsDataTest"> | string | null
+    updated_time?: DateTimeNullableWithAggregatesFilter<"TweetsDataTest"> | Date | string | null
   }
 
   export type FollowerFollowingDataWhereInput = {
@@ -6392,6 +11237,353 @@ export namespace Prisma {
     email?: StringNullableWithAggregatesFilter<"FollowerFollowingData"> | string | null
   }
 
+  export type FollowersDataTestWhereInput = {
+    AND?: FollowersDataTestWhereInput | FollowersDataTestWhereInput[]
+    OR?: FollowersDataTestWhereInput[]
+    NOT?: FollowersDataTestWhereInput | FollowersDataTestWhereInput[]
+    id?: StringFilter<"FollowersDataTest"> | string
+    id_str?: StringFilter<"FollowersDataTest"> | string
+    name?: StringNullableFilter<"FollowersDataTest"> | string | null
+    screen_name?: StringNullableFilter<"FollowersDataTest"> | string | null
+    location?: StringNullableFilter<"FollowersDataTest"> | string | null
+    description?: StringNullableFilter<"FollowersDataTest"> | string | null
+    url?: StringNullableFilter<"FollowersDataTest"> | string | null
+    entities?: JsonNullableFilter<"FollowersDataTest">
+    protected?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    followers_count?: IntNullableFilter<"FollowersDataTest"> | number | null
+    fast_followers_count?: IntNullableFilter<"FollowersDataTest"> | number | null
+    normal_followers_count?: IntNullableFilter<"FollowersDataTest"> | number | null
+    friends_count?: IntNullableFilter<"FollowersDataTest"> | number | null
+    listed_count?: IntNullableFilter<"FollowersDataTest"> | number | null
+    created_at?: StringNullableFilter<"FollowersDataTest"> | string | null
+    favourites_count?: IntNullableFilter<"FollowersDataTest"> | number | null
+    utc_offset?: StringNullableFilter<"FollowersDataTest"> | string | null
+    time_zone?: StringNullableFilter<"FollowersDataTest"> | string | null
+    geo_enabled?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    verified?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    statuses_count?: IntNullableFilter<"FollowersDataTest"> | number | null
+    media_count?: IntNullableFilter<"FollowersDataTest"> | number | null
+    lang?: StringNullableFilter<"FollowersDataTest"> | string | null
+    status?: XOR<TweetStatusNullableCompositeFilter, TweetStatusObjectEqualityInput> | null
+    contributors_enabled?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    is_translator?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    is_translation_enabled?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    profile_background_color?: StringNullableFilter<"FollowersDataTest"> | string | null
+    profile_background_image_url?: StringNullableFilter<"FollowersDataTest"> | string | null
+    profile_background_image_url_https?: StringNullableFilter<"FollowersDataTest"> | string | null
+    profile_background_tile?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    profile_image_url?: StringNullableFilter<"FollowersDataTest"> | string | null
+    profile_image_url_https?: StringNullableFilter<"FollowersDataTest"> | string | null
+    profile_banner_url?: StringNullableFilter<"FollowersDataTest"> | string | null
+    profile_link_color?: StringNullableFilter<"FollowersDataTest"> | string | null
+    profile_sidebar_border_color?: StringNullableFilter<"FollowersDataTest"> | string | null
+    profile_sidebar_fill_color?: StringNullableFilter<"FollowersDataTest"> | string | null
+    profile_text_color?: StringNullableFilter<"FollowersDataTest"> | string | null
+    profile_use_background_image?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    has_extended_profile?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    default_profile?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    default_profile_image?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    pinned_tweet_ids?: JsonNullableFilter<"FollowersDataTest">
+    pinned_tweet_ids_str?: StringNullableListFilter<"FollowersDataTest">
+    has_custom_timelines?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    can_media_tag?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    followed_by?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    following?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    live_following?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    follow_request_sent?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    notifications?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    muting?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    blocking?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    blocked_by?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    advertiser_account_type?: StringNullableFilter<"FollowersDataTest"> | string | null
+    advertiser_account_service_levels?: StringNullableListFilter<"FollowersDataTest">
+    analytics_type?: StringNullableFilter<"FollowersDataTest"> | string | null
+    business_profile_state?: StringNullableFilter<"FollowersDataTest"> | string | null
+    translator_type?: StringNullableFilter<"FollowersDataTest"> | string | null
+    withheld_in_countries?: StringNullableListFilter<"FollowersDataTest">
+    require_some_consent?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    type?: StringNullableFilter<"FollowersDataTest"> | string | null
+    target_username?: StringNullableFilter<"FollowersDataTest"> | string | null
+    email?: StringNullableFilter<"FollowersDataTest"> | string | null
+  }
+
+  export type FollowersDataTestOrderByWithRelationInput = {
+    id?: SortOrder
+    id_str?: SortOrder
+    name?: SortOrder
+    screen_name?: SortOrder
+    location?: SortOrder
+    description?: SortOrder
+    url?: SortOrder
+    entities?: SortOrder
+    protected?: SortOrder
+    followers_count?: SortOrder
+    fast_followers_count?: SortOrder
+    normal_followers_count?: SortOrder
+    friends_count?: SortOrder
+    listed_count?: SortOrder
+    created_at?: SortOrder
+    favourites_count?: SortOrder
+    utc_offset?: SortOrder
+    time_zone?: SortOrder
+    geo_enabled?: SortOrder
+    verified?: SortOrder
+    statuses_count?: SortOrder
+    media_count?: SortOrder
+    lang?: SortOrder
+    status?: TweetStatusOrderByInput
+    contributors_enabled?: SortOrder
+    is_translator?: SortOrder
+    is_translation_enabled?: SortOrder
+    profile_background_color?: SortOrder
+    profile_background_image_url?: SortOrder
+    profile_background_image_url_https?: SortOrder
+    profile_background_tile?: SortOrder
+    profile_image_url?: SortOrder
+    profile_image_url_https?: SortOrder
+    profile_banner_url?: SortOrder
+    profile_link_color?: SortOrder
+    profile_sidebar_border_color?: SortOrder
+    profile_sidebar_fill_color?: SortOrder
+    profile_text_color?: SortOrder
+    profile_use_background_image?: SortOrder
+    has_extended_profile?: SortOrder
+    default_profile?: SortOrder
+    default_profile_image?: SortOrder
+    pinned_tweet_ids?: SortOrder
+    pinned_tweet_ids_str?: SortOrder
+    has_custom_timelines?: SortOrder
+    can_media_tag?: SortOrder
+    followed_by?: SortOrder
+    following?: SortOrder
+    live_following?: SortOrder
+    follow_request_sent?: SortOrder
+    notifications?: SortOrder
+    muting?: SortOrder
+    blocking?: SortOrder
+    blocked_by?: SortOrder
+    advertiser_account_type?: SortOrder
+    advertiser_account_service_levels?: SortOrder
+    analytics_type?: SortOrder
+    business_profile_state?: SortOrder
+    translator_type?: SortOrder
+    withheld_in_countries?: SortOrder
+    require_some_consent?: SortOrder
+    type?: SortOrder
+    target_username?: SortOrder
+    email?: SortOrder
+  }
+
+  export type FollowersDataTestWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: FollowersDataTestWhereInput | FollowersDataTestWhereInput[]
+    OR?: FollowersDataTestWhereInput[]
+    NOT?: FollowersDataTestWhereInput | FollowersDataTestWhereInput[]
+    id_str?: StringFilter<"FollowersDataTest"> | string
+    name?: StringNullableFilter<"FollowersDataTest"> | string | null
+    screen_name?: StringNullableFilter<"FollowersDataTest"> | string | null
+    location?: StringNullableFilter<"FollowersDataTest"> | string | null
+    description?: StringNullableFilter<"FollowersDataTest"> | string | null
+    url?: StringNullableFilter<"FollowersDataTest"> | string | null
+    entities?: JsonNullableFilter<"FollowersDataTest">
+    protected?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    followers_count?: IntNullableFilter<"FollowersDataTest"> | number | null
+    fast_followers_count?: IntNullableFilter<"FollowersDataTest"> | number | null
+    normal_followers_count?: IntNullableFilter<"FollowersDataTest"> | number | null
+    friends_count?: IntNullableFilter<"FollowersDataTest"> | number | null
+    listed_count?: IntNullableFilter<"FollowersDataTest"> | number | null
+    created_at?: StringNullableFilter<"FollowersDataTest"> | string | null
+    favourites_count?: IntNullableFilter<"FollowersDataTest"> | number | null
+    utc_offset?: StringNullableFilter<"FollowersDataTest"> | string | null
+    time_zone?: StringNullableFilter<"FollowersDataTest"> | string | null
+    geo_enabled?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    verified?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    statuses_count?: IntNullableFilter<"FollowersDataTest"> | number | null
+    media_count?: IntNullableFilter<"FollowersDataTest"> | number | null
+    lang?: StringNullableFilter<"FollowersDataTest"> | string | null
+    status?: XOR<TweetStatusNullableCompositeFilter, TweetStatusObjectEqualityInput> | null
+    contributors_enabled?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    is_translator?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    is_translation_enabled?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    profile_background_color?: StringNullableFilter<"FollowersDataTest"> | string | null
+    profile_background_image_url?: StringNullableFilter<"FollowersDataTest"> | string | null
+    profile_background_image_url_https?: StringNullableFilter<"FollowersDataTest"> | string | null
+    profile_background_tile?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    profile_image_url?: StringNullableFilter<"FollowersDataTest"> | string | null
+    profile_image_url_https?: StringNullableFilter<"FollowersDataTest"> | string | null
+    profile_banner_url?: StringNullableFilter<"FollowersDataTest"> | string | null
+    profile_link_color?: StringNullableFilter<"FollowersDataTest"> | string | null
+    profile_sidebar_border_color?: StringNullableFilter<"FollowersDataTest"> | string | null
+    profile_sidebar_fill_color?: StringNullableFilter<"FollowersDataTest"> | string | null
+    profile_text_color?: StringNullableFilter<"FollowersDataTest"> | string | null
+    profile_use_background_image?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    has_extended_profile?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    default_profile?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    default_profile_image?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    pinned_tweet_ids?: JsonNullableFilter<"FollowersDataTest">
+    pinned_tweet_ids_str?: StringNullableListFilter<"FollowersDataTest">
+    has_custom_timelines?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    can_media_tag?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    followed_by?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    following?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    live_following?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    follow_request_sent?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    notifications?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    muting?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    blocking?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    blocked_by?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    advertiser_account_type?: StringNullableFilter<"FollowersDataTest"> | string | null
+    advertiser_account_service_levels?: StringNullableListFilter<"FollowersDataTest">
+    analytics_type?: StringNullableFilter<"FollowersDataTest"> | string | null
+    business_profile_state?: StringNullableFilter<"FollowersDataTest"> | string | null
+    translator_type?: StringNullableFilter<"FollowersDataTest"> | string | null
+    withheld_in_countries?: StringNullableListFilter<"FollowersDataTest">
+    require_some_consent?: BoolNullableFilter<"FollowersDataTest"> | boolean | null
+    type?: StringNullableFilter<"FollowersDataTest"> | string | null
+    target_username?: StringNullableFilter<"FollowersDataTest"> | string | null
+    email?: StringNullableFilter<"FollowersDataTest"> | string | null
+  }, "id">
+
+  export type FollowersDataTestOrderByWithAggregationInput = {
+    id?: SortOrder
+    id_str?: SortOrder
+    name?: SortOrder
+    screen_name?: SortOrder
+    location?: SortOrder
+    description?: SortOrder
+    url?: SortOrder
+    entities?: SortOrder
+    protected?: SortOrder
+    followers_count?: SortOrder
+    fast_followers_count?: SortOrder
+    normal_followers_count?: SortOrder
+    friends_count?: SortOrder
+    listed_count?: SortOrder
+    created_at?: SortOrder
+    favourites_count?: SortOrder
+    utc_offset?: SortOrder
+    time_zone?: SortOrder
+    geo_enabled?: SortOrder
+    verified?: SortOrder
+    statuses_count?: SortOrder
+    media_count?: SortOrder
+    lang?: SortOrder
+    contributors_enabled?: SortOrder
+    is_translator?: SortOrder
+    is_translation_enabled?: SortOrder
+    profile_background_color?: SortOrder
+    profile_background_image_url?: SortOrder
+    profile_background_image_url_https?: SortOrder
+    profile_background_tile?: SortOrder
+    profile_image_url?: SortOrder
+    profile_image_url_https?: SortOrder
+    profile_banner_url?: SortOrder
+    profile_link_color?: SortOrder
+    profile_sidebar_border_color?: SortOrder
+    profile_sidebar_fill_color?: SortOrder
+    profile_text_color?: SortOrder
+    profile_use_background_image?: SortOrder
+    has_extended_profile?: SortOrder
+    default_profile?: SortOrder
+    default_profile_image?: SortOrder
+    pinned_tweet_ids?: SortOrder
+    pinned_tweet_ids_str?: SortOrder
+    has_custom_timelines?: SortOrder
+    can_media_tag?: SortOrder
+    followed_by?: SortOrder
+    following?: SortOrder
+    live_following?: SortOrder
+    follow_request_sent?: SortOrder
+    notifications?: SortOrder
+    muting?: SortOrder
+    blocking?: SortOrder
+    blocked_by?: SortOrder
+    advertiser_account_type?: SortOrder
+    advertiser_account_service_levels?: SortOrder
+    analytics_type?: SortOrder
+    business_profile_state?: SortOrder
+    translator_type?: SortOrder
+    withheld_in_countries?: SortOrder
+    require_some_consent?: SortOrder
+    type?: SortOrder
+    target_username?: SortOrder
+    email?: SortOrder
+    _count?: FollowersDataTestCountOrderByAggregateInput
+    _avg?: FollowersDataTestAvgOrderByAggregateInput
+    _max?: FollowersDataTestMaxOrderByAggregateInput
+    _min?: FollowersDataTestMinOrderByAggregateInput
+    _sum?: FollowersDataTestSumOrderByAggregateInput
+  }
+
+  export type FollowersDataTestScalarWhereWithAggregatesInput = {
+    AND?: FollowersDataTestScalarWhereWithAggregatesInput | FollowersDataTestScalarWhereWithAggregatesInput[]
+    OR?: FollowersDataTestScalarWhereWithAggregatesInput[]
+    NOT?: FollowersDataTestScalarWhereWithAggregatesInput | FollowersDataTestScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FollowersDataTest"> | string
+    id_str?: StringWithAggregatesFilter<"FollowersDataTest"> | string
+    name?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    screen_name?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    location?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    description?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    url?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    entities?: JsonNullableWithAggregatesFilter<"FollowersDataTest">
+    protected?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    followers_count?: IntNullableWithAggregatesFilter<"FollowersDataTest"> | number | null
+    fast_followers_count?: IntNullableWithAggregatesFilter<"FollowersDataTest"> | number | null
+    normal_followers_count?: IntNullableWithAggregatesFilter<"FollowersDataTest"> | number | null
+    friends_count?: IntNullableWithAggregatesFilter<"FollowersDataTest"> | number | null
+    listed_count?: IntNullableWithAggregatesFilter<"FollowersDataTest"> | number | null
+    created_at?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    favourites_count?: IntNullableWithAggregatesFilter<"FollowersDataTest"> | number | null
+    utc_offset?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    time_zone?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    geo_enabled?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    verified?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    statuses_count?: IntNullableWithAggregatesFilter<"FollowersDataTest"> | number | null
+    media_count?: IntNullableWithAggregatesFilter<"FollowersDataTest"> | number | null
+    lang?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    contributors_enabled?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    is_translator?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    is_translation_enabled?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    profile_background_color?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    profile_background_image_url?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    profile_background_image_url_https?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    profile_background_tile?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    profile_image_url?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    profile_image_url_https?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    profile_banner_url?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    profile_link_color?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    profile_sidebar_border_color?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    profile_sidebar_fill_color?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    profile_text_color?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    profile_use_background_image?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    has_extended_profile?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    default_profile?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    default_profile_image?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    pinned_tweet_ids?: JsonNullableWithAggregatesFilter<"FollowersDataTest">
+    pinned_tweet_ids_str?: StringNullableListFilter<"FollowersDataTest">
+    has_custom_timelines?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    can_media_tag?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    followed_by?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    following?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    live_following?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    follow_request_sent?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    notifications?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    muting?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    blocking?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    blocked_by?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    advertiser_account_type?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    advertiser_account_service_levels?: StringNullableListFilter<"FollowersDataTest">
+    analytics_type?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    business_profile_state?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    translator_type?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    withheld_in_countries?: StringNullableListFilter<"FollowersDataTest">
+    require_some_consent?: BoolNullableWithAggregatesFilter<"FollowersDataTest"> | boolean | null
+    type?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    target_username?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+    email?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
+  }
+
   export type UserProfileCreateInput = {
     id?: string
     default_profile: boolean
@@ -6577,6 +11769,205 @@ export namespace Prisma {
     updated_time?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserProfileTestCreateInput = {
+    id?: string
+    default_profile: boolean
+    default_profile_image: boolean
+    description?: string | null
+    entities?: XOR<EntitiesProfileNullableCreateEnvelopeInput, EntitiesProfileCreateInput> | null
+    fast_followers_count?: number | null
+    favourites_count?: number | null
+    followers_count?: number | null
+    friends_count?: number | null
+    has_custom_timelines?: boolean | null
+    is_translator?: boolean | null
+    listed_count?: number | null
+    media_count?: number | null
+    normal_followers_count?: number | null
+    pinned_tweet_ids_str?: UserProfileTestCreatepinned_tweet_ids_strInput | string[]
+    possibly_sensitive?: boolean | null
+    profile_banner_url?: string | null
+    profile_interstitial_type?: string | null
+    statuses_count?: number | null
+    translator_type?: string | null
+    withheld_in_countries?: UserProfileTestCreatewithheld_in_countriesInput | string[]
+    user_id_str: string
+    profile_url?: string | null
+    profile_image_url_https?: string | null
+    verified?: boolean | null
+    updated_time?: Date | string | null
+  }
+
+  export type UserProfileTestUncheckedCreateInput = {
+    id?: string
+    default_profile: boolean
+    default_profile_image: boolean
+    description?: string | null
+    entities?: XOR<EntitiesProfileNullableCreateEnvelopeInput, EntitiesProfileCreateInput> | null
+    fast_followers_count?: number | null
+    favourites_count?: number | null
+    followers_count?: number | null
+    friends_count?: number | null
+    has_custom_timelines?: boolean | null
+    is_translator?: boolean | null
+    listed_count?: number | null
+    media_count?: number | null
+    normal_followers_count?: number | null
+    pinned_tweet_ids_str?: UserProfileTestCreatepinned_tweet_ids_strInput | string[]
+    possibly_sensitive?: boolean | null
+    profile_banner_url?: string | null
+    profile_interstitial_type?: string | null
+    statuses_count?: number | null
+    translator_type?: string | null
+    withheld_in_countries?: UserProfileTestCreatewithheld_in_countriesInput | string[]
+    user_id_str: string
+    profile_url?: string | null
+    profile_image_url_https?: string | null
+    verified?: boolean | null
+    updated_time?: Date | string | null
+  }
+
+  export type UserProfileTestUpdateInput = {
+    default_profile?: BoolFieldUpdateOperationsInput | boolean
+    default_profile_image?: BoolFieldUpdateOperationsInput | boolean
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    entities?: XOR<EntitiesProfileNullableUpdateEnvelopeInput, EntitiesProfileCreateInput> | null
+    fast_followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    favourites_count?: NullableIntFieldUpdateOperationsInput | number | null
+    followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    friends_count?: NullableIntFieldUpdateOperationsInput | number | null
+    has_custom_timelines?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_translator?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    listed_count?: NullableIntFieldUpdateOperationsInput | number | null
+    media_count?: NullableIntFieldUpdateOperationsInput | number | null
+    normal_followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    pinned_tweet_ids_str?: UserProfileTestUpdatepinned_tweet_ids_strInput | string[]
+    possibly_sensitive?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    profile_banner_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_interstitial_type?: NullableStringFieldUpdateOperationsInput | string | null
+    statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
+    translator_type?: NullableStringFieldUpdateOperationsInput | string | null
+    withheld_in_countries?: UserProfileTestUpdatewithheld_in_countriesInput | string[]
+    user_id_str?: StringFieldUpdateOperationsInput | string
+    profile_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_image_url_https?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    updated_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type UserProfileTestUncheckedUpdateInput = {
+    default_profile?: BoolFieldUpdateOperationsInput | boolean
+    default_profile_image?: BoolFieldUpdateOperationsInput | boolean
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    entities?: XOR<EntitiesProfileNullableUpdateEnvelopeInput, EntitiesProfileCreateInput> | null
+    fast_followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    favourites_count?: NullableIntFieldUpdateOperationsInput | number | null
+    followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    friends_count?: NullableIntFieldUpdateOperationsInput | number | null
+    has_custom_timelines?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_translator?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    listed_count?: NullableIntFieldUpdateOperationsInput | number | null
+    media_count?: NullableIntFieldUpdateOperationsInput | number | null
+    normal_followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    pinned_tweet_ids_str?: UserProfileTestUpdatepinned_tweet_ids_strInput | string[]
+    possibly_sensitive?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    profile_banner_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_interstitial_type?: NullableStringFieldUpdateOperationsInput | string | null
+    statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
+    translator_type?: NullableStringFieldUpdateOperationsInput | string | null
+    withheld_in_countries?: UserProfileTestUpdatewithheld_in_countriesInput | string[]
+    user_id_str?: StringFieldUpdateOperationsInput | string
+    profile_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_image_url_https?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    updated_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type UserProfileTestCreateManyInput = {
+    id?: string
+    default_profile: boolean
+    default_profile_image: boolean
+    description?: string | null
+    entities?: XOR<EntitiesProfileNullableCreateEnvelopeInput, EntitiesProfileCreateInput> | null
+    fast_followers_count?: number | null
+    favourites_count?: number | null
+    followers_count?: number | null
+    friends_count?: number | null
+    has_custom_timelines?: boolean | null
+    is_translator?: boolean | null
+    listed_count?: number | null
+    media_count?: number | null
+    normal_followers_count?: number | null
+    pinned_tweet_ids_str?: UserProfileTestCreatepinned_tweet_ids_strInput | string[]
+    possibly_sensitive?: boolean | null
+    profile_banner_url?: string | null
+    profile_interstitial_type?: string | null
+    statuses_count?: number | null
+    translator_type?: string | null
+    withheld_in_countries?: UserProfileTestCreatewithheld_in_countriesInput | string[]
+    user_id_str: string
+    profile_url?: string | null
+    profile_image_url_https?: string | null
+    verified?: boolean | null
+    updated_time?: Date | string | null
+  }
+
+  export type UserProfileTestUpdateManyMutationInput = {
+    default_profile?: BoolFieldUpdateOperationsInput | boolean
+    default_profile_image?: BoolFieldUpdateOperationsInput | boolean
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    entities?: XOR<EntitiesProfileNullableUpdateEnvelopeInput, EntitiesProfileCreateInput> | null
+    fast_followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    favourites_count?: NullableIntFieldUpdateOperationsInput | number | null
+    followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    friends_count?: NullableIntFieldUpdateOperationsInput | number | null
+    has_custom_timelines?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_translator?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    listed_count?: NullableIntFieldUpdateOperationsInput | number | null
+    media_count?: NullableIntFieldUpdateOperationsInput | number | null
+    normal_followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    pinned_tweet_ids_str?: UserProfileTestUpdatepinned_tweet_ids_strInput | string[]
+    possibly_sensitive?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    profile_banner_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_interstitial_type?: NullableStringFieldUpdateOperationsInput | string | null
+    statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
+    translator_type?: NullableStringFieldUpdateOperationsInput | string | null
+    withheld_in_countries?: UserProfileTestUpdatewithheld_in_countriesInput | string[]
+    user_id_str?: StringFieldUpdateOperationsInput | string
+    profile_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_image_url_https?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    updated_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type UserProfileTestUncheckedUpdateManyInput = {
+    default_profile?: BoolFieldUpdateOperationsInput | boolean
+    default_profile_image?: BoolFieldUpdateOperationsInput | boolean
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    entities?: XOR<EntitiesProfileNullableUpdateEnvelopeInput, EntitiesProfileCreateInput> | null
+    fast_followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    favourites_count?: NullableIntFieldUpdateOperationsInput | number | null
+    followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    friends_count?: NullableIntFieldUpdateOperationsInput | number | null
+    has_custom_timelines?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_translator?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    listed_count?: NullableIntFieldUpdateOperationsInput | number | null
+    media_count?: NullableIntFieldUpdateOperationsInput | number | null
+    normal_followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    pinned_tweet_ids_str?: UserProfileTestUpdatepinned_tweet_ids_strInput | string[]
+    possibly_sensitive?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    profile_banner_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_interstitial_type?: NullableStringFieldUpdateOperationsInput | string | null
+    statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
+    translator_type?: NullableStringFieldUpdateOperationsInput | string | null
+    withheld_in_countries?: UserProfileTestUpdatewithheld_in_countriesInput | string[]
+    user_id_str?: StringFieldUpdateOperationsInput | string
+    profile_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_image_url_https?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    updated_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type TweetsDataCreateInput = {
     id?: string
     id_str: string
@@ -6597,6 +11988,7 @@ export namespace Prisma {
     retweeted?: boolean | null
     user?: XOR<TweetUserNullableCreateEnvelopeInput, TweetUserCreateInput> | null
     user_id_str?: string | null
+    views_count?: string | null
     updated_time: Date | string
   }
 
@@ -6620,6 +12012,7 @@ export namespace Prisma {
     retweeted?: boolean | null
     user?: XOR<TweetUserNullableCreateEnvelopeInput, TweetUserCreateInput> | null
     user_id_str?: string | null
+    views_count?: string | null
     updated_time: Date | string
   }
 
@@ -6642,6 +12035,7 @@ export namespace Prisma {
     retweeted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     user?: XOR<TweetUserNullableUpdateEnvelopeInput, TweetUserCreateInput> | null
     user_id_str?: NullableStringFieldUpdateOperationsInput | string | null
+    views_count?: NullableStringFieldUpdateOperationsInput | string | null
     updated_time?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -6664,6 +12058,7 @@ export namespace Prisma {
     retweeted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     user?: XOR<TweetUserNullableUpdateEnvelopeInput, TweetUserCreateInput> | null
     user_id_str?: NullableStringFieldUpdateOperationsInput | string | null
+    views_count?: NullableStringFieldUpdateOperationsInput | string | null
     updated_time?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -6687,6 +12082,7 @@ export namespace Prisma {
     retweeted?: boolean | null
     user?: XOR<TweetUserNullableCreateEnvelopeInput, TweetUserCreateInput> | null
     user_id_str?: string | null
+    views_count?: string | null
     updated_time: Date | string
   }
 
@@ -6709,6 +12105,7 @@ export namespace Prisma {
     retweeted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     user?: XOR<TweetUserNullableUpdateEnvelopeInput, TweetUserCreateInput> | null
     user_id_str?: NullableStringFieldUpdateOperationsInput | string | null
+    views_count?: NullableStringFieldUpdateOperationsInput | string | null
     updated_time?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -6731,7 +12128,193 @@ export namespace Prisma {
     retweeted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     user?: XOR<TweetUserNullableUpdateEnvelopeInput, TweetUserCreateInput> | null
     user_id_str?: NullableStringFieldUpdateOperationsInput | string | null
+    views_count?: NullableStringFieldUpdateOperationsInput | string | null
     updated_time?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TweetsDataTestCreateInput = {
+    id?: string
+    id_str: string
+    bookmark_count?: number | null
+    bookmarked?: boolean | null
+    conversation_id_str?: string | null
+    created_at?: string | null
+    display_text_range?: TweetsDataTestCreatedisplay_text_rangeInput | number[]
+    extended_entities?: InputJsonValue | null
+    entities?: InputJsonValue | null
+    favorite_count?: number | null
+    favorited?: boolean | null
+    full_text?: string | null
+    is_quote_status?: boolean | null
+    lang?: string | null
+    quote_count?: number | null
+    reply_count?: number | null
+    retweet_count?: number | null
+    retweeted?: boolean | null
+    twitterUrl?: string | null
+    user?: XOR<TweetUserNullableCreateEnvelopeInput, TweetUserCreateInput> | null
+    url?: string | null
+    user_id_str?: string | null
+    views_count?: string | null
+    updated_time?: Date | string | null
+  }
+
+  export type TweetsDataTestUncheckedCreateInput = {
+    id?: string
+    id_str: string
+    bookmark_count?: number | null
+    bookmarked?: boolean | null
+    conversation_id_str?: string | null
+    created_at?: string | null
+    display_text_range?: TweetsDataTestCreatedisplay_text_rangeInput | number[]
+    extended_entities?: InputJsonValue | null
+    entities?: InputJsonValue | null
+    favorite_count?: number | null
+    favorited?: boolean | null
+    full_text?: string | null
+    is_quote_status?: boolean | null
+    lang?: string | null
+    quote_count?: number | null
+    reply_count?: number | null
+    retweet_count?: number | null
+    retweeted?: boolean | null
+    twitterUrl?: string | null
+    user?: XOR<TweetUserNullableCreateEnvelopeInput, TweetUserCreateInput> | null
+    url?: string | null
+    user_id_str?: string | null
+    views_count?: string | null
+    updated_time?: Date | string | null
+  }
+
+  export type TweetsDataTestUpdateInput = {
+    id_str?: StringFieldUpdateOperationsInput | string
+    bookmark_count?: NullableIntFieldUpdateOperationsInput | number | null
+    bookmarked?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    conversation_id_str?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableStringFieldUpdateOperationsInput | string | null
+    display_text_range?: TweetsDataTestUpdatedisplay_text_rangeInput | number[]
+    extended_entities?: InputJsonValue | InputJsonValue | null
+    entities?: InputJsonValue | InputJsonValue | null
+    favorite_count?: NullableIntFieldUpdateOperationsInput | number | null
+    favorited?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    full_text?: NullableStringFieldUpdateOperationsInput | string | null
+    is_quote_status?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    lang?: NullableStringFieldUpdateOperationsInput | string | null
+    quote_count?: NullableIntFieldUpdateOperationsInput | number | null
+    reply_count?: NullableIntFieldUpdateOperationsInput | number | null
+    retweet_count?: NullableIntFieldUpdateOperationsInput | number | null
+    retweeted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    twitterUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: XOR<TweetUserNullableUpdateEnvelopeInput, TweetUserCreateInput> | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id_str?: NullableStringFieldUpdateOperationsInput | string | null
+    views_count?: NullableStringFieldUpdateOperationsInput | string | null
+    updated_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type TweetsDataTestUncheckedUpdateInput = {
+    id_str?: StringFieldUpdateOperationsInput | string
+    bookmark_count?: NullableIntFieldUpdateOperationsInput | number | null
+    bookmarked?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    conversation_id_str?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableStringFieldUpdateOperationsInput | string | null
+    display_text_range?: TweetsDataTestUpdatedisplay_text_rangeInput | number[]
+    extended_entities?: InputJsonValue | InputJsonValue | null
+    entities?: InputJsonValue | InputJsonValue | null
+    favorite_count?: NullableIntFieldUpdateOperationsInput | number | null
+    favorited?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    full_text?: NullableStringFieldUpdateOperationsInput | string | null
+    is_quote_status?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    lang?: NullableStringFieldUpdateOperationsInput | string | null
+    quote_count?: NullableIntFieldUpdateOperationsInput | number | null
+    reply_count?: NullableIntFieldUpdateOperationsInput | number | null
+    retweet_count?: NullableIntFieldUpdateOperationsInput | number | null
+    retweeted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    twitterUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: XOR<TweetUserNullableUpdateEnvelopeInput, TweetUserCreateInput> | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id_str?: NullableStringFieldUpdateOperationsInput | string | null
+    views_count?: NullableStringFieldUpdateOperationsInput | string | null
+    updated_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type TweetsDataTestCreateManyInput = {
+    id?: string
+    id_str: string
+    bookmark_count?: number | null
+    bookmarked?: boolean | null
+    conversation_id_str?: string | null
+    created_at?: string | null
+    display_text_range?: TweetsDataTestCreatedisplay_text_rangeInput | number[]
+    extended_entities?: InputJsonValue | null
+    entities?: InputJsonValue | null
+    favorite_count?: number | null
+    favorited?: boolean | null
+    full_text?: string | null
+    is_quote_status?: boolean | null
+    lang?: string | null
+    quote_count?: number | null
+    reply_count?: number | null
+    retweet_count?: number | null
+    retweeted?: boolean | null
+    twitterUrl?: string | null
+    user?: XOR<TweetUserNullableCreateEnvelopeInput, TweetUserCreateInput> | null
+    url?: string | null
+    user_id_str?: string | null
+    views_count?: string | null
+    updated_time?: Date | string | null
+  }
+
+  export type TweetsDataTestUpdateManyMutationInput = {
+    id_str?: StringFieldUpdateOperationsInput | string
+    bookmark_count?: NullableIntFieldUpdateOperationsInput | number | null
+    bookmarked?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    conversation_id_str?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableStringFieldUpdateOperationsInput | string | null
+    display_text_range?: TweetsDataTestUpdatedisplay_text_rangeInput | number[]
+    extended_entities?: InputJsonValue | InputJsonValue | null
+    entities?: InputJsonValue | InputJsonValue | null
+    favorite_count?: NullableIntFieldUpdateOperationsInput | number | null
+    favorited?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    full_text?: NullableStringFieldUpdateOperationsInput | string | null
+    is_quote_status?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    lang?: NullableStringFieldUpdateOperationsInput | string | null
+    quote_count?: NullableIntFieldUpdateOperationsInput | number | null
+    reply_count?: NullableIntFieldUpdateOperationsInput | number | null
+    retweet_count?: NullableIntFieldUpdateOperationsInput | number | null
+    retweeted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    twitterUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: XOR<TweetUserNullableUpdateEnvelopeInput, TweetUserCreateInput> | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id_str?: NullableStringFieldUpdateOperationsInput | string | null
+    views_count?: NullableStringFieldUpdateOperationsInput | string | null
+    updated_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type TweetsDataTestUncheckedUpdateManyInput = {
+    id_str?: StringFieldUpdateOperationsInput | string
+    bookmark_count?: NullableIntFieldUpdateOperationsInput | number | null
+    bookmarked?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    conversation_id_str?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableStringFieldUpdateOperationsInput | string | null
+    display_text_range?: TweetsDataTestUpdatedisplay_text_rangeInput | number[]
+    extended_entities?: InputJsonValue | InputJsonValue | null
+    entities?: InputJsonValue | InputJsonValue | null
+    favorite_count?: NullableIntFieldUpdateOperationsInput | number | null
+    favorited?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    full_text?: NullableStringFieldUpdateOperationsInput | string | null
+    is_quote_status?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    lang?: NullableStringFieldUpdateOperationsInput | string | null
+    quote_count?: NullableIntFieldUpdateOperationsInput | number | null
+    reply_count?: NullableIntFieldUpdateOperationsInput | number | null
+    retweet_count?: NullableIntFieldUpdateOperationsInput | number | null
+    retweeted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    twitterUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: XOR<TweetUserNullableUpdateEnvelopeInput, TweetUserCreateInput> | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id_str?: NullableStringFieldUpdateOperationsInput | string | null
+    views_count?: NullableStringFieldUpdateOperationsInput | string | null
+    updated_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FollowerFollowingDataCreateInput = {
@@ -7199,6 +12782,471 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type FollowersDataTestCreateInput = {
+    id?: string
+    id_str: string
+    name?: string | null
+    screen_name?: string | null
+    location?: string | null
+    description?: string | null
+    url?: string | null
+    entities?: InputJsonValue | null
+    protected?: boolean | null
+    followers_count?: number | null
+    fast_followers_count?: number | null
+    normal_followers_count?: number | null
+    friends_count?: number | null
+    listed_count?: number | null
+    created_at?: string | null
+    favourites_count?: number | null
+    utc_offset?: string | null
+    time_zone?: string | null
+    geo_enabled?: boolean | null
+    verified?: boolean | null
+    statuses_count?: number | null
+    media_count?: number | null
+    lang?: string | null
+    status?: XOR<TweetStatusNullableCreateEnvelopeInput, TweetStatusCreateInput> | null
+    contributors_enabled?: boolean | null
+    is_translator?: boolean | null
+    is_translation_enabled?: boolean | null
+    profile_background_color?: string | null
+    profile_background_image_url?: string | null
+    profile_background_image_url_https?: string | null
+    profile_background_tile?: boolean | null
+    profile_image_url?: string | null
+    profile_image_url_https?: string | null
+    profile_banner_url?: string | null
+    profile_link_color?: string | null
+    profile_sidebar_border_color?: string | null
+    profile_sidebar_fill_color?: string | null
+    profile_text_color?: string | null
+    profile_use_background_image?: boolean | null
+    has_extended_profile?: boolean | null
+    default_profile?: boolean | null
+    default_profile_image?: boolean | null
+    pinned_tweet_ids?: InputJsonValue | null
+    pinned_tweet_ids_str?: FollowersDataTestCreatepinned_tweet_ids_strInput | string[]
+    has_custom_timelines?: boolean | null
+    can_media_tag?: boolean | null
+    followed_by?: boolean | null
+    following?: boolean | null
+    live_following?: boolean | null
+    follow_request_sent?: boolean | null
+    notifications?: boolean | null
+    muting?: boolean | null
+    blocking?: boolean | null
+    blocked_by?: boolean | null
+    advertiser_account_type?: string | null
+    advertiser_account_service_levels?: FollowersDataTestCreateadvertiser_account_service_levelsInput | string[]
+    analytics_type?: string | null
+    business_profile_state?: string | null
+    translator_type?: string | null
+    withheld_in_countries?: FollowersDataTestCreatewithheld_in_countriesInput | string[]
+    require_some_consent?: boolean | null
+    type?: string | null
+    target_username?: string | null
+    email?: string | null
+  }
+
+  export type FollowersDataTestUncheckedCreateInput = {
+    id?: string
+    id_str: string
+    name?: string | null
+    screen_name?: string | null
+    location?: string | null
+    description?: string | null
+    url?: string | null
+    entities?: InputJsonValue | null
+    protected?: boolean | null
+    followers_count?: number | null
+    fast_followers_count?: number | null
+    normal_followers_count?: number | null
+    friends_count?: number | null
+    listed_count?: number | null
+    created_at?: string | null
+    favourites_count?: number | null
+    utc_offset?: string | null
+    time_zone?: string | null
+    geo_enabled?: boolean | null
+    verified?: boolean | null
+    statuses_count?: number | null
+    media_count?: number | null
+    lang?: string | null
+    status?: XOR<TweetStatusNullableCreateEnvelopeInput, TweetStatusCreateInput> | null
+    contributors_enabled?: boolean | null
+    is_translator?: boolean | null
+    is_translation_enabled?: boolean | null
+    profile_background_color?: string | null
+    profile_background_image_url?: string | null
+    profile_background_image_url_https?: string | null
+    profile_background_tile?: boolean | null
+    profile_image_url?: string | null
+    profile_image_url_https?: string | null
+    profile_banner_url?: string | null
+    profile_link_color?: string | null
+    profile_sidebar_border_color?: string | null
+    profile_sidebar_fill_color?: string | null
+    profile_text_color?: string | null
+    profile_use_background_image?: boolean | null
+    has_extended_profile?: boolean | null
+    default_profile?: boolean | null
+    default_profile_image?: boolean | null
+    pinned_tweet_ids?: InputJsonValue | null
+    pinned_tweet_ids_str?: FollowersDataTestCreatepinned_tweet_ids_strInput | string[]
+    has_custom_timelines?: boolean | null
+    can_media_tag?: boolean | null
+    followed_by?: boolean | null
+    following?: boolean | null
+    live_following?: boolean | null
+    follow_request_sent?: boolean | null
+    notifications?: boolean | null
+    muting?: boolean | null
+    blocking?: boolean | null
+    blocked_by?: boolean | null
+    advertiser_account_type?: string | null
+    advertiser_account_service_levels?: FollowersDataTestCreateadvertiser_account_service_levelsInput | string[]
+    analytics_type?: string | null
+    business_profile_state?: string | null
+    translator_type?: string | null
+    withheld_in_countries?: FollowersDataTestCreatewithheld_in_countriesInput | string[]
+    require_some_consent?: boolean | null
+    type?: string | null
+    target_username?: string | null
+    email?: string | null
+  }
+
+  export type FollowersDataTestUpdateInput = {
+    id_str?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    screen_name?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    entities?: InputJsonValue | InputJsonValue | null
+    protected?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    fast_followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    normal_followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    friends_count?: NullableIntFieldUpdateOperationsInput | number | null
+    listed_count?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: NullableStringFieldUpdateOperationsInput | string | null
+    favourites_count?: NullableIntFieldUpdateOperationsInput | number | null
+    utc_offset?: NullableStringFieldUpdateOperationsInput | string | null
+    time_zone?: NullableStringFieldUpdateOperationsInput | string | null
+    geo_enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
+    media_count?: NullableIntFieldUpdateOperationsInput | number | null
+    lang?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: XOR<TweetStatusNullableUpdateEnvelopeInput, TweetStatusCreateInput> | null
+    contributors_enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_translator?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_translation_enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    profile_background_color?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_background_image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_background_image_url_https?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_background_tile?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    profile_image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_image_url_https?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_banner_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_link_color?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_sidebar_border_color?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_sidebar_fill_color?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_text_color?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_use_background_image?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    has_extended_profile?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    default_profile?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    default_profile_image?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    pinned_tweet_ids?: InputJsonValue | InputJsonValue | null
+    pinned_tweet_ids_str?: FollowersDataTestUpdatepinned_tweet_ids_strInput | string[]
+    has_custom_timelines?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    can_media_tag?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    followed_by?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    following?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    live_following?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    follow_request_sent?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    notifications?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    muting?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    blocking?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    blocked_by?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    advertiser_account_type?: NullableStringFieldUpdateOperationsInput | string | null
+    advertiser_account_service_levels?: FollowersDataTestUpdateadvertiser_account_service_levelsInput | string[]
+    analytics_type?: NullableStringFieldUpdateOperationsInput | string | null
+    business_profile_state?: NullableStringFieldUpdateOperationsInput | string | null
+    translator_type?: NullableStringFieldUpdateOperationsInput | string | null
+    withheld_in_countries?: FollowersDataTestUpdatewithheld_in_countriesInput | string[]
+    require_some_consent?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    target_username?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FollowersDataTestUncheckedUpdateInput = {
+    id_str?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    screen_name?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    entities?: InputJsonValue | InputJsonValue | null
+    protected?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    fast_followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    normal_followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    friends_count?: NullableIntFieldUpdateOperationsInput | number | null
+    listed_count?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: NullableStringFieldUpdateOperationsInput | string | null
+    favourites_count?: NullableIntFieldUpdateOperationsInput | number | null
+    utc_offset?: NullableStringFieldUpdateOperationsInput | string | null
+    time_zone?: NullableStringFieldUpdateOperationsInput | string | null
+    geo_enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
+    media_count?: NullableIntFieldUpdateOperationsInput | number | null
+    lang?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: XOR<TweetStatusNullableUpdateEnvelopeInput, TweetStatusCreateInput> | null
+    contributors_enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_translator?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_translation_enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    profile_background_color?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_background_image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_background_image_url_https?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_background_tile?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    profile_image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_image_url_https?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_banner_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_link_color?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_sidebar_border_color?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_sidebar_fill_color?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_text_color?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_use_background_image?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    has_extended_profile?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    default_profile?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    default_profile_image?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    pinned_tweet_ids?: InputJsonValue | InputJsonValue | null
+    pinned_tweet_ids_str?: FollowersDataTestUpdatepinned_tweet_ids_strInput | string[]
+    has_custom_timelines?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    can_media_tag?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    followed_by?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    following?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    live_following?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    follow_request_sent?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    notifications?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    muting?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    blocking?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    blocked_by?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    advertiser_account_type?: NullableStringFieldUpdateOperationsInput | string | null
+    advertiser_account_service_levels?: FollowersDataTestUpdateadvertiser_account_service_levelsInput | string[]
+    analytics_type?: NullableStringFieldUpdateOperationsInput | string | null
+    business_profile_state?: NullableStringFieldUpdateOperationsInput | string | null
+    translator_type?: NullableStringFieldUpdateOperationsInput | string | null
+    withheld_in_countries?: FollowersDataTestUpdatewithheld_in_countriesInput | string[]
+    require_some_consent?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    target_username?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FollowersDataTestCreateManyInput = {
+    id?: string
+    id_str: string
+    name?: string | null
+    screen_name?: string | null
+    location?: string | null
+    description?: string | null
+    url?: string | null
+    entities?: InputJsonValue | null
+    protected?: boolean | null
+    followers_count?: number | null
+    fast_followers_count?: number | null
+    normal_followers_count?: number | null
+    friends_count?: number | null
+    listed_count?: number | null
+    created_at?: string | null
+    favourites_count?: number | null
+    utc_offset?: string | null
+    time_zone?: string | null
+    geo_enabled?: boolean | null
+    verified?: boolean | null
+    statuses_count?: number | null
+    media_count?: number | null
+    lang?: string | null
+    status?: XOR<TweetStatusNullableCreateEnvelopeInput, TweetStatusCreateInput> | null
+    contributors_enabled?: boolean | null
+    is_translator?: boolean | null
+    is_translation_enabled?: boolean | null
+    profile_background_color?: string | null
+    profile_background_image_url?: string | null
+    profile_background_image_url_https?: string | null
+    profile_background_tile?: boolean | null
+    profile_image_url?: string | null
+    profile_image_url_https?: string | null
+    profile_banner_url?: string | null
+    profile_link_color?: string | null
+    profile_sidebar_border_color?: string | null
+    profile_sidebar_fill_color?: string | null
+    profile_text_color?: string | null
+    profile_use_background_image?: boolean | null
+    has_extended_profile?: boolean | null
+    default_profile?: boolean | null
+    default_profile_image?: boolean | null
+    pinned_tweet_ids?: InputJsonValue | null
+    pinned_tweet_ids_str?: FollowersDataTestCreatepinned_tweet_ids_strInput | string[]
+    has_custom_timelines?: boolean | null
+    can_media_tag?: boolean | null
+    followed_by?: boolean | null
+    following?: boolean | null
+    live_following?: boolean | null
+    follow_request_sent?: boolean | null
+    notifications?: boolean | null
+    muting?: boolean | null
+    blocking?: boolean | null
+    blocked_by?: boolean | null
+    advertiser_account_type?: string | null
+    advertiser_account_service_levels?: FollowersDataTestCreateadvertiser_account_service_levelsInput | string[]
+    analytics_type?: string | null
+    business_profile_state?: string | null
+    translator_type?: string | null
+    withheld_in_countries?: FollowersDataTestCreatewithheld_in_countriesInput | string[]
+    require_some_consent?: boolean | null
+    type?: string | null
+    target_username?: string | null
+    email?: string | null
+  }
+
+  export type FollowersDataTestUpdateManyMutationInput = {
+    id_str?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    screen_name?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    entities?: InputJsonValue | InputJsonValue | null
+    protected?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    fast_followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    normal_followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    friends_count?: NullableIntFieldUpdateOperationsInput | number | null
+    listed_count?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: NullableStringFieldUpdateOperationsInput | string | null
+    favourites_count?: NullableIntFieldUpdateOperationsInput | number | null
+    utc_offset?: NullableStringFieldUpdateOperationsInput | string | null
+    time_zone?: NullableStringFieldUpdateOperationsInput | string | null
+    geo_enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
+    media_count?: NullableIntFieldUpdateOperationsInput | number | null
+    lang?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: XOR<TweetStatusNullableUpdateEnvelopeInput, TweetStatusCreateInput> | null
+    contributors_enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_translator?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_translation_enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    profile_background_color?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_background_image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_background_image_url_https?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_background_tile?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    profile_image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_image_url_https?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_banner_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_link_color?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_sidebar_border_color?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_sidebar_fill_color?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_text_color?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_use_background_image?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    has_extended_profile?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    default_profile?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    default_profile_image?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    pinned_tweet_ids?: InputJsonValue | InputJsonValue | null
+    pinned_tweet_ids_str?: FollowersDataTestUpdatepinned_tweet_ids_strInput | string[]
+    has_custom_timelines?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    can_media_tag?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    followed_by?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    following?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    live_following?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    follow_request_sent?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    notifications?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    muting?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    blocking?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    blocked_by?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    advertiser_account_type?: NullableStringFieldUpdateOperationsInput | string | null
+    advertiser_account_service_levels?: FollowersDataTestUpdateadvertiser_account_service_levelsInput | string[]
+    analytics_type?: NullableStringFieldUpdateOperationsInput | string | null
+    business_profile_state?: NullableStringFieldUpdateOperationsInput | string | null
+    translator_type?: NullableStringFieldUpdateOperationsInput | string | null
+    withheld_in_countries?: FollowersDataTestUpdatewithheld_in_countriesInput | string[]
+    require_some_consent?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    target_username?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FollowersDataTestUncheckedUpdateManyInput = {
+    id_str?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    screen_name?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    entities?: InputJsonValue | InputJsonValue | null
+    protected?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    fast_followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    normal_followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    friends_count?: NullableIntFieldUpdateOperationsInput | number | null
+    listed_count?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: NullableStringFieldUpdateOperationsInput | string | null
+    favourites_count?: NullableIntFieldUpdateOperationsInput | number | null
+    utc_offset?: NullableStringFieldUpdateOperationsInput | string | null
+    time_zone?: NullableStringFieldUpdateOperationsInput | string | null
+    geo_enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
+    media_count?: NullableIntFieldUpdateOperationsInput | number | null
+    lang?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: XOR<TweetStatusNullableUpdateEnvelopeInput, TweetStatusCreateInput> | null
+    contributors_enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_translator?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_translation_enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    profile_background_color?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_background_image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_background_image_url_https?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_background_tile?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    profile_image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_image_url_https?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_banner_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_link_color?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_sidebar_border_color?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_sidebar_fill_color?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_text_color?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_use_background_image?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    has_extended_profile?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    default_profile?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    default_profile_image?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    pinned_tweet_ids?: InputJsonValue | InputJsonValue | null
+    pinned_tweet_ids_str?: FollowersDataTestUpdatepinned_tweet_ids_strInput | string[]
+    has_custom_timelines?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    can_media_tag?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    followed_by?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    following?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    live_following?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    follow_request_sent?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    notifications?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    muting?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    blocking?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    blocked_by?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    advertiser_account_type?: NullableStringFieldUpdateOperationsInput | string | null
+    advertiser_account_service_levels?: FollowersDataTestUpdateadvertiser_account_service_levelsInput | string[]
+    analytics_type?: NullableStringFieldUpdateOperationsInput | string | null
+    business_profile_state?: NullableStringFieldUpdateOperationsInput | string | null
+    translator_type?: NullableStringFieldUpdateOperationsInput | string | null
+    withheld_in_countries?: FollowersDataTestUpdatewithheld_in_countriesInput | string[]
+    require_some_consent?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    target_username?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -7468,6 +13516,135 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+    isSet?: boolean
+  }
+
+  export type UserProfileTestCountOrderByAggregateInput = {
+    id?: SortOrder
+    default_profile?: SortOrder
+    default_profile_image?: SortOrder
+    description?: SortOrder
+    fast_followers_count?: SortOrder
+    favourites_count?: SortOrder
+    followers_count?: SortOrder
+    friends_count?: SortOrder
+    has_custom_timelines?: SortOrder
+    is_translator?: SortOrder
+    listed_count?: SortOrder
+    media_count?: SortOrder
+    normal_followers_count?: SortOrder
+    pinned_tweet_ids_str?: SortOrder
+    possibly_sensitive?: SortOrder
+    profile_banner_url?: SortOrder
+    profile_interstitial_type?: SortOrder
+    statuses_count?: SortOrder
+    translator_type?: SortOrder
+    withheld_in_countries?: SortOrder
+    user_id_str?: SortOrder
+    profile_url?: SortOrder
+    profile_image_url_https?: SortOrder
+    verified?: SortOrder
+    updated_time?: SortOrder
+  }
+
+  export type UserProfileTestAvgOrderByAggregateInput = {
+    fast_followers_count?: SortOrder
+    favourites_count?: SortOrder
+    followers_count?: SortOrder
+    friends_count?: SortOrder
+    listed_count?: SortOrder
+    media_count?: SortOrder
+    normal_followers_count?: SortOrder
+    statuses_count?: SortOrder
+  }
+
+  export type UserProfileTestMaxOrderByAggregateInput = {
+    id?: SortOrder
+    default_profile?: SortOrder
+    default_profile_image?: SortOrder
+    description?: SortOrder
+    fast_followers_count?: SortOrder
+    favourites_count?: SortOrder
+    followers_count?: SortOrder
+    friends_count?: SortOrder
+    has_custom_timelines?: SortOrder
+    is_translator?: SortOrder
+    listed_count?: SortOrder
+    media_count?: SortOrder
+    normal_followers_count?: SortOrder
+    possibly_sensitive?: SortOrder
+    profile_banner_url?: SortOrder
+    profile_interstitial_type?: SortOrder
+    statuses_count?: SortOrder
+    translator_type?: SortOrder
+    user_id_str?: SortOrder
+    profile_url?: SortOrder
+    profile_image_url_https?: SortOrder
+    verified?: SortOrder
+    updated_time?: SortOrder
+  }
+
+  export type UserProfileTestMinOrderByAggregateInput = {
+    id?: SortOrder
+    default_profile?: SortOrder
+    default_profile_image?: SortOrder
+    description?: SortOrder
+    fast_followers_count?: SortOrder
+    favourites_count?: SortOrder
+    followers_count?: SortOrder
+    friends_count?: SortOrder
+    has_custom_timelines?: SortOrder
+    is_translator?: SortOrder
+    listed_count?: SortOrder
+    media_count?: SortOrder
+    normal_followers_count?: SortOrder
+    possibly_sensitive?: SortOrder
+    profile_banner_url?: SortOrder
+    profile_interstitial_type?: SortOrder
+    statuses_count?: SortOrder
+    translator_type?: SortOrder
+    user_id_str?: SortOrder
+    profile_url?: SortOrder
+    profile_image_url_https?: SortOrder
+    verified?: SortOrder
+    updated_time?: SortOrder
+  }
+
+  export type UserProfileTestSumOrderByAggregateInput = {
+    fast_followers_count?: SortOrder
+    favourites_count?: SortOrder
+    followers_count?: SortOrder
+    friends_count?: SortOrder
+    listed_count?: SortOrder
+    media_count?: SortOrder
+    normal_followers_count?: SortOrder
+    statuses_count?: SortOrder
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
   export type IntNullableListFilter<$PrismaModel = never> = {
     equals?: number[] | ListIntFieldRefInput<$PrismaModel> | null
     has?: number | IntFieldRefInput<$PrismaModel> | null
@@ -7560,6 +13737,7 @@ export namespace Prisma {
     retweet_count?: SortOrder
     retweeted?: SortOrder
     user_id_str?: SortOrder
+    views_count?: SortOrder
     updated_time?: SortOrder
   }
 
@@ -7589,6 +13767,7 @@ export namespace Prisma {
     retweet_count?: SortOrder
     retweeted?: SortOrder
     user_id_str?: SortOrder
+    views_count?: SortOrder
     updated_time?: SortOrder
   }
 
@@ -7609,6 +13788,7 @@ export namespace Prisma {
     retweet_count?: SortOrder
     retweeted?: SortOrder
     user_id_str?: SortOrder
+    views_count?: SortOrder
     updated_time?: SortOrder
   }
 
@@ -7634,6 +13814,96 @@ export namespace Prisma {
     _min?: NestedJsonNullableFilter<$PrismaModel>
     _max?: NestedJsonNullableFilter<$PrismaModel>
     isSet?: boolean
+  }
+
+  export type TweetsDataTestCountOrderByAggregateInput = {
+    id?: SortOrder
+    id_str?: SortOrder
+    bookmark_count?: SortOrder
+    bookmarked?: SortOrder
+    conversation_id_str?: SortOrder
+    created_at?: SortOrder
+    display_text_range?: SortOrder
+    extended_entities?: SortOrder
+    entities?: SortOrder
+    favorite_count?: SortOrder
+    favorited?: SortOrder
+    full_text?: SortOrder
+    is_quote_status?: SortOrder
+    lang?: SortOrder
+    quote_count?: SortOrder
+    reply_count?: SortOrder
+    retweet_count?: SortOrder
+    retweeted?: SortOrder
+    twitterUrl?: SortOrder
+    url?: SortOrder
+    user_id_str?: SortOrder
+    views_count?: SortOrder
+    updated_time?: SortOrder
+  }
+
+  export type TweetsDataTestAvgOrderByAggregateInput = {
+    bookmark_count?: SortOrder
+    display_text_range?: SortOrder
+    favorite_count?: SortOrder
+    quote_count?: SortOrder
+    reply_count?: SortOrder
+    retweet_count?: SortOrder
+  }
+
+  export type TweetsDataTestMaxOrderByAggregateInput = {
+    id?: SortOrder
+    id_str?: SortOrder
+    bookmark_count?: SortOrder
+    bookmarked?: SortOrder
+    conversation_id_str?: SortOrder
+    created_at?: SortOrder
+    favorite_count?: SortOrder
+    favorited?: SortOrder
+    full_text?: SortOrder
+    is_quote_status?: SortOrder
+    lang?: SortOrder
+    quote_count?: SortOrder
+    reply_count?: SortOrder
+    retweet_count?: SortOrder
+    retweeted?: SortOrder
+    twitterUrl?: SortOrder
+    url?: SortOrder
+    user_id_str?: SortOrder
+    views_count?: SortOrder
+    updated_time?: SortOrder
+  }
+
+  export type TweetsDataTestMinOrderByAggregateInput = {
+    id?: SortOrder
+    id_str?: SortOrder
+    bookmark_count?: SortOrder
+    bookmarked?: SortOrder
+    conversation_id_str?: SortOrder
+    created_at?: SortOrder
+    favorite_count?: SortOrder
+    favorited?: SortOrder
+    full_text?: SortOrder
+    is_quote_status?: SortOrder
+    lang?: SortOrder
+    quote_count?: SortOrder
+    reply_count?: SortOrder
+    retweet_count?: SortOrder
+    retweeted?: SortOrder
+    twitterUrl?: SortOrder
+    url?: SortOrder
+    user_id_str?: SortOrder
+    views_count?: SortOrder
+    updated_time?: SortOrder
+  }
+
+  export type TweetsDataTestSumOrderByAggregateInput = {
+    bookmark_count?: SortOrder
+    display_text_range?: SortOrder
+    favorite_count?: SortOrder
+    quote_count?: SortOrder
+    reply_count?: SortOrder
+    retweet_count?: SortOrder
   }
 
   export type TweetStatusNullableCompositeFilter = {
@@ -7901,6 +14171,216 @@ export namespace Prisma {
     media_count?: SortOrder
   }
 
+  export type FollowersDataTestCountOrderByAggregateInput = {
+    id?: SortOrder
+    id_str?: SortOrder
+    name?: SortOrder
+    screen_name?: SortOrder
+    location?: SortOrder
+    description?: SortOrder
+    url?: SortOrder
+    entities?: SortOrder
+    protected?: SortOrder
+    followers_count?: SortOrder
+    fast_followers_count?: SortOrder
+    normal_followers_count?: SortOrder
+    friends_count?: SortOrder
+    listed_count?: SortOrder
+    created_at?: SortOrder
+    favourites_count?: SortOrder
+    utc_offset?: SortOrder
+    time_zone?: SortOrder
+    geo_enabled?: SortOrder
+    verified?: SortOrder
+    statuses_count?: SortOrder
+    media_count?: SortOrder
+    lang?: SortOrder
+    contributors_enabled?: SortOrder
+    is_translator?: SortOrder
+    is_translation_enabled?: SortOrder
+    profile_background_color?: SortOrder
+    profile_background_image_url?: SortOrder
+    profile_background_image_url_https?: SortOrder
+    profile_background_tile?: SortOrder
+    profile_image_url?: SortOrder
+    profile_image_url_https?: SortOrder
+    profile_banner_url?: SortOrder
+    profile_link_color?: SortOrder
+    profile_sidebar_border_color?: SortOrder
+    profile_sidebar_fill_color?: SortOrder
+    profile_text_color?: SortOrder
+    profile_use_background_image?: SortOrder
+    has_extended_profile?: SortOrder
+    default_profile?: SortOrder
+    default_profile_image?: SortOrder
+    pinned_tweet_ids?: SortOrder
+    pinned_tweet_ids_str?: SortOrder
+    has_custom_timelines?: SortOrder
+    can_media_tag?: SortOrder
+    followed_by?: SortOrder
+    following?: SortOrder
+    live_following?: SortOrder
+    follow_request_sent?: SortOrder
+    notifications?: SortOrder
+    muting?: SortOrder
+    blocking?: SortOrder
+    blocked_by?: SortOrder
+    advertiser_account_type?: SortOrder
+    advertiser_account_service_levels?: SortOrder
+    analytics_type?: SortOrder
+    business_profile_state?: SortOrder
+    translator_type?: SortOrder
+    withheld_in_countries?: SortOrder
+    require_some_consent?: SortOrder
+    type?: SortOrder
+    target_username?: SortOrder
+    email?: SortOrder
+  }
+
+  export type FollowersDataTestAvgOrderByAggregateInput = {
+    followers_count?: SortOrder
+    fast_followers_count?: SortOrder
+    normal_followers_count?: SortOrder
+    friends_count?: SortOrder
+    listed_count?: SortOrder
+    favourites_count?: SortOrder
+    statuses_count?: SortOrder
+    media_count?: SortOrder
+  }
+
+  export type FollowersDataTestMaxOrderByAggregateInput = {
+    id?: SortOrder
+    id_str?: SortOrder
+    name?: SortOrder
+    screen_name?: SortOrder
+    location?: SortOrder
+    description?: SortOrder
+    url?: SortOrder
+    protected?: SortOrder
+    followers_count?: SortOrder
+    fast_followers_count?: SortOrder
+    normal_followers_count?: SortOrder
+    friends_count?: SortOrder
+    listed_count?: SortOrder
+    created_at?: SortOrder
+    favourites_count?: SortOrder
+    utc_offset?: SortOrder
+    time_zone?: SortOrder
+    geo_enabled?: SortOrder
+    verified?: SortOrder
+    statuses_count?: SortOrder
+    media_count?: SortOrder
+    lang?: SortOrder
+    contributors_enabled?: SortOrder
+    is_translator?: SortOrder
+    is_translation_enabled?: SortOrder
+    profile_background_color?: SortOrder
+    profile_background_image_url?: SortOrder
+    profile_background_image_url_https?: SortOrder
+    profile_background_tile?: SortOrder
+    profile_image_url?: SortOrder
+    profile_image_url_https?: SortOrder
+    profile_banner_url?: SortOrder
+    profile_link_color?: SortOrder
+    profile_sidebar_border_color?: SortOrder
+    profile_sidebar_fill_color?: SortOrder
+    profile_text_color?: SortOrder
+    profile_use_background_image?: SortOrder
+    has_extended_profile?: SortOrder
+    default_profile?: SortOrder
+    default_profile_image?: SortOrder
+    has_custom_timelines?: SortOrder
+    can_media_tag?: SortOrder
+    followed_by?: SortOrder
+    following?: SortOrder
+    live_following?: SortOrder
+    follow_request_sent?: SortOrder
+    notifications?: SortOrder
+    muting?: SortOrder
+    blocking?: SortOrder
+    blocked_by?: SortOrder
+    advertiser_account_type?: SortOrder
+    analytics_type?: SortOrder
+    business_profile_state?: SortOrder
+    translator_type?: SortOrder
+    require_some_consent?: SortOrder
+    type?: SortOrder
+    target_username?: SortOrder
+    email?: SortOrder
+  }
+
+  export type FollowersDataTestMinOrderByAggregateInput = {
+    id?: SortOrder
+    id_str?: SortOrder
+    name?: SortOrder
+    screen_name?: SortOrder
+    location?: SortOrder
+    description?: SortOrder
+    url?: SortOrder
+    protected?: SortOrder
+    followers_count?: SortOrder
+    fast_followers_count?: SortOrder
+    normal_followers_count?: SortOrder
+    friends_count?: SortOrder
+    listed_count?: SortOrder
+    created_at?: SortOrder
+    favourites_count?: SortOrder
+    utc_offset?: SortOrder
+    time_zone?: SortOrder
+    geo_enabled?: SortOrder
+    verified?: SortOrder
+    statuses_count?: SortOrder
+    media_count?: SortOrder
+    lang?: SortOrder
+    contributors_enabled?: SortOrder
+    is_translator?: SortOrder
+    is_translation_enabled?: SortOrder
+    profile_background_color?: SortOrder
+    profile_background_image_url?: SortOrder
+    profile_background_image_url_https?: SortOrder
+    profile_background_tile?: SortOrder
+    profile_image_url?: SortOrder
+    profile_image_url_https?: SortOrder
+    profile_banner_url?: SortOrder
+    profile_link_color?: SortOrder
+    profile_sidebar_border_color?: SortOrder
+    profile_sidebar_fill_color?: SortOrder
+    profile_text_color?: SortOrder
+    profile_use_background_image?: SortOrder
+    has_extended_profile?: SortOrder
+    default_profile?: SortOrder
+    default_profile_image?: SortOrder
+    has_custom_timelines?: SortOrder
+    can_media_tag?: SortOrder
+    followed_by?: SortOrder
+    following?: SortOrder
+    live_following?: SortOrder
+    follow_request_sent?: SortOrder
+    notifications?: SortOrder
+    muting?: SortOrder
+    blocking?: SortOrder
+    blocked_by?: SortOrder
+    advertiser_account_type?: SortOrder
+    analytics_type?: SortOrder
+    business_profile_state?: SortOrder
+    translator_type?: SortOrder
+    require_some_consent?: SortOrder
+    type?: SortOrder
+    target_username?: SortOrder
+    email?: SortOrder
+  }
+
+  export type FollowersDataTestSumOrderByAggregateInput = {
+    followers_count?: SortOrder
+    fast_followers_count?: SortOrder
+    normal_followers_count?: SortOrder
+    friends_count?: SortOrder
+    listed_count?: SortOrder
+    favourites_count?: SortOrder
+    statuses_count?: SortOrder
+    media_count?: SortOrder
+  }
+
   export type EntitiesProfileNullableCreateEnvelopeInput = {
     set?: EntitiesProfileCreateInput | null
   }
@@ -7964,6 +14444,29 @@ export namespace Prisma {
     set?: Date | string
   }
 
+  export type UserProfileTestCreatepinned_tweet_ids_strInput = {
+    set: string[]
+  }
+
+  export type UserProfileTestCreatewithheld_in_countriesInput = {
+    set: string[]
+  }
+
+  export type UserProfileTestUpdatepinned_tweet_ids_strInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type UserProfileTestUpdatewithheld_in_countriesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+    unset?: boolean
+  }
+
   export type TweetsDataCreatedisplay_text_rangeInput = {
     set: number[]
   }
@@ -8004,6 +14507,15 @@ export namespace Prisma {
     set?: TweetUserCreateInput | null
     upsert?: TweetUserUpsertInput
     unset?: boolean
+  }
+
+  export type TweetsDataTestCreatedisplay_text_rangeInput = {
+    set: number[]
+  }
+
+  export type TweetsDataTestUpdatedisplay_text_rangeInput = {
+    set?: number[]
+    push?: number | number[]
   }
 
   export type TweetStatusNullableCreateEnvelopeInput = {
@@ -8063,6 +14575,33 @@ export namespace Prisma {
   }
 
   export type FollowerFollowingDataUpdatewithheld_in_countriesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type FollowersDataTestCreatepinned_tweet_ids_strInput = {
+    set: string[]
+  }
+
+  export type FollowersDataTestCreateadvertiser_account_service_levelsInput = {
+    set: string[]
+  }
+
+  export type FollowersDataTestCreatewithheld_in_countriesInput = {
+    set: string[]
+  }
+
+  export type FollowersDataTestUpdatepinned_tweet_ids_strInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type FollowersDataTestUpdateadvertiser_account_service_levelsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type FollowersDataTestUpdatewithheld_in_countriesInput = {
     set?: string[]
     push?: string | string[]
   }
@@ -8249,6 +14788,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+    isSet?: boolean
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+    isSet?: boolean
   }
 
   export type TweetUserWhereInput = {

@@ -10,7 +10,7 @@
     "apify-client": "^2.18.0",
     "axios": "^1.11.0",
     "mongodb": "^6.5.0",
-    "next": "latest",
+    "next": "^15.5.5",
     "next-auth": "^4.24.11",
     "node-cron": "^4.2.1",
     "react": "^18",
@@ -23,9 +23,11 @@
     "autoprefixer": "^10.0.1",
     "eslint": "^9",
     "eslint-config-next": "^15.4.7",
+    "mini-css-extract-plugin": "^2.9.4",
     "postcss": "^8",
     "prisma": "^6.14.0",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "webpack": "^5.102.1"
   }
 }

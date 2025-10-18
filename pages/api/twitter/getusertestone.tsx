@@ -14,41 +14,40 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
             return res.status(400).json({ message: "ID is required" });
         }
 
-        const tweetsData = await db2.tweetsData.findMany({
+        const tweetsData = await db2.tweetsDataTest.findMany({
             where: {
                 user_id_str: id,
             },
         });
 
-        const followersData = await db2.followerFollowingData.findMany({
+        const followersData = await db2.followersDataTest.findMany({
             where: {
-                target_username: "CryptoWizardd",
+                target_username: id,
             },
         });
 
-        const userData = await db2.userProfile.findMany({
+        const userProfile = await db2.userProfileTest.findMany({
             where: {
-                id_str: "user_CryptoWizardd",
+                user_id_str: id,
             },
         });
 
-        // console.log('userData', userData);
+        console.log('userProfile', userProfile);
 
-        const userProfile = userData.map(user => ({
+        const filterUserProfile = userProfile.map(user => ({
             id: user.id,
-            profile_banner_url: user.profile_banner_url,
             description: user.description,
-            statuses_count: user.statuses_count,
-            translator_type: user.translator_type,
-            profile_url: user.profile_url,
-            fast_followers_count: user.fast_followers_count,
+            verified: user.verified,
             followers_count: user.followers_count,
             friends_count: user.friends_count,
+            fast_followers_count: user.fast_followers_count,
+            listed_count: user.listed_count,
             favourites_count: user.favourites_count,
+            statuses_count: user.statuses_count,
             media_count: user.media_count,
             normal_followers_count: user.normal_followers_count,
-            possibly_sensitive: user.possibly_sensitive,
-            created_at: user.updated_time,
+            profile_banner_url: user.profile_banner_url,
+            profile_image_url_https: user.profile_image_url_https,
         }));
 
         const filterFollowersData = followersData.map(follower => ({
@@ -69,61 +68,60 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
             screen_name: follower.screen_name,
             name: follower.name,
             profile_image_url: follower.profile_image_url,
+            email: follower.email,
+            geo_enabled: follower.geo_enabled,
+            location: follower.location,
         }));
 
-        // console.log('followersData', filterFollowersData);
-
-        const Top10Followers = filterFollowersData.sort((a, b) => (b.followers_count || 0) - (a.followers_count || 0)).slice(0, 10);
-        // console.log('Top10Followers', Top10Followers);
-
-        if (tweetsData.length === 0) {
-            return res.status(404).json({ message: "Data not found" });
-        }
-
-        // console.log('userProfile', userProfile);
+        const top10Followers = filterFollowersData.sort((a, b) => (b.followers_count || 0) - (a.followers_count || 0)).slice(0, 10);
 
         const filterTweetsData = tweetsData.map(tweet => ({
             id: tweet.id,
-            bookmark_count: tweet.bookmark_count,
-            favorite_count: tweet.favorite_count,
-            reply_count: tweet.reply_count,
-            retweet_count: tweet.retweet_count,
-            created_at: tweet.created_at,
             tweetText: tweet.full_text,
+            created_at : tweet.created_at,
+            bookmark_count : tweet.bookmark_count,
+            views_count : tweet.views_count || 0,
+            favorite_count : tweet.favorite_count,
+            reply_count : tweet.reply_count,
+            retweet_count : tweet.retweet_count,
+            twitterUrl: tweet.twitterUrl,
+            media_url_https : tweet.extended_entities?.media[0]?.media_url_https,
+            lang : tweet.lang,
+            quote_count : tweet.quote_count,
         }));
 
         const TweetsData = {
-            userProfile: userProfile[0]?.profile_banner_url,
-            userName: userProfile[0]?.id,
-            // filterTweetsData
-        }
+            filterTweetsData: filterTweetsData.map(tweet => ({
+                ...tweet,
+                userProfile: userProfile[0]?.profile_banner_url || null,
+                userName: userProfile[0]?.id || null,
+            }))
+        };
+
+        console.log('filterTweetsData', filterTweetsData);
+
+        const top10Tweets = filterTweetsData.sort((a, b) => (b.favorite_count || 0) - (a.favorite_count || 0)).slice(0, 1000);
 
         const averageLikeCount = filterTweetsData.reduce((acc, tweet) => acc + (tweet.favorite_count || 0), 0) / filterTweetsData.length;
+        console.log('averageLikeCount', averageLikeCount);
         const averageReplyCount = filterTweetsData.reduce((acc, tweet) => acc + (tweet.reply_count || 0), 0) / filterTweetsData.length;
+        console.log('averageReplyCount', averageReplyCount);
         const averageRetweetCount = filterTweetsData.reduce((acc, tweet) => acc + (tweet.retweet_count || 0), 0) / filterTweetsData.length;
-        const averageBookmarkCount = filterTweetsData.reduce((acc, tweet) => acc + (tweet.bookmark_count || 0), 0) / filterTweetsData.length;
+        console.log('averageRetweetCount', averageRetweetCount);
+        const averageQuoteCount = filterTweetsData.reduce((acc, tweet) => acc + (tweet.quote_count || 0), 0) / filterTweetsData.length;
+        console.log('averageQuoteCount', averageQuoteCount);
 
-        // console.log('averageLikeCount', averageLikeCount);
-        // console.log('averageReplyCount', averageReplyCount);
-        // console.log('averageRetweetCount', averageRetweetCount);
-        // console.log('averageBookmarkCount', averageBookmarkCount);
-
-        const mostLikedTweet = filterTweetsData.sort((a, b) => (b.favorite_count || 0) - (a.favorite_count || 0))[0];
-        const mostRepliedTweet = filterTweetsData.sort((a, b) => (b.reply_count || 0) - (a.reply_count || 0))[0];
-        const mostRetweetedTweet = filterTweetsData.sort((a, b) => (b.retweet_count || 0) - (a.retweet_count || 0))[0];
-        const mostBookmarkedTweet = filterTweetsData.sort((a, b) => (b.bookmark_count || 0) - (a.bookmark_count || 0))[0];
 
         return res.status(200).json({
-            userProfile,
+            userProfile: filterUserProfile,
             analytics: {
                 averageLikeCount: averageLikeCount,
                 averageReplyCount: averageReplyCount,
                 averageRetweetCount: averageRetweetCount,
-                averageBookmarkCount: averageBookmarkCount,
+                averageQuoteCount: averageQuoteCount,
             },
-
             tweetsData: TweetsData,
-            Top10Followers: Top10Followers,
+            followersData: top10Followers,
         });
     } catch (error) {
         console.error("Error fetching groups:", error);

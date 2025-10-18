@@ -139,6 +139,34 @@ exports.Prisma.UserProfileScalarFieldEnum = {
   updated_time: 'updated_time'
 };
 
+exports.Prisma.UserProfileTestScalarFieldEnum = {
+  id: 'id',
+  default_profile: 'default_profile',
+  default_profile_image: 'default_profile_image',
+  description: 'description',
+  fast_followers_count: 'fast_followers_count',
+  favourites_count: 'favourites_count',
+  followers_count: 'followers_count',
+  friends_count: 'friends_count',
+  has_custom_timelines: 'has_custom_timelines',
+  is_translator: 'is_translator',
+  listed_count: 'listed_count',
+  media_count: 'media_count',
+  normal_followers_count: 'normal_followers_count',
+  pinned_tweet_ids_str: 'pinned_tweet_ids_str',
+  possibly_sensitive: 'possibly_sensitive',
+  profile_banner_url: 'profile_banner_url',
+  profile_interstitial_type: 'profile_interstitial_type',
+  statuses_count: 'statuses_count',
+  translator_type: 'translator_type',
+  withheld_in_countries: 'withheld_in_countries',
+  user_id_str: 'user_id_str',
+  profile_url: 'profile_url',
+  profile_image_url_https: 'profile_image_url_https',
+  verified: 'verified',
+  updated_time: 'updated_time'
+};
+
 exports.Prisma.TweetsDataScalarFieldEnum = {
   id: 'id',
   id_str: 'id_str',
@@ -158,10 +186,103 @@ exports.Prisma.TweetsDataScalarFieldEnum = {
   retweet_count: 'retweet_count',
   retweeted: 'retweeted',
   user_id_str: 'user_id_str',
+  views_count: 'views_count',
+  updated_time: 'updated_time'
+};
+
+exports.Prisma.TweetsDataTestScalarFieldEnum = {
+  id: 'id',
+  id_str: 'id_str',
+  bookmark_count: 'bookmark_count',
+  bookmarked: 'bookmarked',
+  conversation_id_str: 'conversation_id_str',
+  created_at: 'created_at',
+  display_text_range: 'display_text_range',
+  extended_entities: 'extended_entities',
+  entities: 'entities',
+  favorite_count: 'favorite_count',
+  favorited: 'favorited',
+  full_text: 'full_text',
+  is_quote_status: 'is_quote_status',
+  lang: 'lang',
+  quote_count: 'quote_count',
+  reply_count: 'reply_count',
+  retweet_count: 'retweet_count',
+  retweeted: 'retweeted',
+  twitterUrl: 'twitterUrl',
+  url: 'url',
+  user_id_str: 'user_id_str',
+  views_count: 'views_count',
   updated_time: 'updated_time'
 };
 
 exports.Prisma.FollowerFollowingDataScalarFieldEnum = {
+  id: 'id',
+  id_str: 'id_str',
+  name: 'name',
+  screen_name: 'screen_name',
+  location: 'location',
+  description: 'description',
+  url: 'url',
+  entities: 'entities',
+  protected: 'protected',
+  followers_count: 'followers_count',
+  fast_followers_count: 'fast_followers_count',
+  normal_followers_count: 'normal_followers_count',
+  friends_count: 'friends_count',
+  listed_count: 'listed_count',
+  created_at: 'created_at',
+  favourites_count: 'favourites_count',
+  utc_offset: 'utc_offset',
+  time_zone: 'time_zone',
+  geo_enabled: 'geo_enabled',
+  verified: 'verified',
+  statuses_count: 'statuses_count',
+  media_count: 'media_count',
+  lang: 'lang',
+  contributors_enabled: 'contributors_enabled',
+  is_translator: 'is_translator',
+  is_translation_enabled: 'is_translation_enabled',
+  profile_background_color: 'profile_background_color',
+  profile_background_image_url: 'profile_background_image_url',
+  profile_background_image_url_https: 'profile_background_image_url_https',
+  profile_background_tile: 'profile_background_tile',
+  profile_image_url: 'profile_image_url',
+  profile_image_url_https: 'profile_image_url_https',
+  profile_banner_url: 'profile_banner_url',
+  profile_link_color: 'profile_link_color',
+  profile_sidebar_border_color: 'profile_sidebar_border_color',
+  profile_sidebar_fill_color: 'profile_sidebar_fill_color',
+  profile_text_color: 'profile_text_color',
+  profile_use_background_image: 'profile_use_background_image',
+  has_extended_profile: 'has_extended_profile',
+  default_profile: 'default_profile',
+  default_profile_image: 'default_profile_image',
+  pinned_tweet_ids: 'pinned_tweet_ids',
+  pinned_tweet_ids_str: 'pinned_tweet_ids_str',
+  has_custom_timelines: 'has_custom_timelines',
+  can_media_tag: 'can_media_tag',
+  followed_by: 'followed_by',
+  following: 'following',
+  live_following: 'live_following',
+  follow_request_sent: 'follow_request_sent',
+  notifications: 'notifications',
+  muting: 'muting',
+  blocking: 'blocking',
+  blocked_by: 'blocked_by',
+  advertiser_account_type: 'advertiser_account_type',
+  advertiser_account_service_levels: 'advertiser_account_service_levels',
+  analytics_type: 'analytics_type',
+  business_profile_state: 'business_profile_state',
+  translator_type: 'translator_type',
+  withheld_in_countries: 'withheld_in_countries',
+  require_some_consent: 'require_some_consent',
+  type: 'type',
+  target_username: 'target_username',
+  email: 'email'
+};
+
+exports.Prisma.FollowersDataTestScalarFieldEnum = {
   id: 'id',
   id_str: 'id_str',
   name: 'name',
@@ -240,8 +361,11 @@ exports.Prisma.QueryMode = {
 
 exports.Prisma.ModelName = {
   UserProfile: 'UserProfile',
+  UserProfileTest: 'UserProfileTest',
   TweetsData: 'TweetsData',
-  FollowerFollowingData: 'FollowerFollowingData'
+  TweetsDataTest: 'TweetsDataTest',
+  FollowerFollowingData: 'FollowerFollowingData',
+  FollowersDataTest: 'FollowersDataTest'
 };
 
 /**
