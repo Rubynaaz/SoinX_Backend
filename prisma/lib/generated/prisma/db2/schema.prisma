@@ -142,7 +142,7 @@ model TweetsDataTest {
 }
 
 type ExtendedEntities {
-  media MediaEntity?
+  media Json?
 }
 
 type MediaEntity {

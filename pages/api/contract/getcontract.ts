@@ -21,11 +21,11 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       prisma.groupUserCountsWebhookTest.findMany({
         where: { ContractAddress: contractId },
         include: { DexscreenerData: true },
-        orderBy: { MessageDateTime: "desc" }
+        orderBy: { MessageDateTime: "desc" },
       }),
-      prisma.dexscreenerCacheNew.findUnique({
-        where: { contractAddress: contractId }
-      })
+      prisma.dexscreenerCacheNew.findFirst({
+        where: { contractAddress: contractId },
+      }),
     ]);
 
     if (!groups.length || !cachedDex) {
