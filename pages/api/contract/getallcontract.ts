@@ -110,7 +110,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       return 0;
     });
 
-    // Pagination
+    
     const totalContracts = contracts.length;
     const paginatedContracts = contracts.slice(
       (pageNum - 1) * limitNum,
