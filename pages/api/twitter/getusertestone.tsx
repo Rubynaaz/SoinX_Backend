@@ -34,6 +34,13 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
         console.log('userProfile', userProfile);
 
+        const graphData = tweetsData.map(tweet => ({
+            date: tweet.created_at,
+            likes: tweet.favorite_count || 0,
+            retweets: tweet.retweet_count || 0,
+            replies: tweet.reply_count || 0,
+        }));
+
         const filterUserProfile = userProfile.map(user => ({
             id: user.id,
             description: user.description,
@@ -91,11 +98,13 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         }));
 
         const TweetsData = {
-            filterTweetsData: filterTweetsData.map(tweet => ({
-                ...tweet,
-                userProfile: userProfile[0]?.profile_banner_url || null,
-                userName: userProfile[0]?.id || null,
-            }))
+            filterTweetsData: filterTweetsData
+                .slice(0, 4) // <-- Take only first 10 items
+                .map(tweet => ({
+                    ...tweet,
+                    userProfile: userProfile[0]?.profile_banner_url || null,
+                    userName: userProfile[0]?.id || null,
+                }))
         };
 
         console.log('filterTweetsData', filterTweetsData);
@@ -122,6 +131,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
             },
             tweetsData: TweetsData,
             followersData: top10Followers,
+            graphData: graphData,
         });
     } catch (error) {
         console.error("Error fetching groups:", error);
