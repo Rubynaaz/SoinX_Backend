@@ -77,9 +77,15 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
             // const engagementScore = ((totalLikes + totalRetweets + totalQuotes + totalReplies) / (T * (F + (totalViews/T)))) * 100;
             // const engagementScore = ((totalLikes + totalRetweets + totalQuotes + totalReplies) / (T * F)) * 100;
-            // const engagementScore = ((totalLikes + totalRetweets + totalQuotes + totalReplies) / totalViews) * 100;
             // const engagementScore = (T / totalViews) * 100;
-            const engagementScore = totalViews;
+            const engagementScore = totalViews
+                ? ((
+                    totalLikes +
+                    totalRetweets +
+                    totalQuotes +
+                    totalReplies
+                  ) / totalViews) * 100
+                : 0;
 
             return {
                 ...user,
