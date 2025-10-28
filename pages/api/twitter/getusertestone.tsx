@@ -92,7 +92,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
             reply_count : tweet.reply_count,
             retweet_count : tweet.retweet_count,
             twitterUrl: tweet.twitterUrl,
-            // media_url_https : tweet.extended_entities?.media[0]?.media_url_https as string,
+            media_url_https : tweet.extended_entities?.media[0]?.media_url_https as string,
             lang : tweet.lang,
             quote_count : tweet.quote_count,
         }));
