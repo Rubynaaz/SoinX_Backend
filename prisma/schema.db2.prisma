@@ -120,7 +120,7 @@ model TweetsDataTest {
     conversation_id_str String?
     created_at          String?
     display_text_range  Int[]
-    extended_entities   Json?
+    extended_entities   ExtendedEntities?
     entities            Json?
     favorite_count      Int?
     favorited           Boolean?
@@ -142,7 +142,7 @@ model TweetsDataTest {
 }
 
 type ExtendedEntities {
-    media Json?
+    media MediaEntity[]
 }
 
 type MediaEntity {

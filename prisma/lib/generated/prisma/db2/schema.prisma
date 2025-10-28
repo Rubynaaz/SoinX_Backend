@@ -113,14 +113,14 @@ model TweetsData {
 
 /// Duplicate of TweetsData mapped to tweets_data_test collection
 model TweetsDataTest {
-  id                  String     @id @default(auto()) @map("_id") @db2.ObjectId
+  id                  String            @id @default(auto()) @map("_id") @db2.ObjectId
   id_str              String
   bookmark_count      Int?
   bookmarked          Boolean?
   conversation_id_str String?
   created_at          String?
   display_text_range  Int[]
-  extended_entities   Json?
+  extended_entities   ExtendedEntities?
   entities            Json?
   favorite_count      Int?
   favorited           Boolean?
@@ -142,7 +142,7 @@ model TweetsDataTest {
 }
 
 type ExtendedEntities {
-  media Json?
+  media MediaEntity[]
 }
 
 type MediaEntity {

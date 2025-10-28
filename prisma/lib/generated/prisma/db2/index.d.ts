@@ -29,6 +29,16 @@ export type DescriptionProfile = $Result.DefaultSelection<Prisma.$DescriptionPro
  */
 export type UrlEntity = $Result.DefaultSelection<Prisma.$UrlEntityPayload>
 /**
+ * Model ExtendedEntities
+ * 
+ */
+export type ExtendedEntities = $Result.DefaultSelection<Prisma.$ExtendedEntitiesPayload>
+/**
+ * Model MediaEntity
+ * 
+ */
+export type MediaEntity = $Result.DefaultSelection<Prisma.$MediaEntityPayload>
+/**
  * Model TweetUser
  * Minimal user shape embedded in a tweet
  */
@@ -1482,6 +1492,147 @@ export namespace Prisma {
      * Omit specific fields from the UrlEntity
      */
     omit?: UrlEntityOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ExtendedEntities
+   */
+
+
+
+
+
+  export type ExtendedEntitiesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    media?: boolean | MediaEntityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["extendedEntities"]>
+
+
+
+  export type ExtendedEntitiesSelectScalar = {}
+
+  export type ExtendedEntitiesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"media", ExtArgs["result"]["extendedEntities"]>
+  export type ExtendedEntitiesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $ExtendedEntitiesPayload = {
+    name: "ExtendedEntities"
+    objects: {}
+    scalars: {}
+    composites: {
+      media: Prisma.$MediaEntityPayload[]
+    }
+  }
+
+  type ExtendedEntitiesGetPayload<S extends boolean | null | undefined | ExtendedEntitiesDefaultArgs> = $Result.GetResult<Prisma.$ExtendedEntitiesPayload, S>
+
+
+
+
+
+  /**
+   * Fields of the ExtendedEntities model
+   */
+  interface ExtendedEntitiesFieldRefs {
+
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ExtendedEntities without action
+   */
+  export type ExtendedEntitiesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtendedEntities
+     */
+    select?: ExtendedEntitiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtendedEntities
+     */
+    omit?: ExtendedEntitiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtendedEntitiesInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MediaEntity
+   */
+
+
+
+
+
+  export type MediaEntitySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    display_url?: boolean
+    expanded_url?: boolean
+    url?: boolean
+    indices?: boolean
+    media_url_https?: boolean
+    type?: boolean
+  }, ExtArgs["result"]["mediaEntity"]>
+
+
+
+  export type MediaEntitySelectScalar = {
+    display_url?: boolean
+    expanded_url?: boolean
+    url?: boolean
+    indices?: boolean
+    media_url_https?: boolean
+    type?: boolean
+  }
+
+  export type MediaEntityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"display_url" | "expanded_url" | "url" | "indices" | "media_url_https" | "type", ExtArgs["result"]["mediaEntity"]>
+
+  export type $MediaEntityPayload = {
+    name: "MediaEntity"
+    objects: {}
+    scalars: {
+      display_url: string | null
+      expanded_url: string | null
+      url: string | null
+      indices: number[]
+      media_url_https: string | null
+      type: string | null
+    }
+    composites: {}
+  }
+
+  type MediaEntityGetPayload<S extends boolean | null | undefined | MediaEntityDefaultArgs> = $Result.GetResult<Prisma.$MediaEntityPayload, S>
+
+
+
+
+
+  /**
+   * Fields of the MediaEntity model
+   */
+  interface MediaEntityFieldRefs {
+    readonly display_url: FieldRef<"MediaEntity", 'String'>
+    readonly expanded_url: FieldRef<"MediaEntity", 'String'>
+    readonly url: FieldRef<"MediaEntity", 'String'>
+    readonly indices: FieldRef<"MediaEntity", 'Int[]'>
+    readonly media_url_https: FieldRef<"MediaEntity", 'String'>
+    readonly type: FieldRef<"MediaEntity", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MediaEntity without action
+   */
+  export type MediaEntityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaEntity
+     */
+    select?: MediaEntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaEntity
+     */
+    omit?: MediaEntityOmit<ExtArgs> | null
   }
 
 
@@ -5512,7 +5663,6 @@ export namespace Prisma {
     conversation_id_str: number
     created_at: number
     display_text_range: number
-    extended_entities: number
     entities: number
     favorite_count: number
     favorited: number
@@ -5604,7 +5754,6 @@ export namespace Prisma {
     conversation_id_str?: true
     created_at?: true
     display_text_range?: true
-    extended_entities?: true
     entities?: true
     favorite_count?: true
     favorited?: true
@@ -5717,7 +5866,6 @@ export namespace Prisma {
     conversation_id_str: string | null
     created_at: string | null
     display_text_range: number[]
-    extended_entities: JsonValue | null
     entities: JsonValue | null
     favorite_count: number | null
     favorited: boolean | null
@@ -5762,7 +5910,7 @@ export namespace Prisma {
     conversation_id_str?: boolean
     created_at?: boolean
     display_text_range?: boolean
-    extended_entities?: boolean
+    extended_entities?: boolean | ExtendedEntitiesDefaultArgs<ExtArgs>
     entities?: boolean
     favorite_count?: boolean
     favorited?: boolean
@@ -5791,7 +5939,6 @@ export namespace Prisma {
     conversation_id_str?: boolean
     created_at?: boolean
     display_text_range?: boolean
-    extended_entities?: boolean
     entities?: boolean
     favorite_count?: boolean
     favorited?: boolean
@@ -5823,7 +5970,6 @@ export namespace Prisma {
       conversation_id_str: string | null
       created_at: string | null
       display_text_range: number[]
-      extended_entities: Prisma.JsonValue | null
       entities: Prisma.JsonValue | null
       favorite_count: number | null
       favorited: boolean | null
@@ -5841,6 +5987,7 @@ export namespace Prisma {
       updated_time: Date | null
     }, ExtArgs["result"]["tweetsDataTest"]>
     composites: {
+      extended_entities: Prisma.$ExtendedEntitiesPayload | null
       user: Prisma.$TweetUserPayload | null
     }
   }
@@ -6240,7 +6387,6 @@ export namespace Prisma {
     readonly conversation_id_str: FieldRef<"TweetsDataTest", 'String'>
     readonly created_at: FieldRef<"TweetsDataTest", 'String'>
     readonly display_text_range: FieldRef<"TweetsDataTest", 'Int[]'>
-    readonly extended_entities: FieldRef<"TweetsDataTest", 'Json'>
     readonly entities: FieldRef<"TweetsDataTest", 'Json'>
     readonly favorite_count: FieldRef<"TweetsDataTest", 'Int'>
     readonly favorited: FieldRef<"TweetsDataTest", 'Boolean'>
@@ -10054,7 +10200,6 @@ export namespace Prisma {
     conversation_id_str: 'conversation_id_str',
     created_at: 'created_at',
     display_text_range: 'display_text_range',
-    extended_entities: 'extended_entities',
     entities: 'entities',
     favorite_count: 'favorite_count',
     favorited: 'favorited',
@@ -10754,7 +10899,7 @@ export namespace Prisma {
     conversation_id_str?: StringNullableFilter<"TweetsDataTest"> | string | null
     created_at?: StringNullableFilter<"TweetsDataTest"> | string | null
     display_text_range?: IntNullableListFilter<"TweetsDataTest">
-    extended_entities?: JsonNullableFilter<"TweetsDataTest">
+    extended_entities?: XOR<ExtendedEntitiesNullableCompositeFilter, ExtendedEntitiesObjectEqualityInput> | null
     entities?: JsonNullableFilter<"TweetsDataTest">
     favorite_count?: IntNullableFilter<"TweetsDataTest"> | number | null
     favorited?: BoolNullableFilter<"TweetsDataTest"> | boolean | null
@@ -10781,7 +10926,7 @@ export namespace Prisma {
     conversation_id_str?: SortOrder
     created_at?: SortOrder
     display_text_range?: SortOrder
-    extended_entities?: SortOrder
+    extended_entities?: ExtendedEntitiesOrderByInput
     entities?: SortOrder
     favorite_count?: SortOrder
     favorited?: SortOrder
@@ -10811,7 +10956,7 @@ export namespace Prisma {
     conversation_id_str?: StringNullableFilter<"TweetsDataTest"> | string | null
     created_at?: StringNullableFilter<"TweetsDataTest"> | string | null
     display_text_range?: IntNullableListFilter<"TweetsDataTest">
-    extended_entities?: JsonNullableFilter<"TweetsDataTest">
+    extended_entities?: XOR<ExtendedEntitiesNullableCompositeFilter, ExtendedEntitiesObjectEqualityInput> | null
     entities?: JsonNullableFilter<"TweetsDataTest">
     favorite_count?: IntNullableFilter<"TweetsDataTest"> | number | null
     favorited?: BoolNullableFilter<"TweetsDataTest"> | boolean | null
@@ -10838,7 +10983,6 @@ export namespace Prisma {
     conversation_id_str?: SortOrder
     created_at?: SortOrder
     display_text_range?: SortOrder
-    extended_entities?: SortOrder
     entities?: SortOrder
     favorite_count?: SortOrder
     favorited?: SortOrder
@@ -10872,7 +11016,6 @@ export namespace Prisma {
     conversation_id_str?: StringNullableWithAggregatesFilter<"TweetsDataTest"> | string | null
     created_at?: StringNullableWithAggregatesFilter<"TweetsDataTest"> | string | null
     display_text_range?: IntNullableListFilter<"TweetsDataTest">
-    extended_entities?: JsonNullableWithAggregatesFilter<"TweetsDataTest">
     entities?: JsonNullableWithAggregatesFilter<"TweetsDataTest">
     favorite_count?: IntNullableWithAggregatesFilter<"TweetsDataTest"> | number | null
     favorited?: BoolNullableWithAggregatesFilter<"TweetsDataTest"> | boolean | null
@@ -12140,7 +12283,7 @@ export namespace Prisma {
     conversation_id_str?: string | null
     created_at?: string | null
     display_text_range?: TweetsDataTestCreatedisplay_text_rangeInput | number[]
-    extended_entities?: InputJsonValue | null
+    extended_entities?: XOR<ExtendedEntitiesNullableCreateEnvelopeInput, ExtendedEntitiesCreateInput> | null
     entities?: InputJsonValue | null
     favorite_count?: number | null
     favorited?: boolean | null
@@ -12167,7 +12310,7 @@ export namespace Prisma {
     conversation_id_str?: string | null
     created_at?: string | null
     display_text_range?: TweetsDataTestCreatedisplay_text_rangeInput | number[]
-    extended_entities?: InputJsonValue | null
+    extended_entities?: XOR<ExtendedEntitiesNullableCreateEnvelopeInput, ExtendedEntitiesCreateInput> | null
     entities?: InputJsonValue | null
     favorite_count?: number | null
     favorited?: boolean | null
@@ -12193,7 +12336,7 @@ export namespace Prisma {
     conversation_id_str?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableStringFieldUpdateOperationsInput | string | null
     display_text_range?: TweetsDataTestUpdatedisplay_text_rangeInput | number[]
-    extended_entities?: InputJsonValue | InputJsonValue | null
+    extended_entities?: XOR<ExtendedEntitiesNullableUpdateEnvelopeInput, ExtendedEntitiesCreateInput> | null
     entities?: InputJsonValue | InputJsonValue | null
     favorite_count?: NullableIntFieldUpdateOperationsInput | number | null
     favorited?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12219,7 +12362,7 @@ export namespace Prisma {
     conversation_id_str?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableStringFieldUpdateOperationsInput | string | null
     display_text_range?: TweetsDataTestUpdatedisplay_text_rangeInput | number[]
-    extended_entities?: InputJsonValue | InputJsonValue | null
+    extended_entities?: XOR<ExtendedEntitiesNullableUpdateEnvelopeInput, ExtendedEntitiesCreateInput> | null
     entities?: InputJsonValue | InputJsonValue | null
     favorite_count?: NullableIntFieldUpdateOperationsInput | number | null
     favorited?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12246,7 +12389,7 @@ export namespace Prisma {
     conversation_id_str?: string | null
     created_at?: string | null
     display_text_range?: TweetsDataTestCreatedisplay_text_rangeInput | number[]
-    extended_entities?: InputJsonValue | null
+    extended_entities?: XOR<ExtendedEntitiesNullableCreateEnvelopeInput, ExtendedEntitiesCreateInput> | null
     entities?: InputJsonValue | null
     favorite_count?: number | null
     favorited?: boolean | null
@@ -12272,7 +12415,7 @@ export namespace Prisma {
     conversation_id_str?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableStringFieldUpdateOperationsInput | string | null
     display_text_range?: TweetsDataTestUpdatedisplay_text_rangeInput | number[]
-    extended_entities?: InputJsonValue | InputJsonValue | null
+    extended_entities?: XOR<ExtendedEntitiesNullableUpdateEnvelopeInput, ExtendedEntitiesCreateInput> | null
     entities?: InputJsonValue | InputJsonValue | null
     favorite_count?: NullableIntFieldUpdateOperationsInput | number | null
     favorited?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12298,7 +12441,7 @@ export namespace Prisma {
     conversation_id_str?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableStringFieldUpdateOperationsInput | string | null
     display_text_range?: TweetsDataTestUpdatedisplay_text_rangeInput | number[]
-    extended_entities?: InputJsonValue | InputJsonValue | null
+    extended_entities?: XOR<ExtendedEntitiesNullableUpdateEnvelopeInput, ExtendedEntitiesCreateInput> | null
     entities?: InputJsonValue | InputJsonValue | null
     favorite_count?: NullableIntFieldUpdateOperationsInput | number | null
     favorited?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -13816,6 +13959,21 @@ export namespace Prisma {
     isSet?: boolean
   }
 
+  export type ExtendedEntitiesNullableCompositeFilter = {
+    equals?: ExtendedEntitiesObjectEqualityInput | null
+    is?: ExtendedEntitiesWhereInput | null
+    isNot?: ExtendedEntitiesWhereInput | null
+    isSet?: boolean
+  }
+
+  export type ExtendedEntitiesObjectEqualityInput = {
+    media?: MediaEntityObjectEqualityInput[]
+  }
+
+  export type ExtendedEntitiesOrderByInput = {
+    media?: MediaEntityOrderByCompositeAggregateInput
+  }
+
   export type TweetsDataTestCountOrderByAggregateInput = {
     id?: SortOrder
     id_str?: SortOrder
@@ -13824,7 +13982,6 @@ export namespace Prisma {
     conversation_id_str?: SortOrder
     created_at?: SortOrder
     display_text_range?: SortOrder
-    extended_entities?: SortOrder
     entities?: SortOrder
     favorite_count?: SortOrder
     favorited?: SortOrder
@@ -14513,9 +14670,23 @@ export namespace Prisma {
     set: number[]
   }
 
+  export type ExtendedEntitiesNullableCreateEnvelopeInput = {
+    set?: ExtendedEntitiesCreateInput | null
+  }
+
+  export type ExtendedEntitiesCreateInput = {
+    media?: MediaEntityCreateInput | MediaEntityCreateInput[]
+  }
+
   export type TweetsDataTestUpdatedisplay_text_rangeInput = {
     set?: number[]
     push?: number | number[]
+  }
+
+  export type ExtendedEntitiesNullableUpdateEnvelopeInput = {
+    set?: ExtendedEntitiesCreateInput | null
+    upsert?: ExtendedEntitiesUpsertInput
+    unset?: boolean
   }
 
   export type TweetStatusNullableCreateEnvelopeInput = {
@@ -14855,6 +15026,26 @@ export namespace Prisma {
     isSet?: boolean
   }
 
+  export type ExtendedEntitiesWhereInput = {
+    AND?: ExtendedEntitiesWhereInput | ExtendedEntitiesWhereInput[]
+    OR?: ExtendedEntitiesWhereInput[]
+    NOT?: ExtendedEntitiesWhereInput | ExtendedEntitiesWhereInput[]
+    media?: MediaEntityCompositeListFilter | MediaEntityObjectEqualityInput[]
+  }
+
+  export type MediaEntityObjectEqualityInput = {
+    display_url?: string | null
+    expanded_url?: string | null
+    url?: string | null
+    indices?: number[]
+    media_url_https?: string | null
+    type?: string | null
+  }
+
+  export type MediaEntityOrderByCompositeAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type TweetStatusWhereInput = {
     AND?: TweetStatusWhereInput | TweetStatusWhereInput[]
     OR?: TweetStatusWhereInput[]
@@ -14904,6 +15095,20 @@ export namespace Prisma {
     update: TweetUserUpdateInput
   }
 
+  export type MediaEntityCreateInput = {
+    display_url?: string | null
+    expanded_url?: string | null
+    url?: string | null
+    indices?: MediaEntityCreateindicesInput | number[]
+    media_url_https?: string | null
+    type?: string | null
+  }
+
+  export type ExtendedEntitiesUpsertInput = {
+    set: ExtendedEntitiesCreateInput | null
+    update: ExtendedEntitiesUpdateInput
+  }
+
   export type TweetStatusUpsertInput = {
     set: TweetStatusCreateInput | null
     update: TweetStatusUpdateInput
@@ -14925,6 +15130,15 @@ export namespace Prisma {
 
   export type UrlEntityOrderByCompositeAggregateInput = {
     _count?: SortOrder
+  }
+
+  export type MediaEntityCompositeListFilter = {
+    equals?: MediaEntityObjectEqualityInput[]
+    every?: MediaEntityWhereInput
+    some?: MediaEntityWhereInput
+    none?: MediaEntityWhereInput
+    isEmpty?: boolean
+    isSet?: boolean
   }
 
   export type UrlEntityCreateInput = {
@@ -14961,6 +15175,14 @@ export namespace Prisma {
     withheld_in_countries?: TweetUserUpdatewithheld_in_countriesInput | string[]
   }
 
+  export type MediaEntityCreateindicesInput = {
+    set: number[]
+  }
+
+  export type ExtendedEntitiesUpdateInput = {
+    media?: XOR<MediaEntityListUpdateEnvelopeInput, MediaEntityCreateInput> | MediaEntityCreateInput[]
+  }
+
   export type TweetStatusUpdateInput = {
     created_at?: NullableStringFieldUpdateOperationsInput | string | null
     id_str?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14992,6 +15214,18 @@ export namespace Prisma {
     urls?: UrlEntityCompositeListFilter | UrlEntityObjectEqualityInput[]
   }
 
+  export type MediaEntityWhereInput = {
+    AND?: MediaEntityWhereInput | MediaEntityWhereInput[]
+    OR?: MediaEntityWhereInput[]
+    NOT?: MediaEntityWhereInput | MediaEntityWhereInput[]
+    display_url?: StringNullableFilter<"MediaEntity"> | string | null
+    expanded_url?: StringNullableFilter<"MediaEntity"> | string | null
+    url?: StringNullableFilter<"MediaEntity"> | string | null
+    indices?: IntNullableListFilter<"MediaEntity">
+    media_url_https?: StringNullableFilter<"MediaEntity"> | string | null
+    type?: StringNullableFilter<"MediaEntity"> | string | null
+  }
+
   export type UrlEntityCreateindicesInput = {
     set: number[]
   }
@@ -15012,6 +15246,13 @@ export namespace Prisma {
     push?: string | string[]
   }
 
+  export type MediaEntityListUpdateEnvelopeInput = {
+    set?: MediaEntityCreateInput | MediaEntityCreateInput[]
+    push?: MediaEntityCreateInput | MediaEntityCreateInput[]
+    updateMany?: MediaEntityUpdateManyInput
+    deleteMany?: MediaEntityDeleteManyInput
+  }
+
   export type UrlEntityCompositeListFilter = {
     equals?: UrlEntityObjectEqualityInput[]
     every?: UrlEntityWhereInput
@@ -15024,6 +15265,15 @@ export namespace Prisma {
   export type DescriptionProfileUpsertInput = {
     set: DescriptionProfileCreateInput | null
     update: DescriptionProfileUpdateInput
+  }
+
+  export type MediaEntityUpdateManyInput = {
+    where: MediaEntityWhereInput
+    data: MediaEntityUpdateInput
+  }
+
+  export type MediaEntityDeleteManyInput = {
+    where: MediaEntityWhereInput
   }
 
   export type UrlEntityWhereInput = {
@@ -15040,11 +15290,25 @@ export namespace Prisma {
     urls?: XOR<UrlEntityListUpdateEnvelopeInput, UrlEntityCreateInput> | UrlEntityCreateInput[]
   }
 
+  export type MediaEntityUpdateInput = {
+    display_url?: NullableStringFieldUpdateOperationsInput | string | null
+    expanded_url?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    indices?: MediaEntityUpdateindicesInput | number[]
+    media_url_https?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type UrlEntityListUpdateEnvelopeInput = {
     set?: UrlEntityCreateInput | UrlEntityCreateInput[]
     push?: UrlEntityCreateInput | UrlEntityCreateInput[]
     updateMany?: UrlEntityUpdateManyInput
     deleteMany?: UrlEntityDeleteManyInput
+  }
+
+  export type MediaEntityUpdateindicesInput = {
+    set?: number[]
+    push?: number | number[]
   }
 
   export type UrlEntityUpdateManyInput = {

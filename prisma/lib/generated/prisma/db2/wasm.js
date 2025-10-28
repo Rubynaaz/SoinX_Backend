@@ -198,7 +198,6 @@ exports.Prisma.TweetsDataTestScalarFieldEnum = {
   conversation_id_str: 'conversation_id_str',
   created_at: 'created_at',
   display_text_range: 'display_text_range',
-  extended_entities: 'extended_entities',
   entities: 'entities',
   favorite_count: 'favorite_count',
   favorited: 'favorited',
