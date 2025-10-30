@@ -43,6 +43,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
         const filterUserProfile = userProfile.map(user => ({
             id: user.id,
+            name: user.name,
             description: user.description,
             verified: user.verified,
             followers_count: user.followers_count,
@@ -102,7 +103,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
                 .slice(0, 4) // <-- Take only first 10 items
                 .map(tweet => ({
                     ...tweet,
-                    userProfile: userProfile[0]?.profile_banner_url || null,
+                    userProfile: userProfile[0]?.profile_image_url_https || null,
                     userName: userProfile[0]?.id || null,
                 }))
         };

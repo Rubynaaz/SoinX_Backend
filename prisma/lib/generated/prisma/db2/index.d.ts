@@ -3195,6 +3195,7 @@ export namespace Prisma {
     profile_interstitial_type: string | null
     statuses_count: number | null
     translator_type: string | null
+    name: string | null
     user_id_str: string | null
     profile_url: string | null
     profile_image_url_https: string | null
@@ -3221,6 +3222,7 @@ export namespace Prisma {
     profile_interstitial_type: string | null
     statuses_count: number | null
     translator_type: string | null
+    name: string | null
     user_id_str: string | null
     profile_url: string | null
     profile_image_url_https: string | null
@@ -3248,6 +3250,7 @@ export namespace Prisma {
     profile_interstitial_type: number
     statuses_count: number
     translator_type: number
+    name: number
     withheld_in_countries: number
     user_id_str: number
     profile_url: number
@@ -3299,6 +3302,7 @@ export namespace Prisma {
     profile_interstitial_type?: true
     statuses_count?: true
     translator_type?: true
+    name?: true
     user_id_str?: true
     profile_url?: true
     profile_image_url_https?: true
@@ -3325,6 +3329,7 @@ export namespace Prisma {
     profile_interstitial_type?: true
     statuses_count?: true
     translator_type?: true
+    name?: true
     user_id_str?: true
     profile_url?: true
     profile_image_url_https?: true
@@ -3352,6 +3357,7 @@ export namespace Prisma {
     profile_interstitial_type?: true
     statuses_count?: true
     translator_type?: true
+    name?: true
     withheld_in_countries?: true
     user_id_str?: true
     profile_url?: true
@@ -3467,8 +3473,9 @@ export namespace Prisma {
     profile_interstitial_type: string | null
     statuses_count: number | null
     translator_type: string | null
+    name: string | null
     withheld_in_countries: string[]
-    user_id_str: string
+    user_id_str: string | null
     profile_url: string | null
     profile_image_url_https: string | null
     verified: boolean | null
@@ -3515,6 +3522,7 @@ export namespace Prisma {
     profile_interstitial_type?: boolean
     statuses_count?: boolean
     translator_type?: boolean
+    name?: boolean
     withheld_in_countries?: boolean
     user_id_str?: boolean
     profile_url?: boolean
@@ -3545,6 +3553,7 @@ export namespace Prisma {
     profile_interstitial_type?: boolean
     statuses_count?: boolean
     translator_type?: boolean
+    name?: boolean
     withheld_in_countries?: boolean
     user_id_str?: boolean
     profile_url?: boolean
@@ -3553,7 +3562,7 @@ export namespace Prisma {
     updated_time?: boolean
   }
 
-  export type UserProfileTestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "default_profile" | "default_profile_image" | "description" | "entities" | "fast_followers_count" | "favourites_count" | "followers_count" | "friends_count" | "has_custom_timelines" | "is_translator" | "listed_count" | "media_count" | "normal_followers_count" | "pinned_tweet_ids_str" | "possibly_sensitive" | "profile_banner_url" | "profile_interstitial_type" | "statuses_count" | "translator_type" | "withheld_in_countries" | "user_id_str" | "profile_url" | "profile_image_url_https" | "verified" | "updated_time", ExtArgs["result"]["userProfileTest"]>
+  export type UserProfileTestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "default_profile" | "default_profile_image" | "description" | "entities" | "fast_followers_count" | "favourites_count" | "followers_count" | "friends_count" | "has_custom_timelines" | "is_translator" | "listed_count" | "media_count" | "normal_followers_count" | "pinned_tweet_ids_str" | "possibly_sensitive" | "profile_banner_url" | "profile_interstitial_type" | "statuses_count" | "translator_type" | "name" | "withheld_in_countries" | "user_id_str" | "profile_url" | "profile_image_url_https" | "verified" | "updated_time", ExtArgs["result"]["userProfileTest"]>
   export type UserProfileTestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $UserProfileTestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3579,8 +3588,9 @@ export namespace Prisma {
       profile_interstitial_type: string | null
       statuses_count: number | null
       translator_type: string | null
+      name: string | null
       withheld_in_countries: string[]
-      user_id_str: string
+      user_id_str: string | null
       profile_url: string | null
       profile_image_url_https: string | null
       verified: boolean | null
@@ -3998,6 +4008,7 @@ export namespace Prisma {
     readonly profile_interstitial_type: FieldRef<"UserProfileTest", 'String'>
     readonly statuses_count: FieldRef<"UserProfileTest", 'Int'>
     readonly translator_type: FieldRef<"UserProfileTest", 'String'>
+    readonly name: FieldRef<"UserProfileTest", 'String'>
     readonly withheld_in_countries: FieldRef<"UserProfileTest", 'String[]'>
     readonly user_id_str: FieldRef<"UserProfileTest", 'String'>
     readonly profile_url: FieldRef<"UserProfileTest", 'String'>
@@ -10155,6 +10166,7 @@ export namespace Prisma {
     profile_interstitial_type: 'profile_interstitial_type',
     statuses_count: 'statuses_count',
     translator_type: 'translator_type',
+    name: 'name',
     withheld_in_countries: 'withheld_in_countries',
     user_id_str: 'user_id_str',
     profile_url: 'profile_url',
@@ -10623,8 +10635,9 @@ export namespace Prisma {
     profile_interstitial_type?: StringNullableFilter<"UserProfileTest"> | string | null
     statuses_count?: IntNullableFilter<"UserProfileTest"> | number | null
     translator_type?: StringNullableFilter<"UserProfileTest"> | string | null
+    name?: StringNullableFilter<"UserProfileTest"> | string | null
     withheld_in_countries?: StringNullableListFilter<"UserProfileTest">
-    user_id_str?: StringFilter<"UserProfileTest"> | string
+    user_id_str?: StringNullableFilter<"UserProfileTest"> | string | null
     profile_url?: StringNullableFilter<"UserProfileTest"> | string | null
     profile_image_url_https?: StringNullableFilter<"UserProfileTest"> | string | null
     verified?: BoolNullableFilter<"UserProfileTest"> | boolean | null
@@ -10652,6 +10665,7 @@ export namespace Prisma {
     profile_interstitial_type?: SortOrder
     statuses_count?: SortOrder
     translator_type?: SortOrder
+    name?: SortOrder
     withheld_in_countries?: SortOrder
     user_id_str?: SortOrder
     profile_url?: SortOrder
@@ -10684,8 +10698,9 @@ export namespace Prisma {
     profile_interstitial_type?: StringNullableFilter<"UserProfileTest"> | string | null
     statuses_count?: IntNullableFilter<"UserProfileTest"> | number | null
     translator_type?: StringNullableFilter<"UserProfileTest"> | string | null
+    name?: StringNullableFilter<"UserProfileTest"> | string | null
     withheld_in_countries?: StringNullableListFilter<"UserProfileTest">
-    user_id_str?: StringFilter<"UserProfileTest"> | string
+    user_id_str?: StringNullableFilter<"UserProfileTest"> | string | null
     profile_url?: StringNullableFilter<"UserProfileTest"> | string | null
     profile_image_url_https?: StringNullableFilter<"UserProfileTest"> | string | null
     verified?: BoolNullableFilter<"UserProfileTest"> | boolean | null
@@ -10712,6 +10727,7 @@ export namespace Prisma {
     profile_interstitial_type?: SortOrder
     statuses_count?: SortOrder
     translator_type?: SortOrder
+    name?: SortOrder
     withheld_in_countries?: SortOrder
     user_id_str?: SortOrder
     profile_url?: SortOrder
@@ -10748,8 +10764,9 @@ export namespace Prisma {
     profile_interstitial_type?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
     statuses_count?: IntNullableWithAggregatesFilter<"UserProfileTest"> | number | null
     translator_type?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
+    name?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
     withheld_in_countries?: StringNullableListFilter<"UserProfileTest">
-    user_id_str?: StringWithAggregatesFilter<"UserProfileTest"> | string
+    user_id_str?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
     profile_url?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
     profile_image_url_https?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
     verified?: BoolNullableWithAggregatesFilter<"UserProfileTest"> | boolean | null
@@ -11933,8 +11950,9 @@ export namespace Prisma {
     profile_interstitial_type?: string | null
     statuses_count?: number | null
     translator_type?: string | null
+    name?: string | null
     withheld_in_countries?: UserProfileTestCreatewithheld_in_countriesInput | string[]
-    user_id_str: string
+    user_id_str?: string | null
     profile_url?: string | null
     profile_image_url_https?: string | null
     verified?: boolean | null
@@ -11962,8 +11980,9 @@ export namespace Prisma {
     profile_interstitial_type?: string | null
     statuses_count?: number | null
     translator_type?: string | null
+    name?: string | null
     withheld_in_countries?: UserProfileTestCreatewithheld_in_countriesInput | string[]
-    user_id_str: string
+    user_id_str?: string | null
     profile_url?: string | null
     profile_image_url_https?: string | null
     verified?: boolean | null
@@ -11990,8 +12009,9 @@ export namespace Prisma {
     profile_interstitial_type?: NullableStringFieldUpdateOperationsInput | string | null
     statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
     translator_type?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     withheld_in_countries?: UserProfileTestUpdatewithheld_in_countriesInput | string[]
-    user_id_str?: StringFieldUpdateOperationsInput | string
+    user_id_str?: NullableStringFieldUpdateOperationsInput | string | null
     profile_url?: NullableStringFieldUpdateOperationsInput | string | null
     profile_image_url_https?: NullableStringFieldUpdateOperationsInput | string | null
     verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12018,8 +12038,9 @@ export namespace Prisma {
     profile_interstitial_type?: NullableStringFieldUpdateOperationsInput | string | null
     statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
     translator_type?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     withheld_in_countries?: UserProfileTestUpdatewithheld_in_countriesInput | string[]
-    user_id_str?: StringFieldUpdateOperationsInput | string
+    user_id_str?: NullableStringFieldUpdateOperationsInput | string | null
     profile_url?: NullableStringFieldUpdateOperationsInput | string | null
     profile_image_url_https?: NullableStringFieldUpdateOperationsInput | string | null
     verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12047,8 +12068,9 @@ export namespace Prisma {
     profile_interstitial_type?: string | null
     statuses_count?: number | null
     translator_type?: string | null
+    name?: string | null
     withheld_in_countries?: UserProfileTestCreatewithheld_in_countriesInput | string[]
-    user_id_str: string
+    user_id_str?: string | null
     profile_url?: string | null
     profile_image_url_https?: string | null
     verified?: boolean | null
@@ -12075,8 +12097,9 @@ export namespace Prisma {
     profile_interstitial_type?: NullableStringFieldUpdateOperationsInput | string | null
     statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
     translator_type?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     withheld_in_countries?: UserProfileTestUpdatewithheld_in_countriesInput | string[]
-    user_id_str?: StringFieldUpdateOperationsInput | string
+    user_id_str?: NullableStringFieldUpdateOperationsInput | string | null
     profile_url?: NullableStringFieldUpdateOperationsInput | string | null
     profile_image_url_https?: NullableStringFieldUpdateOperationsInput | string | null
     verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12103,8 +12126,9 @@ export namespace Prisma {
     profile_interstitial_type?: NullableStringFieldUpdateOperationsInput | string | null
     statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
     translator_type?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     withheld_in_countries?: UserProfileTestUpdatewithheld_in_countriesInput | string[]
-    user_id_str?: StringFieldUpdateOperationsInput | string
+    user_id_str?: NullableStringFieldUpdateOperationsInput | string | null
     profile_url?: NullableStringFieldUpdateOperationsInput | string | null
     profile_image_url_https?: NullableStringFieldUpdateOperationsInput | string | null
     verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -13691,6 +13715,7 @@ export namespace Prisma {
     profile_interstitial_type?: SortOrder
     statuses_count?: SortOrder
     translator_type?: SortOrder
+    name?: SortOrder
     withheld_in_countries?: SortOrder
     user_id_str?: SortOrder
     profile_url?: SortOrder
@@ -13729,6 +13754,7 @@ export namespace Prisma {
     profile_interstitial_type?: SortOrder
     statuses_count?: SortOrder
     translator_type?: SortOrder
+    name?: SortOrder
     user_id_str?: SortOrder
     profile_url?: SortOrder
     profile_image_url_https?: SortOrder
@@ -13755,6 +13781,7 @@ export namespace Prisma {
     profile_interstitial_type?: SortOrder
     statuses_count?: SortOrder
     translator_type?: SortOrder
+    name?: SortOrder
     user_id_str?: SortOrder
     profile_url?: SortOrder
     profile_image_url_https?: SortOrder

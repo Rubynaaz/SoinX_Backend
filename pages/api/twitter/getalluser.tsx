@@ -14,6 +14,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         const allUsers = await db2.userProfileTest.findMany({
             select: {
                 user_id_str: true,
+                name: true,
                 followers_count: true,
                 profile_image_url_https: true,
                 verified: true,
@@ -71,8 +72,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
             // const engagementScore = ((totalLikes + totalRetweets + totalQuotes + totalReplies) / (T * (F + (totalViews/T)))) * 100;
             // const engagementScore = ((totalLikes + totalRetweets + totalQuotes + totalReplies) / (T * F)) * 100;
-            const engagementScore = ((totalLikes + totalRetweets + totalQuotes + totalReplies) / totalViews) * 100;
+            // const engagementScore = ((totalLikes + totalRetweets + totalQuotes + totalReplies) / totalViews) * 100;
             // const engagementScore = (T / totalViews) * 100;
+            const engagementScore = totalViews;
 
             return {
                 ...user,

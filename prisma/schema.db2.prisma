@@ -59,8 +59,9 @@ model UserProfileTest {
     profile_interstitial_type String?
     statuses_count            Int?
     translator_type           String?
+    name                      String?
     withheld_in_countries     String[]
-    user_id_str               String
+    user_id_str               String?
     profile_url               String?
     profile_image_url_https   String?
     verified                  Boolean?
