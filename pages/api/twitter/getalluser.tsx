@@ -22,9 +22,13 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         });
 
         // --- 2️⃣ Fetch all tweets for those users ---
+        const userIds = allUsers
+            .map(u => u.user_id_str)
+            .filter((id): id is string => id !== null);
+
         const tweetsData = await db2.tweetsDataTest.findMany({
             where: {
-                user_id_str: { in: allUsers.map(u => u.user_id_str) },
+                user_id_str: { in: userIds },
             },
             select: {
                 user_id_str: true,
@@ -49,7 +53,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
         // --- 4️⃣ Calculate Engagement Score per user ---
         const engagementScores = allUsers.map(user => {
-            const userTweets = tweetsByUser[user.user_id_str] || [];
+            const userIdStr = user.user_id_str ?? "";
+            const userTweets = userIdStr ? (tweetsByUser[userIdStr] || []) : [];
             const T = userTweets.length;
             const F = user.followers_count || 0;
 

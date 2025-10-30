@@ -56,6 +56,7 @@ model UserProfileTest {
     pinned_tweet_ids_str      String[]
     possibly_sensitive        Boolean?
     profile_banner_url        String?
+    location                  String?
     profile_interstitial_type String?
     statuses_count            Int?
     translator_type           String?
@@ -114,7 +115,7 @@ model TweetsData {
 
 /// Duplicate of TweetsData mapped to tweets_data_test collection
 model TweetsDataTest {
-    id                  String     @id @default(auto()) @map("_id") @db2.ObjectId
+    id                  String            @id @default(auto()) @map("_id") @db2.ObjectId
     id_str              String
     bookmark_count      Int?
     bookmarked          Boolean?
@@ -147,12 +148,12 @@ type ExtendedEntities {
 }
 
 type MediaEntity {
-    display_url String?
-    expanded_url String?
-    url String?
-    indices Int[]
+    display_url     String?
+    expanded_url    String?
+    url             String?
+    indices         Int[]
     media_url_https String?
-    type String?
+    type            String?
 }
 
 /// Minimal user shape embedded in a tweet

@@ -56,6 +56,7 @@ model UserProfileTest {
   pinned_tweet_ids_str      String[]
   possibly_sensitive        Boolean?
   profile_banner_url        String?
+  location                  String?
   profile_interstitial_type String?
   statuses_count            Int?
   translator_type           String?

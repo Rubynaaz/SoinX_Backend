@@ -3192,6 +3192,7 @@ export namespace Prisma {
     normal_followers_count: number | null
     possibly_sensitive: boolean | null
     profile_banner_url: string | null
+    location: string | null
     profile_interstitial_type: string | null
     statuses_count: number | null
     translator_type: string | null
@@ -3219,6 +3220,7 @@ export namespace Prisma {
     normal_followers_count: number | null
     possibly_sensitive: boolean | null
     profile_banner_url: string | null
+    location: string | null
     profile_interstitial_type: string | null
     statuses_count: number | null
     translator_type: string | null
@@ -3247,6 +3249,7 @@ export namespace Prisma {
     pinned_tweet_ids_str: number
     possibly_sensitive: number
     profile_banner_url: number
+    location: number
     profile_interstitial_type: number
     statuses_count: number
     translator_type: number
@@ -3299,6 +3302,7 @@ export namespace Prisma {
     normal_followers_count?: true
     possibly_sensitive?: true
     profile_banner_url?: true
+    location?: true
     profile_interstitial_type?: true
     statuses_count?: true
     translator_type?: true
@@ -3326,6 +3330,7 @@ export namespace Prisma {
     normal_followers_count?: true
     possibly_sensitive?: true
     profile_banner_url?: true
+    location?: true
     profile_interstitial_type?: true
     statuses_count?: true
     translator_type?: true
@@ -3354,6 +3359,7 @@ export namespace Prisma {
     pinned_tweet_ids_str?: true
     possibly_sensitive?: true
     profile_banner_url?: true
+    location?: true
     profile_interstitial_type?: true
     statuses_count?: true
     translator_type?: true
@@ -3470,6 +3476,7 @@ export namespace Prisma {
     pinned_tweet_ids_str: string[]
     possibly_sensitive: boolean | null
     profile_banner_url: string | null
+    location: string | null
     profile_interstitial_type: string | null
     statuses_count: number | null
     translator_type: string | null
@@ -3519,6 +3526,7 @@ export namespace Prisma {
     pinned_tweet_ids_str?: boolean
     possibly_sensitive?: boolean
     profile_banner_url?: boolean
+    location?: boolean
     profile_interstitial_type?: boolean
     statuses_count?: boolean
     translator_type?: boolean
@@ -3550,6 +3558,7 @@ export namespace Prisma {
     pinned_tweet_ids_str?: boolean
     possibly_sensitive?: boolean
     profile_banner_url?: boolean
+    location?: boolean
     profile_interstitial_type?: boolean
     statuses_count?: boolean
     translator_type?: boolean
@@ -3562,7 +3571,7 @@ export namespace Prisma {
     updated_time?: boolean
   }
 
-  export type UserProfileTestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "default_profile" | "default_profile_image" | "description" | "entities" | "fast_followers_count" | "favourites_count" | "followers_count" | "friends_count" | "has_custom_timelines" | "is_translator" | "listed_count" | "media_count" | "normal_followers_count" | "pinned_tweet_ids_str" | "possibly_sensitive" | "profile_banner_url" | "profile_interstitial_type" | "statuses_count" | "translator_type" | "name" | "withheld_in_countries" | "user_id_str" | "profile_url" | "profile_image_url_https" | "verified" | "updated_time", ExtArgs["result"]["userProfileTest"]>
+  export type UserProfileTestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "default_profile" | "default_profile_image" | "description" | "entities" | "fast_followers_count" | "favourites_count" | "followers_count" | "friends_count" | "has_custom_timelines" | "is_translator" | "listed_count" | "media_count" | "normal_followers_count" | "pinned_tweet_ids_str" | "possibly_sensitive" | "profile_banner_url" | "location" | "profile_interstitial_type" | "statuses_count" | "translator_type" | "name" | "withheld_in_countries" | "user_id_str" | "profile_url" | "profile_image_url_https" | "verified" | "updated_time", ExtArgs["result"]["userProfileTest"]>
   export type UserProfileTestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $UserProfileTestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3585,6 +3594,7 @@ export namespace Prisma {
       pinned_tweet_ids_str: string[]
       possibly_sensitive: boolean | null
       profile_banner_url: string | null
+      location: string | null
       profile_interstitial_type: string | null
       statuses_count: number | null
       translator_type: string | null
@@ -4005,6 +4015,7 @@ export namespace Prisma {
     readonly pinned_tweet_ids_str: FieldRef<"UserProfileTest", 'String[]'>
     readonly possibly_sensitive: FieldRef<"UserProfileTest", 'Boolean'>
     readonly profile_banner_url: FieldRef<"UserProfileTest", 'String'>
+    readonly location: FieldRef<"UserProfileTest", 'String'>
     readonly profile_interstitial_type: FieldRef<"UserProfileTest", 'String'>
     readonly statuses_count: FieldRef<"UserProfileTest", 'Int'>
     readonly translator_type: FieldRef<"UserProfileTest", 'String'>
@@ -10163,6 +10174,7 @@ export namespace Prisma {
     pinned_tweet_ids_str: 'pinned_tweet_ids_str',
     possibly_sensitive: 'possibly_sensitive',
     profile_banner_url: 'profile_banner_url',
+    location: 'location',
     profile_interstitial_type: 'profile_interstitial_type',
     statuses_count: 'statuses_count',
     translator_type: 'translator_type',
@@ -10632,6 +10644,7 @@ export namespace Prisma {
     pinned_tweet_ids_str?: StringNullableListFilter<"UserProfileTest">
     possibly_sensitive?: BoolNullableFilter<"UserProfileTest"> | boolean | null
     profile_banner_url?: StringNullableFilter<"UserProfileTest"> | string | null
+    location?: StringNullableFilter<"UserProfileTest"> | string | null
     profile_interstitial_type?: StringNullableFilter<"UserProfileTest"> | string | null
     statuses_count?: IntNullableFilter<"UserProfileTest"> | number | null
     translator_type?: StringNullableFilter<"UserProfileTest"> | string | null
@@ -10662,6 +10675,7 @@ export namespace Prisma {
     pinned_tweet_ids_str?: SortOrder
     possibly_sensitive?: SortOrder
     profile_banner_url?: SortOrder
+    location?: SortOrder
     profile_interstitial_type?: SortOrder
     statuses_count?: SortOrder
     translator_type?: SortOrder
@@ -10695,6 +10709,7 @@ export namespace Prisma {
     pinned_tweet_ids_str?: StringNullableListFilter<"UserProfileTest">
     possibly_sensitive?: BoolNullableFilter<"UserProfileTest"> | boolean | null
     profile_banner_url?: StringNullableFilter<"UserProfileTest"> | string | null
+    location?: StringNullableFilter<"UserProfileTest"> | string | null
     profile_interstitial_type?: StringNullableFilter<"UserProfileTest"> | string | null
     statuses_count?: IntNullableFilter<"UserProfileTest"> | number | null
     translator_type?: StringNullableFilter<"UserProfileTest"> | string | null
@@ -10724,6 +10739,7 @@ export namespace Prisma {
     pinned_tweet_ids_str?: SortOrder
     possibly_sensitive?: SortOrder
     profile_banner_url?: SortOrder
+    location?: SortOrder
     profile_interstitial_type?: SortOrder
     statuses_count?: SortOrder
     translator_type?: SortOrder
@@ -10761,6 +10777,7 @@ export namespace Prisma {
     pinned_tweet_ids_str?: StringNullableListFilter<"UserProfileTest">
     possibly_sensitive?: BoolNullableWithAggregatesFilter<"UserProfileTest"> | boolean | null
     profile_banner_url?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
+    location?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
     profile_interstitial_type?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
     statuses_count?: IntNullableWithAggregatesFilter<"UserProfileTest"> | number | null
     translator_type?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
@@ -11947,6 +11964,7 @@ export namespace Prisma {
     pinned_tweet_ids_str?: UserProfileTestCreatepinned_tweet_ids_strInput | string[]
     possibly_sensitive?: boolean | null
     profile_banner_url?: string | null
+    location?: string | null
     profile_interstitial_type?: string | null
     statuses_count?: number | null
     translator_type?: string | null
@@ -11977,6 +11995,7 @@ export namespace Prisma {
     pinned_tweet_ids_str?: UserProfileTestCreatepinned_tweet_ids_strInput | string[]
     possibly_sensitive?: boolean | null
     profile_banner_url?: string | null
+    location?: string | null
     profile_interstitial_type?: string | null
     statuses_count?: number | null
     translator_type?: string | null
@@ -12006,6 +12025,7 @@ export namespace Prisma {
     pinned_tweet_ids_str?: UserProfileTestUpdatepinned_tweet_ids_strInput | string[]
     possibly_sensitive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     profile_banner_url?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     profile_interstitial_type?: NullableStringFieldUpdateOperationsInput | string | null
     statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
     translator_type?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12035,6 +12055,7 @@ export namespace Prisma {
     pinned_tweet_ids_str?: UserProfileTestUpdatepinned_tweet_ids_strInput | string[]
     possibly_sensitive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     profile_banner_url?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     profile_interstitial_type?: NullableStringFieldUpdateOperationsInput | string | null
     statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
     translator_type?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12065,6 +12086,7 @@ export namespace Prisma {
     pinned_tweet_ids_str?: UserProfileTestCreatepinned_tweet_ids_strInput | string[]
     possibly_sensitive?: boolean | null
     profile_banner_url?: string | null
+    location?: string | null
     profile_interstitial_type?: string | null
     statuses_count?: number | null
     translator_type?: string | null
@@ -12094,6 +12116,7 @@ export namespace Prisma {
     pinned_tweet_ids_str?: UserProfileTestUpdatepinned_tweet_ids_strInput | string[]
     possibly_sensitive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     profile_banner_url?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     profile_interstitial_type?: NullableStringFieldUpdateOperationsInput | string | null
     statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
     translator_type?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12123,6 +12146,7 @@ export namespace Prisma {
     pinned_tweet_ids_str?: UserProfileTestUpdatepinned_tweet_ids_strInput | string[]
     possibly_sensitive?: NullableBoolFieldUpdateOperationsInput | boolean | null
     profile_banner_url?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     profile_interstitial_type?: NullableStringFieldUpdateOperationsInput | string | null
     statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
     translator_type?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13712,6 +13736,7 @@ export namespace Prisma {
     pinned_tweet_ids_str?: SortOrder
     possibly_sensitive?: SortOrder
     profile_banner_url?: SortOrder
+    location?: SortOrder
     profile_interstitial_type?: SortOrder
     statuses_count?: SortOrder
     translator_type?: SortOrder
@@ -13751,6 +13776,7 @@ export namespace Prisma {
     normal_followers_count?: SortOrder
     possibly_sensitive?: SortOrder
     profile_banner_url?: SortOrder
+    location?: SortOrder
     profile_interstitial_type?: SortOrder
     statuses_count?: SortOrder
     translator_type?: SortOrder
@@ -13778,6 +13804,7 @@ export namespace Prisma {
     normal_followers_count?: SortOrder
     possibly_sensitive?: SortOrder
     profile_banner_url?: SortOrder
+    location?: SortOrder
     profile_interstitial_type?: SortOrder
     statuses_count?: SortOrder
     translator_type?: SortOrder

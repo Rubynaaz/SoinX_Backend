@@ -1,10 +1,13 @@
 import { PrismaClient as PrismaClientDb2 } from '../../../prisma/lib/generated/prisma/db2';
 import type { NextApiRequest, NextApiResponse } from "next";
 import allowCors from "@/lib/allowCors";
+import { use } from 'react';
 
 const db2 = new PrismaClientDb2();
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+
+    
     if (req.method !== "GET") {
         return res.status(405).json({ message: "Method not allowed" });
     }
@@ -45,6 +48,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
             id: user.id,
             name: user.name,
             description: user.description,
+            location: user.location,
             verified: user.verified,
             followers_count: user.followers_count,
             friends_count: user.friends_count,
@@ -86,16 +90,16 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         const filterTweetsData = tweetsData.map(tweet => ({
             id: tweet.id,
             tweetText: tweet.full_text,
-            created_at : tweet.created_at,
-            bookmark_count : tweet.bookmark_count,
-            views_count : tweet.views_count || 0,
-            favorite_count : tweet.favorite_count,
-            reply_count : tweet.reply_count,
-            retweet_count : tweet.retweet_count,
+            created_at: tweet.created_at,
+            bookmark_count: tweet.bookmark_count,
+            views_count: tweet.views_count || 0,
+            favorite_count: tweet.favorite_count,
+            reply_count: tweet.reply_count,
+            retweet_count: tweet.retweet_count,
             twitterUrl: tweet.twitterUrl,
-            media_url_https : tweet.extended_entities?.media[0]?.media_url_https,
-            lang : tweet.lang,
-            quote_count : tweet.quote_count,
+            media_url_https: tweet.extended_entities?.media[0]?.media_url_https,
+            lang: tweet.lang,
+            quote_count: tweet.quote_count,
         }));
 
         const TweetsData = {
@@ -119,7 +123,11 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         const averageRetweetCount = filterTweetsData.reduce((acc, tweet) => acc + (tweet.retweet_count || 0), 0) / filterTweetsData.length;
         console.log('averageRetweetCount', averageRetweetCount);
         const averageQuoteCount = filterTweetsData.reduce((acc, tweet) => acc + (tweet.quote_count || 0), 0) / filterTweetsData.length;
-        console.log('averageQuoteCount', averageQuoteCount);
+        const totalLikesCount = filterTweetsData.reduce((acc, tweet) => acc + (tweet.favorite_count || 0), 0)
+        console.log('totalLikesCount', totalLikesCount);
+        const totalReplyCount = filterTweetsData.reduce((acc, tweet) => acc + (tweet.retweet_count || 0), 0)
+        const totalViewCount = filterTweetsData.reduce((acc, tweet) => acc + (Number(tweet.views_count) || 0), 0)
+        console.log('totalLikesCount', totalLikesCount);
 
 
         return res.status(200).json({
@@ -129,6 +137,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
                 averageReplyCount: averageReplyCount,
                 averageRetweetCount: averageRetweetCount,
                 averageQuoteCount: averageQuoteCount,
+                totalLikesCount: totalLikesCount,
+                totalReplyCount: totalReplyCount,
+                totalViewCount: totalViewCount
             },
             tweetsData: TweetsData,
             followersData: top10Followers,

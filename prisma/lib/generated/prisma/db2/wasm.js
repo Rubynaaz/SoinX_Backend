@@ -156,6 +156,7 @@ exports.Prisma.UserProfileTestScalarFieldEnum = {
   pinned_tweet_ids_str: 'pinned_tweet_ids_str',
   possibly_sensitive: 'possibly_sensitive',
   profile_banner_url: 'profile_banner_url',
+  location: 'location',
   profile_interstitial_type: 'profile_interstitial_type',
   statuses_count: 'statuses_count',
   translator_type: 'translator_type',
