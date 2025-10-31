@@ -48,6 +48,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
             id: user.id,
             name: user.name,
             description: user.description,
+            url: user.url,
             location: user.location,
             verified: user.verified,
             followers_count: user.followers_count,

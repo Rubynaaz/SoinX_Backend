@@ -1310,13 +1310,14 @@ export namespace Prisma {
 
   export type EntitiesProfileSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     description?: boolean | DescriptionProfileDefaultArgs<ExtArgs>
+    url?: boolean | UrlEntityDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["entitiesProfile"]>
 
 
 
   export type EntitiesProfileSelectScalar = {}
 
-  export type EntitiesProfileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"description", ExtArgs["result"]["entitiesProfile"]>
+  export type EntitiesProfileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"description" | "url", ExtArgs["result"]["entitiesProfile"]>
   export type EntitiesProfileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $EntitiesProfilePayload = {
@@ -1325,6 +1326,7 @@ export namespace Prisma {
     scalars: {}
     composites: {
       description: Prisma.$DescriptionProfilePayload | null
+      url: Prisma.$UrlEntityPayload | null
     }
   }
 
@@ -3197,6 +3199,7 @@ export namespace Prisma {
     statuses_count: number | null
     translator_type: string | null
     name: string | null
+    url: string | null
     user_id_str: string | null
     profile_url: string | null
     profile_image_url_https: string | null
@@ -3225,6 +3228,7 @@ export namespace Prisma {
     statuses_count: number | null
     translator_type: string | null
     name: string | null
+    url: string | null
     user_id_str: string | null
     profile_url: string | null
     profile_image_url_https: string | null
@@ -3254,6 +3258,7 @@ export namespace Prisma {
     statuses_count: number
     translator_type: number
     name: number
+    url: number
     withheld_in_countries: number
     user_id_str: number
     profile_url: number
@@ -3307,6 +3312,7 @@ export namespace Prisma {
     statuses_count?: true
     translator_type?: true
     name?: true
+    url?: true
     user_id_str?: true
     profile_url?: true
     profile_image_url_https?: true
@@ -3335,6 +3341,7 @@ export namespace Prisma {
     statuses_count?: true
     translator_type?: true
     name?: true
+    url?: true
     user_id_str?: true
     profile_url?: true
     profile_image_url_https?: true
@@ -3364,6 +3371,7 @@ export namespace Prisma {
     statuses_count?: true
     translator_type?: true
     name?: true
+    url?: true
     withheld_in_countries?: true
     user_id_str?: true
     profile_url?: true
@@ -3481,6 +3489,7 @@ export namespace Prisma {
     statuses_count: number | null
     translator_type: string | null
     name: string | null
+    url: string | null
     withheld_in_countries: string[]
     user_id_str: string | null
     profile_url: string | null
@@ -3531,6 +3540,7 @@ export namespace Prisma {
     statuses_count?: boolean
     translator_type?: boolean
     name?: boolean
+    url?: boolean
     withheld_in_countries?: boolean
     user_id_str?: boolean
     profile_url?: boolean
@@ -3563,6 +3573,7 @@ export namespace Prisma {
     statuses_count?: boolean
     translator_type?: boolean
     name?: boolean
+    url?: boolean
     withheld_in_countries?: boolean
     user_id_str?: boolean
     profile_url?: boolean
@@ -3571,7 +3582,7 @@ export namespace Prisma {
     updated_time?: boolean
   }
 
-  export type UserProfileTestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "default_profile" | "default_profile_image" | "description" | "entities" | "fast_followers_count" | "favourites_count" | "followers_count" | "friends_count" | "has_custom_timelines" | "is_translator" | "listed_count" | "media_count" | "normal_followers_count" | "pinned_tweet_ids_str" | "possibly_sensitive" | "profile_banner_url" | "location" | "profile_interstitial_type" | "statuses_count" | "translator_type" | "name" | "withheld_in_countries" | "user_id_str" | "profile_url" | "profile_image_url_https" | "verified" | "updated_time", ExtArgs["result"]["userProfileTest"]>
+  export type UserProfileTestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "default_profile" | "default_profile_image" | "description" | "entities" | "fast_followers_count" | "favourites_count" | "followers_count" | "friends_count" | "has_custom_timelines" | "is_translator" | "listed_count" | "media_count" | "normal_followers_count" | "pinned_tweet_ids_str" | "possibly_sensitive" | "profile_banner_url" | "location" | "profile_interstitial_type" | "statuses_count" | "translator_type" | "name" | "url" | "withheld_in_countries" | "user_id_str" | "profile_url" | "profile_image_url_https" | "verified" | "updated_time", ExtArgs["result"]["userProfileTest"]>
   export type UserProfileTestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $UserProfileTestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3599,6 +3610,7 @@ export namespace Prisma {
       statuses_count: number | null
       translator_type: string | null
       name: string | null
+      url: string | null
       withheld_in_countries: string[]
       user_id_str: string | null
       profile_url: string | null
@@ -4020,6 +4032,7 @@ export namespace Prisma {
     readonly statuses_count: FieldRef<"UserProfileTest", 'Int'>
     readonly translator_type: FieldRef<"UserProfileTest", 'String'>
     readonly name: FieldRef<"UserProfileTest", 'String'>
+    readonly url: FieldRef<"UserProfileTest", 'String'>
     readonly withheld_in_countries: FieldRef<"UserProfileTest", 'String[]'>
     readonly user_id_str: FieldRef<"UserProfileTest", 'String'>
     readonly profile_url: FieldRef<"UserProfileTest", 'String'>
@@ -10179,6 +10192,7 @@ export namespace Prisma {
     statuses_count: 'statuses_count',
     translator_type: 'translator_type',
     name: 'name',
+    url: 'url',
     withheld_in_countries: 'withheld_in_countries',
     user_id_str: 'user_id_str',
     profile_url: 'profile_url',
@@ -10649,6 +10663,7 @@ export namespace Prisma {
     statuses_count?: IntNullableFilter<"UserProfileTest"> | number | null
     translator_type?: StringNullableFilter<"UserProfileTest"> | string | null
     name?: StringNullableFilter<"UserProfileTest"> | string | null
+    url?: StringNullableFilter<"UserProfileTest"> | string | null
     withheld_in_countries?: StringNullableListFilter<"UserProfileTest">
     user_id_str?: StringNullableFilter<"UserProfileTest"> | string | null
     profile_url?: StringNullableFilter<"UserProfileTest"> | string | null
@@ -10680,6 +10695,7 @@ export namespace Prisma {
     statuses_count?: SortOrder
     translator_type?: SortOrder
     name?: SortOrder
+    url?: SortOrder
     withheld_in_countries?: SortOrder
     user_id_str?: SortOrder
     profile_url?: SortOrder
@@ -10714,6 +10730,7 @@ export namespace Prisma {
     statuses_count?: IntNullableFilter<"UserProfileTest"> | number | null
     translator_type?: StringNullableFilter<"UserProfileTest"> | string | null
     name?: StringNullableFilter<"UserProfileTest"> | string | null
+    url?: StringNullableFilter<"UserProfileTest"> | string | null
     withheld_in_countries?: StringNullableListFilter<"UserProfileTest">
     user_id_str?: StringNullableFilter<"UserProfileTest"> | string | null
     profile_url?: StringNullableFilter<"UserProfileTest"> | string | null
@@ -10744,6 +10761,7 @@ export namespace Prisma {
     statuses_count?: SortOrder
     translator_type?: SortOrder
     name?: SortOrder
+    url?: SortOrder
     withheld_in_countries?: SortOrder
     user_id_str?: SortOrder
     profile_url?: SortOrder
@@ -10782,6 +10800,7 @@ export namespace Prisma {
     statuses_count?: IntNullableWithAggregatesFilter<"UserProfileTest"> | number | null
     translator_type?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
     name?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
+    url?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
     withheld_in_countries?: StringNullableListFilter<"UserProfileTest">
     user_id_str?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
     profile_url?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
@@ -11969,6 +11988,7 @@ export namespace Prisma {
     statuses_count?: number | null
     translator_type?: string | null
     name?: string | null
+    url?: string | null
     withheld_in_countries?: UserProfileTestCreatewithheld_in_countriesInput | string[]
     user_id_str?: string | null
     profile_url?: string | null
@@ -12000,6 +12020,7 @@ export namespace Prisma {
     statuses_count?: number | null
     translator_type?: string | null
     name?: string | null
+    url?: string | null
     withheld_in_countries?: UserProfileTestCreatewithheld_in_countriesInput | string[]
     user_id_str?: string | null
     profile_url?: string | null
@@ -12030,6 +12051,7 @@ export namespace Prisma {
     statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
     translator_type?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
     withheld_in_countries?: UserProfileTestUpdatewithheld_in_countriesInput | string[]
     user_id_str?: NullableStringFieldUpdateOperationsInput | string | null
     profile_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12060,6 +12082,7 @@ export namespace Prisma {
     statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
     translator_type?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
     withheld_in_countries?: UserProfileTestUpdatewithheld_in_countriesInput | string[]
     user_id_str?: NullableStringFieldUpdateOperationsInput | string | null
     profile_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12091,6 +12114,7 @@ export namespace Prisma {
     statuses_count?: number | null
     translator_type?: string | null
     name?: string | null
+    url?: string | null
     withheld_in_countries?: UserProfileTestCreatewithheld_in_countriesInput | string[]
     user_id_str?: string | null
     profile_url?: string | null
@@ -12121,6 +12145,7 @@ export namespace Prisma {
     statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
     translator_type?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
     withheld_in_countries?: UserProfileTestUpdatewithheld_in_countriesInput | string[]
     user_id_str?: NullableStringFieldUpdateOperationsInput | string | null
     profile_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12151,6 +12176,7 @@ export namespace Prisma {
     statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
     translator_type?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
     withheld_in_countries?: UserProfileTestUpdatewithheld_in_countriesInput | string[]
     user_id_str?: NullableStringFieldUpdateOperationsInput | string | null
     profile_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13483,6 +13509,7 @@ export namespace Prisma {
 
   export type EntitiesProfileObjectEqualityInput = {
     description?: DescriptionProfileObjectEqualityInput | null
+    url?: UrlEntityObjectEqualityInput | null
   }
 
   export type IntNullableFilter<$PrismaModel = never> = {
@@ -13524,6 +13551,7 @@ export namespace Prisma {
 
   export type EntitiesProfileOrderByInput = {
     description?: DescriptionProfileOrderByInput
+    url?: UrlEntityOrderByInput
   }
 
   export type UserProfileCountOrderByAggregateInput = {
@@ -13741,6 +13769,7 @@ export namespace Prisma {
     statuses_count?: SortOrder
     translator_type?: SortOrder
     name?: SortOrder
+    url?: SortOrder
     withheld_in_countries?: SortOrder
     user_id_str?: SortOrder
     profile_url?: SortOrder
@@ -13781,6 +13810,7 @@ export namespace Prisma {
     statuses_count?: SortOrder
     translator_type?: SortOrder
     name?: SortOrder
+    url?: SortOrder
     user_id_str?: SortOrder
     profile_url?: SortOrder
     profile_image_url_https?: SortOrder
@@ -13809,6 +13839,7 @@ export namespace Prisma {
     statuses_count?: SortOrder
     translator_type?: SortOrder
     name?: SortOrder
+    url?: SortOrder
     user_id_str?: SortOrder
     profile_url?: SortOrder
     profile_image_url_https?: SortOrder
@@ -14598,6 +14629,7 @@ export namespace Prisma {
 
   export type EntitiesProfileCreateInput = {
     description?: DescriptionProfileCreateInput | null
+    url?: UrlEntityCreateInput | null
   }
 
   export type UserProfileCreatepinned_tweet_ids_strInput = {
@@ -14870,10 +14902,18 @@ export namespace Prisma {
     OR?: EntitiesProfileWhereInput[]
     NOT?: EntitiesProfileWhereInput | EntitiesProfileWhereInput[]
     description?: XOR<DescriptionProfileNullableCompositeFilter, DescriptionProfileObjectEqualityInput> | null
+    url?: XOR<UrlEntityNullableCompositeFilter, UrlEntityObjectEqualityInput> | null
   }
 
   export type DescriptionProfileObjectEqualityInput = {
     urls?: UrlEntityObjectEqualityInput[]
+  }
+
+  export type UrlEntityObjectEqualityInput = {
+    display_url?: string | null
+    expanded_url?: string | null
+    url?: string | null
+    indices?: number[]
   }
 
   export type NestedIntNullableFilter<$PrismaModel = never> = {
@@ -14907,6 +14947,13 @@ export namespace Prisma {
 
   export type DescriptionProfileOrderByInput = {
     urls?: UrlEntityOrderByCompositeAggregateInput
+  }
+
+  export type UrlEntityOrderByInput = {
+    display_url?: SortOrder
+    expanded_url?: SortOrder
+    url?: SortOrder
+    indices?: SortOrder
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -15131,6 +15178,13 @@ export namespace Prisma {
     urls?: UrlEntityCreateInput | UrlEntityCreateInput[]
   }
 
+  export type UrlEntityCreateInput = {
+    display_url?: string | null
+    expanded_url?: string | null
+    url?: string | null
+    indices?: UrlEntityCreateindicesInput | number[]
+  }
+
   export type EntitiesProfileUpsertInput = {
     set: EntitiesProfileCreateInput | null
     update: EntitiesProfileUpdateInput
@@ -15175,11 +15229,11 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type UrlEntityObjectEqualityInput = {
-    display_url?: string | null
-    expanded_url?: string | null
-    url?: string | null
-    indices?: number[]
+  export type UrlEntityNullableCompositeFilter = {
+    equals?: UrlEntityObjectEqualityInput | null
+    is?: UrlEntityWhereInput | null
+    isNot?: UrlEntityWhereInput | null
+    isSet?: boolean
   }
 
   export type UrlEntityOrderByCompositeAggregateInput = {
@@ -15195,15 +15249,13 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type UrlEntityCreateInput = {
-    display_url?: string | null
-    expanded_url?: string | null
-    url?: string | null
-    indices?: UrlEntityCreateindicesInput | number[]
+  export type UrlEntityCreateindicesInput = {
+    set: number[]
   }
 
   export type EntitiesProfileUpdateInput = {
     description?: XOR<DescriptionProfileNullableUpdateEnvelopeInput, DescriptionProfileCreateInput> | null
+    url?: XOR<UrlEntityNullableUpdateEnvelopeInput, UrlEntityCreateInput> | null
   }
 
   export type TweetUserUpdateInput = {
@@ -15268,6 +15320,16 @@ export namespace Prisma {
     urls?: UrlEntityCompositeListFilter | UrlEntityObjectEqualityInput[]
   }
 
+  export type UrlEntityWhereInput = {
+    AND?: UrlEntityWhereInput | UrlEntityWhereInput[]
+    OR?: UrlEntityWhereInput[]
+    NOT?: UrlEntityWhereInput | UrlEntityWhereInput[]
+    display_url?: StringNullableFilter<"UrlEntity"> | string | null
+    expanded_url?: StringNullableFilter<"UrlEntity"> | string | null
+    url?: StringNullableFilter<"UrlEntity"> | string | null
+    indices?: IntNullableListFilter<"UrlEntity">
+  }
+
   export type MediaEntityWhereInput = {
     AND?: MediaEntityWhereInput | MediaEntityWhereInput[]
     OR?: MediaEntityWhereInput[]
@@ -15280,13 +15342,15 @@ export namespace Prisma {
     type?: StringNullableFilter<"MediaEntity"> | string | null
   }
 
-  export type UrlEntityCreateindicesInput = {
-    set: number[]
-  }
-
   export type DescriptionProfileNullableUpdateEnvelopeInput = {
     set?: DescriptionProfileCreateInput | null
     upsert?: DescriptionProfileUpsertInput
+    unset?: boolean
+  }
+
+  export type UrlEntityNullableUpdateEnvelopeInput = {
+    set?: UrlEntityCreateInput | null
+    upsert?: UrlEntityUpsertInput
     unset?: boolean
   }
 
@@ -15321,6 +15385,11 @@ export namespace Prisma {
     update: DescriptionProfileUpdateInput
   }
 
+  export type UrlEntityUpsertInput = {
+    set: UrlEntityCreateInput | null
+    update: UrlEntityUpdateInput
+  }
+
   export type MediaEntityUpdateManyInput = {
     where: MediaEntityWhereInput
     data: MediaEntityUpdateInput
@@ -15330,18 +15399,15 @@ export namespace Prisma {
     where: MediaEntityWhereInput
   }
 
-  export type UrlEntityWhereInput = {
-    AND?: UrlEntityWhereInput | UrlEntityWhereInput[]
-    OR?: UrlEntityWhereInput[]
-    NOT?: UrlEntityWhereInput | UrlEntityWhereInput[]
-    display_url?: StringNullableFilter<"UrlEntity"> | string | null
-    expanded_url?: StringNullableFilter<"UrlEntity"> | string | null
-    url?: StringNullableFilter<"UrlEntity"> | string | null
-    indices?: IntNullableListFilter<"UrlEntity">
-  }
-
   export type DescriptionProfileUpdateInput = {
     urls?: XOR<UrlEntityListUpdateEnvelopeInput, UrlEntityCreateInput> | UrlEntityCreateInput[]
+  }
+
+  export type UrlEntityUpdateInput = {
+    display_url?: NullableStringFieldUpdateOperationsInput | string | null
+    expanded_url?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    indices?: UrlEntityUpdateindicesInput | number[]
   }
 
   export type MediaEntityUpdateInput = {
@@ -15360,6 +15426,11 @@ export namespace Prisma {
     deleteMany?: UrlEntityDeleteManyInput
   }
 
+  export type UrlEntityUpdateindicesInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
   export type MediaEntityUpdateindicesInput = {
     set?: number[]
     push?: number | number[]
@@ -15372,18 +15443,6 @@ export namespace Prisma {
 
   export type UrlEntityDeleteManyInput = {
     where: UrlEntityWhereInput
-  }
-
-  export type UrlEntityUpdateInput = {
-    display_url?: NullableStringFieldUpdateOperationsInput | string | null
-    expanded_url?: NullableStringFieldUpdateOperationsInput | string | null
-    url?: NullableStringFieldUpdateOperationsInput | string | null
-    indices?: UrlEntityUpdateindicesInput | number[]
-  }
-
-  export type UrlEntityUpdateindicesInput = {
-    set?: number[]
-    push?: number | number[]
   }
 
 

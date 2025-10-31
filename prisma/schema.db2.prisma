@@ -61,6 +61,7 @@ model UserProfileTest {
     statuses_count            Int?
     translator_type           String?
     name                      String?
+    url                       String?
     withheld_in_countries     String[]
     user_id_str               String?
     profile_url               String?
@@ -73,6 +74,7 @@ model UserProfileTest {
 
 type EntitiesProfile {
     description DescriptionProfile?
+    url UrlEntity?
 }
 
 type DescriptionProfile {

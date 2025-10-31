@@ -161,6 +161,7 @@ exports.Prisma.UserProfileTestScalarFieldEnum = {
   statuses_count: 'statuses_count',
   translator_type: 'translator_type',
   name: 'name',
+  url: 'url',
   withheld_in_countries: 'withheld_in_countries',
   user_id_str: 'user_id_str',
   profile_url: 'profile_url',
