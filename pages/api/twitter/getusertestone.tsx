@@ -85,7 +85,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
             geo_enabled: follower.geo_enabled,
             location: follower.location,
         }));
-
+// this is the top 10 followers
         const top10Followers = filterFollowersData.sort((a, b) => (b.followers_count || 0) - (a.followers_count || 0)).slice(0, 10);
 
         const filterTweetsData = tweetsData.map(tweet => ({
