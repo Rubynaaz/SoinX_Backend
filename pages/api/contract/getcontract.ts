@@ -69,6 +69,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       coin: {
         contract_address: contractId,
         symbol: groups[0].DexscreenerData[0]?.baseToken?.symbol,
+        // tokenImage: groups[0].DexscreenerData[0]?.info?.imageurl,
         name: groups[0].DexscreenerData[0]?.baseToken?.name,
         chain: groups[0].DexscreenerData[0]?.chainId,
         priceUsd: groups[0].DexscreenerData[0]?.priceUsd,
@@ -77,10 +78,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         dexUrl: groups[0].DexscreenerData[0]?.url,
         tokenImage: cachedDex.info?.imageurl,
         tokenBackgroundImage: groups[0].DexscreenerData[0]?.info?.header,
-        historicalData: cachedDex.historicalData
+        historicalData: cachedDex.historicalData,
       },
       messages: groupsWithChange,
-      averageMarketcapChange: parseFloat(avgMarketcapChange.toFixed(2))
+      averageMarketcapChange: parseFloat(avgMarketcapChange.toFixed(2)),
     });
   } catch (error) {
     console.error("Error fetching contract:", error);
