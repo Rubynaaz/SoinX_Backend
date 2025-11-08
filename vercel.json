@@ -1,0 +1,9 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/update-dex-data",
+      "schedule": "*/15 * * * *"
+    }
+  ]
+}
+

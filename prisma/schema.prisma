@@ -355,3 +355,19 @@ type HighlightsInfo {
   can_highlight_tweets Boolean?
   highlighted_tweets   String?
 }
+
+model DexLatestData {
+  id              String          @id @default(auto()) @map("_id") @db.ObjectId
+  contractAddress String          @unique @map("contract_address")
+  historicalData  HistoricalPriceData[]
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime?       @updatedAt @map("updated_at")
+
+  @@map("dex_latest_data")
+}
+
+type HistoricalPriceData {
+  priceUsd  Float?
+  marketCap Float?
+  timestamp DateTime
+}

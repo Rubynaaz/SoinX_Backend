@@ -32,13 +32,26 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       return res.status(404).json({ message: "Contract not found" });
     }
 
+    console.log('contractId', contractId);
+    const response = await fetch(`https://api.dexscreener.com/latest/dex/search?q=${contractId}`, {
+      method: 'GET',
+      headers: {
+        "Accept": "*/*"
+      },
+    });
+
+    const data = await response.json();
+    // console.log('dexscreener data', data);
+    // console.log('Price Usd', data.pairs[0].priceUsd);
+    // console.log('Market Cap', data.pairs[0].marketCap);
+
     // Map group messages with marketcap change
     const groupsWithChange = groups
       .map(group => {
         const firstDex = group.DexscreenerData[0];
 
         const dbMarketcap = firstDex?.marketCap || 0;
-        const cachedMarketcap = cachedDex.marketCap || 0;
+        const cachedMarketcap = data.pairs[0].marketCap || 0;
         const historicaldata = cachedDex.historicalData;
 
         if (!dbMarketcap || !cachedMarketcap) return null;
@@ -72,8 +85,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         // tokenImage: groups[0].DexscreenerData[0]?.info?.imageurl,
         name: groups[0].DexscreenerData[0]?.baseToken?.name,
         chain: groups[0].DexscreenerData[0]?.chainId,
-        priceUsd: groups[0].DexscreenerData[0]?.priceUsd,
-        marketcap: groups[0].DexscreenerData[0]?.marketCap,
+        priceUsd: Number(data.pairs[0].priceUsd),
+        marketcap: data.pairs[0].marketCap,
+        marketCapAtCallTime: groups[0].DexscreenerData[0]?.marketCap,
+        priceUsdAtCallTime: Number(groups[0].DexscreenerData[0]?.priceUsd),
         cachedMarketcap: cachedDex.marketCap,
         dexUrl: groups[0].DexscreenerData[0]?.url,
         tokenImage: cachedDex.info?.imageurl,

@@ -352,7 +352,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "E:\\code\\NEXTJS LEARNING\\soing-global\\prisma\\lib\\generated\\prisma\\db2",
+      "value": "/home/bhavinrg/SOIN_GLOBAL/SoinX_Backend/prisma/lib/generated/prisma/db2",
       "fromEnvVar": null
     },
     "config": {
@@ -361,17 +361,16 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "debian-openssl-3.0.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "E:\\code\\NEXTJS LEARNING\\soing-global\\prisma\\schema.db2.prisma",
+    "sourceFilePath": "/home/bhavinrg/SOIN_GLOBAL/SoinX_Backend/prisma/schema.db2.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../../../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../../..",
   "clientVersion": "6.14.0",
