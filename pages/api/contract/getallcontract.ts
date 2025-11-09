@@ -4,6 +4,28 @@ import allowCors from "@/lib/allowCors";
 
 const prisma = new PrismaClient();
 
+function getMoralisChainName(chainId: string | null | undefined): string | null {
+  if (!chainId) return null;
+
+  const chainMap: Record<string, string> = {
+    // Dexscreener chain names to Moralis API chain names
+    'bsc': 'bsc',
+    'ethereum': 'eth',
+    'polygon': 'polygon',
+    'avalanche': 'avalanche',
+    'fantom': 'fantom',
+    'arbitrum': 'arbitrum',
+    'optimism': 'optimism',
+    'base': 'base',
+    'cronos': 'cronos',
+    'gnosis': 'gnosis',
+  };
+
+  // Convert chain name to Moralis API format
+  const lowerChainId = chainId.toLowerCase();
+  return chainMap[lowerChainId] || lowerChainId; // Return as-is if not in map
+}
+
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Method not allowed" });
@@ -26,9 +48,28 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     // Fetch all group entries and include Dexscreener cache
     const groupEntries = await prisma.groupUserCountsWebhookTest.findMany({
-      include: {
-        DexscreenerData: true
-      }
+      where: {
+        ContractAddress: { not: null }, // Uses Contract Address_1 index
+      },
+      select: { // Only fetch needed fields
+        ContractAddress: true,
+        MessageDateTime: true,
+        GroupName: true,
+        DexscreenerData: {
+          select: {
+            marketCap: true,
+            priceUsd: true,
+            chainId: true,
+            baseToken: {
+              select: { name: true, symbol: true },
+            },
+          },
+        },
+      },
+      orderBy: [
+        { ContractAddress: 'asc' },
+        { MessageDateTime: 'asc' }
+      ],
     });
 
     // Group by ContractAddress
@@ -50,10 +91,27 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     let contracts = Object.values(grouped);
 
+    // Fetch Moralis token analytics using direct API call
+
+
     // Fetch Dexscreener cache
-    const dexCache = await prisma.dexscreenerCacheNew.findMany();
+    const dexCache = await prisma.dexscreenerCacheNew.findMany({
+      where: {
+        contractAddress: {
+          in: contracts.map(item => item.ContractAddress),
+        },
+      },
+      select: {
+        contractAddress: true,
+        marketCap: true,
+        info: {
+          select: { imageurl: true },
+        },
+        dexUrl: true,
+      },
+    });
     const dexCacheMap = new Map(dexCache.map(dc => [dc.contractAddress, dc]));
-    
+
 
     // Map and calculate marketcapChange
     contracts = contracts
@@ -64,7 +122,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         const dbCap = Number(item.firstDex?.marketCap || 0);
         const cachedCap = Number(cachedDex.marketCap || 0);
         const tokenImage = cachedDex.info?.imageurl
-        
+
 
         if (!dbCap || !cachedCap) return null;
 
@@ -110,12 +168,79 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       return 0;
     });
 
-    
+
     const totalContracts = contracts.length;
     const paginatedContracts = contracts.slice(
       (pageNum - 1) * limitNum,
       pageNum * limitNum
     );
+
+    // Initialize pricePercentChange24h for all contracts (set to null initially)
+    paginatedContracts.forEach(contract => {
+      contract.pricePercentChange24h = null;
+      // contract.moralisAnalytics = null;
+    });
+
+    // Fetch Moralis token analytics for paginated contracts only (to avoid rate limits)
+    const moralisApiKey = process.env.MORALIS_API_KEY;
+    if (moralisApiKey && paginatedContracts.length > 0) {
+      // Fetch analytics in parallel with rate limiting
+      const analyticsPromises = paginatedContracts.map(async (contract, index) => {
+        // Add small delay to respect rate limits (250ms between requests)
+        if (index > 0) {
+          await new Promise((resolve) => setTimeout(resolve, 250));
+        }
+
+        const moralisChainName = getMoralisChainName(contract.chain);
+        if (!moralisChainName) {
+          return { contractAddress: contract.ContractAddress, analytics: null };
+        }
+
+        try {
+          const moralisUrl = `https://deep-index.moralis.io/api/v2.2/tokens/${contract.ContractAddress}/analytics?chain=${moralisChainName}`;
+
+          const moralisResponse = await fetch(moralisUrl, {
+            method: 'GET',
+            headers: {
+              accept: 'application/json',
+              'X-API-Key': moralisApiKey,
+            },
+          });
+
+          if (moralisResponse.ok) {
+            const analytics = await moralisResponse.json();
+            console.log('Moralis Analytics 24h:', analytics.pricePercentChange["24h"]);
+            return { contractAddress: contract.ContractAddress, analytics };
+          } else {
+            console.error(`Moralis API error for ${contract.ContractAddress}:`, moralisResponse.status);
+            return { contractAddress: contract.ContractAddress, analytics: null };
+          }
+        } catch (moralisError) {
+          console.error(`Moralis API error for ${contract.ContractAddress}:`, moralisError);
+          return { contractAddress: contract.ContractAddress, analytics: null };
+        }
+      });
+
+      const analyticsResults = await Promise.all(analyticsPromises);
+      const analyticsMap = new Map(
+        analyticsResults.map(result => [result.contractAddress, result.analytics])
+      );
+
+      // Add analytics data to contracts
+      paginatedContracts.forEach(contract => {
+        const analytics = analyticsMap.get(contract.ContractAddress);
+        if (analytics && analytics.pricePercentChange) {
+          // Extract 24h price percent change
+          const totalVolume = Number(analytics.totalBuyVolume?.["24h"]) + Number(analytics.totalSellVolume?.["24h"]) || 0;
+          contract.totalVolume = totalVolume;
+          contract.pricePercentChange24h = analytics.pricePercentChange["24h"] || null;
+          // contract.moralisAnalytics = analytics;
+        } else {
+          contract.pricePercentChange24h = null;
+          // contract.moralisAnalytics = null;
+        }
+      });
+    }
 
     return res.status(200).json({
       page: pageNum,
