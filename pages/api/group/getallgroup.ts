@@ -4,27 +4,27 @@ import allowCors from "@/lib/allowCors";
 
 const prisma = new PrismaClient();
 
-function getMoralisChainName(chainId: string | null | undefined): string | null {
-  if (!chainId) return null;
+// function getMoralisChainName(chainId: string | null | undefined): string | null {
+//   if (!chainId) return null;
 
-  const chainMap: Record<string, string> = {
-    // Dexscreener chain names to Moralis API chain names
-    'bsc': 'bsc',
-    'ethereum': 'eth',
-    'polygon': 'polygon',
-    'avalanche': 'avalanche',
-    'fantom': 'fantom',
-    'arbitrum': 'arbitrum',
-    'optimism': 'optimism',
-    'base': 'base',
-    'cronos': 'cronos',
-    'gnosis': 'gnosis',
-  };
+//   const chainMap: Record<string, string> = {
+//     // Dexscreener chain names to Moralis API chain names
+//     'bsc': 'bsc',
+//     'ethereum': 'eth',
+//     'polygon': 'polygon',
+//     'avalanche': 'avalanche',
+//     'fantom': 'fantom',
+//     'arbitrum': 'arbitrum',
+//     'optimism': 'optimism',
+//     'base': 'base',
+//     'cronos': 'cronos',
+//     'gnosis': 'gnosis',
+//   };
 
-  // Convert chain name to Moralis API format
-  const lowerChainId = chainId.toLowerCase();
-  return chainMap[lowerChainId] || lowerChainId; // Return as-is if not in map
-}
+//   // Convert chain name to Moralis API format
+//   const lowerChainId = chainId.toLowerCase();
+//   return chainMap[lowerChainId] || lowerChainId; // Return as-is if not in map
+// }
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "GET") {
@@ -84,7 +84,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       chain: string | null;
       totalVolume?: number | null;
       pricePercentChange24h?: number | null;
-      moralisAnalytics?: any;
+      // moralisAnalytics?: any;
     };
 
     // Get all calls from all rows
@@ -122,6 +122,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       return {
         tokenName: dexData?.baseToken?.name ?? cachedDex?.baseToken?.name ?? null,
         tokenSymbol: dexData?.baseToken?.symbol ?? cachedDex?.baseToken?.symbol ?? null,
+        tokenChain: dexData?.chainId ?? null,
         tokenImage: dexData?.info?.imageUrl ?? cachedDex?.info?.imageurl ?? null,
         price: cachedDex?.priceUsd?.toString() ?? dexData?.priceUsd ?? null,
         marketCap: cachedDex?.marketCap ?? (dexData?.marketCap != null ? Number(dexData.marketCap) : null),
@@ -132,66 +133,66 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     });
 
     // Fetch Moralis analytics for top 4 contracts
-    const moralisApiKey = process.env.MORALIS_API_KEY;
-    if (moralisApiKey && recentContractData.length > 0) {
-      // Fetch analytics in parallel with rate limiting
-      const analyticsPromises = recentContractData.map(async (contract, index) => {
-        // Add small delay to respect rate limits (250ms between requests)
-        if (index > 0) {
-          await new Promise((resolve) => setTimeout(resolve, 250));
-        }
+    // const moralisApiKey = process.env.MORALIS_API_KEY;
+    // if (moralisApiKey && recentContractData.length > 0) {
+    //   // Fetch analytics in parallel with rate limiting
+    //   const analyticsPromises = recentContractData.map(async (contract, index) => {
+    //     // Add small delay to respect rate limits (250ms between requests)
+    //     if (index > 0) {
+    //       await new Promise((resolve) => setTimeout(resolve, 250));
+    //     }
 
-        const moralisChainName = getMoralisChainName(contract.chain);
-        if (!moralisChainName || !contract.contractAddress) {
-          return { contractAddress: contract.contractAddress, analytics: null };
-        }
+    //     const moralisChainName = getMoralisChainName(contract.chain);
+    //     if (!moralisChainName || !contract.contractAddress) {
+    //       return { contractAddress: contract.contractAddress, analytics: null };
+    //     }
 
-        try {
-          const moralisUrl = `https://deep-index.moralis.io/api/v2.2/tokens/${contract.contractAddress}/analytics?chain=${moralisChainName}`;
+    //     try {
+    //       const moralisUrl = `https://deep-index.moralis.io/api/v2.2/tokens/${contract.contractAddress}/analytics?chain=${moralisChainName}`;
 
-          const moralisResponse = await fetch(moralisUrl, {
-            method: 'GET',
-            headers: {
-              accept: 'application/json',
-              'X-API-Key': moralisApiKey,
-            },
-          });
+    //       const moralisResponse = await fetch(moralisUrl, {
+    //         method: 'GET',
+    //         headers: {
+    //           accept: 'application/json',
+    //           'X-API-Key': moralisApiKey,
+    //         },
+    //       });
 
-          if (moralisResponse.ok) {
-            const analytics = await moralisResponse.json();
-            console.log('Moralis Analytics 24h:', analytics.pricePercentChange?.["24h"]);
-            return { contractAddress: contract.contractAddress, analytics };
-          } else {
-            console.error(`Moralis API error for ${contract.contractAddress}:`, moralisResponse.status);
-            return { contractAddress: contract.contractAddress, analytics: null };
-          }
-        } catch (moralisError) {
-          console.error(`Moralis API error for ${contract.contractAddress}:`, moralisError);
-          return { contractAddress: contract.contractAddress, analytics: null };
-        }
-      });
+    //       if (moralisResponse.ok) {
+    //         const analytics = await moralisResponse.json();
+    //         console.log('Moralis Analytics 24h:', analytics.pricePercentChange?.["24h"]);
+    //         return { contractAddress: contract.contractAddress, analytics };
+    //       } else {
+    //         console.error(`Moralis API error for ${contract.contractAddress}:`, moralisResponse.status);
+    //         return { contractAddress: contract.contractAddress, analytics: null };
+    //       }
+    //     } catch (moralisError) {
+    //       console.error(`Moralis API error for ${contract.contractAddress}:`, moralisError);
+    //       return { contractAddress: contract.contractAddress, analytics: null };
+    //     }
+    //   });
 
-      const analyticsResults = await Promise.all(analyticsPromises);
-      const analyticsMap = new Map(
-        analyticsResults.map(result => [result.contractAddress, result.analytics])
-      );
+    //   const analyticsResults = await Promise.all(analyticsPromises);
+    //   const analyticsMap = new Map(
+    //     analyticsResults.map(result => [result.contractAddress, result.analytics])
+    //   );
 
-      // Add analytics data to recentContractData
-      recentContractData.forEach(contract => {
-        const analytics = analyticsMap.get(contract.contractAddress ?? '');
-        if (analytics && analytics.pricePercentChange) {
-          // Extract 24h price percent change and total volume
-          const totalVolume = Number(analytics.totalBuyVolume?.["24h"] || 0) + Number(analytics.totalSellVolume?.["24h"] || 0);
-          contract.totalVolume = totalVolume;
-          contract.pricePercentChange24h = analytics.pricePercentChange["24h"] || null;
-          contract.moralisAnalytics = analytics;
-        } else {
-          contract.pricePercentChange24h = null;
-          contract.totalVolume = null;
-          contract.moralisAnalytics = null;
-        }
-      });
-    }
+    //   // Add analytics data to recentContractData
+    //   recentContractData.forEach(contract => {
+    //     const analytics = analyticsMap.get(contract.contractAddress ?? '');
+    //     if (analytics && analytics.pricePercentChange) {
+    //       // Extract 24h price percent change and total volume
+    //       const totalVolume = Number(analytics.totalBuyVolume?.["24h"] || 0) + Number(analytics.totalSellVolume?.["24h"] || 0);
+    //       contract.totalVolume = totalVolume;
+    //       contract.pricePercentChange24h = analytics.pricePercentChange["24h"] || null;
+    //       contract.moralisAnalytics = analytics;
+    //     } else {
+    //       contract.pricePercentChange24h = null;
+    //       contract.totalVolume = null;
+    //       contract.moralisAnalytics = null;
+    //     }
+    //   });
+    // }
 
     // Aggregate by group (GroupName + Username)
     type Aggregated = {
