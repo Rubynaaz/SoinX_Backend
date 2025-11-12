@@ -182,6 +182,73 @@ model GroupAnalytics {
   @@map("group_analytics")
 }
 
+model GroupAnalyticsDetailed {
+  id                    String                    @id @default(auto()) @map("_id") @db.ObjectId
+  groupName              String                    @map("group_name")
+  username               String?                   @map("username")
+  groupUserCount         Int                       @map("group_user_count")
+  totalCalls             Int                       @map("total_calls")
+  totalUniqueContracts   Int                       @map("total_unique_contracts")
+  positiveCalls          Int                       @map("positive_calls")
+  negativeCalls          Int                       @map("negative_calls")
+  successRate            Float?                    @map("success_rate")
+  avgPriceChange         Float?                    @map("avg_price_change")
+  avgMarketCapChange     Float?                    @map("avg_marketcap_change")
+  avgMultiplierX         Float?                    @map("avg_multiplier_x")
+  bestCall               GroupBestCall?
+  lastCall               GroupLastCall?
+  contracts              GroupContractPerformance[]
+  lastMessageDateTime    DateTime?                 @map("last_message_datetime")
+  createdAt              DateTime                  @default(now()) @map("created_at")
+  updatedAt              DateTime                  @updatedAt @map("updated_at")
+
+  @@index([groupName, username])
+  @@map("group_analytics_detailed")
+}
+
+type GroupBestCall {
+  contractAddress String
+  tokenName       String?
+  tokenSymbol     String?
+  tokenImage      String?
+  chain           String?
+  priceChange     Float?
+  marketCapChange Float?
+  multiplierX     Float?
+  messageDateTime DateTime?
+}
+
+type GroupLastCall {
+  contractAddress String
+  tokenName       String?
+  tokenSymbol     String?
+  tokenImage      String?
+  chain           String?
+  priceChange     Float?
+  marketCapChange Float?
+  multiplierX     Float?
+  messageDateTime DateTime?
+}
+
+type GroupContractPerformance {
+  contractAddress    String
+  tokenName          String?
+  tokenSymbol        String?
+  tokenImage         String?
+  chain              String?
+  initialPrice       Float?
+  initialMarketCap   Float?
+  currentPrice       Float?
+  currentMarketCap   Float?
+  priceChange        Float?
+  marketCapChange    Float?
+  multiplierX        Float?
+  callCount          Int
+  firstCallDateTime  DateTime?
+  lastCallDateTime   DateTime?
+  performance        String? // "positive", "negative", "neutral"
+}
+
 type TopContract {
   contract_address          String
   priceUsd                  Float?

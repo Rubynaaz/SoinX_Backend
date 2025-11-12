@@ -32,47 +32,24 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   const page = parseInt(req.query.page as string) || 1;
-  const limit = parseInt(req.query.limit as string) || 50;
-  const sortBy = (req.query.sort_by as string) || "memberCount"; // memberCount | totalContractAddresses | groupName | username | lastMessageAt | recent
+  const limit = parseInt(req.query.limit as string) || 100;
+  const sortBy = (req.query.sort_by as string) || "memberCount"; // memberCount | totalCalls | username
   const order = req.query.order === "asc" ? "asc" : "desc";
 
   // console.log('calling API /group/getallgroup')
 
   try {
-    // Fetch rows with DexscreenerData for token information
-    const rows = await prisma.groupUserCountsWebhookTest.findMany({
-      where: {
-        GroupName: {
-          not: undefined,
-        },
-      },
+    // Fetch all group analytics from GroupAnalyticsDetailed
+    const groupAnalytics = await prisma.groupAnalyticsDetailed.findMany({
       select: {
-        GroupName: true,
-        Username: true,
-        GroupUserCount: true,
-        ContractAddress: true,
-        MessageDateTime: true,
-        DexscreenerData: true,
-      },
-      orderBy: {
-        MessageDateTime: 'desc',
+        username: true,
+        groupUserCount: true,
+        totalCalls: true,
+        lastCall: true, // Only needed for recentContractData
       },
     });
 
-    // Get all unique contract addresses to fetch cache
-    const allContractAddresses = Array.from(
-      new Set(rows.map(r => r.ContractAddress).filter((c): c is string => !!c && c.trim().length > 0))
-    );
-
-    // Fetch Dexscreener cache for all contracts
-    const dexCache = await prisma.dexscreenerCacheNew.findMany({
-      where: {
-        contractAddress: { in: allContractAddresses },
-      },
-    });
-    const dexCacheMap = new Map(dexCache.map(dc => [dc.contractAddress, dc]));
-
-    // Collect all calls from entire database for last 4 calls
+    // Collect all last calls from groups for recentContractData
     type LastCall = {
       tokenName: string | null;
       tokenSymbol: string | null;
@@ -84,25 +61,33 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       chain: string | null;
       totalVolume?: number | null;
       pricePercentChange24h?: number | null;
-      // moralisAnalytics?: any;
     };
 
-    // Get all calls from all rows
-    const allCalls: Array<{ contractAddress: string; messageDateTime: Date; dexData: any }> = [];
-    for (const r of rows) {
-      if (r.ContractAddress && r.ContractAddress.trim().length > 0 &&
-        r.MessageDateTime && r.DexscreenerData && r.DexscreenerData.length > 0) {
-        allCalls.push({
-          contractAddress: r.ContractAddress.trim(),
-          messageDateTime: r.MessageDateTime,
-          dexData: r.DexscreenerData[0], // Use first Dex entry
+    // Get all last calls from all groups
+    const allLastCalls: Array<{
+      contractAddress: string;
+      messageDateTime: Date;
+      lastCall: any;
+    }> = [];
+
+    for (const group of groupAnalytics) {
+      if (group.lastCall && group.lastCall.contractAddress && group.lastCall.messageDateTime) {
+        allLastCalls.push({
+          contractAddress: group.lastCall.contractAddress,
+          messageDateTime: new Date(group.lastCall.messageDateTime),
+          lastCall: group.lastCall,
         });
       }
     }
 
     // Get last 4 unique calls globally (by contract address, most recent first)
-    const uniqueCalls = new Map<string, { contractAddress: string; messageDateTime: Date; dexData: any }>();
-    for (const call of allCalls) {
+    const uniqueCalls = new Map<string, {
+      contractAddress: string;
+      messageDateTime: Date;
+      lastCall: any;
+    }>();
+
+    for (const call of allLastCalls) {
       if (!uniqueCalls.has(call.contractAddress) ||
         call.messageDateTime > uniqueCalls.get(call.contractAddress)!.messageDateTime) {
         uniqueCalls.set(call.contractAddress, call);
@@ -114,21 +99,18 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       .sort((a, b) => b.messageDateTime.getTime() - a.messageDateTime.getTime())
       .slice(0, 4);
 
-    // Build recentContractData array with token data
+    // Build recentContractData array with token data from lastCall
     const recentContractData: LastCall[] = sortedCalls.map(call => {
-      const cachedDex = dexCacheMap.get(call.contractAddress);
-      const dexData = call.dexData;
-
+      const lastCall = call.lastCall;
       return {
-        tokenName: dexData?.baseToken?.name ?? cachedDex?.baseToken?.name ?? null,
-        tokenSymbol: dexData?.baseToken?.symbol ?? cachedDex?.baseToken?.symbol ?? null,
-        tokenChain: dexData?.chainId ?? null,
-        tokenImage: dexData?.info?.imageUrl ?? cachedDex?.info?.imageurl ?? null,
-        price: cachedDex?.priceUsd?.toString() ?? dexData?.priceUsd ?? null,
-        marketCap: cachedDex?.marketCap ?? (dexData?.marketCap != null ? Number(dexData.marketCap) : null),
+        tokenName: lastCall?.tokenName ?? null,
+        tokenSymbol: lastCall?.tokenSymbol ?? null,
+        tokenImage: lastCall?.tokenImage ?? null,
+        price: null, // Not available in lastCall
+        marketCap: null, // Not available in lastCall
         contractAddress: call.contractAddress,
         messageDateTime: call.messageDateTime.toISOString(),
-        chain: dexData?.chainId ?? null,
+        chain: lastCall?.chain ?? null,
       };
     });
 
@@ -194,74 +176,27 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     //   });
     // }
 
-    // Aggregate by group (GroupName + Username)
+    // Map GroupAnalyticsDetailed to Aggregated format
     type Aggregated = {
-      groupName: string;
-      username: string | null;
-      memberCount: number; // use max observed per group
-      totalContractAddresses: number; // unique count
-      lastMessageAt: string | null; // ISO string
-      lastContractAddress: string | null;
-    };
-
-    const groupMap = new Map<string, {
-      groupName: string;
       username: string | null;
       memberCount: number;
-      contracts: Set<string>;
-      lastAt: Date | null;
-      lastAddress: string | null;
-    }>();
+      totalContractAddresses: number;
+    };
 
-    for (const r of rows) {
-      const key = `${r.GroupName}::${r.Username ?? ''}`;
-      if (!groupMap.has(key)) {
-        groupMap.set(key, {
-          groupName: r.GroupName,
-          username: r.Username ?? null,
-          memberCount: typeof r.GroupUserCount === 'number' ? r.GroupUserCount : 0,
-          contracts: new Set<string>(),
-          lastAt: r.MessageDateTime ?? null,
-          lastAddress: r.ContractAddress ?? null,
-        });
-      }
-      const agg = groupMap.get(key)!;
-      if (typeof r.GroupUserCount === 'number' && r.GroupUserCount > agg.memberCount) {
-        agg.memberCount = r.GroupUserCount;
-      }
-      if (r.ContractAddress && r.ContractAddress.trim().length > 0) {
-        agg.contracts.add(r.ContractAddress.trim());
-      }
-      if (r.MessageDateTime) {
-        if (!agg.lastAt || r.MessageDateTime > agg.lastAt) {
-          agg.lastAt = r.MessageDateTime;
-          agg.lastAddress = r.ContractAddress ?? agg.lastAddress;
-        }
-      }
-    }
-
-    let aggregated: Aggregated[] = Array.from(groupMap.values()).map(v => ({
-      groupName: v.groupName,
-      username: v.username,
-      memberCount: v.memberCount,
-      totalContractAddresses: v.contracts.size,
-      lastMessageAt: v.lastAt ? v.lastAt.toISOString() : null,
-      lastContractAddress: v.lastAddress ?? null,
+    let aggregated: Aggregated[] = groupAnalytics.map(group => ({
+      username: group.username,
+      memberCount: group.groupUserCount,
+      totalContractAddresses: group.totalCalls,
     }));
 
     // Sorting
     aggregated.sort((a, b) => {
       const dir = order === 'asc' ? 1 : -1;
       switch (sortBy) {
-        case 'groupName':
-          return a.groupName.localeCompare(b.groupName) * dir;
         case 'username':
           return (a.username ?? '').localeCompare(b.username ?? '') * dir;
-        case 'totalContractAddresses':
+        case 'totalCalls':
           return (a.totalContractAddresses - b.totalContractAddresses) * dir;
-        case 'lastMessageAt':
-        case 'recent':
-          return ((new Date(a.lastMessageAt ?? 0).getTime()) - (new Date(b.lastMessageAt ?? 0).getTime())) * dir;
         case 'memberCount':
         default:
           return (a.memberCount - b.memberCount) * dir;

@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "npx prisma generate --schema=prisma/schema.prisma && npx prisma generate --schema=prisma/schema.db2.prisma && next build",
-    "start": "next start"
+    "start": "next start",
+    "process-group-analytics": "npx tsx scripts/process-group-analytics.ts"
   },
   "dependencies": {
     "@moralisweb3/next": "^2.27.2",

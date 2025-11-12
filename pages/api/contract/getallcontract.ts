@@ -63,6 +63,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
             baseToken: {
               select: { name: true, symbol: true },
             },
+            info: {
+              select: { imageUrl: true },
+            },
           },
         },
       },
@@ -94,43 +97,51 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     // Fetch Moralis token analytics using direct API call
 
 
-    // Fetch Dexscreener cache
-    const dexCache = await prisma.dexscreenerCacheNew.findMany({
+    // Fetch latest dex data (historical series) for all contracts; we'll use the latest point
+    const latestAll = await prisma.dexLatestData.findMany({
       where: {
         contractAddress: {
-          in: contracts.map(item => item.ContractAddress),
+          in: contracts.map((item: any) => item.ContractAddress),
         },
       },
       select: {
         contractAddress: true,
-        marketCap: true,
-        info: {
-          select: { imageurl: true },
-        },
-        dexUrl: true,
+        historicalData: true,
       },
     });
-    const dexCacheMap = new Map(dexCache.map(dc => [dc.contractAddress, dc]));
+    const latestMap = new Map(
+      latestAll.map((ld: any) => {
+        const hist = ld.historicalData || [];
+        const last = hist.length > 0 ? hist[hist.length - 1] : null;
+        return [ld.contractAddress, last];
+      })
+    );
 
 
     // Map and calculate marketcapChange
     contracts = contracts
       .map(item => {
-        const cachedDex = dexCacheMap.get(item.ContractAddress);
-        if (!cachedDex) return null;
-
-        const dbCap = Number(item.firstDex?.marketCap || 0);
-        const cachedCap = Number(cachedDex.marketCap || 0);
-        const tokenImage = cachedDex.info?.imageurl
-
-
-        if (!dbCap || !cachedCap) return null;
-
-        const marketcapChange = cachedCap ? ((cachedCap - dbCap) / dbCap) * 100 : 0;
-        let multiplierX = 1.0;
-        if (marketcapChange > -100) {
-          multiplierX = marketcapChange / 100 + 1;
+        const latestPoint = latestMap.get(item.ContractAddress);
+        
+        // Skip contracts that don't have data in dexLatestData
+        if (!latestPoint) {
+          return null;
         }
+        
+        // console.log("🚀 ~ handler ~ item.firstDex:", item.firstDex)
+        const tokenImage = item.firstDex?.info?.imageUrl ?? null;
+        const dbCap = item.firstDex?.marketCap != null ? Number(item.firstDex.marketCap) : null;
+        const latestCap = latestPoint?.marketCap != null ? Number(latestPoint.marketCap) : null;
+        const latestPrice = latestPoint?.priceUsd != null ? Number(latestPoint.priceUsd) : null;
+
+        let marketcapChange: number | null = null;
+        let multiplierX: number | null = null;
+        if (dbCap && latestCap) {
+          marketcapChange = ((latestCap - dbCap) / dbCap) * 100;
+          multiplierX = marketcapChange > -100 ? marketcapChange / 100 + 1 : 0;
+        }
+
+        
 
         return {
           ContractAddress: item.ContractAddress,
@@ -143,16 +154,15 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           tokenSymbol: item.firstDex?.baseToken?.symbol,
           tokenImage: tokenImage,
           dbMarketcap: dbCap,
-          priceUsd: item.firstDex?.priceUsd,
-          cachedMarketcap: cachedCap,
-          dexUrl: cachedDex.dexUrl,
-          marketcapChange: parseFloat(marketcapChange.toFixed(2)),
-          multiplierX: parseFloat(multiplierX.toFixed(2))
+          priceUsd: latestPrice ?? item.firstDex?.priceUsd ?? null,
+          cachedMarketcap: latestCap ?? null,
+          dexUrl: null,
+          marketcapChange: marketcapChange != null ? parseFloat(marketcapChange.toFixed(2)) : null,
+          multiplierX: multiplierX != null ? parseFloat(multiplierX.toFixed(2)) : null
         };
       })
       .filter(Boolean)
       .filter((item): item is NonNullable<typeof item> => item != null)
-      .filter(item => item.marketcapChange != null && item.multiplierX != null)
       .filter(item => {
         if (filterChain && item!.chain !== filterChain) return false;
         if (item!.totalGroups < minGroupsNum) return false;
@@ -163,6 +173,11 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     contracts.sort((a, b) => {
       const fieldA = a[sortBy as string];
       const fieldB = b[sortBy as string];
+      const aNull = fieldA === null || fieldA === undefined;
+      const bNull = fieldB === null || fieldB === undefined;
+      if (aNull && bNull) return 0;
+      if (aNull) return 1;
+      if (bNull) return -1;
       if (fieldA < fieldB) return sortOrder * -1;
       if (fieldA > fieldB) return sortOrder * 1;
       return 0;
@@ -239,6 +254,25 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           contract.pricePercentChange24h = null;
           // contract.moralisAnalytics = null;
         }
+      });
+    }
+
+    // Attach historicalData from dexLatestData for paginated contracts
+    if (paginatedContracts.length > 0) {
+      const latestData = await prisma.dexLatestData.findMany({
+        where: {
+          contractAddress: {
+            in: paginatedContracts.map(c => c.ContractAddress)
+          }
+        },
+        select: {
+          contractAddress: true,
+          historicalData: true
+        }
+      });
+      const latestDataMap = new Map(latestData.map(ld => [ld.contractAddress, ld.historicalData]));
+      paginatedContracts.forEach(contract => {
+        (contract as any).historicalData = latestDataMap.get(contract.ContractAddress) || [];
       });
     }
 

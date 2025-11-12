@@ -89,7 +89,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         const top10Followers = filterFollowersData.sort((a, b) => (b.followers_count || 0) - (a.followers_count || 0)).slice(0, 10);
 
         const filterTweetsData = tweetsData.map(tweet => ({
-            id: tweet.id,
+            id: tweet.id_str,
             tweetText: tweet.full_text,
             created_at: tweet.created_at,
             bookmark_count: tweet.bookmark_count,
