@@ -109,7 +109,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
                 .map(tweet => ({
                     ...tweet,
                     userProfile: userProfile[0]?.profile_image_url_https || null,
-                    userName: userProfile[0]?.id || null,
+                    userId: userProfile[0]?.id || null,
+                    userName: userProfile[0]?.name || null,
                 }))
         };
 
