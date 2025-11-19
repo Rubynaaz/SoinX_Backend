@@ -452,6 +452,7 @@ model TelegramUserData{
   chain                String?    @map("chain")
   call_count           Int       @map("call_count")
   social_links         Social[]   @map("social_links")
+  pair_address         String?    @map("pair_address")
   token_image          String?    @map("token_image")
   banner_image         String?    @map("banner_image")
   price_usd            Float?     @map("price_usd")

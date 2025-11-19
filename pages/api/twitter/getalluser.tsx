@@ -16,6 +16,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
                 user_id_str: true,
                 name: true,
                 followers_count: true,
+                friends_count: true,
                 profile_image_url_https: true,
                 verified: true,
             },
