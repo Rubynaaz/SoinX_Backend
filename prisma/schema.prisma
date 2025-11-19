@@ -438,3 +438,27 @@ type HistoricalPriceData {
   marketCap Float?
   timestamp DateTime
 }
+
+
+model TelegramUserData{
+  id                   String    @id @map("_id") @db.ObjectId
+  contract_address     String    @unique @map("contract_address")
+  group_name           String    @map("group_name")
+  username             String    @map("username")
+  token_name           String?    @map("token_name")
+  token_symbol         String?    @map("token_symbol")
+  dex_url              String?    @map("dex_url")
+  full_message         String    @map("full_message")
+  chain                String?    @map("chain")
+  call_count           Int       @map("call_count")
+  social_links         Social[]   @map("social_links")
+  pair_address         String?    @map("pair_address")
+  token_image          String?    @map("token_image")
+  banner_image         String?    @map("banner_image")
+  price_usd            Float?     @map("price_usd")
+  market_cap           Float?     @map("market_cap")
+  user_count           Int?       @map("user_count")
+  message_datetime     DateTime?  @map("message_datetime")
+
+  @@map("telegram_influencer_data_simplified")
+}

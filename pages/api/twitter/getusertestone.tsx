@@ -42,6 +42,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
             likes: tweet.favorite_count || 0,
             retweets: tweet.retweet_count || 0,
             replies: tweet.reply_count || 0,
+            views: tweet.views_count || 0,
         }));
 
         const filterUserProfile = userProfile.map(user => ({
@@ -119,7 +120,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         const top10Tweets = filterTweetsData.sort((a, b) => (b.favorite_count || 0) - (a.favorite_count || 0)).slice(0, 1000);
 
         const averageLikeCount = filterTweetsData.reduce((acc, tweet) => acc + (tweet.favorite_count || 0), 0) / filterTweetsData.length;
-        console.log('averageLikeCount', averageLikeCount);
+        const averageViewCount = filterTweetsData.reduce((acc, tweet) => acc + (Number(tweet.views_count) || 0), 0) / filterTweetsData.length;
+        console.log('averageViewCount', averageViewCount);
         const averageReplyCount = filterTweetsData.reduce((acc, tweet) => acc + (tweet.reply_count || 0), 0) / filterTweetsData.length;
         console.log('averageReplyCount', averageReplyCount);
         const averageRetweetCount = filterTweetsData.reduce((acc, tweet) => acc + (tweet.retweet_count || 0), 0) / filterTweetsData.length;
@@ -141,7 +143,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
                 averageQuoteCount: averageQuoteCount,
                 totalLikesCount: totalLikesCount,
                 totalReplyCount: totalReplyCount,
-                totalViewCount: totalViewCount
+                totalViewCount: totalViewCount,
+                averageViewCount: averageViewCount,
             },
             tweetsData: TweetsData,
             followersData: top10Followers,
