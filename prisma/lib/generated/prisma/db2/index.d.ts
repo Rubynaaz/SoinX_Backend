@@ -49,6 +49,11 @@ export type TweetUser = $Result.DefaultSelection<Prisma.$TweetUserPayload>
  */
 export type TweetStatus = $Result.DefaultSelection<Prisma.$TweetStatusPayload>
 /**
+ * Model TweetAnalytics
+ * Essential tweet analytics data
+ */
+export type TweetAnalytics = $Result.DefaultSelection<Prisma.$TweetAnalyticsPayload>
+/**
  * Model UserProfile
  * 
  */
@@ -78,6 +83,11 @@ export type FollowerFollowingData = $Result.DefaultSelection<Prisma.$FollowerFol
  * Duplicate of FollowerFollowingData mapped to followers_data_test collection
  */
 export type FollowersDataTest = $Result.DefaultSelection<Prisma.$FollowersDataTestPayload>
+/**
+ * Model UserAnalytics
+ * User Analytics - Aggregated analytics data for each user
+ */
+export type UserAnalytics = $Result.DefaultSelection<Prisma.$UserAnalyticsPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -223,6 +233,16 @@ export class PrismaClient<
     * ```
     */
   get followersDataTest(): Prisma.FollowersDataTestDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userAnalytics`: Exposes CRUD operations for the **UserAnalytics** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserAnalytics
+    * const userAnalytics = await prisma.userAnalytics.findMany()
+    * ```
+    */
+  get userAnalytics(): Prisma.UserAnalyticsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -668,7 +688,8 @@ export namespace Prisma {
     TweetsData: 'TweetsData',
     TweetsDataTest: 'TweetsDataTest',
     FollowerFollowingData: 'FollowerFollowingData',
-    FollowersDataTest: 'FollowersDataTest'
+    FollowersDataTest: 'FollowersDataTest',
+    UserAnalytics: 'UserAnalytics'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -687,7 +708,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "userProfile" | "userProfileTest" | "tweetsData" | "tweetsDataTest" | "followerFollowingData" | "followersDataTest"
+      modelProps: "userProfile" | "userProfileTest" | "tweetsData" | "tweetsDataTest" | "followerFollowingData" | "followersDataTest" | "userAnalytics"
       txIsolationLevel: never
     }
     model: {
@@ -1135,6 +1156,80 @@ export namespace Prisma {
           }
         }
       }
+      UserAnalytics: {
+        payload: Prisma.$UserAnalyticsPayload<ExtArgs>
+        fields: Prisma.UserAnalyticsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserAnalyticsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAnalyticsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserAnalyticsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAnalyticsPayload>
+          }
+          findFirst: {
+            args: Prisma.UserAnalyticsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAnalyticsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserAnalyticsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAnalyticsPayload>
+          }
+          findMany: {
+            args: Prisma.UserAnalyticsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAnalyticsPayload>[]
+          }
+          create: {
+            args: Prisma.UserAnalyticsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAnalyticsPayload>
+          }
+          createMany: {
+            args: Prisma.UserAnalyticsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.UserAnalyticsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAnalyticsPayload>
+          }
+          update: {
+            args: Prisma.UserAnalyticsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAnalyticsPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserAnalyticsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserAnalyticsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.UserAnalyticsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAnalyticsPayload>
+          }
+          aggregate: {
+            args: Prisma.UserAnalyticsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserAnalytics>
+          }
+          groupBy: {
+            args: Prisma.UserAnalyticsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserAnalyticsGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.UserAnalyticsFindRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.UserAnalyticsAggregateRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          count: {
+            args: Prisma.UserAnalyticsCountArgs<ExtArgs>
+            result: $Utils.Optional<UserAnalyticsCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1220,6 +1315,7 @@ export namespace Prisma {
     tweetsDataTest?: TweetsDataTestOmit
     followerFollowingData?: FollowerFollowingDataOmit
     followersDataTest?: FollowersDataTestOmit
+    userAnalytics?: UserAnalyticsOmit
   }
 
   /* Types for Logging */
@@ -1913,6 +2009,101 @@ export namespace Prisma {
      * Omit specific fields from the TweetStatus
      */
     omit?: TweetStatusOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TweetAnalytics
+   */
+
+
+
+
+
+  export type TweetAnalyticsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    tweet_id_str?: boolean
+    text?: boolean
+    created_at?: boolean
+    tweet_date?: boolean
+    likes?: boolean
+    replies?: boolean
+    retweets?: boolean
+    views?: boolean
+    quotes?: boolean
+    url?: boolean
+  }, ExtArgs["result"]["tweetAnalytics"]>
+
+
+
+  export type TweetAnalyticsSelectScalar = {
+    tweet_id_str?: boolean
+    text?: boolean
+    created_at?: boolean
+    tweet_date?: boolean
+    likes?: boolean
+    replies?: boolean
+    retweets?: boolean
+    views?: boolean
+    quotes?: boolean
+    url?: boolean
+  }
+
+  export type TweetAnalyticsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"tweet_id_str" | "text" | "created_at" | "tweet_date" | "likes" | "replies" | "retweets" | "views" | "quotes" | "url", ExtArgs["result"]["tweetAnalytics"]>
+
+  export type $TweetAnalyticsPayload = {
+    name: "TweetAnalytics"
+    objects: {}
+    scalars: {
+      tweet_id_str: string
+      text: string | null
+      created_at: string | null
+      tweet_date: Date | null
+      likes: number | null
+      replies: number | null
+      retweets: number | null
+      views: string | null
+      quotes: number | null
+      url: string | null
+    }
+    composites: {}
+  }
+
+  type TweetAnalyticsGetPayload<S extends boolean | null | undefined | TweetAnalyticsDefaultArgs> = $Result.GetResult<Prisma.$TweetAnalyticsPayload, S>
+
+
+
+
+
+  /**
+   * Fields of the TweetAnalytics model
+   */
+  interface TweetAnalyticsFieldRefs {
+    readonly tweet_id_str: FieldRef<"TweetAnalytics", 'String'>
+    readonly text: FieldRef<"TweetAnalytics", 'String'>
+    readonly created_at: FieldRef<"TweetAnalytics", 'String'>
+    readonly tweet_date: FieldRef<"TweetAnalytics", 'DateTime'>
+    readonly likes: FieldRef<"TweetAnalytics", 'Int'>
+    readonly replies: FieldRef<"TweetAnalytics", 'Int'>
+    readonly retweets: FieldRef<"TweetAnalytics", 'Int'>
+    readonly views: FieldRef<"TweetAnalytics", 'String'>
+    readonly quotes: FieldRef<"TweetAnalytics", 'Int'>
+    readonly url: FieldRef<"TweetAnalytics", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TweetAnalytics without action
+   */
+  export type TweetAnalyticsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TweetAnalytics
+     */
+    select?: TweetAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TweetAnalytics
+     */
+    omit?: TweetAnalyticsOmit<ExtArgs> | null
   }
 
 
@@ -3199,6 +3390,8 @@ export namespace Prisma {
     statuses_count: number | null
     translator_type: string | null
     name: string | null
+    screen_name: string | null
+    created_at: string | null
     url: string | null
     user_id_str: string | null
     profile_url: string | null
@@ -3228,6 +3421,8 @@ export namespace Prisma {
     statuses_count: number | null
     translator_type: string | null
     name: string | null
+    screen_name: string | null
+    created_at: string | null
     url: string | null
     user_id_str: string | null
     profile_url: string | null
@@ -3258,6 +3453,8 @@ export namespace Prisma {
     statuses_count: number
     translator_type: number
     name: number
+    screen_name: number
+    created_at: number
     url: number
     withheld_in_countries: number
     user_id_str: number
@@ -3312,6 +3509,8 @@ export namespace Prisma {
     statuses_count?: true
     translator_type?: true
     name?: true
+    screen_name?: true
+    created_at?: true
     url?: true
     user_id_str?: true
     profile_url?: true
@@ -3341,6 +3540,8 @@ export namespace Prisma {
     statuses_count?: true
     translator_type?: true
     name?: true
+    screen_name?: true
+    created_at?: true
     url?: true
     user_id_str?: true
     profile_url?: true
@@ -3371,6 +3572,8 @@ export namespace Prisma {
     statuses_count?: true
     translator_type?: true
     name?: true
+    screen_name?: true
+    created_at?: true
     url?: true
     withheld_in_countries?: true
     user_id_str?: true
@@ -3489,6 +3692,8 @@ export namespace Prisma {
     statuses_count: number | null
     translator_type: string | null
     name: string | null
+    screen_name: string | null
+    created_at: string | null
     url: string | null
     withheld_in_countries: string[]
     user_id_str: string | null
@@ -3540,6 +3745,8 @@ export namespace Prisma {
     statuses_count?: boolean
     translator_type?: boolean
     name?: boolean
+    screen_name?: boolean
+    created_at?: boolean
     url?: boolean
     withheld_in_countries?: boolean
     user_id_str?: boolean
@@ -3573,6 +3780,8 @@ export namespace Prisma {
     statuses_count?: boolean
     translator_type?: boolean
     name?: boolean
+    screen_name?: boolean
+    created_at?: boolean
     url?: boolean
     withheld_in_countries?: boolean
     user_id_str?: boolean
@@ -3582,7 +3791,7 @@ export namespace Prisma {
     updated_time?: boolean
   }
 
-  export type UserProfileTestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "default_profile" | "default_profile_image" | "description" | "entities" | "fast_followers_count" | "favourites_count" | "followers_count" | "friends_count" | "has_custom_timelines" | "is_translator" | "listed_count" | "media_count" | "normal_followers_count" | "pinned_tweet_ids_str" | "possibly_sensitive" | "profile_banner_url" | "location" | "profile_interstitial_type" | "statuses_count" | "translator_type" | "name" | "url" | "withheld_in_countries" | "user_id_str" | "profile_url" | "profile_image_url_https" | "verified" | "updated_time", ExtArgs["result"]["userProfileTest"]>
+  export type UserProfileTestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "default_profile" | "default_profile_image" | "description" | "entities" | "fast_followers_count" | "favourites_count" | "followers_count" | "friends_count" | "has_custom_timelines" | "is_translator" | "listed_count" | "media_count" | "normal_followers_count" | "pinned_tweet_ids_str" | "possibly_sensitive" | "profile_banner_url" | "location" | "profile_interstitial_type" | "statuses_count" | "translator_type" | "name" | "screen_name" | "created_at" | "url" | "withheld_in_countries" | "user_id_str" | "profile_url" | "profile_image_url_https" | "verified" | "updated_time", ExtArgs["result"]["userProfileTest"]>
   export type UserProfileTestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $UserProfileTestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3610,6 +3819,8 @@ export namespace Prisma {
       statuses_count: number | null
       translator_type: string | null
       name: string | null
+      screen_name: string | null
+      created_at: string | null
       url: string | null
       withheld_in_countries: string[]
       user_id_str: string | null
@@ -4032,6 +4243,8 @@ export namespace Prisma {
     readonly statuses_count: FieldRef<"UserProfileTest", 'Int'>
     readonly translator_type: FieldRef<"UserProfileTest", 'String'>
     readonly name: FieldRef<"UserProfileTest", 'String'>
+    readonly screen_name: FieldRef<"UserProfileTest", 'String'>
+    readonly created_at: FieldRef<"UserProfileTest", 'String'>
     readonly url: FieldRef<"UserProfileTest", 'String'>
     readonly withheld_in_countries: FieldRef<"UserProfileTest", 'String[]'>
     readonly user_id_str: FieldRef<"UserProfileTest", 'String'>
@@ -10138,6 +10351,1548 @@ export namespace Prisma {
 
 
   /**
+   * Model UserAnalytics
+   */
+
+  export type AggregateUserAnalytics = {
+    _count: UserAnalyticsCountAggregateOutputType | null
+    _avg: UserAnalyticsAvgAggregateOutputType | null
+    _sum: UserAnalyticsSumAggregateOutputType | null
+    _min: UserAnalyticsMinAggregateOutputType | null
+    _max: UserAnalyticsMaxAggregateOutputType | null
+  }
+
+  export type UserAnalyticsAvgAggregateOutputType = {
+    followers_count: number | null
+    friends_count: number | null
+    statuses_count: number | null
+    favourites_count: number | null
+    listed_count: number | null
+    media_count: number | null
+    normal_followers_count: number | null
+    total_tweets: number | null
+    total_likes: number | null
+    total_replies: number | null
+    total_retweets: number | null
+    total_views: number | null
+    total_quotes: number | null
+    avg_likes_per_tweet: number | null
+    avg_replies_per_tweet: number | null
+    avg_retweets_per_tweet: number | null
+    avg_views_per_tweet: number | null
+    total_engagement: number | null
+    avg_engagement_per_tweet: number | null
+    engagement_rate: number | null
+    engagement_rate_by_followers: number | null
+    mindshare_score: number | null
+    reach_score: number | null
+    influence_score: number | null
+    conversation_score: number | null
+    virality_score: number | null
+  }
+
+  export type UserAnalyticsSumAggregateOutputType = {
+    followers_count: number | null
+    friends_count: number | null
+    statuses_count: number | null
+    favourites_count: number | null
+    listed_count: number | null
+    media_count: number | null
+    normal_followers_count: number | null
+    total_tweets: number | null
+    total_likes: number | null
+    total_replies: number | null
+    total_retweets: number | null
+    total_views: number | null
+    total_quotes: number | null
+    avg_likes_per_tweet: number | null
+    avg_replies_per_tweet: number | null
+    avg_retweets_per_tweet: number | null
+    avg_views_per_tweet: number | null
+    total_engagement: number | null
+    avg_engagement_per_tweet: number | null
+    engagement_rate: number | null
+    engagement_rate_by_followers: number | null
+    mindshare_score: number | null
+    reach_score: number | null
+    influence_score: number | null
+    conversation_score: number | null
+    virality_score: number | null
+  }
+
+  export type UserAnalyticsMinAggregateOutputType = {
+    id: string | null
+    user_id_str: string | null
+    name: string | null
+    screen_name: string | null
+    description: string | null
+    profile_image_url_https: string | null
+    profile_banner_url: string | null
+    profile_url: string | null
+    verified: boolean | null
+    followers_count: number | null
+    friends_count: number | null
+    statuses_count: number | null
+    location: string | null
+    created_at: string | null
+    favourites_count: number | null
+    listed_count: number | null
+    media_count: number | null
+    normal_followers_count: number | null
+    possibly_sensitive: boolean | null
+    profile_interstitial_type: string | null
+    translator_type: string | null
+    total_tweets: number | null
+    total_likes: number | null
+    total_replies: number | null
+    total_retweets: number | null
+    total_views: number | null
+    total_quotes: number | null
+    avg_likes_per_tweet: number | null
+    avg_replies_per_tweet: number | null
+    avg_retweets_per_tweet: number | null
+    avg_views_per_tweet: number | null
+    total_engagement: number | null
+    avg_engagement_per_tweet: number | null
+    engagement_rate: number | null
+    engagement_rate_by_followers: number | null
+    mindshare_score: number | null
+    reach_score: number | null
+    influence_score: number | null
+    conversation_score: number | null
+    virality_score: number | null
+    first_tweet_date: Date | null
+    last_tweet_date: Date | null
+    updated_at: Date | null
+  }
+
+  export type UserAnalyticsMaxAggregateOutputType = {
+    id: string | null
+    user_id_str: string | null
+    name: string | null
+    screen_name: string | null
+    description: string | null
+    profile_image_url_https: string | null
+    profile_banner_url: string | null
+    profile_url: string | null
+    verified: boolean | null
+    followers_count: number | null
+    friends_count: number | null
+    statuses_count: number | null
+    location: string | null
+    created_at: string | null
+    favourites_count: number | null
+    listed_count: number | null
+    media_count: number | null
+    normal_followers_count: number | null
+    possibly_sensitive: boolean | null
+    profile_interstitial_type: string | null
+    translator_type: string | null
+    total_tweets: number | null
+    total_likes: number | null
+    total_replies: number | null
+    total_retweets: number | null
+    total_views: number | null
+    total_quotes: number | null
+    avg_likes_per_tweet: number | null
+    avg_replies_per_tweet: number | null
+    avg_retweets_per_tweet: number | null
+    avg_views_per_tweet: number | null
+    total_engagement: number | null
+    avg_engagement_per_tweet: number | null
+    engagement_rate: number | null
+    engagement_rate_by_followers: number | null
+    mindshare_score: number | null
+    reach_score: number | null
+    influence_score: number | null
+    conversation_score: number | null
+    virality_score: number | null
+    first_tweet_date: Date | null
+    last_tweet_date: Date | null
+    updated_at: Date | null
+  }
+
+  export type UserAnalyticsCountAggregateOutputType = {
+    id: number
+    user_id_str: number
+    name: number
+    screen_name: number
+    description: number
+    profile_image_url_https: number
+    profile_banner_url: number
+    profile_url: number
+    verified: number
+    followers_count: number
+    friends_count: number
+    statuses_count: number
+    location: number
+    created_at: number
+    favourites_count: number
+    listed_count: number
+    media_count: number
+    normal_followers_count: number
+    pinned_tweet_ids_str: number
+    possibly_sensitive: number
+    profile_interstitial_type: number
+    translator_type: number
+    withheld_in_countries: number
+    total_tweets: number
+    total_likes: number
+    total_replies: number
+    total_retweets: number
+    total_views: number
+    total_quotes: number
+    avg_likes_per_tweet: number
+    avg_replies_per_tweet: number
+    avg_retweets_per_tweet: number
+    avg_views_per_tweet: number
+    total_engagement: number
+    avg_engagement_per_tweet: number
+    engagement_rate: number
+    engagement_rate_by_followers: number
+    mindshare_score: number
+    reach_score: number
+    influence_score: number
+    conversation_score: number
+    virality_score: number
+    first_tweet_date: number
+    last_tweet_date: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type UserAnalyticsAvgAggregateInputType = {
+    followers_count?: true
+    friends_count?: true
+    statuses_count?: true
+    favourites_count?: true
+    listed_count?: true
+    media_count?: true
+    normal_followers_count?: true
+    total_tweets?: true
+    total_likes?: true
+    total_replies?: true
+    total_retweets?: true
+    total_views?: true
+    total_quotes?: true
+    avg_likes_per_tweet?: true
+    avg_replies_per_tweet?: true
+    avg_retweets_per_tweet?: true
+    avg_views_per_tweet?: true
+    total_engagement?: true
+    avg_engagement_per_tweet?: true
+    engagement_rate?: true
+    engagement_rate_by_followers?: true
+    mindshare_score?: true
+    reach_score?: true
+    influence_score?: true
+    conversation_score?: true
+    virality_score?: true
+  }
+
+  export type UserAnalyticsSumAggregateInputType = {
+    followers_count?: true
+    friends_count?: true
+    statuses_count?: true
+    favourites_count?: true
+    listed_count?: true
+    media_count?: true
+    normal_followers_count?: true
+    total_tweets?: true
+    total_likes?: true
+    total_replies?: true
+    total_retweets?: true
+    total_views?: true
+    total_quotes?: true
+    avg_likes_per_tweet?: true
+    avg_replies_per_tweet?: true
+    avg_retweets_per_tweet?: true
+    avg_views_per_tweet?: true
+    total_engagement?: true
+    avg_engagement_per_tweet?: true
+    engagement_rate?: true
+    engagement_rate_by_followers?: true
+    mindshare_score?: true
+    reach_score?: true
+    influence_score?: true
+    conversation_score?: true
+    virality_score?: true
+  }
+
+  export type UserAnalyticsMinAggregateInputType = {
+    id?: true
+    user_id_str?: true
+    name?: true
+    screen_name?: true
+    description?: true
+    profile_image_url_https?: true
+    profile_banner_url?: true
+    profile_url?: true
+    verified?: true
+    followers_count?: true
+    friends_count?: true
+    statuses_count?: true
+    location?: true
+    created_at?: true
+    favourites_count?: true
+    listed_count?: true
+    media_count?: true
+    normal_followers_count?: true
+    possibly_sensitive?: true
+    profile_interstitial_type?: true
+    translator_type?: true
+    total_tweets?: true
+    total_likes?: true
+    total_replies?: true
+    total_retweets?: true
+    total_views?: true
+    total_quotes?: true
+    avg_likes_per_tweet?: true
+    avg_replies_per_tweet?: true
+    avg_retweets_per_tweet?: true
+    avg_views_per_tweet?: true
+    total_engagement?: true
+    avg_engagement_per_tweet?: true
+    engagement_rate?: true
+    engagement_rate_by_followers?: true
+    mindshare_score?: true
+    reach_score?: true
+    influence_score?: true
+    conversation_score?: true
+    virality_score?: true
+    first_tweet_date?: true
+    last_tweet_date?: true
+    updated_at?: true
+  }
+
+  export type UserAnalyticsMaxAggregateInputType = {
+    id?: true
+    user_id_str?: true
+    name?: true
+    screen_name?: true
+    description?: true
+    profile_image_url_https?: true
+    profile_banner_url?: true
+    profile_url?: true
+    verified?: true
+    followers_count?: true
+    friends_count?: true
+    statuses_count?: true
+    location?: true
+    created_at?: true
+    favourites_count?: true
+    listed_count?: true
+    media_count?: true
+    normal_followers_count?: true
+    possibly_sensitive?: true
+    profile_interstitial_type?: true
+    translator_type?: true
+    total_tweets?: true
+    total_likes?: true
+    total_replies?: true
+    total_retweets?: true
+    total_views?: true
+    total_quotes?: true
+    avg_likes_per_tweet?: true
+    avg_replies_per_tweet?: true
+    avg_retweets_per_tweet?: true
+    avg_views_per_tweet?: true
+    total_engagement?: true
+    avg_engagement_per_tweet?: true
+    engagement_rate?: true
+    engagement_rate_by_followers?: true
+    mindshare_score?: true
+    reach_score?: true
+    influence_score?: true
+    conversation_score?: true
+    virality_score?: true
+    first_tweet_date?: true
+    last_tweet_date?: true
+    updated_at?: true
+  }
+
+  export type UserAnalyticsCountAggregateInputType = {
+    id?: true
+    user_id_str?: true
+    name?: true
+    screen_name?: true
+    description?: true
+    profile_image_url_https?: true
+    profile_banner_url?: true
+    profile_url?: true
+    verified?: true
+    followers_count?: true
+    friends_count?: true
+    statuses_count?: true
+    location?: true
+    created_at?: true
+    favourites_count?: true
+    listed_count?: true
+    media_count?: true
+    normal_followers_count?: true
+    pinned_tweet_ids_str?: true
+    possibly_sensitive?: true
+    profile_interstitial_type?: true
+    translator_type?: true
+    withheld_in_countries?: true
+    total_tweets?: true
+    total_likes?: true
+    total_replies?: true
+    total_retweets?: true
+    total_views?: true
+    total_quotes?: true
+    avg_likes_per_tweet?: true
+    avg_replies_per_tweet?: true
+    avg_retweets_per_tweet?: true
+    avg_views_per_tweet?: true
+    total_engagement?: true
+    avg_engagement_per_tweet?: true
+    engagement_rate?: true
+    engagement_rate_by_followers?: true
+    mindshare_score?: true
+    reach_score?: true
+    influence_score?: true
+    conversation_score?: true
+    virality_score?: true
+    first_tweet_date?: true
+    last_tweet_date?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type UserAnalyticsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserAnalytics to aggregate.
+     */
+    where?: UserAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserAnalytics to fetch.
+     */
+    orderBy?: UserAnalyticsOrderByWithRelationInput | UserAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserAnalytics
+    **/
+    _count?: true | UserAnalyticsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserAnalyticsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserAnalyticsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserAnalyticsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserAnalyticsMaxAggregateInputType
+  }
+
+  export type GetUserAnalyticsAggregateType<T extends UserAnalyticsAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserAnalytics]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserAnalytics[P]>
+      : GetScalarType<T[P], AggregateUserAnalytics[P]>
+  }
+
+
+
+
+  export type UserAnalyticsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserAnalyticsWhereInput
+    orderBy?: UserAnalyticsOrderByWithAggregationInput | UserAnalyticsOrderByWithAggregationInput[]
+    by: UserAnalyticsScalarFieldEnum[] | UserAnalyticsScalarFieldEnum
+    having?: UserAnalyticsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserAnalyticsCountAggregateInputType | true
+    _avg?: UserAnalyticsAvgAggregateInputType
+    _sum?: UserAnalyticsSumAggregateInputType
+    _min?: UserAnalyticsMinAggregateInputType
+    _max?: UserAnalyticsMaxAggregateInputType
+  }
+
+  export type UserAnalyticsGroupByOutputType = {
+    id: string
+    user_id_str: string
+    name: string | null
+    screen_name: string | null
+    description: string | null
+    profile_image_url_https: string | null
+    profile_banner_url: string | null
+    profile_url: string | null
+    verified: boolean | null
+    followers_count: number | null
+    friends_count: number | null
+    statuses_count: number | null
+    location: string | null
+    created_at: string | null
+    favourites_count: number | null
+    listed_count: number | null
+    media_count: number | null
+    normal_followers_count: number | null
+    pinned_tweet_ids_str: string[]
+    possibly_sensitive: boolean | null
+    profile_interstitial_type: string | null
+    translator_type: string | null
+    withheld_in_countries: string[]
+    total_tweets: number
+    total_likes: number
+    total_replies: number
+    total_retweets: number
+    total_views: number
+    total_quotes: number
+    avg_likes_per_tweet: number | null
+    avg_replies_per_tweet: number | null
+    avg_retweets_per_tweet: number | null
+    avg_views_per_tweet: number | null
+    total_engagement: number
+    avg_engagement_per_tweet: number | null
+    engagement_rate: number | null
+    engagement_rate_by_followers: number | null
+    mindshare_score: number | null
+    reach_score: number | null
+    influence_score: number | null
+    conversation_score: number | null
+    virality_score: number | null
+    first_tweet_date: Date | null
+    last_tweet_date: Date | null
+    updated_at: Date
+    _count: UserAnalyticsCountAggregateOutputType | null
+    _avg: UserAnalyticsAvgAggregateOutputType | null
+    _sum: UserAnalyticsSumAggregateOutputType | null
+    _min: UserAnalyticsMinAggregateOutputType | null
+    _max: UserAnalyticsMaxAggregateOutputType | null
+  }
+
+  type GetUserAnalyticsGroupByPayload<T extends UserAnalyticsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserAnalyticsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserAnalyticsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserAnalyticsGroupByOutputType[P]>
+            : GetScalarType<T[P], UserAnalyticsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserAnalyticsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id_str?: boolean
+    name?: boolean
+    screen_name?: boolean
+    description?: boolean
+    profile_image_url_https?: boolean
+    profile_banner_url?: boolean
+    profile_url?: boolean
+    verified?: boolean
+    followers_count?: boolean
+    friends_count?: boolean
+    statuses_count?: boolean
+    location?: boolean
+    created_at?: boolean
+    favourites_count?: boolean
+    listed_count?: boolean
+    media_count?: boolean
+    normal_followers_count?: boolean
+    pinned_tweet_ids_str?: boolean
+    possibly_sensitive?: boolean
+    profile_interstitial_type?: boolean
+    translator_type?: boolean
+    withheld_in_countries?: boolean
+    total_tweets?: boolean
+    total_likes?: boolean
+    total_replies?: boolean
+    total_retweets?: boolean
+    total_views?: boolean
+    total_quotes?: boolean
+    avg_likes_per_tweet?: boolean
+    avg_replies_per_tweet?: boolean
+    avg_retweets_per_tweet?: boolean
+    avg_views_per_tweet?: boolean
+    total_engagement?: boolean
+    avg_engagement_per_tweet?: boolean
+    engagement_rate?: boolean
+    engagement_rate_by_followers?: boolean
+    mindshare_score?: boolean
+    reach_score?: boolean
+    influence_score?: boolean
+    conversation_score?: boolean
+    virality_score?: boolean
+    tweets?: boolean | TweetAnalyticsDefaultArgs<ExtArgs>
+    first_tweet_date?: boolean
+    last_tweet_date?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["userAnalytics"]>
+
+
+
+  export type UserAnalyticsSelectScalar = {
+    id?: boolean
+    user_id_str?: boolean
+    name?: boolean
+    screen_name?: boolean
+    description?: boolean
+    profile_image_url_https?: boolean
+    profile_banner_url?: boolean
+    profile_url?: boolean
+    verified?: boolean
+    followers_count?: boolean
+    friends_count?: boolean
+    statuses_count?: boolean
+    location?: boolean
+    created_at?: boolean
+    favourites_count?: boolean
+    listed_count?: boolean
+    media_count?: boolean
+    normal_followers_count?: boolean
+    pinned_tweet_ids_str?: boolean
+    possibly_sensitive?: boolean
+    profile_interstitial_type?: boolean
+    translator_type?: boolean
+    withheld_in_countries?: boolean
+    total_tweets?: boolean
+    total_likes?: boolean
+    total_replies?: boolean
+    total_retweets?: boolean
+    total_views?: boolean
+    total_quotes?: boolean
+    avg_likes_per_tweet?: boolean
+    avg_replies_per_tweet?: boolean
+    avg_retweets_per_tweet?: boolean
+    avg_views_per_tweet?: boolean
+    total_engagement?: boolean
+    avg_engagement_per_tweet?: boolean
+    engagement_rate?: boolean
+    engagement_rate_by_followers?: boolean
+    mindshare_score?: boolean
+    reach_score?: boolean
+    influence_score?: boolean
+    conversation_score?: boolean
+    virality_score?: boolean
+    first_tweet_date?: boolean
+    last_tweet_date?: boolean
+    updated_at?: boolean
+  }
+
+  export type UserAnalyticsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id_str" | "name" | "screen_name" | "description" | "profile_image_url_https" | "profile_banner_url" | "profile_url" | "verified" | "followers_count" | "friends_count" | "statuses_count" | "location" | "created_at" | "favourites_count" | "listed_count" | "media_count" | "normal_followers_count" | "pinned_tweet_ids_str" | "possibly_sensitive" | "profile_interstitial_type" | "translator_type" | "withheld_in_countries" | "total_tweets" | "total_likes" | "total_replies" | "total_retweets" | "total_views" | "total_quotes" | "avg_likes_per_tweet" | "avg_replies_per_tweet" | "avg_retweets_per_tweet" | "avg_views_per_tweet" | "total_engagement" | "avg_engagement_per_tweet" | "engagement_rate" | "engagement_rate_by_followers" | "mindshare_score" | "reach_score" | "influence_score" | "conversation_score" | "virality_score" | "tweets" | "first_tweet_date" | "last_tweet_date" | "updated_at", ExtArgs["result"]["userAnalytics"]>
+  export type UserAnalyticsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $UserAnalyticsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserAnalytics"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      user_id_str: string
+      name: string | null
+      screen_name: string | null
+      description: string | null
+      profile_image_url_https: string | null
+      profile_banner_url: string | null
+      profile_url: string | null
+      verified: boolean | null
+      followers_count: number | null
+      friends_count: number | null
+      statuses_count: number | null
+      location: string | null
+      created_at: string | null
+      favourites_count: number | null
+      listed_count: number | null
+      media_count: number | null
+      normal_followers_count: number | null
+      pinned_tweet_ids_str: string[]
+      possibly_sensitive: boolean | null
+      profile_interstitial_type: string | null
+      translator_type: string | null
+      withheld_in_countries: string[]
+      total_tweets: number
+      total_likes: number
+      total_replies: number
+      total_retweets: number
+      total_views: number
+      total_quotes: number
+      avg_likes_per_tweet: number | null
+      avg_replies_per_tweet: number | null
+      avg_retweets_per_tweet: number | null
+      avg_views_per_tweet: number | null
+      total_engagement: number
+      avg_engagement_per_tweet: number | null
+      engagement_rate: number | null
+      engagement_rate_by_followers: number | null
+      mindshare_score: number | null
+      reach_score: number | null
+      influence_score: number | null
+      conversation_score: number | null
+      virality_score: number | null
+      first_tweet_date: Date | null
+      last_tweet_date: Date | null
+      updated_at: Date
+    }, ExtArgs["result"]["userAnalytics"]>
+    composites: {
+      tweets: Prisma.$TweetAnalyticsPayload[]
+    }
+  }
+
+  type UserAnalyticsGetPayload<S extends boolean | null | undefined | UserAnalyticsDefaultArgs> = $Result.GetResult<Prisma.$UserAnalyticsPayload, S>
+
+  type UserAnalyticsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserAnalyticsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserAnalyticsCountAggregateInputType | true
+    }
+
+  export interface UserAnalyticsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserAnalytics'], meta: { name: 'UserAnalytics' } }
+    /**
+     * Find zero or one UserAnalytics that matches the filter.
+     * @param {UserAnalyticsFindUniqueArgs} args - Arguments to find a UserAnalytics
+     * @example
+     * // Get one UserAnalytics
+     * const userAnalytics = await prisma.userAnalytics.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserAnalyticsFindUniqueArgs>(args: SelectSubset<T, UserAnalyticsFindUniqueArgs<ExtArgs>>): Prisma__UserAnalyticsClient<$Result.GetResult<Prisma.$UserAnalyticsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserAnalytics that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserAnalyticsFindUniqueOrThrowArgs} args - Arguments to find a UserAnalytics
+     * @example
+     * // Get one UserAnalytics
+     * const userAnalytics = await prisma.userAnalytics.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserAnalyticsFindUniqueOrThrowArgs>(args: SelectSubset<T, UserAnalyticsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserAnalyticsClient<$Result.GetResult<Prisma.$UserAnalyticsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserAnalytics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAnalyticsFindFirstArgs} args - Arguments to find a UserAnalytics
+     * @example
+     * // Get one UserAnalytics
+     * const userAnalytics = await prisma.userAnalytics.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserAnalyticsFindFirstArgs>(args?: SelectSubset<T, UserAnalyticsFindFirstArgs<ExtArgs>>): Prisma__UserAnalyticsClient<$Result.GetResult<Prisma.$UserAnalyticsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserAnalytics that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAnalyticsFindFirstOrThrowArgs} args - Arguments to find a UserAnalytics
+     * @example
+     * // Get one UserAnalytics
+     * const userAnalytics = await prisma.userAnalytics.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserAnalyticsFindFirstOrThrowArgs>(args?: SelectSubset<T, UserAnalyticsFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserAnalyticsClient<$Result.GetResult<Prisma.$UserAnalyticsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserAnalytics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAnalyticsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserAnalytics
+     * const userAnalytics = await prisma.userAnalytics.findMany()
+     * 
+     * // Get first 10 UserAnalytics
+     * const userAnalytics = await prisma.userAnalytics.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userAnalyticsWithIdOnly = await prisma.userAnalytics.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserAnalyticsFindManyArgs>(args?: SelectSubset<T, UserAnalyticsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserAnalytics.
+     * @param {UserAnalyticsCreateArgs} args - Arguments to create a UserAnalytics.
+     * @example
+     * // Create one UserAnalytics
+     * const UserAnalytics = await prisma.userAnalytics.create({
+     *   data: {
+     *     // ... data to create a UserAnalytics
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserAnalyticsCreateArgs>(args: SelectSubset<T, UserAnalyticsCreateArgs<ExtArgs>>): Prisma__UserAnalyticsClient<$Result.GetResult<Prisma.$UserAnalyticsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserAnalytics.
+     * @param {UserAnalyticsCreateManyArgs} args - Arguments to create many UserAnalytics.
+     * @example
+     * // Create many UserAnalytics
+     * const userAnalytics = await prisma.userAnalytics.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserAnalyticsCreateManyArgs>(args?: SelectSubset<T, UserAnalyticsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a UserAnalytics.
+     * @param {UserAnalyticsDeleteArgs} args - Arguments to delete one UserAnalytics.
+     * @example
+     * // Delete one UserAnalytics
+     * const UserAnalytics = await prisma.userAnalytics.delete({
+     *   where: {
+     *     // ... filter to delete one UserAnalytics
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserAnalyticsDeleteArgs>(args: SelectSubset<T, UserAnalyticsDeleteArgs<ExtArgs>>): Prisma__UserAnalyticsClient<$Result.GetResult<Prisma.$UserAnalyticsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserAnalytics.
+     * @param {UserAnalyticsUpdateArgs} args - Arguments to update one UserAnalytics.
+     * @example
+     * // Update one UserAnalytics
+     * const userAnalytics = await prisma.userAnalytics.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserAnalyticsUpdateArgs>(args: SelectSubset<T, UserAnalyticsUpdateArgs<ExtArgs>>): Prisma__UserAnalyticsClient<$Result.GetResult<Prisma.$UserAnalyticsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserAnalytics.
+     * @param {UserAnalyticsDeleteManyArgs} args - Arguments to filter UserAnalytics to delete.
+     * @example
+     * // Delete a few UserAnalytics
+     * const { count } = await prisma.userAnalytics.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserAnalyticsDeleteManyArgs>(args?: SelectSubset<T, UserAnalyticsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAnalyticsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserAnalytics
+     * const userAnalytics = await prisma.userAnalytics.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserAnalyticsUpdateManyArgs>(args: SelectSubset<T, UserAnalyticsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one UserAnalytics.
+     * @param {UserAnalyticsUpsertArgs} args - Arguments to update or create a UserAnalytics.
+     * @example
+     * // Update or create a UserAnalytics
+     * const userAnalytics = await prisma.userAnalytics.upsert({
+     *   create: {
+     *     // ... data to create a UserAnalytics
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserAnalytics we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserAnalyticsUpsertArgs>(args: SelectSubset<T, UserAnalyticsUpsertArgs<ExtArgs>>): Prisma__UserAnalyticsClient<$Result.GetResult<Prisma.$UserAnalyticsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserAnalytics that matches the filter.
+     * @param {UserAnalyticsFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const userAnalytics = await prisma.userAnalytics.findRaw({
+     *   filter: { age: { $gt: 25 } }
+     * })
+     */
+    findRaw(args?: UserAnalyticsFindRawArgs): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a UserAnalytics.
+     * @param {UserAnalyticsAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const userAnalytics = await prisma.userAnalytics.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     */
+    aggregateRaw(args?: UserAnalyticsAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+
+
+    /**
+     * Count the number of UserAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAnalyticsCountArgs} args - Arguments to filter UserAnalytics to count.
+     * @example
+     * // Count the number of UserAnalytics
+     * const count = await prisma.userAnalytics.count({
+     *   where: {
+     *     // ... the filter for the UserAnalytics we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserAnalyticsCountArgs>(
+      args?: Subset<T, UserAnalyticsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserAnalyticsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAnalyticsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserAnalyticsAggregateArgs>(args: Subset<T, UserAnalyticsAggregateArgs>): Prisma.PrismaPromise<GetUserAnalyticsAggregateType<T>>
+
+    /**
+     * Group by UserAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAnalyticsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserAnalyticsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserAnalyticsGroupByArgs['orderBy'] }
+        : { orderBy?: UserAnalyticsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserAnalyticsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserAnalyticsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserAnalytics model
+   */
+  readonly fields: UserAnalyticsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserAnalytics.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserAnalyticsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserAnalytics model
+   */
+  interface UserAnalyticsFieldRefs {
+    readonly id: FieldRef<"UserAnalytics", 'String'>
+    readonly user_id_str: FieldRef<"UserAnalytics", 'String'>
+    readonly name: FieldRef<"UserAnalytics", 'String'>
+    readonly screen_name: FieldRef<"UserAnalytics", 'String'>
+    readonly description: FieldRef<"UserAnalytics", 'String'>
+    readonly profile_image_url_https: FieldRef<"UserAnalytics", 'String'>
+    readonly profile_banner_url: FieldRef<"UserAnalytics", 'String'>
+    readonly profile_url: FieldRef<"UserAnalytics", 'String'>
+    readonly verified: FieldRef<"UserAnalytics", 'Boolean'>
+    readonly followers_count: FieldRef<"UserAnalytics", 'Int'>
+    readonly friends_count: FieldRef<"UserAnalytics", 'Int'>
+    readonly statuses_count: FieldRef<"UserAnalytics", 'Int'>
+    readonly location: FieldRef<"UserAnalytics", 'String'>
+    readonly created_at: FieldRef<"UserAnalytics", 'String'>
+    readonly favourites_count: FieldRef<"UserAnalytics", 'Int'>
+    readonly listed_count: FieldRef<"UserAnalytics", 'Int'>
+    readonly media_count: FieldRef<"UserAnalytics", 'Int'>
+    readonly normal_followers_count: FieldRef<"UserAnalytics", 'Int'>
+    readonly pinned_tweet_ids_str: FieldRef<"UserAnalytics", 'String[]'>
+    readonly possibly_sensitive: FieldRef<"UserAnalytics", 'Boolean'>
+    readonly profile_interstitial_type: FieldRef<"UserAnalytics", 'String'>
+    readonly translator_type: FieldRef<"UserAnalytics", 'String'>
+    readonly withheld_in_countries: FieldRef<"UserAnalytics", 'String[]'>
+    readonly total_tweets: FieldRef<"UserAnalytics", 'Int'>
+    readonly total_likes: FieldRef<"UserAnalytics", 'Int'>
+    readonly total_replies: FieldRef<"UserAnalytics", 'Int'>
+    readonly total_retweets: FieldRef<"UserAnalytics", 'Int'>
+    readonly total_views: FieldRef<"UserAnalytics", 'Int'>
+    readonly total_quotes: FieldRef<"UserAnalytics", 'Int'>
+    readonly avg_likes_per_tweet: FieldRef<"UserAnalytics", 'Float'>
+    readonly avg_replies_per_tweet: FieldRef<"UserAnalytics", 'Float'>
+    readonly avg_retweets_per_tweet: FieldRef<"UserAnalytics", 'Float'>
+    readonly avg_views_per_tweet: FieldRef<"UserAnalytics", 'Float'>
+    readonly total_engagement: FieldRef<"UserAnalytics", 'Int'>
+    readonly avg_engagement_per_tweet: FieldRef<"UserAnalytics", 'Float'>
+    readonly engagement_rate: FieldRef<"UserAnalytics", 'Float'>
+    readonly engagement_rate_by_followers: FieldRef<"UserAnalytics", 'Float'>
+    readonly mindshare_score: FieldRef<"UserAnalytics", 'Float'>
+    readonly reach_score: FieldRef<"UserAnalytics", 'Float'>
+    readonly influence_score: FieldRef<"UserAnalytics", 'Float'>
+    readonly conversation_score: FieldRef<"UserAnalytics", 'Float'>
+    readonly virality_score: FieldRef<"UserAnalytics", 'Float'>
+    readonly first_tweet_date: FieldRef<"UserAnalytics", 'DateTime'>
+    readonly last_tweet_date: FieldRef<"UserAnalytics", 'DateTime'>
+    readonly updated_at: FieldRef<"UserAnalytics", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserAnalytics findUnique
+   */
+  export type UserAnalyticsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnalytics
+     */
+    select?: UserAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnalytics
+     */
+    omit?: UserAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAnalytics to fetch.
+     */
+    where: UserAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * UserAnalytics findUniqueOrThrow
+   */
+  export type UserAnalyticsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnalytics
+     */
+    select?: UserAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnalytics
+     */
+    omit?: UserAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAnalytics to fetch.
+     */
+    where: UserAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * UserAnalytics findFirst
+   */
+  export type UserAnalyticsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnalytics
+     */
+    select?: UserAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnalytics
+     */
+    omit?: UserAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAnalytics to fetch.
+     */
+    where?: UserAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserAnalytics to fetch.
+     */
+    orderBy?: UserAnalyticsOrderByWithRelationInput | UserAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserAnalytics.
+     */
+    cursor?: UserAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserAnalytics.
+     */
+    distinct?: UserAnalyticsScalarFieldEnum | UserAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * UserAnalytics findFirstOrThrow
+   */
+  export type UserAnalyticsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnalytics
+     */
+    select?: UserAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnalytics
+     */
+    omit?: UserAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAnalytics to fetch.
+     */
+    where?: UserAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserAnalytics to fetch.
+     */
+    orderBy?: UserAnalyticsOrderByWithRelationInput | UserAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserAnalytics.
+     */
+    cursor?: UserAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserAnalytics.
+     */
+    distinct?: UserAnalyticsScalarFieldEnum | UserAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * UserAnalytics findMany
+   */
+  export type UserAnalyticsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnalytics
+     */
+    select?: UserAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnalytics
+     */
+    omit?: UserAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAnalytics to fetch.
+     */
+    where?: UserAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserAnalytics to fetch.
+     */
+    orderBy?: UserAnalyticsOrderByWithRelationInput | UserAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserAnalytics.
+     */
+    cursor?: UserAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserAnalytics.
+     */
+    skip?: number
+    distinct?: UserAnalyticsScalarFieldEnum | UserAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * UserAnalytics create
+   */
+  export type UserAnalyticsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnalytics
+     */
+    select?: UserAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnalytics
+     */
+    omit?: UserAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnalyticsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserAnalytics.
+     */
+    data: XOR<UserAnalyticsCreateInput, UserAnalyticsUncheckedCreateInput>
+  }
+
+  /**
+   * UserAnalytics createMany
+   */
+  export type UserAnalyticsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserAnalytics.
+     */
+    data: UserAnalyticsCreateManyInput | UserAnalyticsCreateManyInput[]
+  }
+
+  /**
+   * UserAnalytics update
+   */
+  export type UserAnalyticsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnalytics
+     */
+    select?: UserAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnalytics
+     */
+    omit?: UserAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnalyticsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserAnalytics.
+     */
+    data: XOR<UserAnalyticsUpdateInput, UserAnalyticsUncheckedUpdateInput>
+    /**
+     * Choose, which UserAnalytics to update.
+     */
+    where: UserAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * UserAnalytics updateMany
+   */
+  export type UserAnalyticsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserAnalytics.
+     */
+    data: XOR<UserAnalyticsUpdateManyMutationInput, UserAnalyticsUncheckedUpdateManyInput>
+    /**
+     * Filter which UserAnalytics to update
+     */
+    where?: UserAnalyticsWhereInput
+    /**
+     * Limit how many UserAnalytics to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserAnalytics upsert
+   */
+  export type UserAnalyticsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnalytics
+     */
+    select?: UserAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnalytics
+     */
+    omit?: UserAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnalyticsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserAnalytics to update in case it exists.
+     */
+    where: UserAnalyticsWhereUniqueInput
+    /**
+     * In case the UserAnalytics found by the `where` argument doesn't exist, create a new UserAnalytics with this data.
+     */
+    create: XOR<UserAnalyticsCreateInput, UserAnalyticsUncheckedCreateInput>
+    /**
+     * In case the UserAnalytics was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserAnalyticsUpdateInput, UserAnalyticsUncheckedUpdateInput>
+  }
+
+  /**
+   * UserAnalytics delete
+   */
+  export type UserAnalyticsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnalytics
+     */
+    select?: UserAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnalytics
+     */
+    omit?: UserAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter which UserAnalytics to delete.
+     */
+    where: UserAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * UserAnalytics deleteMany
+   */
+  export type UserAnalyticsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserAnalytics to delete
+     */
+    where?: UserAnalyticsWhereInput
+    /**
+     * Limit how many UserAnalytics to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserAnalytics findRaw
+   */
+  export type UserAnalyticsFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * UserAnalytics aggregateRaw
+   */
+  export type UserAnalyticsAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * UserAnalytics without action
+   */
+  export type UserAnalyticsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnalytics
+     */
+    select?: UserAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnalytics
+     */
+    omit?: UserAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnalyticsInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -10192,6 +11947,8 @@ export namespace Prisma {
     statuses_count: 'statuses_count',
     translator_type: 'translator_type',
     name: 'name',
+    screen_name: 'screen_name',
+    created_at: 'created_at',
     url: 'url',
     withheld_in_countries: 'withheld_in_countries',
     user_id_str: 'user_id_str',
@@ -10394,6 +12151,57 @@ export namespace Prisma {
   };
 
   export type FollowersDataTestScalarFieldEnum = (typeof FollowersDataTestScalarFieldEnum)[keyof typeof FollowersDataTestScalarFieldEnum]
+
+
+  export const UserAnalyticsScalarFieldEnum: {
+    id: 'id',
+    user_id_str: 'user_id_str',
+    name: 'name',
+    screen_name: 'screen_name',
+    description: 'description',
+    profile_image_url_https: 'profile_image_url_https',
+    profile_banner_url: 'profile_banner_url',
+    profile_url: 'profile_url',
+    verified: 'verified',
+    followers_count: 'followers_count',
+    friends_count: 'friends_count',
+    statuses_count: 'statuses_count',
+    location: 'location',
+    created_at: 'created_at',
+    favourites_count: 'favourites_count',
+    listed_count: 'listed_count',
+    media_count: 'media_count',
+    normal_followers_count: 'normal_followers_count',
+    pinned_tweet_ids_str: 'pinned_tweet_ids_str',
+    possibly_sensitive: 'possibly_sensitive',
+    profile_interstitial_type: 'profile_interstitial_type',
+    translator_type: 'translator_type',
+    withheld_in_countries: 'withheld_in_countries',
+    total_tweets: 'total_tweets',
+    total_likes: 'total_likes',
+    total_replies: 'total_replies',
+    total_retweets: 'total_retweets',
+    total_views: 'total_views',
+    total_quotes: 'total_quotes',
+    avg_likes_per_tweet: 'avg_likes_per_tweet',
+    avg_replies_per_tweet: 'avg_replies_per_tweet',
+    avg_retweets_per_tweet: 'avg_retweets_per_tweet',
+    avg_views_per_tweet: 'avg_views_per_tweet',
+    total_engagement: 'total_engagement',
+    avg_engagement_per_tweet: 'avg_engagement_per_tweet',
+    engagement_rate: 'engagement_rate',
+    engagement_rate_by_followers: 'engagement_rate_by_followers',
+    mindshare_score: 'mindshare_score',
+    reach_score: 'reach_score',
+    influence_score: 'influence_score',
+    conversation_score: 'conversation_score',
+    virality_score: 'virality_score',
+    first_tweet_date: 'first_tweet_date',
+    last_tweet_date: 'last_tweet_date',
+    updated_at: 'updated_at'
+  };
+
+  export type UserAnalyticsScalarFieldEnum = (typeof UserAnalyticsScalarFieldEnum)[keyof typeof UserAnalyticsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -10663,6 +12471,8 @@ export namespace Prisma {
     statuses_count?: IntNullableFilter<"UserProfileTest"> | number | null
     translator_type?: StringNullableFilter<"UserProfileTest"> | string | null
     name?: StringNullableFilter<"UserProfileTest"> | string | null
+    screen_name?: StringNullableFilter<"UserProfileTest"> | string | null
+    created_at?: StringNullableFilter<"UserProfileTest"> | string | null
     url?: StringNullableFilter<"UserProfileTest"> | string | null
     withheld_in_countries?: StringNullableListFilter<"UserProfileTest">
     user_id_str?: StringNullableFilter<"UserProfileTest"> | string | null
@@ -10695,6 +12505,8 @@ export namespace Prisma {
     statuses_count?: SortOrder
     translator_type?: SortOrder
     name?: SortOrder
+    screen_name?: SortOrder
+    created_at?: SortOrder
     url?: SortOrder
     withheld_in_countries?: SortOrder
     user_id_str?: SortOrder
@@ -10730,6 +12542,8 @@ export namespace Prisma {
     statuses_count?: IntNullableFilter<"UserProfileTest"> | number | null
     translator_type?: StringNullableFilter<"UserProfileTest"> | string | null
     name?: StringNullableFilter<"UserProfileTest"> | string | null
+    screen_name?: StringNullableFilter<"UserProfileTest"> | string | null
+    created_at?: StringNullableFilter<"UserProfileTest"> | string | null
     url?: StringNullableFilter<"UserProfileTest"> | string | null
     withheld_in_countries?: StringNullableListFilter<"UserProfileTest">
     user_id_str?: StringNullableFilter<"UserProfileTest"> | string | null
@@ -10761,6 +12575,8 @@ export namespace Prisma {
     statuses_count?: SortOrder
     translator_type?: SortOrder
     name?: SortOrder
+    screen_name?: SortOrder
+    created_at?: SortOrder
     url?: SortOrder
     withheld_in_countries?: SortOrder
     user_id_str?: SortOrder
@@ -10800,6 +12616,8 @@ export namespace Prisma {
     statuses_count?: IntNullableWithAggregatesFilter<"UserProfileTest"> | number | null
     translator_type?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
     name?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
+    screen_name?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
+    created_at?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
     url?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
     withheld_in_countries?: StringNullableListFilter<"UserProfileTest">
     user_id_str?: StringNullableWithAggregatesFilter<"UserProfileTest"> | string | null
@@ -11780,6 +13598,263 @@ export namespace Prisma {
     email?: StringNullableWithAggregatesFilter<"FollowersDataTest"> | string | null
   }
 
+  export type UserAnalyticsWhereInput = {
+    AND?: UserAnalyticsWhereInput | UserAnalyticsWhereInput[]
+    OR?: UserAnalyticsWhereInput[]
+    NOT?: UserAnalyticsWhereInput | UserAnalyticsWhereInput[]
+    id?: StringFilter<"UserAnalytics"> | string
+    user_id_str?: StringFilter<"UserAnalytics"> | string
+    name?: StringNullableFilter<"UserAnalytics"> | string | null
+    screen_name?: StringNullableFilter<"UserAnalytics"> | string | null
+    description?: StringNullableFilter<"UserAnalytics"> | string | null
+    profile_image_url_https?: StringNullableFilter<"UserAnalytics"> | string | null
+    profile_banner_url?: StringNullableFilter<"UserAnalytics"> | string | null
+    profile_url?: StringNullableFilter<"UserAnalytics"> | string | null
+    verified?: BoolNullableFilter<"UserAnalytics"> | boolean | null
+    followers_count?: IntNullableFilter<"UserAnalytics"> | number | null
+    friends_count?: IntNullableFilter<"UserAnalytics"> | number | null
+    statuses_count?: IntNullableFilter<"UserAnalytics"> | number | null
+    location?: StringNullableFilter<"UserAnalytics"> | string | null
+    created_at?: StringNullableFilter<"UserAnalytics"> | string | null
+    favourites_count?: IntNullableFilter<"UserAnalytics"> | number | null
+    listed_count?: IntNullableFilter<"UserAnalytics"> | number | null
+    media_count?: IntNullableFilter<"UserAnalytics"> | number | null
+    normal_followers_count?: IntNullableFilter<"UserAnalytics"> | number | null
+    pinned_tweet_ids_str?: StringNullableListFilter<"UserAnalytics">
+    possibly_sensitive?: BoolNullableFilter<"UserAnalytics"> | boolean | null
+    profile_interstitial_type?: StringNullableFilter<"UserAnalytics"> | string | null
+    translator_type?: StringNullableFilter<"UserAnalytics"> | string | null
+    withheld_in_countries?: StringNullableListFilter<"UserAnalytics">
+    total_tweets?: IntFilter<"UserAnalytics"> | number
+    total_likes?: IntFilter<"UserAnalytics"> | number
+    total_replies?: IntFilter<"UserAnalytics"> | number
+    total_retweets?: IntFilter<"UserAnalytics"> | number
+    total_views?: IntFilter<"UserAnalytics"> | number
+    total_quotes?: IntFilter<"UserAnalytics"> | number
+    avg_likes_per_tweet?: FloatNullableFilter<"UserAnalytics"> | number | null
+    avg_replies_per_tweet?: FloatNullableFilter<"UserAnalytics"> | number | null
+    avg_retweets_per_tweet?: FloatNullableFilter<"UserAnalytics"> | number | null
+    avg_views_per_tweet?: FloatNullableFilter<"UserAnalytics"> | number | null
+    total_engagement?: IntFilter<"UserAnalytics"> | number
+    avg_engagement_per_tweet?: FloatNullableFilter<"UserAnalytics"> | number | null
+    engagement_rate?: FloatNullableFilter<"UserAnalytics"> | number | null
+    engagement_rate_by_followers?: FloatNullableFilter<"UserAnalytics"> | number | null
+    mindshare_score?: FloatNullableFilter<"UserAnalytics"> | number | null
+    reach_score?: FloatNullableFilter<"UserAnalytics"> | number | null
+    influence_score?: FloatNullableFilter<"UserAnalytics"> | number | null
+    conversation_score?: FloatNullableFilter<"UserAnalytics"> | number | null
+    virality_score?: FloatNullableFilter<"UserAnalytics"> | number | null
+    tweets?: TweetAnalyticsCompositeListFilter | TweetAnalyticsObjectEqualityInput[]
+    first_tweet_date?: DateTimeNullableFilter<"UserAnalytics"> | Date | string | null
+    last_tweet_date?: DateTimeNullableFilter<"UserAnalytics"> | Date | string | null
+    updated_at?: DateTimeFilter<"UserAnalytics"> | Date | string
+  }
+
+  export type UserAnalyticsOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id_str?: SortOrder
+    name?: SortOrder
+    screen_name?: SortOrder
+    description?: SortOrder
+    profile_image_url_https?: SortOrder
+    profile_banner_url?: SortOrder
+    profile_url?: SortOrder
+    verified?: SortOrder
+    followers_count?: SortOrder
+    friends_count?: SortOrder
+    statuses_count?: SortOrder
+    location?: SortOrder
+    created_at?: SortOrder
+    favourites_count?: SortOrder
+    listed_count?: SortOrder
+    media_count?: SortOrder
+    normal_followers_count?: SortOrder
+    pinned_tweet_ids_str?: SortOrder
+    possibly_sensitive?: SortOrder
+    profile_interstitial_type?: SortOrder
+    translator_type?: SortOrder
+    withheld_in_countries?: SortOrder
+    total_tweets?: SortOrder
+    total_likes?: SortOrder
+    total_replies?: SortOrder
+    total_retweets?: SortOrder
+    total_views?: SortOrder
+    total_quotes?: SortOrder
+    avg_likes_per_tweet?: SortOrder
+    avg_replies_per_tweet?: SortOrder
+    avg_retweets_per_tweet?: SortOrder
+    avg_views_per_tweet?: SortOrder
+    total_engagement?: SortOrder
+    avg_engagement_per_tweet?: SortOrder
+    engagement_rate?: SortOrder
+    engagement_rate_by_followers?: SortOrder
+    mindshare_score?: SortOrder
+    reach_score?: SortOrder
+    influence_score?: SortOrder
+    conversation_score?: SortOrder
+    virality_score?: SortOrder
+    tweets?: TweetAnalyticsOrderByCompositeAggregateInput
+    first_tweet_date?: SortOrder
+    last_tweet_date?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type UserAnalyticsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    user_id_str?: string
+    AND?: UserAnalyticsWhereInput | UserAnalyticsWhereInput[]
+    OR?: UserAnalyticsWhereInput[]
+    NOT?: UserAnalyticsWhereInput | UserAnalyticsWhereInput[]
+    name?: StringNullableFilter<"UserAnalytics"> | string | null
+    screen_name?: StringNullableFilter<"UserAnalytics"> | string | null
+    description?: StringNullableFilter<"UserAnalytics"> | string | null
+    profile_image_url_https?: StringNullableFilter<"UserAnalytics"> | string | null
+    profile_banner_url?: StringNullableFilter<"UserAnalytics"> | string | null
+    profile_url?: StringNullableFilter<"UserAnalytics"> | string | null
+    verified?: BoolNullableFilter<"UserAnalytics"> | boolean | null
+    followers_count?: IntNullableFilter<"UserAnalytics"> | number | null
+    friends_count?: IntNullableFilter<"UserAnalytics"> | number | null
+    statuses_count?: IntNullableFilter<"UserAnalytics"> | number | null
+    location?: StringNullableFilter<"UserAnalytics"> | string | null
+    created_at?: StringNullableFilter<"UserAnalytics"> | string | null
+    favourites_count?: IntNullableFilter<"UserAnalytics"> | number | null
+    listed_count?: IntNullableFilter<"UserAnalytics"> | number | null
+    media_count?: IntNullableFilter<"UserAnalytics"> | number | null
+    normal_followers_count?: IntNullableFilter<"UserAnalytics"> | number | null
+    pinned_tweet_ids_str?: StringNullableListFilter<"UserAnalytics">
+    possibly_sensitive?: BoolNullableFilter<"UserAnalytics"> | boolean | null
+    profile_interstitial_type?: StringNullableFilter<"UserAnalytics"> | string | null
+    translator_type?: StringNullableFilter<"UserAnalytics"> | string | null
+    withheld_in_countries?: StringNullableListFilter<"UserAnalytics">
+    total_tweets?: IntFilter<"UserAnalytics"> | number
+    total_likes?: IntFilter<"UserAnalytics"> | number
+    total_replies?: IntFilter<"UserAnalytics"> | number
+    total_retweets?: IntFilter<"UserAnalytics"> | number
+    total_views?: IntFilter<"UserAnalytics"> | number
+    total_quotes?: IntFilter<"UserAnalytics"> | number
+    avg_likes_per_tweet?: FloatNullableFilter<"UserAnalytics"> | number | null
+    avg_replies_per_tweet?: FloatNullableFilter<"UserAnalytics"> | number | null
+    avg_retweets_per_tweet?: FloatNullableFilter<"UserAnalytics"> | number | null
+    avg_views_per_tweet?: FloatNullableFilter<"UserAnalytics"> | number | null
+    total_engagement?: IntFilter<"UserAnalytics"> | number
+    avg_engagement_per_tweet?: FloatNullableFilter<"UserAnalytics"> | number | null
+    engagement_rate?: FloatNullableFilter<"UserAnalytics"> | number | null
+    engagement_rate_by_followers?: FloatNullableFilter<"UserAnalytics"> | number | null
+    mindshare_score?: FloatNullableFilter<"UserAnalytics"> | number | null
+    reach_score?: FloatNullableFilter<"UserAnalytics"> | number | null
+    influence_score?: FloatNullableFilter<"UserAnalytics"> | number | null
+    conversation_score?: FloatNullableFilter<"UserAnalytics"> | number | null
+    virality_score?: FloatNullableFilter<"UserAnalytics"> | number | null
+    tweets?: TweetAnalyticsCompositeListFilter | TweetAnalyticsObjectEqualityInput[]
+    first_tweet_date?: DateTimeNullableFilter<"UserAnalytics"> | Date | string | null
+    last_tweet_date?: DateTimeNullableFilter<"UserAnalytics"> | Date | string | null
+    updated_at?: DateTimeFilter<"UserAnalytics"> | Date | string
+  }, "id" | "user_id_str">
+
+  export type UserAnalyticsOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id_str?: SortOrder
+    name?: SortOrder
+    screen_name?: SortOrder
+    description?: SortOrder
+    profile_image_url_https?: SortOrder
+    profile_banner_url?: SortOrder
+    profile_url?: SortOrder
+    verified?: SortOrder
+    followers_count?: SortOrder
+    friends_count?: SortOrder
+    statuses_count?: SortOrder
+    location?: SortOrder
+    created_at?: SortOrder
+    favourites_count?: SortOrder
+    listed_count?: SortOrder
+    media_count?: SortOrder
+    normal_followers_count?: SortOrder
+    pinned_tweet_ids_str?: SortOrder
+    possibly_sensitive?: SortOrder
+    profile_interstitial_type?: SortOrder
+    translator_type?: SortOrder
+    withheld_in_countries?: SortOrder
+    total_tweets?: SortOrder
+    total_likes?: SortOrder
+    total_replies?: SortOrder
+    total_retweets?: SortOrder
+    total_views?: SortOrder
+    total_quotes?: SortOrder
+    avg_likes_per_tweet?: SortOrder
+    avg_replies_per_tweet?: SortOrder
+    avg_retweets_per_tweet?: SortOrder
+    avg_views_per_tweet?: SortOrder
+    total_engagement?: SortOrder
+    avg_engagement_per_tweet?: SortOrder
+    engagement_rate?: SortOrder
+    engagement_rate_by_followers?: SortOrder
+    mindshare_score?: SortOrder
+    reach_score?: SortOrder
+    influence_score?: SortOrder
+    conversation_score?: SortOrder
+    virality_score?: SortOrder
+    first_tweet_date?: SortOrder
+    last_tweet_date?: SortOrder
+    updated_at?: SortOrder
+    _count?: UserAnalyticsCountOrderByAggregateInput
+    _avg?: UserAnalyticsAvgOrderByAggregateInput
+    _max?: UserAnalyticsMaxOrderByAggregateInput
+    _min?: UserAnalyticsMinOrderByAggregateInput
+    _sum?: UserAnalyticsSumOrderByAggregateInput
+  }
+
+  export type UserAnalyticsScalarWhereWithAggregatesInput = {
+    AND?: UserAnalyticsScalarWhereWithAggregatesInput | UserAnalyticsScalarWhereWithAggregatesInput[]
+    OR?: UserAnalyticsScalarWhereWithAggregatesInput[]
+    NOT?: UserAnalyticsScalarWhereWithAggregatesInput | UserAnalyticsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserAnalytics"> | string
+    user_id_str?: StringWithAggregatesFilter<"UserAnalytics"> | string
+    name?: StringNullableWithAggregatesFilter<"UserAnalytics"> | string | null
+    screen_name?: StringNullableWithAggregatesFilter<"UserAnalytics"> | string | null
+    description?: StringNullableWithAggregatesFilter<"UserAnalytics"> | string | null
+    profile_image_url_https?: StringNullableWithAggregatesFilter<"UserAnalytics"> | string | null
+    profile_banner_url?: StringNullableWithAggregatesFilter<"UserAnalytics"> | string | null
+    profile_url?: StringNullableWithAggregatesFilter<"UserAnalytics"> | string | null
+    verified?: BoolNullableWithAggregatesFilter<"UserAnalytics"> | boolean | null
+    followers_count?: IntNullableWithAggregatesFilter<"UserAnalytics"> | number | null
+    friends_count?: IntNullableWithAggregatesFilter<"UserAnalytics"> | number | null
+    statuses_count?: IntNullableWithAggregatesFilter<"UserAnalytics"> | number | null
+    location?: StringNullableWithAggregatesFilter<"UserAnalytics"> | string | null
+    created_at?: StringNullableWithAggregatesFilter<"UserAnalytics"> | string | null
+    favourites_count?: IntNullableWithAggregatesFilter<"UserAnalytics"> | number | null
+    listed_count?: IntNullableWithAggregatesFilter<"UserAnalytics"> | number | null
+    media_count?: IntNullableWithAggregatesFilter<"UserAnalytics"> | number | null
+    normal_followers_count?: IntNullableWithAggregatesFilter<"UserAnalytics"> | number | null
+    pinned_tweet_ids_str?: StringNullableListFilter<"UserAnalytics">
+    possibly_sensitive?: BoolNullableWithAggregatesFilter<"UserAnalytics"> | boolean | null
+    profile_interstitial_type?: StringNullableWithAggregatesFilter<"UserAnalytics"> | string | null
+    translator_type?: StringNullableWithAggregatesFilter<"UserAnalytics"> | string | null
+    withheld_in_countries?: StringNullableListFilter<"UserAnalytics">
+    total_tweets?: IntWithAggregatesFilter<"UserAnalytics"> | number
+    total_likes?: IntWithAggregatesFilter<"UserAnalytics"> | number
+    total_replies?: IntWithAggregatesFilter<"UserAnalytics"> | number
+    total_retweets?: IntWithAggregatesFilter<"UserAnalytics"> | number
+    total_views?: IntWithAggregatesFilter<"UserAnalytics"> | number
+    total_quotes?: IntWithAggregatesFilter<"UserAnalytics"> | number
+    avg_likes_per_tweet?: FloatNullableWithAggregatesFilter<"UserAnalytics"> | number | null
+    avg_replies_per_tweet?: FloatNullableWithAggregatesFilter<"UserAnalytics"> | number | null
+    avg_retweets_per_tweet?: FloatNullableWithAggregatesFilter<"UserAnalytics"> | number | null
+    avg_views_per_tweet?: FloatNullableWithAggregatesFilter<"UserAnalytics"> | number | null
+    total_engagement?: IntWithAggregatesFilter<"UserAnalytics"> | number
+    avg_engagement_per_tweet?: FloatNullableWithAggregatesFilter<"UserAnalytics"> | number | null
+    engagement_rate?: FloatNullableWithAggregatesFilter<"UserAnalytics"> | number | null
+    engagement_rate_by_followers?: FloatNullableWithAggregatesFilter<"UserAnalytics"> | number | null
+    mindshare_score?: FloatNullableWithAggregatesFilter<"UserAnalytics"> | number | null
+    reach_score?: FloatNullableWithAggregatesFilter<"UserAnalytics"> | number | null
+    influence_score?: FloatNullableWithAggregatesFilter<"UserAnalytics"> | number | null
+    conversation_score?: FloatNullableWithAggregatesFilter<"UserAnalytics"> | number | null
+    virality_score?: FloatNullableWithAggregatesFilter<"UserAnalytics"> | number | null
+    first_tweet_date?: DateTimeNullableWithAggregatesFilter<"UserAnalytics"> | Date | string | null
+    last_tweet_date?: DateTimeNullableWithAggregatesFilter<"UserAnalytics"> | Date | string | null
+    updated_at?: DateTimeWithAggregatesFilter<"UserAnalytics"> | Date | string
+  }
+
   export type UserProfileCreateInput = {
     id?: string
     default_profile: boolean
@@ -11988,6 +14063,8 @@ export namespace Prisma {
     statuses_count?: number | null
     translator_type?: string | null
     name?: string | null
+    screen_name?: string | null
+    created_at?: string | null
     url?: string | null
     withheld_in_countries?: UserProfileTestCreatewithheld_in_countriesInput | string[]
     user_id_str?: string | null
@@ -12020,6 +14097,8 @@ export namespace Prisma {
     statuses_count?: number | null
     translator_type?: string | null
     name?: string | null
+    screen_name?: string | null
+    created_at?: string | null
     url?: string | null
     withheld_in_countries?: UserProfileTestCreatewithheld_in_countriesInput | string[]
     user_id_str?: string | null
@@ -12051,6 +14130,8 @@ export namespace Prisma {
     statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
     translator_type?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    screen_name?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableStringFieldUpdateOperationsInput | string | null
     url?: NullableStringFieldUpdateOperationsInput | string | null
     withheld_in_countries?: UserProfileTestUpdatewithheld_in_countriesInput | string[]
     user_id_str?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12082,6 +14163,8 @@ export namespace Prisma {
     statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
     translator_type?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    screen_name?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableStringFieldUpdateOperationsInput | string | null
     url?: NullableStringFieldUpdateOperationsInput | string | null
     withheld_in_countries?: UserProfileTestUpdatewithheld_in_countriesInput | string[]
     user_id_str?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12114,6 +14197,8 @@ export namespace Prisma {
     statuses_count?: number | null
     translator_type?: string | null
     name?: string | null
+    screen_name?: string | null
+    created_at?: string | null
     url?: string | null
     withheld_in_countries?: UserProfileTestCreatewithheld_in_countriesInput | string[]
     user_id_str?: string | null
@@ -12145,6 +14230,8 @@ export namespace Prisma {
     statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
     translator_type?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    screen_name?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableStringFieldUpdateOperationsInput | string | null
     url?: NullableStringFieldUpdateOperationsInput | string | null
     withheld_in_countries?: UserProfileTestUpdatewithheld_in_countriesInput | string[]
     user_id_str?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12176,6 +14263,8 @@ export namespace Prisma {
     statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
     translator_type?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    screen_name?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableStringFieldUpdateOperationsInput | string | null
     url?: NullableStringFieldUpdateOperationsInput | string | null
     withheld_in_countries?: UserProfileTestUpdatewithheld_in_countriesInput | string[]
     user_id_str?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13464,6 +15553,345 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type UserAnalyticsCreateInput = {
+    id?: string
+    user_id_str: string
+    name?: string | null
+    screen_name?: string | null
+    description?: string | null
+    profile_image_url_https?: string | null
+    profile_banner_url?: string | null
+    profile_url?: string | null
+    verified?: boolean | null
+    followers_count?: number | null
+    friends_count?: number | null
+    statuses_count?: number | null
+    location?: string | null
+    created_at?: string | null
+    favourites_count?: number | null
+    listed_count?: number | null
+    media_count?: number | null
+    normal_followers_count?: number | null
+    pinned_tweet_ids_str?: UserAnalyticsCreatepinned_tweet_ids_strInput | string[]
+    possibly_sensitive?: boolean | null
+    profile_interstitial_type?: string | null
+    translator_type?: string | null
+    withheld_in_countries?: UserAnalyticsCreatewithheld_in_countriesInput | string[]
+    total_tweets?: number
+    total_likes?: number
+    total_replies?: number
+    total_retweets?: number
+    total_views?: number
+    total_quotes?: number
+    avg_likes_per_tweet?: number | null
+    avg_replies_per_tweet?: number | null
+    avg_retweets_per_tweet?: number | null
+    avg_views_per_tweet?: number | null
+    total_engagement?: number
+    avg_engagement_per_tweet?: number | null
+    engagement_rate?: number | null
+    engagement_rate_by_followers?: number | null
+    mindshare_score?: number | null
+    reach_score?: number | null
+    influence_score?: number | null
+    conversation_score?: number | null
+    virality_score?: number | null
+    tweets?: XOR<TweetAnalyticsListCreateEnvelopeInput, TweetAnalyticsCreateInput> | TweetAnalyticsCreateInput[]
+    first_tweet_date?: Date | string | null
+    last_tweet_date?: Date | string | null
+    updated_at?: Date | string
+  }
+
+  export type UserAnalyticsUncheckedCreateInput = {
+    id?: string
+    user_id_str: string
+    name?: string | null
+    screen_name?: string | null
+    description?: string | null
+    profile_image_url_https?: string | null
+    profile_banner_url?: string | null
+    profile_url?: string | null
+    verified?: boolean | null
+    followers_count?: number | null
+    friends_count?: number | null
+    statuses_count?: number | null
+    location?: string | null
+    created_at?: string | null
+    favourites_count?: number | null
+    listed_count?: number | null
+    media_count?: number | null
+    normal_followers_count?: number | null
+    pinned_tweet_ids_str?: UserAnalyticsCreatepinned_tweet_ids_strInput | string[]
+    possibly_sensitive?: boolean | null
+    profile_interstitial_type?: string | null
+    translator_type?: string | null
+    withheld_in_countries?: UserAnalyticsCreatewithheld_in_countriesInput | string[]
+    total_tweets?: number
+    total_likes?: number
+    total_replies?: number
+    total_retweets?: number
+    total_views?: number
+    total_quotes?: number
+    avg_likes_per_tweet?: number | null
+    avg_replies_per_tweet?: number | null
+    avg_retweets_per_tweet?: number | null
+    avg_views_per_tweet?: number | null
+    total_engagement?: number
+    avg_engagement_per_tweet?: number | null
+    engagement_rate?: number | null
+    engagement_rate_by_followers?: number | null
+    mindshare_score?: number | null
+    reach_score?: number | null
+    influence_score?: number | null
+    conversation_score?: number | null
+    virality_score?: number | null
+    tweets?: XOR<TweetAnalyticsListCreateEnvelopeInput, TweetAnalyticsCreateInput> | TweetAnalyticsCreateInput[]
+    first_tweet_date?: Date | string | null
+    last_tweet_date?: Date | string | null
+    updated_at?: Date | string
+  }
+
+  export type UserAnalyticsUpdateInput = {
+    user_id_str?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    screen_name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_image_url_https?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_banner_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_url?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    friends_count?: NullableIntFieldUpdateOperationsInput | number | null
+    statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableStringFieldUpdateOperationsInput | string | null
+    favourites_count?: NullableIntFieldUpdateOperationsInput | number | null
+    listed_count?: NullableIntFieldUpdateOperationsInput | number | null
+    media_count?: NullableIntFieldUpdateOperationsInput | number | null
+    normal_followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    pinned_tweet_ids_str?: UserAnalyticsUpdatepinned_tweet_ids_strInput | string[]
+    possibly_sensitive?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    profile_interstitial_type?: NullableStringFieldUpdateOperationsInput | string | null
+    translator_type?: NullableStringFieldUpdateOperationsInput | string | null
+    withheld_in_countries?: UserAnalyticsUpdatewithheld_in_countriesInput | string[]
+    total_tweets?: IntFieldUpdateOperationsInput | number
+    total_likes?: IntFieldUpdateOperationsInput | number
+    total_replies?: IntFieldUpdateOperationsInput | number
+    total_retweets?: IntFieldUpdateOperationsInput | number
+    total_views?: IntFieldUpdateOperationsInput | number
+    total_quotes?: IntFieldUpdateOperationsInput | number
+    avg_likes_per_tweet?: NullableFloatFieldUpdateOperationsInput | number | null
+    avg_replies_per_tweet?: NullableFloatFieldUpdateOperationsInput | number | null
+    avg_retweets_per_tweet?: NullableFloatFieldUpdateOperationsInput | number | null
+    avg_views_per_tweet?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_engagement?: IntFieldUpdateOperationsInput | number
+    avg_engagement_per_tweet?: NullableFloatFieldUpdateOperationsInput | number | null
+    engagement_rate?: NullableFloatFieldUpdateOperationsInput | number | null
+    engagement_rate_by_followers?: NullableFloatFieldUpdateOperationsInput | number | null
+    mindshare_score?: NullableFloatFieldUpdateOperationsInput | number | null
+    reach_score?: NullableFloatFieldUpdateOperationsInput | number | null
+    influence_score?: NullableFloatFieldUpdateOperationsInput | number | null
+    conversation_score?: NullableFloatFieldUpdateOperationsInput | number | null
+    virality_score?: NullableFloatFieldUpdateOperationsInput | number | null
+    tweets?: XOR<TweetAnalyticsListUpdateEnvelopeInput, TweetAnalyticsCreateInput> | TweetAnalyticsCreateInput[]
+    first_tweet_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_tweet_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAnalyticsUncheckedUpdateInput = {
+    user_id_str?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    screen_name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_image_url_https?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_banner_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_url?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    friends_count?: NullableIntFieldUpdateOperationsInput | number | null
+    statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableStringFieldUpdateOperationsInput | string | null
+    favourites_count?: NullableIntFieldUpdateOperationsInput | number | null
+    listed_count?: NullableIntFieldUpdateOperationsInput | number | null
+    media_count?: NullableIntFieldUpdateOperationsInput | number | null
+    normal_followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    pinned_tweet_ids_str?: UserAnalyticsUpdatepinned_tweet_ids_strInput | string[]
+    possibly_sensitive?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    profile_interstitial_type?: NullableStringFieldUpdateOperationsInput | string | null
+    translator_type?: NullableStringFieldUpdateOperationsInput | string | null
+    withheld_in_countries?: UserAnalyticsUpdatewithheld_in_countriesInput | string[]
+    total_tweets?: IntFieldUpdateOperationsInput | number
+    total_likes?: IntFieldUpdateOperationsInput | number
+    total_replies?: IntFieldUpdateOperationsInput | number
+    total_retweets?: IntFieldUpdateOperationsInput | number
+    total_views?: IntFieldUpdateOperationsInput | number
+    total_quotes?: IntFieldUpdateOperationsInput | number
+    avg_likes_per_tweet?: NullableFloatFieldUpdateOperationsInput | number | null
+    avg_replies_per_tweet?: NullableFloatFieldUpdateOperationsInput | number | null
+    avg_retweets_per_tweet?: NullableFloatFieldUpdateOperationsInput | number | null
+    avg_views_per_tweet?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_engagement?: IntFieldUpdateOperationsInput | number
+    avg_engagement_per_tweet?: NullableFloatFieldUpdateOperationsInput | number | null
+    engagement_rate?: NullableFloatFieldUpdateOperationsInput | number | null
+    engagement_rate_by_followers?: NullableFloatFieldUpdateOperationsInput | number | null
+    mindshare_score?: NullableFloatFieldUpdateOperationsInput | number | null
+    reach_score?: NullableFloatFieldUpdateOperationsInput | number | null
+    influence_score?: NullableFloatFieldUpdateOperationsInput | number | null
+    conversation_score?: NullableFloatFieldUpdateOperationsInput | number | null
+    virality_score?: NullableFloatFieldUpdateOperationsInput | number | null
+    tweets?: XOR<TweetAnalyticsListUpdateEnvelopeInput, TweetAnalyticsCreateInput> | TweetAnalyticsCreateInput[]
+    first_tweet_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_tweet_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAnalyticsCreateManyInput = {
+    id?: string
+    user_id_str: string
+    name?: string | null
+    screen_name?: string | null
+    description?: string | null
+    profile_image_url_https?: string | null
+    profile_banner_url?: string | null
+    profile_url?: string | null
+    verified?: boolean | null
+    followers_count?: number | null
+    friends_count?: number | null
+    statuses_count?: number | null
+    location?: string | null
+    created_at?: string | null
+    favourites_count?: number | null
+    listed_count?: number | null
+    media_count?: number | null
+    normal_followers_count?: number | null
+    pinned_tweet_ids_str?: UserAnalyticsCreatepinned_tweet_ids_strInput | string[]
+    possibly_sensitive?: boolean | null
+    profile_interstitial_type?: string | null
+    translator_type?: string | null
+    withheld_in_countries?: UserAnalyticsCreatewithheld_in_countriesInput | string[]
+    total_tweets?: number
+    total_likes?: number
+    total_replies?: number
+    total_retweets?: number
+    total_views?: number
+    total_quotes?: number
+    avg_likes_per_tweet?: number | null
+    avg_replies_per_tweet?: number | null
+    avg_retweets_per_tweet?: number | null
+    avg_views_per_tweet?: number | null
+    total_engagement?: number
+    avg_engagement_per_tweet?: number | null
+    engagement_rate?: number | null
+    engagement_rate_by_followers?: number | null
+    mindshare_score?: number | null
+    reach_score?: number | null
+    influence_score?: number | null
+    conversation_score?: number | null
+    virality_score?: number | null
+    tweets?: XOR<TweetAnalyticsListCreateEnvelopeInput, TweetAnalyticsCreateInput> | TweetAnalyticsCreateInput[]
+    first_tweet_date?: Date | string | null
+    last_tweet_date?: Date | string | null
+    updated_at?: Date | string
+  }
+
+  export type UserAnalyticsUpdateManyMutationInput = {
+    user_id_str?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    screen_name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_image_url_https?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_banner_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_url?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    friends_count?: NullableIntFieldUpdateOperationsInput | number | null
+    statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableStringFieldUpdateOperationsInput | string | null
+    favourites_count?: NullableIntFieldUpdateOperationsInput | number | null
+    listed_count?: NullableIntFieldUpdateOperationsInput | number | null
+    media_count?: NullableIntFieldUpdateOperationsInput | number | null
+    normal_followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    pinned_tweet_ids_str?: UserAnalyticsUpdatepinned_tweet_ids_strInput | string[]
+    possibly_sensitive?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    profile_interstitial_type?: NullableStringFieldUpdateOperationsInput | string | null
+    translator_type?: NullableStringFieldUpdateOperationsInput | string | null
+    withheld_in_countries?: UserAnalyticsUpdatewithheld_in_countriesInput | string[]
+    total_tweets?: IntFieldUpdateOperationsInput | number
+    total_likes?: IntFieldUpdateOperationsInput | number
+    total_replies?: IntFieldUpdateOperationsInput | number
+    total_retweets?: IntFieldUpdateOperationsInput | number
+    total_views?: IntFieldUpdateOperationsInput | number
+    total_quotes?: IntFieldUpdateOperationsInput | number
+    avg_likes_per_tweet?: NullableFloatFieldUpdateOperationsInput | number | null
+    avg_replies_per_tweet?: NullableFloatFieldUpdateOperationsInput | number | null
+    avg_retweets_per_tweet?: NullableFloatFieldUpdateOperationsInput | number | null
+    avg_views_per_tweet?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_engagement?: IntFieldUpdateOperationsInput | number
+    avg_engagement_per_tweet?: NullableFloatFieldUpdateOperationsInput | number | null
+    engagement_rate?: NullableFloatFieldUpdateOperationsInput | number | null
+    engagement_rate_by_followers?: NullableFloatFieldUpdateOperationsInput | number | null
+    mindshare_score?: NullableFloatFieldUpdateOperationsInput | number | null
+    reach_score?: NullableFloatFieldUpdateOperationsInput | number | null
+    influence_score?: NullableFloatFieldUpdateOperationsInput | number | null
+    conversation_score?: NullableFloatFieldUpdateOperationsInput | number | null
+    virality_score?: NullableFloatFieldUpdateOperationsInput | number | null
+    tweets?: XOR<TweetAnalyticsListUpdateEnvelopeInput, TweetAnalyticsCreateInput> | TweetAnalyticsCreateInput[]
+    first_tweet_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_tweet_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAnalyticsUncheckedUpdateManyInput = {
+    user_id_str?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    screen_name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_image_url_https?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_banner_url?: NullableStringFieldUpdateOperationsInput | string | null
+    profile_url?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    friends_count?: NullableIntFieldUpdateOperationsInput | number | null
+    statuses_count?: NullableIntFieldUpdateOperationsInput | number | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableStringFieldUpdateOperationsInput | string | null
+    favourites_count?: NullableIntFieldUpdateOperationsInput | number | null
+    listed_count?: NullableIntFieldUpdateOperationsInput | number | null
+    media_count?: NullableIntFieldUpdateOperationsInput | number | null
+    normal_followers_count?: NullableIntFieldUpdateOperationsInput | number | null
+    pinned_tweet_ids_str?: UserAnalyticsUpdatepinned_tweet_ids_strInput | string[]
+    possibly_sensitive?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    profile_interstitial_type?: NullableStringFieldUpdateOperationsInput | string | null
+    translator_type?: NullableStringFieldUpdateOperationsInput | string | null
+    withheld_in_countries?: UserAnalyticsUpdatewithheld_in_countriesInput | string[]
+    total_tweets?: IntFieldUpdateOperationsInput | number
+    total_likes?: IntFieldUpdateOperationsInput | number
+    total_replies?: IntFieldUpdateOperationsInput | number
+    total_retweets?: IntFieldUpdateOperationsInput | number
+    total_views?: IntFieldUpdateOperationsInput | number
+    total_quotes?: IntFieldUpdateOperationsInput | number
+    avg_likes_per_tweet?: NullableFloatFieldUpdateOperationsInput | number | null
+    avg_replies_per_tweet?: NullableFloatFieldUpdateOperationsInput | number | null
+    avg_retweets_per_tweet?: NullableFloatFieldUpdateOperationsInput | number | null
+    avg_views_per_tweet?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_engagement?: IntFieldUpdateOperationsInput | number
+    avg_engagement_per_tweet?: NullableFloatFieldUpdateOperationsInput | number | null
+    engagement_rate?: NullableFloatFieldUpdateOperationsInput | number | null
+    engagement_rate_by_followers?: NullableFloatFieldUpdateOperationsInput | number | null
+    mindshare_score?: NullableFloatFieldUpdateOperationsInput | number | null
+    reach_score?: NullableFloatFieldUpdateOperationsInput | number | null
+    influence_score?: NullableFloatFieldUpdateOperationsInput | number | null
+    conversation_score?: NullableFloatFieldUpdateOperationsInput | number | null
+    virality_score?: NullableFloatFieldUpdateOperationsInput | number | null
+    tweets?: XOR<TweetAnalyticsListUpdateEnvelopeInput, TweetAnalyticsCreateInput> | TweetAnalyticsCreateInput[]
+    first_tweet_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_tweet_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -13769,6 +16197,8 @@ export namespace Prisma {
     statuses_count?: SortOrder
     translator_type?: SortOrder
     name?: SortOrder
+    screen_name?: SortOrder
+    created_at?: SortOrder
     url?: SortOrder
     withheld_in_countries?: SortOrder
     user_id_str?: SortOrder
@@ -13810,6 +16240,8 @@ export namespace Prisma {
     statuses_count?: SortOrder
     translator_type?: SortOrder
     name?: SortOrder
+    screen_name?: SortOrder
+    created_at?: SortOrder
     url?: SortOrder
     user_id_str?: SortOrder
     profile_url?: SortOrder
@@ -13839,6 +16271,8 @@ export namespace Prisma {
     statuses_count?: SortOrder
     translator_type?: SortOrder
     name?: SortOrder
+    screen_name?: SortOrder
+    created_at?: SortOrder
     url?: SortOrder
     user_id_str?: SortOrder
     profile_url?: SortOrder
@@ -14623,6 +17057,286 @@ export namespace Prisma {
     media_count?: SortOrder
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+    isSet?: boolean
+  }
+
+  export type TweetAnalyticsCompositeListFilter = {
+    equals?: TweetAnalyticsObjectEqualityInput[]
+    every?: TweetAnalyticsWhereInput
+    some?: TweetAnalyticsWhereInput
+    none?: TweetAnalyticsWhereInput
+    isEmpty?: boolean
+    isSet?: boolean
+  }
+
+  export type TweetAnalyticsObjectEqualityInput = {
+    tweet_id_str: string
+    text?: string | null
+    created_at?: string | null
+    tweet_date?: Date | string | null
+    likes?: number | null
+    replies?: number | null
+    retweets?: number | null
+    views?: string | null
+    quotes?: number | null
+    url?: string | null
+  }
+
+  export type TweetAnalyticsOrderByCompositeAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserAnalyticsCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id_str?: SortOrder
+    name?: SortOrder
+    screen_name?: SortOrder
+    description?: SortOrder
+    profile_image_url_https?: SortOrder
+    profile_banner_url?: SortOrder
+    profile_url?: SortOrder
+    verified?: SortOrder
+    followers_count?: SortOrder
+    friends_count?: SortOrder
+    statuses_count?: SortOrder
+    location?: SortOrder
+    created_at?: SortOrder
+    favourites_count?: SortOrder
+    listed_count?: SortOrder
+    media_count?: SortOrder
+    normal_followers_count?: SortOrder
+    pinned_tweet_ids_str?: SortOrder
+    possibly_sensitive?: SortOrder
+    profile_interstitial_type?: SortOrder
+    translator_type?: SortOrder
+    withheld_in_countries?: SortOrder
+    total_tweets?: SortOrder
+    total_likes?: SortOrder
+    total_replies?: SortOrder
+    total_retweets?: SortOrder
+    total_views?: SortOrder
+    total_quotes?: SortOrder
+    avg_likes_per_tweet?: SortOrder
+    avg_replies_per_tweet?: SortOrder
+    avg_retweets_per_tweet?: SortOrder
+    avg_views_per_tweet?: SortOrder
+    total_engagement?: SortOrder
+    avg_engagement_per_tweet?: SortOrder
+    engagement_rate?: SortOrder
+    engagement_rate_by_followers?: SortOrder
+    mindshare_score?: SortOrder
+    reach_score?: SortOrder
+    influence_score?: SortOrder
+    conversation_score?: SortOrder
+    virality_score?: SortOrder
+    first_tweet_date?: SortOrder
+    last_tweet_date?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type UserAnalyticsAvgOrderByAggregateInput = {
+    followers_count?: SortOrder
+    friends_count?: SortOrder
+    statuses_count?: SortOrder
+    favourites_count?: SortOrder
+    listed_count?: SortOrder
+    media_count?: SortOrder
+    normal_followers_count?: SortOrder
+    total_tweets?: SortOrder
+    total_likes?: SortOrder
+    total_replies?: SortOrder
+    total_retweets?: SortOrder
+    total_views?: SortOrder
+    total_quotes?: SortOrder
+    avg_likes_per_tweet?: SortOrder
+    avg_replies_per_tweet?: SortOrder
+    avg_retweets_per_tweet?: SortOrder
+    avg_views_per_tweet?: SortOrder
+    total_engagement?: SortOrder
+    avg_engagement_per_tweet?: SortOrder
+    engagement_rate?: SortOrder
+    engagement_rate_by_followers?: SortOrder
+    mindshare_score?: SortOrder
+    reach_score?: SortOrder
+    influence_score?: SortOrder
+    conversation_score?: SortOrder
+    virality_score?: SortOrder
+  }
+
+  export type UserAnalyticsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id_str?: SortOrder
+    name?: SortOrder
+    screen_name?: SortOrder
+    description?: SortOrder
+    profile_image_url_https?: SortOrder
+    profile_banner_url?: SortOrder
+    profile_url?: SortOrder
+    verified?: SortOrder
+    followers_count?: SortOrder
+    friends_count?: SortOrder
+    statuses_count?: SortOrder
+    location?: SortOrder
+    created_at?: SortOrder
+    favourites_count?: SortOrder
+    listed_count?: SortOrder
+    media_count?: SortOrder
+    normal_followers_count?: SortOrder
+    possibly_sensitive?: SortOrder
+    profile_interstitial_type?: SortOrder
+    translator_type?: SortOrder
+    total_tweets?: SortOrder
+    total_likes?: SortOrder
+    total_replies?: SortOrder
+    total_retweets?: SortOrder
+    total_views?: SortOrder
+    total_quotes?: SortOrder
+    avg_likes_per_tweet?: SortOrder
+    avg_replies_per_tweet?: SortOrder
+    avg_retweets_per_tweet?: SortOrder
+    avg_views_per_tweet?: SortOrder
+    total_engagement?: SortOrder
+    avg_engagement_per_tweet?: SortOrder
+    engagement_rate?: SortOrder
+    engagement_rate_by_followers?: SortOrder
+    mindshare_score?: SortOrder
+    reach_score?: SortOrder
+    influence_score?: SortOrder
+    conversation_score?: SortOrder
+    virality_score?: SortOrder
+    first_tweet_date?: SortOrder
+    last_tweet_date?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type UserAnalyticsMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id_str?: SortOrder
+    name?: SortOrder
+    screen_name?: SortOrder
+    description?: SortOrder
+    profile_image_url_https?: SortOrder
+    profile_banner_url?: SortOrder
+    profile_url?: SortOrder
+    verified?: SortOrder
+    followers_count?: SortOrder
+    friends_count?: SortOrder
+    statuses_count?: SortOrder
+    location?: SortOrder
+    created_at?: SortOrder
+    favourites_count?: SortOrder
+    listed_count?: SortOrder
+    media_count?: SortOrder
+    normal_followers_count?: SortOrder
+    possibly_sensitive?: SortOrder
+    profile_interstitial_type?: SortOrder
+    translator_type?: SortOrder
+    total_tweets?: SortOrder
+    total_likes?: SortOrder
+    total_replies?: SortOrder
+    total_retweets?: SortOrder
+    total_views?: SortOrder
+    total_quotes?: SortOrder
+    avg_likes_per_tweet?: SortOrder
+    avg_replies_per_tweet?: SortOrder
+    avg_retweets_per_tweet?: SortOrder
+    avg_views_per_tweet?: SortOrder
+    total_engagement?: SortOrder
+    avg_engagement_per_tweet?: SortOrder
+    engagement_rate?: SortOrder
+    engagement_rate_by_followers?: SortOrder
+    mindshare_score?: SortOrder
+    reach_score?: SortOrder
+    influence_score?: SortOrder
+    conversation_score?: SortOrder
+    virality_score?: SortOrder
+    first_tweet_date?: SortOrder
+    last_tweet_date?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type UserAnalyticsSumOrderByAggregateInput = {
+    followers_count?: SortOrder
+    friends_count?: SortOrder
+    statuses_count?: SortOrder
+    favourites_count?: SortOrder
+    listed_count?: SortOrder
+    media_count?: SortOrder
+    normal_followers_count?: SortOrder
+    total_tweets?: SortOrder
+    total_likes?: SortOrder
+    total_replies?: SortOrder
+    total_retweets?: SortOrder
+    total_views?: SortOrder
+    total_quotes?: SortOrder
+    avg_likes_per_tweet?: SortOrder
+    avg_replies_per_tweet?: SortOrder
+    avg_retweets_per_tweet?: SortOrder
+    avg_views_per_tweet?: SortOrder
+    total_engagement?: SortOrder
+    avg_engagement_per_tweet?: SortOrder
+    engagement_rate?: SortOrder
+    engagement_rate_by_followers?: SortOrder
+    mindshare_score?: SortOrder
+    reach_score?: SortOrder
+    influence_score?: SortOrder
+    conversation_score?: SortOrder
+    virality_score?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
   export type EntitiesProfileNullableCreateEnvelopeInput = {
     set?: EntitiesProfileCreateInput | null
   }
@@ -14861,6 +17575,65 @@ export namespace Prisma {
   export type FollowersDataTestUpdatewithheld_in_countriesInput = {
     set?: string[]
     push?: string | string[]
+  }
+
+  export type UserAnalyticsCreatepinned_tweet_ids_strInput = {
+    set: string[]
+  }
+
+  export type UserAnalyticsCreatewithheld_in_countriesInput = {
+    set: string[]
+  }
+
+  export type TweetAnalyticsListCreateEnvelopeInput = {
+    set?: TweetAnalyticsCreateInput | TweetAnalyticsCreateInput[]
+  }
+
+  export type TweetAnalyticsCreateInput = {
+    tweet_id_str: string
+    text?: string | null
+    created_at?: string | null
+    tweet_date?: Date | string | null
+    likes?: number | null
+    replies?: number | null
+    retweets?: number | null
+    views?: string | null
+    quotes?: number | null
+    url?: string | null
+  }
+
+  export type UserAnalyticsUpdatepinned_tweet_ids_strInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type UserAnalyticsUpdatewithheld_in_countriesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+    unset?: boolean
+  }
+
+  export type TweetAnalyticsListUpdateEnvelopeInput = {
+    set?: TweetAnalyticsCreateInput | TweetAnalyticsCreateInput[]
+    push?: TweetAnalyticsCreateInput | TweetAnalyticsCreateInput[]
+    updateMany?: TweetAnalyticsUpdateManyInput
+    deleteMany?: TweetAnalyticsDeleteManyInput
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -15174,6 +17947,66 @@ export namespace Prisma {
     self_thread?: JsonNullableFilter<"TweetStatus">
   }
 
+  export type TweetAnalyticsWhereInput = {
+    AND?: TweetAnalyticsWhereInput | TweetAnalyticsWhereInput[]
+    OR?: TweetAnalyticsWhereInput[]
+    NOT?: TweetAnalyticsWhereInput | TweetAnalyticsWhereInput[]
+    tweet_id_str?: StringFilter<"TweetAnalytics"> | string
+    text?: StringNullableFilter<"TweetAnalytics"> | string | null
+    created_at?: StringNullableFilter<"TweetAnalytics"> | string | null
+    tweet_date?: DateTimeNullableFilter<"TweetAnalytics"> | Date | string | null
+    likes?: IntNullableFilter<"TweetAnalytics"> | number | null
+    replies?: IntNullableFilter<"TweetAnalytics"> | number | null
+    retweets?: IntNullableFilter<"TweetAnalytics"> | number | null
+    views?: StringNullableFilter<"TweetAnalytics"> | string | null
+    quotes?: IntNullableFilter<"TweetAnalytics"> | number | null
+    url?: StringNullableFilter<"TweetAnalytics"> | string | null
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
   export type DescriptionProfileCreateInput = {
     urls?: UrlEntityCreateInput | UrlEntityCreateInput[]
   }
@@ -15220,6 +18053,15 @@ export namespace Prisma {
   export type TweetStatusUpsertInput = {
     set: TweetStatusCreateInput | null
     update: TweetStatusUpdateInput
+  }
+
+  export type TweetAnalyticsUpdateManyInput = {
+    where: TweetAnalyticsWhereInput
+    data: TweetAnalyticsUpdateInput
+  }
+
+  export type TweetAnalyticsDeleteManyInput = {
+    where: TweetAnalyticsWhereInput
   }
 
   export type DescriptionProfileNullableCompositeFilter = {
@@ -15311,6 +18153,19 @@ export namespace Prisma {
     lang?: NullableStringFieldUpdateOperationsInput | string | null
     supplemental_language?: NullableStringFieldUpdateOperationsInput | string | null
     self_thread?: InputJsonValue | InputJsonValue | null
+  }
+
+  export type TweetAnalyticsUpdateInput = {
+    tweet_id_str?: StringFieldUpdateOperationsInput | string
+    text?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableStringFieldUpdateOperationsInput | string | null
+    tweet_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    likes?: NullableIntFieldUpdateOperationsInput | number | null
+    replies?: NullableIntFieldUpdateOperationsInput | number | null
+    retweets?: NullableIntFieldUpdateOperationsInput | number | null
+    views?: NullableStringFieldUpdateOperationsInput | string | null
+    quotes?: NullableIntFieldUpdateOperationsInput | number | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type DescriptionProfileWhereInput = {

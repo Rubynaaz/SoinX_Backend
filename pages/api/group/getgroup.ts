@@ -299,7 +299,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
                 total_calls_tracked: totalCallsTracked,
                 total_unique_contracts: totalUniqueContracts,
                 consistency_percentage: Math.round(consistencyPercentage * 10) / 10,
-                number_of_alpha_calls: alphaCalls,
+                number_of_alpha_calls: alphaCalls, 
                 best_call: {
                     ... bestCall,
                     multiplier: Math.round(bestCall.multiplier * 10) / 10
