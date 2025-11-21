@@ -61,6 +61,8 @@ model UserProfileTest {
     statuses_count            Int?
     translator_type           String?
     name                      String?
+    screen_name               String?
+    created_at                String?
     url                       String?
     withheld_in_countries     String[]
     user_id_str               String?
@@ -345,4 +347,80 @@ type TweetStatus {
     lang                      String?
     supplemental_language     String?
     self_thread               Json?
+}
+
+/// User Analytics - Aggregated analytics data for each user
+model UserAnalytics {
+    id                        String           @id @default(auto()) @map("_id") @db2.ObjectId
+    user_id_str               String           @unique
+    name                      String?
+    screen_name               String?
+    description               String?
+    profile_image_url_https   String?
+    profile_banner_url        String?
+    profile_url               String?
+    verified                  Boolean?
+    followers_count           Int?
+    friends_count             Int?
+    statuses_count            Int?
+    location                  String?
+    created_at                String?
+    favourites_count          Int?
+    listed_count              Int?
+    media_count               Int?
+    normal_followers_count    Int?
+    pinned_tweet_ids_str     String[]
+    possibly_sensitive        Boolean?
+    profile_interstitial_type String?
+    translator_type           String?
+    withheld_in_countries     String[]
+    
+    // Aggregated tweet analytics
+    total_tweets              Int              @default(0)
+    total_likes              Int              @default(0)
+    total_replies            Int              @default(0)
+    total_retweets           Int              @default(0)
+    total_views              Int              @default(0)
+    total_quotes             Int              @default(0)
+    avg_likes_per_tweet      Float?
+    avg_replies_per_tweet    Float?
+    avg_retweets_per_tweet   Float?
+    avg_views_per_tweet      Float?
+    
+    // Engagement Metrics
+    total_engagement          Int              @default(0)  // likes + replies + retweets + quotes
+    avg_engagement_per_tweet  Float?
+    engagement_rate           Float?           // (total_engagement / total_views) * 100
+    engagement_rate_by_followers Float?        // (total_engagement / followers_count) * 100
+    
+    // Mindshare Metrics
+    mindshare_score           Float?           // Composite score based on reach, engagement, and influence
+    reach_score               Float?           // Based on total views
+    influence_score           Float?           // Based on retweets and quotes (content sharing)
+    conversation_score       Float?           // Based on replies (conversations started)
+    virality_score            Float?           // Based on retweets/quotes ratio
+    
+    // Tweet details (only essential data)
+    tweets                   TweetAnalytics[]
+    
+    // Timestamps
+    first_tweet_date         DateTime?
+    last_tweet_date          DateTime?
+    updated_at               DateTime         @default(now())
+    
+    @@map("user_analytics")
+}
+
+/// Essential tweet analytics data
+type TweetAnalytics {
+    tweet_id_str             String
+    text                     String?
+    created_at               String?
+    tweet_date               DateTime?
+    likes                    Int?
+    replies                  Int?
+    retweets                 Int?
+    views                    String?
+    quotes                   Int?
+    url                      String?
 }

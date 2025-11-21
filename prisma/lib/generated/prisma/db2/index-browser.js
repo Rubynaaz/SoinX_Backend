@@ -161,6 +161,8 @@ exports.Prisma.UserProfileTestScalarFieldEnum = {
   statuses_count: 'statuses_count',
   translator_type: 'translator_type',
   name: 'name',
+  screen_name: 'screen_name',
+  created_at: 'created_at',
   url: 'url',
   withheld_in_countries: 'withheld_in_countries',
   user_id_str: 'user_id_str',
@@ -350,6 +352,54 @@ exports.Prisma.FollowersDataTestScalarFieldEnum = {
   email: 'email'
 };
 
+exports.Prisma.UserAnalyticsScalarFieldEnum = {
+  id: 'id',
+  user_id_str: 'user_id_str',
+  name: 'name',
+  screen_name: 'screen_name',
+  description: 'description',
+  profile_image_url_https: 'profile_image_url_https',
+  profile_banner_url: 'profile_banner_url',
+  profile_url: 'profile_url',
+  verified: 'verified',
+  followers_count: 'followers_count',
+  friends_count: 'friends_count',
+  statuses_count: 'statuses_count',
+  location: 'location',
+  created_at: 'created_at',
+  favourites_count: 'favourites_count',
+  listed_count: 'listed_count',
+  media_count: 'media_count',
+  normal_followers_count: 'normal_followers_count',
+  pinned_tweet_ids_str: 'pinned_tweet_ids_str',
+  possibly_sensitive: 'possibly_sensitive',
+  profile_interstitial_type: 'profile_interstitial_type',
+  translator_type: 'translator_type',
+  withheld_in_countries: 'withheld_in_countries',
+  total_tweets: 'total_tweets',
+  total_likes: 'total_likes',
+  total_replies: 'total_replies',
+  total_retweets: 'total_retweets',
+  total_views: 'total_views',
+  total_quotes: 'total_quotes',
+  avg_likes_per_tweet: 'avg_likes_per_tweet',
+  avg_replies_per_tweet: 'avg_replies_per_tweet',
+  avg_retweets_per_tweet: 'avg_retweets_per_tweet',
+  avg_views_per_tweet: 'avg_views_per_tweet',
+  total_engagement: 'total_engagement',
+  avg_engagement_per_tweet: 'avg_engagement_per_tweet',
+  engagement_rate: 'engagement_rate',
+  engagement_rate_by_followers: 'engagement_rate_by_followers',
+  mindshare_score: 'mindshare_score',
+  reach_score: 'reach_score',
+  influence_score: 'influence_score',
+  conversation_score: 'conversation_score',
+  virality_score: 'virality_score',
+  first_tweet_date: 'first_tweet_date',
+  last_tweet_date: 'last_tweet_date',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -367,7 +417,8 @@ exports.Prisma.ModelName = {
   TweetsData: 'TweetsData',
   TweetsDataTest: 'TweetsDataTest',
   FollowerFollowingData: 'FollowerFollowingData',
-  FollowersDataTest: 'FollowersDataTest'
+  FollowersDataTest: 'FollowersDataTest',
+  UserAnalytics: 'UserAnalytics'
 };
 
 /**
